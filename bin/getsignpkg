@@ -1,0 +1,36 @@
+#!/bin/bash
+
+DEST="$(mktemp -d --tmpdir)"
+
+PKGEXT=".pkg.tar.xz"
+
+usage(){
+  echo "A simple script to get, sign and push the package's signature"
+  echo ""
+  echo "usage: $(basename $0) <pkgbase> [path]"
+  echo ""
+  echo "path is set to svn-packages as default"
+  echo ""
+
+  exit 1
+}
+
+main() {
+  [ $# -eq 0 ] && usage
+
+  cd $DEST
+
+  echo "Fetching packages..."
+  getpkg ${1} || exit 1
+
+  for pkg in *$PKGEXT; do
+    gpg --detach-sign --use-agent ${pkg}
+  done
+
+  echo "Signing packages..."
+  uplsign ${1} || exit 1
+}
+
+main $@
+
+exit 0

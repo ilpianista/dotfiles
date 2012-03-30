@@ -1,0 +1,6 @@
+gtk-theme-name="oxygen-gtk"
+gtk-icon-theme-name="KFaenza"
+gtk-fallback-icon-theme="KFaenza"
+gtk-font-name="Oxygen 8.5"
+
+include "/home/bash/.gtkrc-2.0.mine"

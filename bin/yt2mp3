@@ -1,0 +1,27 @@
+#!/bin/bash
+#
+# Script to convert a youtube video to an mp3 file
+#
+
+usage(){
+  echo "usage: $(basename $0) <youtube url>"
+}
+
+if [[ $# -eq 0 ]]; then
+  usage
+  exit 1
+fi
+
+youtubedl="/usr/bin/youtube-dl"
+
+cmd="${0##*/}"
+format="${cmd##yt2}"
+
+ytargs="-l --extract-audio --audio-format=${format} -w -c"
+
+filename=$(${youtubedl} --get-filename ${1}) || exit 1
+
+# Download and convert
+${youtubedl} ${ytargs} "${1}" || exit 1
+
+exit 0

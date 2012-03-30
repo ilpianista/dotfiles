@@ -1,0 +1,51 @@
+#!/bin/bash
+
+host="pkgbuild.com"
+svnbranch="trunk"
+
+PKGEXT=".pkg.tar.xz"
+
+DEST="."
+
+checkIntegrity() {
+  if [ "$(md5sum "${1}" | cut -d' ' -f1)" != "$(ssh ${host} md5sum "${2}" | cut -d' ' -f1)" ]; then
+    return 1
+  else
+    return 0
+  fi
+}
+
+usage(){
+  echo "A simple script to download a package to the local machine"
+  echo ""
+  echo "usage: $(basename $0) <pkgbase> [path]"
+  echo ""
+  echo "path is set to svn-packages as default"
+  echo ""
+
+  exit 1
+}
+
+main() {
+  [ $# -eq 0 ] && usage
+
+  if [ -z ${2} ]; then
+    path="svn-packages"
+  else
+    path="${2}"
+  fi
+
+  # Package folder structure on the host is something like ~/svn-packages/pkgname/trunk/
+  for pkg in `ssh ${host} ls ${path}/${1}/${svnbranch}/*${PKGEXT}`; do
+    scp ${host}:${pkg} ${DEST} || exit 1
+
+    if ! checkIntegrity ${DEST}/$(basename $pkg) "${pkg}"; then
+      echo "$(basename ${pkg}) corrupted"
+      exit 1
+    fi
+  done
+}
+
+main $@
+
+exit 0
