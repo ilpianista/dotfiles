@@ -1,12 +1,2 @@
-*
-!bin/
-!.vim/
-!.bash_profile
-!.bashrc
-!.gitignore
-!.gtkrc-2.0
-!.gtkrc-2.0.mine
-!.inputrc
-!.makepkg.conf
-!.pastebinit.xml
-!.vimrc
+*~
+.vim/tags/cpp_src
