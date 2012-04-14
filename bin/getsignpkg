@@ -20,7 +20,7 @@ main() {
 
   cd $DEST
 
-  echo "Fetching packages..."
+  echo "Downloading packages into ${DEST}..."
   getpkg ${1} ${2} || exit 1
 
   echo "Signing packages..."
