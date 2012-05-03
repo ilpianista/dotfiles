@@ -1,4 +1,4 @@
 gtk-theme-name="oxygen-gtk"
-gtk-icon-theme-name="KFaenza"
-gtk-fallback-icon-theme="KFaenza"
-gtk-font-name="Oxygen 8.5"
+gtk-icon-theme-name="Oxygen"
+gtk-fallback-icon-theme="Oxygen"
+gtk-font-name="Dejavu Sans 9"
