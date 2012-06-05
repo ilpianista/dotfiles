@@ -21,7 +21,7 @@ main() {
   cd $DEST
 
   echo "Downloading packages into ${DEST}..."
-  getpkg ${1} ${2} || exit 1
+  getpkg ${1} ${2} ${3} || exit 1
 
   echo "Signing packages..."
   for pkg in *$PKGEXT; do
@@ -29,7 +29,7 @@ main() {
   done
 
   echo "Uploading signatures..."
-  uplsign ${1} ${2} || exit 1
+  uplsign ${1} ${2} ${3} || exit 1
 }
 
 main $@

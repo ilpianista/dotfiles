@@ -1,7 +1,11 @@
 "" vundle specific
-filetype off
+filetype off " required!
+
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
+
+" let Vundle manage Vundle
+"  " required!
 Bundle 'gmarik/vundle'
 
 " A tree explorer plugin for vim
@@ -20,6 +24,8 @@ Bundle 'Shougo/neocomplcache'
 Bundle 'Lokaltog/vim-powerline'
 " a git wrapper
 Bundle 'tpope/vim-fugitive'
+" quoting/parenthesizing made simple
+Bundle 'tpope/vim-surround'
 " Syntax checking hacks for vim
 Bundle 'scrooloose/syntastic'
 " Fuzzy file, buffer, mru and tag finder
@@ -28,6 +34,10 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'mattn/gist-vim'
 " Elegant buffer explorer
 Bundle 'fholgado/minibufexpl.vim'
+" Interactive command execution (needed by vimshell)
+Bundle 'Shougo/vimproc'
+" Powerful shell
+Bundle 'Shougo/vimshell'
 
 "" vim-scripts repos
 " Colorsheme Scroller, Chooser, and Browser
@@ -54,7 +64,7 @@ set shiftwidth=4 " number of spaces to use in autoindent
 set expandtab    " use spaces instead of tabs
 set nopaste      " disable paste mode for plugins compatibility
 set textwidth=80 " maximum width of text that is being inserted
-set wrap         " lines longer than the width of the window will wrap
+"set wrap         " lines longer than the width of the window will wrap
 set showmatch  " when a bracket is inserted, briefly jump to the matching one
 
 set viminfo='10,\"100,:20,%,n~/.viminfo

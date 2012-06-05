@@ -24,10 +24,16 @@ main() {
   else
     path="${2}"
   fi
+  
+  if [ -z ${3} ]; then
+    svnbranch="trunk"
+  else
+    svnbranch="${3}"
+  fi
 
   # Packages folder structure on the host is something like ~/svn-packages/pkgname/trunk/
   for sig in *${SIGN}; do
-    scp ${sig} ${host}:${path}/${1}/trunk/ || exit 1
+    scp ${sig} ${host}:${path}/${1}/${svnbranch}/ || exit 1
   done
 }
 

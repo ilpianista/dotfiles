@@ -1,7 +1,6 @@
 #!/bin/bash
 
 host="pkgbuild.com"
-svnbranch="trunk"
 
 PKGEXT=".pkg.tar.xz"
 
@@ -33,6 +32,12 @@ main() {
     path="svn-packages"
   else
     path="${2}"
+  fi
+  
+  if [ -z ${3} ]; then
+    svnbranch="trunk"
+  else
+    svnbranch="${3}"
   fi
 
   # Package folder structure on the host is something like ~/svn-packages/pkgname/trunk/

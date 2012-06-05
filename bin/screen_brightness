@@ -1,0 +1,42 @@
+#!/bin/bash
+# Author: Andrea Scarpino <andrea@archlinux.org>
+
+set(){
+    local max_value=$(cat /sys/class/backlight/intel_backlight/max_brightness)
+    local min_value=max_value
+    let min_value=min_value/30
+
+    if [ $1 -gt $max_value -o $1 -lt $min_value ]; then
+        echo "value not allowed! (too low or too high)"
+        echo "Min: $min_value       Max: $max_value"
+        exit 1
+    else
+        echo "$1" > /sys/class/backlight/intel_backlight/brightness
+    fi
+}
+
+current_value=$(cat /sys/class/backlight/intel_backlight/brightness)
+increment=100000
+
+if [ $# -eq 0 ]; then
+    echo "Usage: $(basename $0) <value>"
+    exit 0
+fi
+
+if [ $(whoami) != "root" ]; then
+    echo "Root privileges are required!"
+    exit 0
+fi
+
+if [ "$1" = "up" ]; then
+    let current_value=$current_value+$increment
+elif [ "$1" = "down" ]; then
+    let current_value=$current_value-$increment
+else
+    set $1
+    exit 0
+fi
+
+set $current_value
+
+exit 0
