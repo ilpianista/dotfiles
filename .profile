@@ -1,3 +1,3 @@
 if [ -n "$DISPLAY" ]; then
-   BROWSER=chromium
+   BROWSER=rekonq
 fi
