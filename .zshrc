@@ -179,13 +179,13 @@ fi
 #$abk[SnL]="| sort -n | less"
 
 ## get top 10 shell commands:
-alias top10='print -l ${(o)history%% *} | uniq -c | sort -nr | head -n 10'
+#alias top10='print -l ${(o)history%% *} | uniq -c | sort -nr | head -n 10'
 
 ## Execute \kbd{./configure}
-alias CO="./configure"
+#alias CO="./configure"
 
 ## Execute \kbd{./configure --help}
-alias CH="./configure --help"
+#alias CH="./configure --help"
 
 ## miscellaneous code ##
 
@@ -317,5 +317,3 @@ alias CH="./configure --help"
 #vimhelp ()    { vim -c "help $1" -c on -c "au! VimEnter *" }
 
 ## END OF FILE #################################################################
-
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

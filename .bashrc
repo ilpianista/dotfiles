@@ -11,4 +11,3 @@ HISTSIZE=1000
 export HISTCONTROL=ignoredups
 
 [[ -f ~/.profile ]] && ~/.profile
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

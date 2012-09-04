@@ -28,6 +28,8 @@ scan () {
 # Load RVM into a shell session *as a function*
 [[ -f ~/.rvm/scripts/rvm ]] && source ~/.rvm/scripts/rvm
 
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
 # Speed-up rebuilds
 export USE_CCACHE=1
 export CCACHE_DIR=/ramdisk/ccache
