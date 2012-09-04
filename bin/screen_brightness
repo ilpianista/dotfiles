@@ -4,7 +4,7 @@
 set(){
     local max_value=$(cat /sys/class/backlight/intel_backlight/max_brightness)
     local min_value=max_value
-    let min_value=min_value/30
+    let min_value=min_value/50
 
     if [ $1 -gt $max_value -o $1 -lt $min_value ]; then
         echo "value not allowed! (too low or too high)"

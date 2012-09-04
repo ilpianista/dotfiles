@@ -11,8 +11,8 @@ style "user-font"
 widget_class "*" style "user-font"
 gtk-font-name="DejaVu Sans 9"
 gtk-theme-name="oxygen-gtk"
-gtk-icon-theme-name="Caledonia"
-gtk-fallback-icon-theme="Caledonia"
+gtk-icon-theme-name="Oxygen"
+gtk-fallback-icon-theme="Oxygen"
 gtk-toolbar-style=GTK_TOOLBAR_ICONS
 gtk-menu-images=0
 gtk-button-images=0

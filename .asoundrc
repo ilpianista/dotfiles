@@ -1,0 +1,36 @@
+pcm.softvol {
+	type softvol
+	
+	slave {
+		pcm "bluetooth"
+	}
+
+	control {
+		name "SoftMaster"
+		card 0
+	}
+
+	hint {
+		show on
+		description "BlueTooth Headset"
+	}
+}
+
+pcm.bluetooth {
+	type bluetooth
+	device "00:23:78:25:CF:14"
+	profile "auto"
+}
+
+pcm.pulse {
+    type pulse
+}
+ctl.pulse {
+    type pulse
+}
+pcm.!default {
+    type pulse
+}
+ctl.!default {
+    type pulse
+}
