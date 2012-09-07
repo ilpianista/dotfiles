@@ -8,6 +8,7 @@ call vundle#rc()
 "  " required!
 Bundle 'gmarik/vundle'
 
+"" plugins
 " Ruby on Rails power tools
 Bundle 'tpope/vim-rails'
 " Vim Cucumber runtime files
@@ -36,6 +37,14 @@ Bundle 'scrooloose/nerdcommenter'
 Bundle 'Shougo/neocomplcache-snippets-complete'
 " Ultimate auto-completion system for Vim
 Bundle 'Shougo/neocomplcache'
+
+"" color schemes
+" Molokai color scheme for Vim
+Bundle 'tomasr/molokai'
+" Dark and light color scheme
+Bundle 'vim-scripts/Lucius'
+" The original IR_Black color scheme for vim
+Bundle 'twerth/ir_black'
 
 "" general stuff
 set encoding=utf-8 " necessary to show unicode glyphs
