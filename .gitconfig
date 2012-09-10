@@ -1,0 +1,20 @@
+[user]
+	email = andrea@archlinux.org
+	name = Andrea Scarpino
+[sendemail]
+	smtpserver = mail.archlinux.org
+	smtpserverport = 587
+	smtpencryption = tls
+	smtpuser = andrea
+[color]
+	ui = auto
+[commit]
+	template = /home/andrea/.commit-template
+[core]
+	excludesfile = /home/andrea/.gitexcludes
+[url "git://anongit.kde.org/"]
+    insteadOf = kde:
+[url "ssh://gitolite@193.204.187.132/"]
+    InsteadOf = uniba:
+[merge]
+	tool = vimdiff

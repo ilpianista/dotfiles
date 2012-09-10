@@ -34,4 +34,4 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 export USE_CCACHE=1
 export CCACHE_DIR=/ramdisk/ccache
 
-export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
+#export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
