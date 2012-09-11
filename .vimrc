@@ -29,6 +29,8 @@ Bundle 'tpope/vim-rvm'
 Bundle 'tpope/vim-abolish'
 " Lightweight support for Ruby's Bundler
 Bundle 'tpope/vim-bundler'
+" Extended session management for Vim
+Bundle 'xolox/vim-session'
 " Provides database access to many dbms (Oracle, Sybase, Microsoft, MySQL, DBI,..)
 Bundle 'vim-scripts/dbext.vim'
 " The ultimate vim statusline utility
@@ -88,6 +90,27 @@ au FileType bash set tabstop=2 shiftwidth=2 expandtab
 
 "" java
 au FileType java set tabstop=4 shiftwidth=4
+
+"" Eclim settings
+
+" 2 means Errors
+let g:EclimLogLevel=2
+" a project tree window will be auto opened for new Vim sessions
+let g:EclimProjectTreeAutoOpen=1
+" the path of the current file will be expanded in the project tree
+let g:EclimProjectTreeExpandPathOnOpen=1
+" list of mappings which link file patterns to the available actions
+let g:EclimProjectTreeActions = [
+    \ {'pattern': '.*', 'name': 'Split', 'action': 'split'},
+    \ {'pattern': '.*', 'name': 'Tab', 'action': 'tabnew'},
+    \ {'pattern': '.*', 'name': 'Edit', 'action': 'edit'},
+  \ ]
+" defines the regex pattern used to identify todo or fixme entries
+let g:EclimTodoSearchPattern = '\(\<fixme\>\|\<todo\>\)\c'
+" defines a list of file extensions that will be searched for the todo / fixme entries
+let g:EclimTodoSearchExtensions = ['java', 'jsp', 'xml', 'html']
+" the validation results will be sorted by severity (errors > warnings > info > etc.)
+let g:EclimValidateSortResults = 'severity'
 
 " Import the class under the cursor with <leader>i (:h mapleader)
 nnoremap <silent> <buffer> <leader>i :JavaImport<cr>
