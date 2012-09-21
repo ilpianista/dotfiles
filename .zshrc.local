@@ -2,4 +2,9 @@
 packages=$HOME/projects/packages
 : ~packages
 
+# Completion scripts
+fpath=(~/.zsh/completion $fpath)
+autoload -U compinit
+compinit
+
 [[ -f ~/.profile ]] && . ~/.profile

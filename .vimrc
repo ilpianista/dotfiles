@@ -39,6 +39,8 @@ Bundle 'Lokaltog/vim-powerline'
 Bundle 'scrooloose/nerdtree'
 " plugin for intensely orgasmic commenting
 Bundle 'scrooloose/nerdcommenter'
+" eclipse + vim
+Bundle 'ervandew/eclim'
 
 "" color schemes
 " Molokai color scheme for Vim
@@ -91,8 +93,10 @@ au FileType bash set tabstop=2 shiftwidth=2 expandtab
 "" java
 au FileType java set tabstop=4 shiftwidth=4
 
-"" Eclim settings
+" vim-session
+let g:session_autosave = 'no'
 
+"" Eclim settings
 " 2 means Errors
 let g:EclimLogLevel=2
 " a project tree window will be auto opened for new Vim sessions
@@ -111,10 +115,3 @@ let g:EclimTodoSearchPattern = '\(\<fixme\>\|\<todo\>\)\c'
 let g:EclimTodoSearchExtensions = ['java', 'jsp', 'xml', 'html']
 " the validation results will be sorted by severity (errors > warnings > info > etc.)
 let g:EclimValidateSortResults = 'severity'
-
-" Import the class under the cursor with <leader>i (:h mapleader)
-nnoremap <silent> <buffer> <leader>i :JavaImport<cr>
-" Search for the javadocs of the element under the cursor with <leader>d
-nnoremap <silent> <buffer> <leader>d :JavaDocSearch -x declarations<cr>
-" Perform a context sensitive search of the element under the cursor with <enter>
-nnoremap <silent> <buffer> <cr> :JavaSearchContext<cr>
