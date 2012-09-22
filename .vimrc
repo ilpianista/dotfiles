@@ -9,13 +9,13 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 "" plugins
+" a concise vim script that implements some of TextMate's snippets
+Bundle 'msanders/snipmate.vim'
 " Ruby on Rails power tools
 Bundle 'tpope/vim-rails'
-" Vim Cucumber runtime files
-Bundle 'tpope/vim-cucumber'
-" Vim runtime files for Haml, Sass, and SCSS
-Bundle 'tpope/vim-haml'
-" wisely add "end" in ruby, endfunction/endif/more in vim script
+" vim syntax for LESS (dynamic CSS)
+Bundle 'groenewege/vim-less'
+" wisely add 'end' in ruby, endfunction/endif/more in vim script
 Bundle 'tpope/vim-endwise'
 " a Git wrapper so awesome, it should be illegal
 Bundle 'tpope/vim-fugitive'
@@ -23,16 +23,14 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
 " pairs of handy bracket mappings
 Bundle 'tpope/vim-unimpaired'
-" switch Ruby versions from inside Vim
-Bundle 'tpope/vim-rvm'
 " easily search for, substitute, and abbreviate multiple variants of a word
 Bundle 'tpope/vim-abolish'
-" Lightweight support for Ruby's Bundler
-Bundle 'tpope/vim-bundler'
 " Extended session management for Vim
 Bundle 'xolox/vim-session'
 " Provides database access to many dbms (Oracle, Sybase, Microsoft, MySQL, DBI,..)
 Bundle 'vim-scripts/dbext.vim'
+" A parser for a condensed HTML format
+Bundle 'rstacruz/sparkup'
 " The ultimate vim statusline utility
 Bundle 'Lokaltog/vim-powerline'
 " A tree explorer plugin for vim
@@ -41,6 +39,8 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
 " eclipse + vim
 Bundle 'ervandew/eclim'
+" scala stuff
+Bundle 'derekwyatt/vim-scala'
 
 "" color schemes
 " Molokai color scheme for Vim
@@ -84,14 +84,10 @@ set wildmode=full
 set wildmenu        " command-line completion operates in an enhanced mode
 set completeopt=longest,menuone " completion popup menu work just like in an IDE
 
-"" ruby
 au FileType ruby set tabstop=2 shiftwidth=2 expandtab
-
-"" bash
 au FileType bash set tabstop=2 shiftwidth=2 expandtab
-
-"" java
-au FileType java set tabstop=4 shiftwidth=4
+au FileType java set tabstop=4 shiftwidth=4 expandtab
+au FileType scala set tabstop=2 shiftwidth=2 expandtab
 
 " vim-session
 let g:session_autosave = 'no'
@@ -115,3 +111,10 @@ let g:EclimTodoSearchPattern = '\(\<fixme\>\|\<todo\>\)\c'
 let g:EclimTodoSearchExtensions = ['java', 'jsp', 'xml', 'html']
 " the validation results will be sorted by severity (errors > warnings > info > etc.)
 let g:EclimValidateSortResults = 'severity'
+
+map <C-S-F> :%JavaFormat<CR>
+map <S-A-O> :JavaImportOrganize<CR>
+map <S-F12> :JavaDocSearch<CR>
+
+imap <S-A-J> :JavaDocComment<CR>
+
