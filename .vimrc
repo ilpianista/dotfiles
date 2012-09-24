@@ -9,14 +9,20 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 "" plugins
+" dependencies for snipmate by garbas
+Bundle "MarcWeber/vim-addon-mw-utils"
+Bundle "tomtom/tlib_vim"
+Bundle "honza/snipmate-snippets"
 " a concise vim script that implements some of TextMate's snippets
-Bundle 'msanders/snipmate.vim'
+Bundle 'garbas/vim-snipmate'
+" Original snipmate repo (outdated)
+"Bundle 'msanders/snipmate.vim'
 " Ruby on Rails power tools
 Bundle 'tpope/vim-rails'
 " vim syntax for LESS (dynamic CSS)
 Bundle 'groenewege/vim-less'
-" wisely add 'end' in ruby, endfunction/endif/more in vim script
-Bundle 'tpope/vim-endwise'
+" Vim runtime files for Haml, Sass, and SCSS
+Bundle 'tpope/vim-haml'
 " a Git wrapper so awesome, it should be illegal
 Bundle 'tpope/vim-fugitive'
 " quoting/parenthesizing made simple
@@ -41,6 +47,8 @@ Bundle 'scrooloose/nerdcommenter'
 Bundle 'ervandew/eclim'
 " scala stuff
 Bundle 'derekwyatt/vim-scala'
+" Scala snippets for Vim's snipMate plugin
+Bundle 'tommorris/scala-vim-snippets'
 
 "" color schemes
 " Molokai color scheme for Vim
@@ -84,11 +92,6 @@ set wildmode=full
 set wildmenu        " command-line completion operates in an enhanced mode
 set completeopt=longest,menuone " completion popup menu work just like in an IDE
 
-au FileType ruby set tabstop=2 shiftwidth=2 expandtab
-au FileType bash set tabstop=2 shiftwidth=2 expandtab
-au FileType java set tabstop=4 shiftwidth=4 expandtab
-au FileType scala set tabstop=2 shiftwidth=2 expandtab
-
 " vim-session
 let g:session_autosave = 'no'
 
@@ -111,10 +114,4 @@ let g:EclimTodoSearchPattern = '\(\<fixme\>\|\<todo\>\)\c'
 let g:EclimTodoSearchExtensions = ['java', 'jsp', 'xml', 'html']
 " the validation results will be sorted by severity (errors > warnings > info > etc.)
 let g:EclimValidateSortResults = 'severity'
-
-map <C-S-F> :%JavaFormat<CR>
-map <S-A-O> :JavaImportOrganize<CR>
-map <S-F12> :JavaDocSearch<CR>
-
-imap <S-A-J> :JavaDocComment<CR>
 
