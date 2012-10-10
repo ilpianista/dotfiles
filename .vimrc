@@ -10,7 +10,7 @@ Bundle 'gmarik/vundle'
 
 "" plugins
 " dependencies for snipmate by garbas
-Bundle "MarcWeber/vim-addon-mw-utils"
+Bundle "vim-scripts/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
 Bundle "honza/snipmate-snippets"
 " a concise vim script that implements some of TextMate's snippets
@@ -49,17 +49,17 @@ Bundle 'ervandew/eclim'
 Bundle 'derekwyatt/vim-scala'
 " Scala snippets for Vim's snipMate plugin
 Bundle 'tommorris/scala-vim-snippets'
+" Play20 framework vim plugin
+Bundle 'gre/play2vim'
 
 "" color schemes
 " Molokai color scheme for Vim
 Bundle 'tomasr/molokai'
 " Dark and light color scheme
 Bundle 'vim-scripts/Lucius'
-" The original IR_Black color scheme for vim
-Bundle 'twerth/ir_black'
 
 "" general stuff
-set nocompatible   " Use Vim defaults instead of 100% vi compatibility
+set nocompatible   " disable vi compatibility
 set encoding=utf-8 " necessary to show unicode glyphs
 set showcmd        " display incomplete commands
 set number         " turn line numbering on
@@ -68,13 +68,14 @@ set cursorcolumn   " highlight the cursor column
 set backspace=indent,eol,start " more powerful backspacing
 set history=50     " keep 50 lines of command line history
 set ruler          " show the cursor position all the time
-set laststatus=2    " always show the status line
+set laststatus=2   " always show the status line
 filetype plugin indent on " turn on filetype detection, filetype plugins, and autoindent
 
 "" color stuffs
 syntax on           " turn syntax highlighting on
-set t_Co=256        " Explicitly tell vim that the terminal supports 256 colors
-colorscheme lucius  " because we prefer a non default colorscheme
+set t_Co=256        " explicitly tell vim that the terminal supports 256 colors
+colorscheme lucius " because we prefer a non default colorscheme
+LuciusBlack
 
 "" whitespace
 set nowrap          " lines longer than the width of the window will not wrap
@@ -91,6 +92,9 @@ set incsearch       " show there the pattern is as it's typed
 set wildmode=full  
 set wildmenu        " command-line completion operates in an enhanced mode
 set completeopt=longest,menuone " completion popup menu work just like in an IDE
+
+" vim-powerline
+let g:Powerline_symbols = 'unicode'
 
 " vim-session
 let g:session_autosave = 'no'
@@ -115,3 +119,5 @@ let g:EclimTodoSearchExtensions = ['java', 'jsp', 'xml', 'html']
 " the validation results will be sorted by severity (errors > warnings > info > etc.)
 let g:EclimValidateSortResults = 'severity'
 
+map <C-S-T> :ProjectTodo<CR>
+map <C-S-P> :ProjectProblems<CR>

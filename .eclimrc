@@ -8,5 +8,15 @@ nailgun.server.port=10012
 # See $ECLIPSE_HOME/configuration/config.ini for other osgi properties.
 osgi.instance.area.default=@user.home/workspace
 
+# increase heap size
+-Xmn256m
+-Xms284m
+-Xmx384m
+-Xss2m
+
+# increase perm gen size
+-XX:PermSize=128m
+-XX:MaxPermSize=256m
+
 # set the default file encoding
 file.encoding=utf-8
