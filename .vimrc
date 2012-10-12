@@ -43,12 +43,14 @@ Bundle 'Lokaltog/vim-powerline'
 Bundle 'scrooloose/nerdtree'
 " plugin for intensely orgasmic commenting
 Bundle 'scrooloose/nerdcommenter'
+" Ultimate auto-completion system for Vim
+Bundle 'Shougo/neocomplcache'
+" neocomplcache complete snippets source
+Bundle 'Shougo/neocomplcache-snippets-complete'
 " eclipse + vim
 Bundle 'ervandew/eclim'
 " scala stuff
 Bundle 'derekwyatt/vim-scala'
-" Scala snippets for Vim's snipMate plugin
-Bundle 'tommorris/scala-vim-snippets'
 " Play20 framework vim plugin
 Bundle 'gre/play2vim'
 
@@ -99,6 +101,29 @@ let g:Powerline_symbols = 'unicode'
 " vim-session
 let g:session_autosave = 'no'
 
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplcache
+let g:neocomplcache_enable_at_startup = 1
+" Use smartcase.
+let g:neocomplcache_enable_smart_case = 1
+" Use camel case completion.
+let g:neocomplcache_enable_camel_case_completion = 1
+" Use underbar completion.
+let g:neocomplcache_enable_underbar_completion = 1
+" Set minimum syntax keyword length.
+let g:neocomplcache_min_syntax_length = 3
+let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+
+" Plugin key-mappings.
+imap <C-k> <Plug>(neocomplcache_snippets_expand)
+smap <C-k> <Plug>(neocomplcache_snippets_expand)
+
+" <CR>: close popup and save indent.
+inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
 "" Eclim settings
 " 2 means Errors
 let g:EclimLogLevel=2
@@ -119,5 +144,11 @@ let g:EclimTodoSearchExtensions = ['java', 'jsp', 'xml', 'html']
 " the validation results will be sorted by severity (errors > warnings > info > etc.)
 let g:EclimValidateSortResults = 'severity'
 
+" eclim bindings
 map <C-S-T> :ProjectTodo<CR>
 map <C-S-P> :ProjectProblems<CR>
+
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
