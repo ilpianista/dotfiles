@@ -17,12 +17,6 @@ Bundle "honza/snipmate-snippets"
 Bundle 'garbas/vim-snipmate'
 " Original snipmate repo (outdated)
 "Bundle 'msanders/snipmate.vim'
-" Ruby on Rails power tools
-Bundle 'tpope/vim-rails'
-" vim syntax for LESS (dynamic CSS)
-Bundle 'groenewege/vim-less'
-" Vim runtime files for Haml, Sass, and SCSS
-Bundle 'tpope/vim-haml'
 " a Git wrapper so awesome, it should be illegal
 Bundle 'tpope/vim-fugitive'
 " quoting/parenthesizing made simple
@@ -37,6 +31,8 @@ Bundle 'xolox/vim-session'
 Bundle 'vim-scripts/dbext.vim'
 " A parser for a condensed HTML format
 Bundle 'rstacruz/sparkup'
+" HTML5 omnicomplete and syntax
+Bundle 'othree/html5.vim'
 " The ultimate vim statusline utility
 Bundle 'Lokaltog/vim-powerline'
 " A tree explorer plugin for vim
@@ -47,10 +43,23 @@ Bundle 'scrooloose/nerdcommenter'
 Bundle 'Shougo/neocomplcache'
 " neocomplcache complete snippets source
 Bundle 'Shougo/neocomplcache-snippets-complete'
-" eclipse + vim
+
+" Ruby stuff
+" Ruby on Rails power tools
+Bundle 'tpope/vim-rails'
+" vim syntax for LESS (dynamic CSS)
+Bundle 'groenewege/vim-less'
+" Vim runtime files for Haml, Sass, and SCSS
+Bundle 'tpope/vim-haml'
+
+" Java stuff
+" eclipse + vim (manually run 'ant' to install)
 Bundle 'ervandew/eclim'
-" scala stuff
+
+" Scala stuff
 Bundle 'derekwyatt/vim-scala'
+" Scala snippets for Vim's snipMate plugin (manually run make install to install)
+Bundle 'tommorris/scala-vim-snippets'
 " Play20 framework vim plugin
 Bundle 'gre/play2vim'
 
@@ -96,7 +105,7 @@ set wildmenu        " command-line completion operates in an enhanced mode
 set completeopt=longest,menuone " completion popup menu work just like in an IDE
 
 " vim-powerline
-let g:Powerline_symbols = 'unicode'
+let g:Powerline_symbols = 'fancy'
 
 " vim-session
 let g:session_autosave = 'no'
@@ -144,11 +153,15 @@ let g:EclimTodoSearchExtensions = ['java', 'jsp', 'xml', 'html']
 " the validation results will be sorted by severity (errors > warnings > info > etc.)
 let g:EclimValidateSortResults = 'severity'
 
-" eclim bindings
+" eclim shortcuts
 map <C-S-T> :ProjectTodo<CR>
 map <C-S-P> :ProjectProblems<CR>
+
+" nerdtree shortcuts
+nmap <leader>ne :NERDTree<CR>
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+

@@ -32,6 +32,6 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 # Speed-up rebuilds
 export USE_CCACHE=1
-export CCACHE_DIR=/ramdisk/ccache
+export CCACHE_DIR=/tmp/ccache
 
 #export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'

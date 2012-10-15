@@ -1,3 +1,3 @@
 colorscheme desert
 
-set guifont=Mensch\ 10
+set guifont=Menlo\ for\ Powerline\ 10
