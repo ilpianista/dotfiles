@@ -52,10 +52,6 @@ Bundle 'groenewege/vim-less'
 " Vim runtime files for Haml, Sass, and SCSS
 Bundle 'tpope/vim-haml'
 
-" Java stuff
-" eclipse + vim (manually run 'ant' to install)
-Bundle 'ervandew/eclim'
-
 " Scala stuff
 Bundle 'derekwyatt/vim-scala'
 " Scala snippets for Vim's snipMate plugin (manually run make install to install)
@@ -113,7 +109,7 @@ let g:session_autosave = 'no'
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
 " Use neocomplcache
-let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_at_startup = 0
 " Use smartcase.
 let g:neocomplcache_enable_smart_case = 1
 " Use camel case completion.
@@ -124,14 +120,19 @@ let g:neocomplcache_enable_underbar_completion = 1
 let g:neocomplcache_min_syntax_length = 3
 let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 
+" shortcuts
+map <C-S> :w<CR>
+
 " Plugin key-mappings.
 imap <C-k> <Plug>(neocomplcache_snippets_expand)
 smap <C-k> <Plug>(neocomplcache_snippets_expand)
+map <C-A-n> NeoComplCacheEnable<CR>
 
 " <CR>: close popup and save indent.
-inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
+" inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+map <leader>n :NERDTree 
 
 "" Eclim settings
 " 2 means Errors
@@ -154,11 +155,9 @@ let g:EclimTodoSearchExtensions = ['java', 'jsp', 'xml', 'html']
 let g:EclimValidateSortResults = 'severity'
 
 " eclim shortcuts
-map <C-S-T> :ProjectTodo<CR>
-map <C-S-P> :ProjectProblems<CR>
-
-" nerdtree shortcuts
-nmap <leader>ne :NERDTree<CR>
+map <leader>t :ProjectTree 
+map <C-T> :ProjectTodo<CR>
+map <C-P> :ProjectProblems<CR>
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
