@@ -6,14 +6,6 @@ PKGEXT=".pkg.tar.xz"
 
 DEST="."
 
-checkIntegrity() {
-  if [ "$(md5sum "${1}" | cut -d' ' -f1)" != "$(ssh ${host} md5sum "${2}" | cut -d' ' -f1)" ]; then
-    return 1
-  else
-    return 0
-  fi
-}
-
 usage(){
   echo "A simple script to download a package to the local machine"
   echo ""
@@ -42,12 +34,7 @@ main() {
 
   # Package folder structure on the host is something like ~/svn-packages/pkgname/trunk/
   for pkg in `ssh ${host} ls ${path}/${1}/${svnbranch}/*${PKGEXT}`; do
-    scp ${host}:${pkg} ${DEST} || exit 1
-
-    if ! checkIntegrity ${DEST}/$(basename $pkg) "${pkg}"; then
-      echo "$(basename ${pkg}) corrupted"
-      exit 1
-    fi
+    rsync -e ssh -p --chmod=ug=rw,o=r -c -h -L --progress --partial -y ${host}:${pkg} ${DEST} || exit 1
   done
 }
 

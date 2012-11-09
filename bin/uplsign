@@ -33,7 +33,7 @@ main() {
 
   # Packages folder structure on the host is something like ~/svn-packages/pkgname/trunk/
   for sig in *${SIGN}; do
-    scp ${sig} ${host}:${path}/${1}/${svnbranch}/ || exit 1
+    rsync -e ssh -p --chmod=ug=rw,o=r -c -h -L --progress --partial -y ${sig} ${host}:${path}/${1}/${svnbranch}/ || exit 1
   done
 }
 
