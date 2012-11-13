@@ -19,8 +19,6 @@ format="${cmd##yt2}"
 
 ytargs="-l --extract-audio --audio-format=${format} -w -c"
 
-filename=$(${youtubedl} --get-filename ${1}) || exit 1
-
 # Download and convert
 ${youtubedl} ${ytargs} "${1}" || exit 1
 
