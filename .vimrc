@@ -28,21 +28,19 @@ Bundle 'tpope/vim-abolish'
 " Extended session management for Vim
 Bundle 'xolox/vim-session'
 " Provides database access to many dbms (Oracle, Sybase, Microsoft, MySQL, DBI,..)
-Bundle 'vim-scripts/dbext.vim'
+" Bundle 'vim-scripts/dbext.vim'
 " A parser for a condensed HTML format
-Bundle 'rstacruz/sparkup'
+" Bundle 'rstacruz/sparkup'
 " HTML5 omnicomplete and syntax
-Bundle 'othree/html5.vim'
+" Bundle 'othree/html5.vim'
+" Perform all your vim insert mode completions with Tab
+Bundle 'ervandew/supertab'
 " The ultimate vim statusline utility
 Bundle 'Lokaltog/vim-powerline'
 " A tree explorer plugin for vim
 Bundle 'scrooloose/nerdtree'
 " plugin for intensely orgasmic commenting
 Bundle 'scrooloose/nerdcommenter'
-" Ultimate auto-completion system for Vim
-Bundle 'Shougo/neocomplcache'
-" neocomplcache complete snippets source
-Bundle 'Shougo/neocomplcache-snippets-complete'
 
 " Ruby stuff
 " Ruby on Rails power tools
@@ -106,34 +104,6 @@ let g:Powerline_symbols = 'fancy'
 " vim-session
 let g:session_autosave = 'no'
 
-" Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" Use neocomplcache
-let g:neocomplcache_enable_at_startup = 0
-" Use smartcase.
-let g:neocomplcache_enable_smart_case = 1
-" Use camel case completion.
-let g:neocomplcache_enable_camel_case_completion = 1
-" Use underbar completion.
-let g:neocomplcache_enable_underbar_completion = 1
-" Set minimum syntax keyword length.
-let g:neocomplcache_min_syntax_length = 3
-let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-
-" shortcuts
-map <C-S> :w<CR>
-
-" Plugin key-mappings.
-imap <C-k> <Plug>(neocomplcache_snippets_expand)
-smap <C-k> <Plug>(neocomplcache_snippets_expand)
-map <C-A-n> NeoComplCacheEnable<CR>
-
-" <CR>: close popup and save indent.
-" inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-map <leader>n :NERDTree 
-
 "" Eclim settings
 " 2 means Errors
 let g:EclimLogLevel=2
@@ -158,9 +128,4 @@ let g:EclimValidateSortResults = 'severity'
 map <leader>t :ProjectTree 
 map <C-T> :ProjectTodo<CR>
 map <C-P> :ProjectProblems<CR>
-
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 
