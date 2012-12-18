@@ -5,11 +5,11 @@ include "/usr/share/themes/oxygen-gtk/gtk-2.0/gtkrc"
 include "/etc/gtk-2.0/gtkrc"
 style "user-font" 
 {
-	font_name="DejaVu Sans"
+	font_name="Oxygen"
 }
 
 widget_class "*" style "user-font"
-gtk-font-name="DejaVu Sans 9"
+gtk-font-name="Oxygen 9"
 gtk-theme-name="oxygen-gtk"
 gtk-icon-theme-name="Oxygen"
 gtk-fallback-icon-theme="Oxygen"

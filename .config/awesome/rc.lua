@@ -72,11 +72,13 @@ layouts =
 
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
-tags = { "*", "www", "media", "dev", "chat" }
-layout = { layouts[1], layouts[10], layouts[1], layouts[2], layouts[2] }
+tags = {
+    names = { "*", "www", "media", "dev", "chat" },
+    layouts = { layouts[1], layouts[10], layouts[1], layouts[2], layouts[2] }
+}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag(tags, s, layout)
+    tags[s] = awful.tag(tags.names, s, tags.layouts)
 end
 -- }}}
 
@@ -183,6 +185,15 @@ vicious.register(mpdwidget, vicious.widgets.mpd,
     end, 10)
 -- }}}
 
+-- {{{ Gmail
+mailicon = widget({ type = "imagebox" })
+mailicon.image = image(beautiful.widget_mail)
+-- Initalize widget
+mailwidget = widget({ type = "textbox" })
+-- Register widget
+vicious.register(mailwidget, vicious.widgets.gmail, "(${count}) Unread mails", 120)
+-- }}}
+
 -- Create a systray
 -- mysystray = widget({ type = "systray" })
 
@@ -257,10 +268,10 @@ for s = 1, screen.count() do
         {
             mylauncher,
             mytaglist[s],
-            mylayoutbox[s],
             mypromptbox[s],
             layout = awful.widget.layout.horizontal.leftright
         },
+        mylayoutbox[s],
         datewidget,
         dateicon,
 --        s == 1 and mysystray or nil,
@@ -273,6 +284,8 @@ for s = 1, screen.count() do
         netwidget,
         upicon,
         dnicon,
+        mailwidget,
+        mailicon,
         memwidget,
         memicon,
         cpuwidget,
@@ -338,6 +351,8 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1)         end),
     awful.key({ modkey,           }, "space", function () awful.layout.inc(layouts,  1) end),
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
+    
+    awful.key({ "Control", "Alt"   }, "l", "kshutdown -k"),
 
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
@@ -447,7 +462,9 @@ awful.rules.rules = {
     { rule = { class = "Ktp-text-ui" },
       properties = { tag = tags[1][5] } }, 
     { rule = { class = "Konversation" },
-      properties = { tag = tags[1][5] } }
+      properties = { tag = tags[1][5] } },
+    { rule = { class = "Gvim" },
+      properties = { tag = tags[1][4], size_hints_honor = false } }
 }
 -- }}}
 
