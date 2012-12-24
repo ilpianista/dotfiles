@@ -16,3 +16,4 @@ gtk-fallback-icon-theme="Oxygen"
 gtk-toolbar-style=GTK_TOOLBAR_ICONS
 gtk-menu-images=0
 gtk-button-images=0
+gtk-cursor-theme-name="Oxygen_Black"
