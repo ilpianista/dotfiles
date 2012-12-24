@@ -1,6 +1,7 @@
 ---------------------------
 -- Default awesome theme --
 ---------------------------
+local awful = require("awful")
 
 theme = {}
 theme.confdir       = awful.util.getdir("config")
@@ -11,6 +12,7 @@ theme.bg_normal     = "#222222"
 theme.bg_focus      = "#535d6c"
 theme.bg_urgent     = "#ff0000"
 theme.bg_minimize   = "#444444"
+theme.bg_systray    = theme.bg_normal
 
 theme.fg_normal     = "#aaaaaa"
 theme.fg_focus      = "#ffffff"
@@ -36,8 +38,6 @@ theme.border_marked = "#91231c"
 theme.taglist_squares_sel   = "/usr/share/awesome/themes/default/taglist/squarefw.png"
 theme.taglist_squares_unsel = "/usr/share/awesome/themes/default/taglist/squarew.png"
 
-theme.tasklist_floating_icon = "/usr/share/awesome/themes/default/tasklist/floatingw.png"
-
 -- Variables set for theming the menu:
 -- menu_[bg|fg]_[normal|focus]
 -- menu_[border_color|border_width]
@@ -55,7 +55,6 @@ theme.fg_netdn_widget  = theme.fg_urgent
 theme.bg_widget        = theme.bg_normal
 theme.border_widget    = theme.bg_normal
 -- }}}
-
 
 -- {{{ Widget icons
 theme.widget_bat    = theme.confdir .. "/icons/bat.png"
@@ -95,7 +94,7 @@ theme.titlebar_maximized_button_normal_active = "/usr/share/awesome/themes/defau
 theme.titlebar_maximized_button_focus_active  = "/usr/share/awesome/themes/default/titlebar/maximized_focus_active.png"
 
 -- You can use your own command to set your wallpaper
-theme.wallpaper_cmd = { "awsetbg /home/andrea/Pictures/wallpapers/wall_120.jpg" }
+theme.wallpaper = "/home/andrea/Pictures/wallpapers/wall_120.jpg"
 
 -- You can use your own layout icons like this:
 theme.layout_fairh = "/usr/share/awesome/themes/default/layouts/fairhw.png"
@@ -112,6 +111,10 @@ theme.layout_spiral  = "/usr/share/awesome/themes/default/layouts/spiralw.png"
 theme.layout_dwindle = "/usr/share/awesome/themes/default/layouts/dwindlew.png"
 
 theme.awesome_icon = "/usr/share/awesome/icons/awesome16.png"
+
+-- Define the icon theme for application icons. If not set then the icons 
+-- from /usr/share/icons and /usr/share/icons/hicolor will be used.
+theme.icon_theme = nil
 
 return theme
 -- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80
