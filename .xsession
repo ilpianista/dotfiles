@@ -1,4 +1,10 @@
-#!/bin/bash
+#!/bin/sh
 
-xrdb -merge ~/.Xresources &
-xsetroot -cursor_name left_ptr
+#
+# ~/.xsession
+#
+# Executed by xdm/gdm/kdm at login
+#
+
+/bin/bash --login -i ~/.xinitrc
+

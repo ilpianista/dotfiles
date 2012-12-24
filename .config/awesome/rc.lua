@@ -38,10 +38,10 @@ end
 -- }}}
 
 -- {{{ Variable definitions
-local home = os.getenv("HOME")
+local config = awful.util.getdir("config")
 
 -- Themes define colours, icons, and wallpapers
-beautiful.init(home .. "/.config/awesome/mine.lua")
+beautiful.init(config .. "/themes/mine/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "konsole"
@@ -85,7 +85,7 @@ end
 -- Define a tag table which hold all screen tags.
 tags = {
     names = { "*", "www", "media", "dev", "chat" },
-    layouts = { layouts[1], layouts[10], layouts[1], layouts[2], layouts[2] }
+    layouts = { layouts[1], layouts[10], layouts[1], layouts[6], layouts[3] }
 }
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
@@ -313,7 +313,7 @@ for s = 1, screen.count() do
     -- Now bring it all together (with the tasklist in the middle)
     local layout = wibox.layout.align.horizontal()
     layout:set_left(left_layout)
-    layout:set_middle(mytasklist[s])
+    --layout:set_middle(mytasklist[s])
     layout:set_right(right_layout)
 
     mywibox[s]:set_widget(layout)
