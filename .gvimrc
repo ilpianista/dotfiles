@@ -1,5 +1,5 @@
 colorscheme desert
 
-set guifont=Menlo\ for\ Powerline\ 9
+set guifont=Bitstream\ Vera\ Sans\ Mono\ 10
 
 highlight Pmenu guibg=brown gui=bold
