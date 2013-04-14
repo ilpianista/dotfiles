@@ -36,6 +36,9 @@ Bundle 'scrooloose/nerdtree'
 " plugin for intensely orgasmic commenting
 Bundle 'scrooloose/nerdcommenter'
 
+" a vim plugin for Nanoc
+Bundle 'timgreen/vim-nanoc'
+
 " Scala stuff
 "Bundle 'derekwyatt/vim-scala'
 " Scala snippets for Vim's snipMate plugin (manually run make install to install)

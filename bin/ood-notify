@@ -1,9 +1,7 @@
 #!/bin/bash
 
-fakedb=/dev/shm/fakepacdb
-
-pkgs=$(pacman --dbpath "$fakedb" -Qqu | wc -l)
-aurpkgs=$(cower -udf 2> /dev/null | wc -l)
+pkgs=$(checkupdates | wc -l)
+aurpkgs=$(cower -u 2> /dev/null | wc -l)
 
 unset msg1
 unset msg2

@@ -9,14 +9,16 @@
 [color]
 	ui = auto
 [commit]
-	template = /home/andrea/.commit-template
+	template = /home/ndr/.commit-template
 [core]
-	excludesfile = /home/andrea/.gitexcludes
+	excludesfile = /home/ndr/.gitexcludes
 [url "git://anongit.kde.org/"]
     insteadOf = kde:
-[url "ssh://gitolite@193.204.187.132/"]
+[url "git@git.kde.org:"]
+    pushInsteadOf = kde:
+[url "ssh://gitolite@arch02.di.uniba.it/"]
     InsteadOf = uniba:
 [merge]
 	tool = vimdiff
 [push]
-	default = simple
+	default = nothing
