@@ -10,9 +10,9 @@ Bundle 'gmarik/vundle'
 
 "" plugins
 " dependencies for snipmate by garbas
-Bundle "vim-scripts/vim-addon-mw-utils"
+Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
-Bundle "honza/snipmate-snippets"
+Bundle "honza/vim-snippets"
 " a concise vim script that implements some of TextMate's snippets
 Bundle 'garbas/vim-snipmate'
 " Original snipmate repo (outdated)
@@ -35,7 +35,8 @@ Bundle 'Lokaltog/vim-powerline'
 Bundle 'scrooloose/nerdtree'
 " plugin for intensely orgasmic commenting
 Bundle 'scrooloose/nerdcommenter'
-
+" Allows Vim to use multiple cursors simultaneously
+Bundle 'paradigm/vim-multicursor'
 " a vim plugin for Nanoc
 Bundle 'timgreen/vim-nanoc'
 
@@ -45,6 +46,9 @@ Bundle 'timgreen/vim-nanoc'
 "Bundle 'tommorris/scala-vim-snippets'
 " Play20 framework vim plugin
 "Bundle 'gre/play2vim'
+
+" Prolog Integration for Vim
+Bundle 'adimit/prolog.vim'
 
 "" color schemes
 " Molokai color scheme for Vim

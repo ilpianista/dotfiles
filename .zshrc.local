@@ -1,5 +1,1 @@
-# Named directories
-packages=$HOME/projects/packages
-: ~packages
-
-[[ -f ~/.profile ]] && . ~/.profile
+/etc/skel/.zshrc
