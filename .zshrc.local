@@ -37,6 +37,11 @@ alias backup="rsync --progress -avh --delete \
                 ${HOME}/ /run/media/$(whoami)/0d3dca5d-6c34-436b-991d-3ad4253a79d7"
 
 alias dmesg='dmesg -H'
+alias df='df -H'
+alias du='du -ch'
+alias diff='colordiff'
+alias mount='mount | column -t'
+alias jobs='jobs -l'
 alias -g '...'='../..'
 
 ## Use a default width of 80 for manpages for more convenient reading
