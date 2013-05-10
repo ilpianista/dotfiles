@@ -37,6 +37,12 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
 " Allows Vim to use multiple cursors simultaneously
 Bundle 'paradigm/vim-multicursor'
+
+" support for expanding abbreviation like zen-coding(emmet)
+Bundle 'mattn/zencoding-vim'
+" A parser for a condensed HTML format (mirror repo)
+Bundle 'tristen/vim-sparkup'
+
 " a vim plugin for Nanoc
 Bundle 'timgreen/vim-nanoc'
 
@@ -72,8 +78,11 @@ filetype plugin indent on " turn on filetype detection, filetype plugins, and au
 "" color stuffs
 syntax on           " turn syntax highlighting on
 set t_Co=256        " explicitly tell vim that the terminal supports 256 colors
-colorscheme lucius " because we prefer a non default colorscheme
-LuciusBlack
+colorscheme molokai " because we prefer a non default colorscheme
+
+if has("gui_running")
+  set guifont=Bitstream\ Vera\ Sans\ Mono\ 10
+endif
 
 "" whitespace
 set nowrap          " lines longer than the width of the window will not wrap

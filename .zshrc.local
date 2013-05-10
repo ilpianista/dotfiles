@@ -1,3 +1,12 @@
+## Use a default width of 80 for manpages for more convenient reading
+export MANWIDTH=${MANWIDTH:-80}
+
+## warning if file exists ('cat /dev/null > ~/.zshrc')
+setopt NO_clobber
+
+## alert me if something failed
+setopt printexitvalue
+
 # pacman stuff
 alias up='sudo pacman -Syu; echo "Checking for AUR updates..."; cower -udd'
 alias asdeps='sudo pacman -S --asdeps'
@@ -24,18 +33,6 @@ alias yt2mp3='youtube-dl -x -t --audio-format=mp3'
 alias yt2song='youtube-dl -x -t'
 yt2stream() { dragon "$(youtube-dl -g ${1})" --title "$(youtube-dl -e ${1})" }
 
-alias backup="rsync --progress -avh --delete \
-                --exclude Music \
-                --exclude Dropbox \
-                --exclude UniBA \
-                --exclude bin \
-                --exclude .cache \
-                --exclude .ccache \
-                --exclude .android \
-                --exclude .dropbox \
-                --exclude .dropbox-dist \
-                ${HOME}/ /run/media/$(whoami)/0d3dca5d-6c34-436b-991d-3ad4253a79d7"
-
 alias dmesg='dmesg -H'
 alias df='df -H'
 alias du='du -ch'
@@ -44,11 +41,4 @@ alias mount='mount | column -t'
 alias jobs='jobs -l'
 alias -g '...'='../..'
 
-## Use a default width of 80 for manpages for more convenient reading
-export MANWIDTH=${MANWIDTH:-80}
-
-## warning if file exists ('cat /dev/null > ~/.zshrc')
-setopt NO_clobber
-
-## alert me if something failed
-setopt printexitvalue
+alias wakerome='wol 00:04:ac:65:42:1e'
