@@ -61,6 +61,8 @@ Bundle 'adimit/prolog.vim'
 Bundle 'tomasr/molokai'
 " Dark and light color scheme
 Bundle 'vim-scripts/Lucius'
+" precision colorscheme for the vim text editor
+Bundle 'altercation/vim-colors-solarized'
 
 "" general stuff
 set nocompatible   " disable vi compatibility
@@ -78,9 +80,11 @@ filetype plugin indent on " turn on filetype detection, filetype plugins, and au
 "" color stuffs
 syntax on           " turn syntax highlighting on
 set t_Co=256        " explicitly tell vim that the terminal supports 256 colors
-colorscheme molokai " because we prefer a non default colorscheme
+colorscheme solarized " because we prefer a non default colorscheme
+highlight clear
 
 if has("gui_running")
+  set background=dark
   set guifont=Bitstream\ Vera\ Sans\ Mono\ 10
 endif
 
@@ -105,29 +109,4 @@ let g:Powerline_symbols = 'fancy'
 
 " vim-session
 let g:session_autosave = 'no'
-
-"" Eclim settings
-" 2 means Errors
-"let g:EclimLogLevel=2
-" a project tree window will be auto opened for new Vim sessions
-"let g:EclimProjectTreeAutoOpen=1
-" the path of the current file will be expanded in the project tree
-"let g:EclimProjectTreeExpandPathOnOpen=1
-" list of mappings which link file patterns to the available actions
-"let g:EclimProjectTreeActions = [
-"    \ {'pattern': '.*', 'name': 'Split', 'action': 'split'},
-"    \ {'pattern': '.*', 'name': 'Tab', 'action': 'tabnew'},
-"    \ {'pattern': '.*', 'name': 'Edit', 'action': 'edit'},
-"  \ ]
-" defines the regex pattern used to identify todo or fixme entries
-"let g:EclimTodoSearchPattern = '\(\<fixme\>\|\<todo\>\)\c'
-" defines a list of file extensions that will be searched for the todo / fixme entries
-"let g:EclimTodoSearchExtensions = ['java', 'jsp', 'xml', 'html']
-" the validation results will be sorted by severity (errors > warnings > info > etc.)
-"let g:EclimValidateSortResults = 'severity'
-
-" eclim shortcuts
-"map <leader>t :ProjectTree 
-"map <C-T> :ProjectTodo<CR>
-"map <C-P> :ProjectProblems<CR>
 
