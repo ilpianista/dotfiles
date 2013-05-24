@@ -1,24 +1,25 @@
 [user]
-	email = andrea@archlinux.org
-	name = Andrea Scarpino
+    email = scarpino@kde.org
+    name = Andrea Scarpino
 [sendemail]
-	smtpserver = mail.archlinux.org
-	smtpserverport = 587
 	smtpencryption = tls
-	smtpuser = andrea
+    smtpserver = smtp.googlemail.com
+	smtpuser = bash.lnx@gmail.com
+	smtpserverport = 587
 [color]
 	ui = auto
-[commit]
-	template = /home/ndr/.commit-template
+#[commit]
+#	template = /home/ndr/.commit-template
 [core]
 	excludesfile = /home/ndr/.gitexcludes
+[merge]
+	tool = vimdiff
+[push]
+	default = nothing
+
 [url "git://anongit.kde.org/"]
     insteadOf = kde:
 [url "git@git.kde.org:"]
     pushInsteadOf = kde:
 [url "ssh://gitolite@arch02.di.uniba.it/"]
     InsteadOf = uniba:
-[merge]
-	tool = vimdiff
-[push]
-	default = nothing
