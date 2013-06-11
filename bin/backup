@@ -1,0 +1,39 @@
+#!/bin/sh
+
+rsync --progress -avh --delete \
+	${HOME}/Documents \
+	${HOME}/IdeaProjects \
+	${HOME}/Movies \
+	${HOME}/Pictures \
+	${HOME}/UniBA \
+	${HOME}/bin \
+	${HOME}/projects \
+	${HOME}/.bash_logout \
+	${HOME}/.bash_profile \
+	${HOME}/.bashrc \
+	${HOME}/.commit-template \
+	${HOME}/.config \
+	${HOME}/.fonts \
+	${HOME}/.gitconfig \
+	${HOME}/.gitexcludes \
+	${HOME}/.gtkrc-2.0 \
+	${HOME}/.gtkrc-2.0-kde4 \
+	${HOME}/.gnupg \
+	${HOME}/.gvimrc \
+	${HOME}/.icons \
+	${HOME}/.inputrc \
+	${HOME}/.kde4 \
+	${HOME}/.local \
+	${HOME}/.makepkg.conf \
+	${HOME}/.profile \
+	${HOME}/.openvpn-wtl.key \
+	${HOME}/.ssh \
+	${HOME}/.stardict \
+	${HOME}/.vim \
+	${HOME}/.vimrc \
+	${HOME}/.xinitrc \
+	${HOME}/.xsession \
+	${HOME}/.zprofile \
+	${HOME}/.zshrc \
+	${HOME}/.Xmodmap \
+	/run/media/$(whoami)/0d3dca5d-6c34-436b-991d-3ad4253a79d7
