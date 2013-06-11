@@ -27,7 +27,7 @@ DISABLE_AUTO_UPDATE="true"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment following line if you want to disable command autocorrection
-# DISABLE_CORRECTION="true"
+DISABLE_CORRECTION="true"
 
 # Uncomment following line if you want red dots to be displayed while waiting for completion
 # COMPLETION_WAITING_DOTS="true"
@@ -40,12 +40,12 @@ DISABLE_AUTO_UPDATE="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git archlinux battery cp gem kate nanoc svn npm github)
+plugins=(git archlinux battery cp gem kate nanoc svn)
 
 source $ZSH/oh-my-zsh.sh
 
 # pacman stuff
-alias up='sudo pacman -Syu; echo "Checking for AUR updates..."; cower -uddf'
+alias upgrade='sudo pacman -Syu; echo "Checking for AUR updates..."; cower -uddf'
 alias asdeps='sudo pacman -S --asdeps'
 alias remove='sudo pacman -Rscn'
 alias useless='pacman -Qqtd'

@@ -9,9 +9,9 @@
 [color]
 	ui = auto
 #[commit]
-#	template = /home/ndr/.commit-template
+#	template = /home/andrea/.commit-template
 [core]
-	excludesfile = /home/ndr/.gitexcludes
+	excludesfile = /home/andrea/.gitexcludes
 [merge]
 	tool = vimdiff
 [push]
@@ -23,3 +23,10 @@
     pushInsteadOf = kde:
 [url "ssh://gitolite@arch02.di.uniba.it/"]
     InsteadOf = uniba:
+
+[github]
+    user = scarpin0
+[reviewboard]
+    url = https://git.reviewboard.kde.org
+[alias]
+    post-review = !post-review --guess-summary --guess-description --username=scarpino --parent=master --tracking-branch=origin/master

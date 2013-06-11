@@ -9,14 +9,12 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 "" plugins
-" dependencies for snipmate by garbas
+" dependencies for snipmate
 Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
 Bundle "honza/vim-snippets"
 " a concise vim script that implements some of TextMate's snippets
 Bundle 'garbas/vim-snipmate'
-" Original snipmate repo (outdated)
-"Bundle 'msanders/snipmate.vim'
 " a Git wrapper so awesome, it should be illegal
 " Bundle 'tpope/vim-fugitive'
 " quoting/parenthesizing made simple
@@ -25,6 +23,8 @@ Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired'
 " easily search for, substitute, and abbreviate multiple variants of a word
 Bundle 'tpope/vim-abolish'
+" needed by vim-session
+Bundle 'xolox/vim-misc'
 " Extended session management for Vim
 Bundle 'xolox/vim-session'
 " Perform all your vim insert mode completions with Tab
@@ -37,6 +37,10 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
 " Allows Vim to use multiple cursors simultaneously
 Bundle 'paradigm/vim-multicursor'
+" needed by gist-vim
+Bundle 'mattn/webapi-vim'
+" vimscript for gist
+Bundle 'mattn/gist-vim'
 
 " support for expanding abbreviation like zen-coding(emmet)
 Bundle 'mattn/zencoding-vim'
@@ -110,3 +114,5 @@ let g:Powerline_symbols = 'fancy'
 " vim-session
 let g:session_autosave = 'no'
 
+" gist-vim
+let g:github_user = 'scarpin0'
