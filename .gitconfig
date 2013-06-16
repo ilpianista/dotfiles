@@ -2,20 +2,20 @@
     email = scarpino@kde.org
     name = Andrea Scarpino
 [sendemail]
-	smtpencryption = tls
+    smtpencryption = tls
     smtpserver = smtp.googlemail.com
-	smtpuser = bash.lnx@gmail.com
-	smtpserverport = 587
+    smtpuser = bash.lnx@gmail.com
+    smtpserverport = 587
 [color]
 	ui = auto
 #[commit]
-#	template = /home/andrea/.commit-template
+#    template = /home/andrea/.commit-template
 [core]
-	excludesfile = /home/andrea/.gitexcludes
+    excludesfile = /home/andrea/.gitexcludes
 [merge]
-	tool = vimdiff
+    tool = vimdiff
 [push]
-	default = nothing
+    default = nothing
 
 [url "git://anongit.kde.org/"]
     insteadOf = kde:

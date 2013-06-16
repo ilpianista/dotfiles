@@ -43,9 +43,9 @@ Bundle 'mattn/webapi-vim'
 Bundle 'mattn/gist-vim'
 
 " support for expanding abbreviation like zen-coding(emmet)
-Bundle 'mattn/zencoding-vim'
+"Bundle 'mattn/zencoding-vim'
 " A parser for a condensed HTML format (mirror repo)
-Bundle 'tristen/vim-sparkup'
+"Bundle 'tristen/vim-sparkup'
 
 " a vim plugin for Nanoc
 Bundle 'timgreen/vim-nanoc'
@@ -59,6 +59,9 @@ Bundle 'timgreen/vim-nanoc'
 
 " Prolog Integration for Vim
 Bundle 'adimit/prolog.vim'
+
+" Vim/Ruby Configuration Files
+Bundle 'vim-ruby/vim-ruby'
 
 "" color schemes
 " Molokai color scheme for Vim
