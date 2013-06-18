@@ -17,7 +17,7 @@ Bundle "honza/vim-snippets"
 " a concise vim script that implements some of TextMate's snippets
 Bundle 'garbas/vim-snipmate'
 " a Git wrapper so awesome, it should be illegal
-" Bundle 'tpope/vim-fugitive'
+"Bundle 'tpope/vim-fugitive'
 " quoting/parenthesizing made simple
 Bundle 'tpope/vim-surround'
 " pairs of handy bracket mappings
@@ -101,11 +101,7 @@ syntax on           " turn syntax highlighting on
 set t_Co=256        " explicitly tell vim that the terminal supports 256 colors
 colorscheme solarized " because we prefer a non default colorscheme
 highlight clear
-
-if has("gui_running")
-  set background=dark
-  set guifont=Bitstream\ Vera\ Sans\ Mono\ 10
-endif
+highlight Pmenu guibg=brown gui=bold
 
 "" whitespace
 set nowrap          " lines longer than the width of the window will not wrap
