@@ -9,7 +9,7 @@ usage() {
   echo
   echo "usage: getsignpkg <pkgbase> [pkg_dir]"
   echo
-  echo "path is set to svn-packages as default"
+  echo "path is set to 'packages/' as default"
   echo
 }
 
@@ -35,13 +35,13 @@ main() {
   cd "${DEST}"
 
   # By default the package folder structure on the host is something
-  # like ~/svn-packages/pkgname/trunk/
-  
+  # like ~/packages/pkgname/trunk/
+
   pkgbase="${1}"
-  pkg_dir="svn-packages/${pkgbase}/trunk"
-  
+  pkg_dir="packages/${pkgbase}/trunk"
+
   [ -n "${2}" ] && pkg_dir="${2}"
-  
+
   echo "Downloading packages into ${DEST}..."
   for pkg in `ssh ${HOST} ls "${pkg_dir}"/*${PKGEXT}`; do
     getpkg "${pkg}" || exit 1
