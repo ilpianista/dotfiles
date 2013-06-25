@@ -34,12 +34,10 @@ Bundle 'scrooloose/nerdcommenter'
 Bundle 'mattn/webapi-vim'
 " vimscript for gist
 Bundle 'mattn/gist-vim'
-" Vim plugin for the Perl module / CLI script 'ack'
-Bundle 'mileszs/ack.vim'
 " Vim plugin to list, select and switch between buffers
 Bundle 'jeetsukumaran/vim-buffergator'
-" Fuzzy file, buffer, mru, tag, etc finder
-Bundle 'kien/ctrlp.vim'
+" Unite and create user interfaces
+Bundle 'Shougo/unite.vim'
 " helpers for UNIX
 Bundle 'tpope/vim-eunuch'
 " a Git wrapper so awesome, it should be illegal

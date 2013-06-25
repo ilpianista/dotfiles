@@ -84,8 +84,8 @@ end
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
 tags = {
-    names = { "*", "www", "media", "dev", "chat" },
-    layouts = { layouts[1], layouts[10], layouts[1], layouts[6], layouts[3] }
+    names = { "1:*", "2:www", "3:media", "4:chat", "5:dev", "6:uni" },
+    layouts = { layouts[1], layouts[10], layouts[1], layouts[3], layouts[6], layouts[1] }
 }
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
@@ -123,7 +123,7 @@ memicon:set_image(beautiful.widget_mem)
 -- Initialize widget
 memwidget = wibox.widget.textbox()
 -- Register widget
-vicious.register(memwidget, vicious.widgets.mem, "$1% ($2MB, swap: $5%)", 10)
+vicious.register(memwidget, vicious.widgets.mem, "$1% ($2MB)", 10)
 -- }}}
 
 -- {{{ CPU usage
@@ -145,12 +145,12 @@ vicious.register(batwidget, vicious.widgets.bat, "$1$2%", 60, "BAT1")
 -- }}}
 
 -- {{{ Volume information
-volicon = wibox.widget.imagebox()
-volicon:set_image(beautiful.widget_vol)
+--volicon = wibox.widget.imagebox()
+--volicon:set_image(beautiful.widget_vol)
 -- Initialize widget
-volwidget = wibox.widget.textbox()
+--volwidget = wibox.widget.textbox()
 -- Register widget
-vicious.register(volwidget, vicious.widgets.volume, "$1% $2", 2, "Master")
+--vicious.register(volwidget, vicious.widgets.volume, "$1% $2", 2, "Master")
 -- }}}
 
 -- {{{ Network usage
@@ -162,8 +162,8 @@ upicon:set_image(beautiful.widget_netup)
 netwidget = wibox.widget.textbox()
 -- Register widget
 vicious.register(netwidget, vicious.widgets.net, '<span color="'
-  .. beautiful.fg_netdn_widget ..'">${wlan0 down_kb}</span> <span color="'
-  .. beautiful.fg_netup_widget ..'">${wlan0 up_kb}</span>', 3)
+  .. beautiful.fg_netdn_widget ..'">${wlp8s0 down_kb}</span> <span color="'
+  .. beautiful.fg_netup_widget ..'">${wlp8s0 up_kb}</span>', 3)
 -- }}}
 
 -- {{{ Wireless
@@ -172,7 +172,7 @@ wifiicon:set_image(beautiful.widget_wifi)
 -- Initialize widget
 wifiwidget = wibox.widget.textbox()
 -- Register widget
-vicious.register(wifiwidget, vicious.widgets.wifi, "${ssid}", 60, "wlan0")
+vicious.register(wifiwidget, vicious.widgets.wifi, "${ssid}", 60, "wlp8s0")
 -- }}}
 
 -- {{{ Date and time
@@ -185,32 +185,29 @@ vicious.register(datewidget, vicious.widgets.date, "%a %d, %R", 60)
 -- }}}
 
 -- {{{ MPD
-mpdicon = wibox.widget.imagebox()
-mpdicon:set_image(beautiful.widget_music)
+--mpdicon = wibox.widget.imagebox()
+--mpdicon:set_image(beautiful.widget_music)
 -- Initialize widget
-mpdwidget = wibox.widget.textbox()
+--mpdwidget = wibox.widget.textbox()
 -- Register widget
-vicious.register(mpdwidget, vicious.widgets.mpd,
-    function (widget, args)
-        if args["{state}"] == "Stop" then 
-            return "Stopped"
-        else 
-            return args["{Artist}"]..' - '.. args["{Title}"]
-        end
-    end, 10)
+--vicious.register(mpdwidget, vicious.widgets.mpd,
+--    function (widget, args)
+--        if args["{state}"] == "Stop" then
+--            return "Stopped"
+--        else
+--            return args["{Artist}"]..' - '.. args["{Title}"]
+--        end
+--    end, 10)
 -- }}}
 
--- {{{ Gmail
-mailicon = wibox.widget.imagebox()
-mailicon:set_image(beautiful.widget_mail)
+-- {{{ GMail
+--mailicon = wibox.widget.imagebox()
+--mailicon:set_image(beautiful.widget_mail)
 -- Initalize widget
-mailwidget = wibox.widget.textbox()
+--mailwidget = wibox.widget.textbox()
 -- Register widget
-vicious.register(mailwidget, vicious.widgets.gmail, "(${count}) Unread mails", 120)
+--vicious.register(mailwidget, vicious.widgets.gmail, "(${count}) Unread mails", 120)
 -- }}}
-
--- Create a systray
---mysystray = wibox.widget.systray()
 
 -- Create a wibox for each screen and add it
 mywibox = {}
@@ -288,24 +285,25 @@ for s = 1, screen.count() do
 
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
---    if s == 1 then right_layout:add(wibox.widget.systray()) end
-    right_layout:add(mpdicon)
-    right_layout:add(mpdwidget)
-    right_layout:add(cpuicon)
-    right_layout:add(cpuwidget)
-    right_layout:add(memicon)
-    right_layout:add(memwidget)
-    right_layout:add(mailicon)
-    right_layout:add(mailwidget)
-    right_layout:add(dnicon)
-    right_layout:add(upicon)
-    right_layout:add(netwidget)
-    right_layout:add(wifiicon)
-    right_layout:add(wifiwidget)
-    right_layout:add(baticon)
-    right_layout:add(batwidget)
-    right_layout:add(volicon)
-    right_layout:add(volwidget)
+
+    if s == 1 then
+--        right_layout:add(mpdicon)
+--        right_layout:add(mpdwidget)
+        right_layout:add(cpuicon)
+        right_layout:add(cpuwidget)
+        right_layout:add(memicon)
+        right_layout:add(memwidget)
+--        right_layout:add(mailicon)
+--        right_layout:add(mailwidget)
+        right_layout:add(dnicon)
+        right_layout:add(upicon)
+        right_layout:add(netwidget)
+        right_layout:add(wifiicon)
+        right_layout:add(wifiwidget)
+        right_layout:add(baticon)
+        right_layout:add(batwidget)
+        right_layout:add(wibox.widget.systray())
+    end
     right_layout:add(dateicon)
     right_layout:add(datewidget)
     right_layout:add(mylayoutbox[s])
@@ -334,12 +332,12 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
 
-    awful.key({ modkey,           }, "j",
+    awful.key({ "Mod1",           }, "Tab",
         function ()
             awful.client.focus.byidx( 1)
             if client.focus then client.focus:raise() end
         end),
-    awful.key({ modkey,           }, "k",
+    awful.key({ "Mod1", "Shift"   }, "Tab",
         function ()
             awful.client.focus.byidx(-1)
             if client.focus then client.focus:raise() end
@@ -471,24 +469,24 @@ awful.rules.rules = {
                      keys = clientkeys,
                      buttons = clientbuttons,
                      floating = false } },
-    { rule = { class = "vlc" },
+    { rule = { class = "dragon" },
       properties = { floating = true, tag = tags[1][3] } },
     { rule = { class = "pinentry" },
       properties = { floating = true } },
-    { rule = { class = "Cantata" },
+    { rule = { class = "Amarok" },
       properties = { tag = tags[1][3] } },
     { rule = { class = "gimp" },
       properties = { floating = true } },
     { rule = { class = "Rekonq" },
       properties = { tag = tags[1][2] } },
     { rule = { class = "Ktp-contactlist" },
-      properties = { tag = tags[1][5] } },
+      properties = { tag = tags[1][4] } },
     { rule = { class = "Ktp-text-ui" },
-      properties = { tag = tags[1][5] } }, 
+      properties = { tag = tags[1][4] } },
     { rule = { class = "Konversation" },
-      properties = { tag = tags[1][5] } },
+      properties = { tag = tags[1][4] } },
     { rule = { class = "Gvim" },
-      properties = { tag = tags[1][4], size_hints_honor = false } }
+      properties = { tag = tags[1][5], size_hints_honor = false } }
 }
 -- }}}
 

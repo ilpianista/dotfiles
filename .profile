@@ -12,7 +12,7 @@ export GEM_HOME=~/.gem/ruby/2.0.0
 export KDEDIRS=/usr/local:$KDEDIRS
 
 if [ -n "$DISPLAY" ]; then
-   export BROWSER=chromium
+   export BROWSER=rekonq
 fi
 
 export DE=kde

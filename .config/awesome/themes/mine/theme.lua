@@ -7,7 +7,7 @@ theme = {}
 theme.confdir       = awful.util.getdir("config")
 local home          = os.getenv("HOME")
 
-theme.font          = "Menlo for Powerline 8"
+theme.font          = "Monaco 9"
 
 theme.bg_normal     = "#222222"
 theme.bg_focus      = "#535d6c"
