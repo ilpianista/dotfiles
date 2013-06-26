@@ -116,6 +116,12 @@ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
 
+-- Separators
+spacer    = wibox.widget.textbox()
+separator = wibox.widget.textbox()
+spacer:set_markup(" ")
+separator:set_markup("|")
+
 -- {{{ Wibox
 -- {{{ Memory usage
 memicon = wibox.widget.imagebox()
@@ -302,10 +308,12 @@ for s = 1, screen.count() do
         right_layout:add(wifiwidget)
         right_layout:add(baticon)
         right_layout:add(batwidget)
+        right_layout:add(spacer)
         right_layout:add(wibox.widget.systray())
     end
     right_layout:add(dateicon)
     right_layout:add(datewidget)
+    right_layout:add(spacer)
     right_layout:add(mylayoutbox[s])
 
     -- Now bring it all together (with the tasklist in the middle)
