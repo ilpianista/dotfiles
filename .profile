@@ -19,7 +19,8 @@ export DE=kde
 
 # Speed-up rebuilds
 export USE_CCACHE=1
-export CCACHE_DIR=/tmp/ccache
+export CCACHE_PREFIX="distcc"
 export PATH="/usr/lib/ccache/bin:$PATH"
+export DISTCC_HOSTS="localhost/1"
 
 #export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'

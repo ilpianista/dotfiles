@@ -114,7 +114,7 @@ set autoindent      " copy indent from current line when starting a new line
 set hlsearch        " highlight all matches in the previous search
 set incsearch       " incremental searching
 set ignorecase      " searches are case insensitive...
-set smartcase       " ... unless they contain at least one capital letter 
+set smartcase       " ... unless they contain at least one capital letter
 
 set wildmode=full
 set wildmenu        " command-line completion operates in an enhanced mode
@@ -138,4 +138,7 @@ let g:Powerline_symbols = 'fancy'
 
 " gist-vim
 let g:github_user = 'scarpin0'
+
+" Shortcut to rapidly toggle `set list`
+nmap <leader>l :set list!<CR>
 
