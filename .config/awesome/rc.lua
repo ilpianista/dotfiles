@@ -130,6 +130,8 @@ memicon:set_image(beautiful.widget_mem)
 memwidget = wibox.widget.textbox()
 -- Register widget
 vicious.register(memwidget, vicious.widgets.mem, "$1% ($2MB)", 10)
+memwidget:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn("ksysguard") end)))
+memicon:buttons(memwidget:buttons())
 -- }}}
 
 -- {{{ CPU usage
@@ -139,6 +141,8 @@ cpuicon:set_image(beautiful.widget_cpu)
 cpuwidget = wibox.widget.textbox()
 -- Register widget
 vicious.register(cpuwidget, vicious.widgets.cpu, "$1%", 2)
+cpuwidget:buttons(memwidget:buttons())
+cpuicon:buttons(cpuwidget:buttons())
 -- }}}
 
 -- {{{ Battery state
@@ -151,12 +155,21 @@ vicious.register(batwidget, vicious.widgets.bat, "$1$2%", 60, "BAT1")
 -- }}}
 
 -- {{{ Volume information
---volicon = wibox.widget.imagebox()
---volicon:set_image(beautiful.widget_vol)
+volicon = wibox.widget.imagebox()
+volicon:set_image(beautiful.widget_vol)
 -- Initialize widget
---volwidget = wibox.widget.textbox()
+volwidget = wibox.widget.textbox()
 -- Register widget
---vicious.register(volwidget, vicious.widgets.volume, "$1% $2", 2, "Master")
+vicious.register(volwidget, vicious.widgets.volume, "$1% $2", 2, "Master")
+volwidget:buttons(awful.util.table.join(
+     awful.button({ }, 1,
+     function() awful.util.spawn_with_shell("amixer -q set Master toggle") end),
+     awful.button({ }, 4,
+     function() awful.util.spawn_with_shell("amixer -q set Master 5%+ unmute") end),
+     awful.button({ }, 5,
+     function() awful.util.spawn_with_shell("amixer -q set Master 5%+ unmute") end)
+))
+volicon:buttons(volwidget:buttons())
 -- }}}
 
 -- {{{ Network usage
@@ -179,6 +192,8 @@ wifiicon:set_image(beautiful.widget_wifi)
 wifiwidget = wibox.widget.textbox()
 -- Register widget
 vicious.register(wifiwidget, vicious.widgets.wifi, "${ssid}", 60, "wlp8s0")
+wifiwidget:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn("kde-nm-connection-editor") end)))
+wifiicon:buttons(wifiwidget:buttons())
 -- }}}
 
 -- {{{ Date and time
@@ -299,13 +314,13 @@ for s = 1, screen.count() do
         right_layout:add(cpuwidget)
         right_layout:add(memicon)
         right_layout:add(memwidget)
---        right_layout:add(mailicon)
---        right_layout:add(mailwidget)
         right_layout:add(dnicon)
         right_layout:add(upicon)
         right_layout:add(netwidget)
         right_layout:add(wifiicon)
         right_layout:add(wifiwidget)
+        right_layout:add(volicon)
+        right_layout:add(volwidget)
         right_layout:add(baticon)
         right_layout:add(batwidget)
         right_layout:add(spacer)
