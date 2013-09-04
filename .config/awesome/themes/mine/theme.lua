@@ -68,6 +68,7 @@ theme.widget_music  = theme.confdir .. "/icons/music.png"
 theme.widget_cpu    = theme.confdir .. "/icons/cpu.png"
 theme.widget_vol    = theme.confdir .. "/icons/vol.png"
 theme.widget_date   = theme.confdir .. "/icons/time.png"
+theme.widget_chat   = theme.confdir .. "/icons/chat.png"
 -- }}}
 
 -- Define the image to load
@@ -111,7 +112,7 @@ theme.layout_tiletop = theme.confdir .. "/icons/layouts/tiletop.png"
 theme.layout_spiral  = theme.confdir .. "/icons/layouts/spiral.png"
 theme.layout_dwindle = theme.confdir .. "/icons/layouts/dwindle.png"
 
-theme.awesome_icon = theme.confdir .. "/icons/awesome.png"
+theme.awesome_icon = theme.confdir .. "/icons/arch.png"
 
 -- Define the icon theme for application icons. If not set then the icons 
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.

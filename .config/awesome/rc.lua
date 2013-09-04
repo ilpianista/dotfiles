@@ -237,6 +237,12 @@ vicious.register(datewidget, vicious.widgets.date, "%a %d, %R", 60)
 --vicious.register(mailwidget, vicious.widgets.gmail, "(${count}) Unread mails", 120)
 -- }}}
 
+-- {{{ Instant Messaging
+chaticon = wibox.widget.imagebox()
+chaticon:set_image(beautiful.widget_chat)
+chaticon:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn("ktp-contactlist") end)))
+-- }}}
+
 -- Create a wibox for each screen and add it
 mywibox = {}
 mypromptbox = {}
@@ -330,6 +336,7 @@ for s = 1, screen.count() do
         right_layout:add(volwidget)
         right_layout:add(baticon)
         right_layout:add(batwidget)
+        right_layout:add(chaticon)
         right_layout:add(spacer)
         right_layout:add(wibox.widget.systray())
     end
