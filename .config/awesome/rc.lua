@@ -84,8 +84,8 @@ end
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
 tags = {
-    names = { "1:*", "2:www", "3:media", "4:chat", "5:dev", "6:uni" },
-    layouts = { layouts[1], layouts[10], layouts[1], layouts[3], layouts[6], layouts[1] }
+    names = { "*", "www", "media", "chat", "dev" },
+    layouts = { layouts[1], layouts[10], layouts[1], layouts[3], layouts[6] }
 }
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
@@ -130,7 +130,7 @@ memicon:set_image(beautiful.widget_mem)
 memwidget = wibox.widget.textbox()
 -- Register widget
 vicious.register(memwidget, vicious.widgets.mem, "$1% ($2MB)", 10)
-memwidget:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn("ksysguard") end)))
+memwidget:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn("konsole -e htop") end)))
 memicon:buttons(memwidget:buttons())
 -- }}}
 
