@@ -151,7 +151,14 @@ baticon:set_image(beautiful.widget_bat)
 -- Initialize widget
 batwidget = wibox.widget.textbox()
 -- Register widget
-vicious.register(batwidget, vicious.widgets.bat, "$1$2%", 60, "BAT1")
+vicious.register(batwidget, vicious.widgets.bat,
+  function(widget, args)
+    if args[1] == '-' and args[2] <= 15 then
+      return "<span color='#cc9393'>" .. args[1] .. args[2] .. "%</span>"
+    else
+      return args[1] .. args[2] .. "%"
+    end
+  end, 60, "BAT1")
 -- }}}
 
 -- {{{ Volume information
