@@ -79,3 +79,5 @@ alias jobs='jobs -l'
 alias -g '...'='../..'
 
 alias wakerome='wol 00:04:ac:65:42:1e'
+
+alias weechat='python2 ~/bin/pyrnotify.py 4321 3000 & ssh -R 4321:localhost:4321 andreascarpino.it'

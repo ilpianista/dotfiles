@@ -507,24 +507,26 @@ awful.rules.rules = {
                      keys = clientkeys,
                      buttons = clientbuttons,
                      floating = false } },
-    { rule = { class = "dragon" },
-      properties = { floating = true, tag = tags[1][3] } },
+    { rule = { class = "dragon" }, callback = function(c)
+      awful.client.movetotag(tags[mouse.screen][3], c) end,
+      properties = { floating = true } },
     { rule = { class = "pinentry" },
       properties = { floating = true } },
     { rule = { class = "Amarok" },
-      properties = { tag = tags[1][3] } },
+      properties = { tag = tags[mouse.screen][3] } },
     { rule = { class = "gimp" },
       properties = { floating = true } },
-    { rule = { class = "Rekonq" },
-      properties = { tag = tags[1][2] } },
+    { rule = { class = "Rekonq" }, callback = function(c)
+      awful.client.movetotag(tags[mouse.screen][2], c) end },
+    { rule = { class = "Chromium" }, callback = function(c)
+      awful.client.movetotag(tags[mouse.screen][2], c) end },
     { rule = { class = "Ktp-contactlist" },
       properties = { tag = tags[1][4] } },
     { rule = { class = "Ktp-text-ui" },
       properties = { tag = tags[1][4] } },
-    { rule = { class = "Konversation" },
-      properties = { tag = tags[1][4] } },
-    { rule = { class = "Gvim" },
-      properties = { tag = tags[1][5], size_hints_honor = false } }
+    { rule = { class = "Gvim" }, callback = function(c)
+      awful.client.movetotag(tags[mouse.screen][5], c) end,
+      properties = { size_hints_honor = false } }
 }
 -- }}}
 
