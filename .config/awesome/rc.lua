@@ -187,9 +187,18 @@ upicon:set_image(beautiful.widget_netup)
 -- Initialize widget
 netwidget = wibox.widget.textbox()
 -- Register widget
-vicious.register(netwidget, vicious.widgets.net, '<span color="'
-  .. beautiful.fg_netdn_widget ..'">${wlp8s0 down_kb}</span> <span color="'
-  .. beautiful.fg_netup_widget ..'">${wlp8s0 up_kb}</span>', 3)
+vicious.register(netwidget, vicious.widgets.net,
+  function(widget, args)
+    local string = '<span color="' .. beautiful.fg_netdn_widget ..'">%s</span> '
+                .. '<span color="' .. beautiful.fg_netup_widget ..'">%s</span>'
+    if args["{eth0 carrier}"] == 1 then
+      return string.format(string, args["{eth0 down_kb}"], args["{eth0 up_kb}"])
+    elseif args["{usb0 carrier}"] == 1 then
+      return string.format(string, args["{usb0 down_kb}"], args["{usb0 up_kb}"])
+    else
+      return string.format(string, args["{wlan0 down_kb}"], args["{wlan0 up_kb}"])
+    end
+  end, 3)
 -- }}}
 
 -- {{{ Wireless
@@ -206,7 +215,7 @@ vicious.register(wifiwidget, vicious.widgets.wifi,
       wifiicon:set_image(beautiful.widget_wifi)
       return args["{ssid}"] .. ' ' .. args["{sign}"]
     end
-  end, 60, "wlp8s0")
+  end, 60, "wlan0")
 wifiwidget:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn("kde-nm-connection-editor") end)))
 wifiicon:buttons(wifiwidget:buttons())
 -- }}}
