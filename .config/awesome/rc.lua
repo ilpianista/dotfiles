@@ -213,7 +213,7 @@ vicious.register(wifiwidget, vicious.widgets.wifi,
       return 'Disconnected'
     else
       wifiicon:set_image(beautiful.widget_wifi)
-      return args["{ssid}"] .. ' ' .. args["{sign}"]
+      return args["{ssid}"] .. ' (' .. args["{link}"] .. ')'
     end
   end, 60, "wlan0")
 wifiwidget:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn("kde-nm-connection-editor") end)))
