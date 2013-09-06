@@ -194,11 +194,19 @@ vicious.register(netwidget, vicious.widgets.net, '<span color="'
 
 -- {{{ Wireless
 wifiicon = wibox.widget.imagebox()
-wifiicon:set_image(beautiful.widget_wifi)
 -- Initialize widget
 wifiwidget = wibox.widget.textbox()
 -- Register widget
-vicious.register(wifiwidget, vicious.widgets.wifi, "${ssid}", 60, "wlp8s0")
+vicious.register(wifiwidget, vicious.widgets.wifi,
+  function(widget, args)
+    if args["{ssid}"] == "N/A" then
+      wifiicon:set_image(beautiful.widget_wifidown)
+      return 'Disconnected'
+    else
+      wifiicon:set_image(beautiful.widget_wifi)
+      return args["{ssid}"] .. ' ' .. args["{sign}"]
+    end
+  end, 60, "wlp8s0")
 wifiwidget:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn("kde-nm-connection-editor") end)))
 wifiicon:buttons(wifiwidget:buttons())
 -- }}}
