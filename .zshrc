@@ -76,4 +76,6 @@ alias -g '...'='../..'
 
 alias wakerome='wol 00:04:ac:65:42:1e'
 
-alias weechat='python2 ~/bin/pyrnotify.py 4321 3000 & ssh -R 4321:localhost:4321 andreascarpino.it'
+alias weechat='python ~/bin/pyrnotify.py 4321 3000 & ssh -R 4321:localhost:4321 andreascarpino.it'
+
+download-torrent() { scp "${1}" andreascarpino.it:~/watch/ && rm "${1}" }

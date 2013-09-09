@@ -23,4 +23,6 @@ export CCACHE_PREFIX="distcc"
 export PATH="/usr/lib/ccache/bin:$PATH"
 export DISTCC_HOSTS="localhost/1"
 
+# Java stuff
 #export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
+export _JAVA_AWT_WM_NONREPARENTING=1
