@@ -523,13 +523,13 @@ awful.rules.rules = {
                      focus = awful.client.focus.filter,
                      keys = clientkeys,
                      buttons = clientbuttons } },
-    { rule = { class = "dragon" }, callback = function(c)
+    { rule = { class = "Dragon" }, callback = function(c)
       awful.client.movetotag(tags[mouse.screen][3], c) end,
       properties = { floating = true } },
     { rule = { class = "pinentry" },
       properties = { floating = true } },
     { rule = { class = "Amarok" },
-      properties = { tag = tags[mouse.screen][3] } },
+      properties = { tag = tags[1][3] } },
     { rule = { class = "gimp" },
       properties = { floating = true } },
     { rule = { class = "Rekonq" }, callback = function(c)
