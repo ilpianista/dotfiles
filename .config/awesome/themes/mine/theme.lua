@@ -5,7 +5,6 @@ local awful = require("awful")
 
 theme = {}
 theme.confdir       = awful.util.getdir("config")
-local home          = os.getenv("HOME")
 
 theme.font          = "Monaco 9"
 
@@ -62,7 +61,7 @@ theme.widget_bat    = theme.confdir .. "/icons/bat.png"
 theme.widget_net    = theme.confdir .. "/icons/down.png"
 theme.widget_netup  = theme.confdir .. "/icons/up.png"
 theme.widget_wifi   = theme.confdir .. "/icons/wifi.png"
-theme.widget_wifidown   = theme.confdir .. "/icons/wifi_down.png"
+theme.widget_wifidown = theme.confdir .. "/icons/wifidown.png"
 theme.widget_mail   = theme.confdir .. "/icons/mail.png"
 theme.widget_mem    = theme.confdir .. "/icons/mem.png"
 theme.widget_music  = theme.confdir .. "/icons/music.png"
@@ -97,7 +96,7 @@ theme.titlebar_maximized_button_normal_active = theme.confdir .. "/icons/titleba
 theme.titlebar_maximized_button_focus_active  = theme.confdir .. "/icons/titlebar/maximized_focus_active.png"
 
 -- You can use your own command to set your wallpaper
-theme.wallpaper = home .. "/Pictures/wallpapers/wall_120.jpg"
+theme.wallpaper = theme.confdir .. "/wallpaper.jpg"
 
 -- You can use your own layout icons like this:
 theme.layout_fairh = theme.confdir .. "/icons/layouts/fairh.png"
@@ -117,7 +116,7 @@ theme.awesome_icon = theme.confdir .. "/icons/arch.png"
 
 -- Define the icon theme for application icons. If not set then the icons 
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
-theme.icon_theme = nil
+theme.icon_theme = Caledonia
 
 return theme
 -- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80
