@@ -46,12 +46,10 @@ Bundle 'tpope/vim-markdown'
 Bundle 'terryma/vim-multiple-cursors'
 
 "" HTML/CSS
-" support for expanding abbreviation like zen-coding(emmet)
-Bundle 'mattn/zencoding-vim'
-" A parser for a condensed HTML format (mirror repo)
-Bundle 'tristen/vim-sparkup'
+" emmet for vim
+Bundle 'mattn/emmet-vim'
 " Highlight colors in css files" Highlight colors in css files
-Bundle 'ap/vim-css-color'
+Bundle 'skammer/vim-css-color'
 " vim syntax for LESS (dynamic CSS)
 Bundle 'groenewege/vim-less'
 
