@@ -16,16 +16,14 @@ Bundle "tomtom/tlib_vim"
 Bundle "honza/vim-snippets"
 " a concise vim script that implements some of TextMate's snippets
 Bundle 'garbas/vim-snipmate'
-" a Git wrapper so awesome, it should be illegal
-"Bundle 'tpope/vim-fugitive'
 " quoting/parenthesizing made simple
 Bundle 'tpope/vim-surround'
 " pairs of handy bracket mappings
 Bundle 'tpope/vim-unimpaired'
 " Perform all your vim insert mode completions with Tab
 Bundle 'ervandew/supertab'
-" The ultimate vim statusline utility
-Bundle 'Lokaltog/vim-powerline'
+" lean & mean status/tabline for vim that's light as air
+Bundle 'bling/vim-airline'
 " A tree explorer plugin for vim
 Bundle 'scrooloose/nerdtree'
 " plugin for intensely orgasmic commenting
@@ -44,17 +42,24 @@ Bundle 'tpope/vim-eunuch'
 Bundle 'tpope/vim-fugitive'
 " Vim Markdown runtime files
 Bundle 'tpope/vim-markdown'
+" True Sublime Text style multiple selections for Vim
+Bundle 'terryma/vim-multiple-cursors'
 
 "" HTML/CSS
 " support for expanding abbreviation like zen-coding(emmet)
-"Bundle 'mattn/zencoding-vim'
+Bundle 'mattn/zencoding-vim'
 " A parser for a condensed HTML format (mirror repo)
-"Bundle 'tristen/vim-sparkup'
+Bundle 'tristen/vim-sparkup'
 " Highlight colors in css files" Highlight colors in css files
 Bundle 'ap/vim-css-color'
+" vim syntax for LESS (dynamic CSS)
+Bundle 'groenewege/vim-less'
 
 " a vim plugin for Nanoc
 Bundle 'timgreen/vim-nanoc'
+
+" Improved PHP omnicompletion
+Bundle 'shawncplus/phpcomplete.vim'
 
 "" Scala
 "Bundle 'derekwyatt/vim-scala'
@@ -133,8 +138,8 @@ set wildignore+=*.swp,*~,._*
 set backupdir^=~/.vim/_backup//    " where to put backup files.
 set directory^=~/.vim/_temp//      " where to put swap files.
 
-" vim-powerline
-let g:Powerline_symbols = 'fancy'
+" use patched powerline fonts
+"let g:airline_powerline_fonts = 1
 
 " gist-vim
 let g:github_user = 'scarpin0'

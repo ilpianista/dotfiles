@@ -64,7 +64,7 @@ alias sign='gpg --detach-sign --use-agent'
 
 alias yt2mp3='youtube-dl -x --audio-format=mp3'
 alias yt2song='youtube-dl -x'
-yt2stream() { dragon "$(youtube-dl -g ${1})" --title "$(youtube-dl -e ${1})" }
+yt2stream() { vlc "$(youtube-dl -g ${1})" }
 
 alias dmesg='dmesg -H'
 alias df='df -H'
@@ -75,7 +75,3 @@ alias jobs='jobs -l'
 alias -g '...'='../..'
 
 alias wakerome='wol 00:04:ac:65:42:1e'
-
-alias weechat='python ~/bin/pyrnotify.py 4321 3000 & ssh -R 4321:localhost:4321 andreascarpino.it'
-
-download-torrent() { scp "${1}" andreascarpino.it:~/watch/ && rm "${1}" }
