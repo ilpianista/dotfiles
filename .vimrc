@@ -59,13 +59,6 @@ Bundle 'timgreen/vim-nanoc'
 " Improved PHP omnicompletion
 Bundle 'shawncplus/phpcomplete.vim'
 
-"" Scala
-"Bundle 'derekwyatt/vim-scala'
-" Scala snippets for Vim's snipMate plugin (manually run make install to install)
-"Bundle 'tommorris/scala-vim-snippets'
-" Play20 framework vim plugin
-"Bundle 'gre/play2vim'
-
 "" Prolog
 " Prolog Integration for Vim
 Bundle 'adimit/prolog.vim'
@@ -77,6 +70,12 @@ Bundle 'tpope/vim-endwise'
 "Bundle 'tpope/vim-haml'
 " Ruby on Rails power tools
 "Bundle 'tpope/vim-rails'
+
+" Provides database access to many dbms (Oracle, Sybase, Microsoft, MySQL, DBI,..)
+Bundle 'vim-scripts/dbext.vim'
+"" PostgreSQL
+" Postgresql syntax
+Bundle 'exu/pgsql.vim'
 
 "" color schemes
 " Molokai color scheme for Vim
@@ -109,7 +108,7 @@ set nowrap          " lines longer than the width of the window will not wrap
 set tabstop=2       " tabs count as 2 spaces
 set shiftwidth=2    " number of spaces to use in autoindent
 set expandtab       " use spaces instead of tabs
-set list            " show invisible characters
+"set list            " show invisible characters
 set backspace=indent,eol,start    " backspace through everything in insert mode
 
 set autoindent      " copy indent from current line when starting a new line
@@ -144,4 +143,20 @@ let g:github_user = 'scarpin0'
 
 " Shortcut to rapidly toggle `set list`
 nmap <leader>l :set list!<CR>
+
+" Hide serach results
 nnoremap <F3> :set hlsearch!<CR>
+
+" use jk as <Esc> alternative
+inoremap jk <Esc>
+
+" reselect visual block after indent/outdent
+vnoremap < <gv
+vnoremap > >gv
+
+" highlight trailing spaces
+match Error /\s\+$/
+
+" pgsql syntax highlight
+au BufNewFile,BufRead *.pgsql setf pgsql
+au BufNewFile,BufRead *.plpgsql setf pgsql
