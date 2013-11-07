@@ -12,7 +12,14 @@
 #fi
 
 if [ -f ~/.Xmodmap ]; then
-    xmodmap ~/.Xmodmap
+  xmodmap ~/.Xmodmap
 fi
 
-# exec startkde
+(pidof kded4 || kded4) &
+
+eval $(ssh-agent)
+sleep 1
+
+ssh-add < $HOME/.kde4/Autostart/ssh-add.sh
+
+exec awesome
