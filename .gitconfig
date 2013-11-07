@@ -24,12 +24,8 @@
     insteadOf = kde:
 [url "git@git.kde.org:"]
     pushInsteadOf = kde:
-[url "git://git.andreascarpino.it/"]
-    insteadOf = me:
-[url "git@git.andreascarpino.it:"]
-    pushInsteadOf = me:
 
 [github]
-    user = scarpin0
+    user = andreascarpino
 [alias]
     post-review = !post-review --guess-summary --guess-description --username=scarpino --parent=master --tracking-branch=origin/master
