@@ -36,7 +36,7 @@ DISABLE_CORRECTION="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git archlinux battery cp gem kate nanoc svn)
+plugins=(command-not-found extract gem git mvn nanoc npm vundle)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -48,6 +48,7 @@ alias useless='pacman -Qqtd'
 alias makepkg='makepkg -L'
 
 search() { pacman -Ss ${1}; cower -s ${1} }
+build() { cower -d ${1}; cd /tmp/${1}; makepkg -si }
 
 scan () {
   pacman -Qlq $1 | xargs file | grep ELF | awk -F: '{print $1}' |

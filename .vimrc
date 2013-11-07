@@ -71,6 +71,12 @@ Bundle 'tpope/vim-endwise'
 " Ruby on Rails power tools
 "Bundle 'tpope/vim-rails'
 
+" Tools to make Vim superb for developing with Node.js
+Bundle 'moll/vim-node'
+
+" QML syntax highlighting for VIM
+Bundle 'peterhoeg/vim-qml'
+
 " Provides database access to many dbms (Oracle, Sybase, Microsoft, MySQL, DBI,..)
 Bundle 'vim-scripts/dbext.vim'
 "" PostgreSQL
@@ -139,7 +145,7 @@ set directory^=~/.vim/_temp//      " where to put swap files.
 "let g:airline_powerline_fonts = 1
 
 " gist-vim
-let g:github_user = 'scarpin0'
+let g:github_user = 'andreascarpino'
 
 " Shortcut to rapidly toggle `set list`
 nmap <leader>l :set list!<CR>

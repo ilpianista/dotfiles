@@ -12,7 +12,7 @@ export GEM_HOME=~/.gem/ruby/2.0.0
 export KDEDIRS=/usr/local:$KDEDIRS
 
 if [ -n "$DISPLAY" ]; then
-   export BROWSER=chromium
+   export BROWSER=rekonq
 fi
 
 export DE=kde
@@ -20,6 +20,7 @@ export DE=kde
 # Speed-up rebuilds
 export USE_CCACHE=1
 export CCACHE_PREFIX="distcc"
+export CCACHE_DIR="/tmp/ccache"
 export PATH="/usr/lib/ccache/bin:$PATH"
 export DISTCC_HOSTS="localhost/1"
 
