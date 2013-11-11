@@ -1,31 +1,38 @@
 [user]
-    email = me@andreascarpino.it
-    name = Andrea Scarpino
+  email = me@andreascarpino.it
+  name = Andrea Scarpino
 [sendemail]
-    smtpencryption = tls
-    smtpserver = smtp.googlemail.com
-    smtpuser = bash.lnx@gmail.com
-    smtpserverport = 587
+  smtpencryption = tls
+  smtpserver = smtp.googlemail.com
+  smtpuser = bash.lnx@gmail.com
+  smtpserverport = 587
 [color]
-    ui = auto
+  ui = auto
 #[commit]
-#    template = /home/andrea/.commit-template
+#  template = $HOME/.commit-template
 [core]
-    excludesfile = /home/andrea/.gitexcludes
-    autocrlf = input
+  excludesfile = $HOME/.gitexcludes
+  autocrlf = input
+	editor = vim
 [merge]
-    tool = vimdiff
+  tool = vimdiff
 [diff]
-    renameLimit = 7974
+  renames = true
+  renameLimit = 7974
 [push]
-    default = nothing
+  default = simple
+[format]
+	pretty = oneline
+[status]
+	short = true
 
 [url "git://anongit.kde.org/"]
-    insteadOf = kde:
+  insteadOf = kde:
 [url "git@git.kde.org:"]
-    pushInsteadOf = kde:
+  pushInsteadOf = kde:
 
 [github]
-    user = andreascarpino
+  user = andreascarpino
 [alias]
-    post-review = !post-review --guess-summary --guess-description --username=scarpino --parent=master --tracking-branch=origin/master
+  post-review = !post-review --guess-summary --guess-description --username=scarpino --parent=master --tracking-branch=origin/master
+	fakepush = push --dry-run
