@@ -4,22 +4,15 @@
 #
 # Executed by startx (run your window manager from here)
 
-#if [ -d /etc/X11/xinit/xinitrc.d ]; then
-#  for f in /etc/X11/xinit/xinitrc.d/*; do
-#    [ -x "$f" ] && . "$f"
-#  done
-#  unset f
-#fi
-
-if [ -f ~/.Xmodmap ]; then
-  xmodmap ~/.Xmodmap
+if [ -d /etc/X11/xinit/xinitrc.d ]; then
+  for f in /etc/X11/xinit/xinitrc.d/*; do
+    [ -x "$f" ] && . "$f"
+  done
+  unset f
 fi
 
-(pidof kded4 || kded4) &
+[[ -f ~/.Xmodmap ]] && xmodmap ~/.Xmodmap
 
-eval $(ssh-agent)
-sleep 1
+[[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
 
-ssh-add < $HOME/.kde4/Autostart/ssh-add.sh
-
-exec awesome
+exec startkde

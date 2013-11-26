@@ -66,7 +66,7 @@ global
 # In addition, you can run kdesrc-build --no-install, and then
 # sudo kdesrc-build --install if you are unable to configure sudo to allow
 # make install with no password.
-#  make-install-prefix sudo -S
+  make-install-prefix sudo -S
 
 # purge-old-logs controls whether old log files should be removed after the
 # latest build finishes. Set to false to disable it.

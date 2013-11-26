@@ -18,15 +18,16 @@ fi
 export DE=kde
 
 # Speed-up rebuilds
-export USE_CCACHE=1
+export PATH="/usr/lib/ccache/bin:$PATH"
 export CCACHE_PREFIX="distcc"
 export CCACHE_DIR="/tmp/ccache"
-export PATH="/usr/lib/ccache/bin:$PATH"
-export DISTCC_HOSTS="localhost/1"
+export DISTCC_HOSTS="localhost/3"
 
 # Java stuff
 #export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
-export _JAVA_AWT_WM_NONREPARENTING=1
+#export _JAVA_AWT_WM_NONREPARENTING=1
 
 export LESSOPEN="| src-hilite-lesspipe.sh %s"
 export LESS=' -R '
+
+[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx 2> $HOME/.xsession-errors
