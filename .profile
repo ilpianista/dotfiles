@@ -29,5 +29,3 @@ export DISTCC_HOSTS="localhost/3"
 
 export LESSOPEN="| src-hilite-lesspipe.sh %s"
 export LESS=' -R '
-
-[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx 2> $HOME/.xsession-errors

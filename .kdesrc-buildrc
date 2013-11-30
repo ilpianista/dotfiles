@@ -24,11 +24,6 @@ global
 # If instead you want to check out another branch, like 4.7, use
 #	branch KDE/4.7
 #
-# With KDE/4.7, use "branch 2.6" for soprano, or distribution-provided soprano.
-#
-# but also see the qt and kdesupport modules below, which have special
-# requirements
-
 # This is the Subversion server to download the rest of the KDE sources from.
 # Developers: Don't forget to add your username to the URL if necessary!
 	svn-server svn+ssh://svn@svn.kde.org/home/kde
@@ -37,8 +32,9 @@ global
 # These options apply to all KDE modules unless otherwise specified.
 #
 # Also see http://techbase.kde.org/Development/Tutorials/CMake#Command_Line_Variables
-  cmake-options -DKDE4_BUILD_TESTS:BOOL=OFF
+  cmake-options -DKDE4_BUILD_TESTS=OFF
   cmake-options -DCMAKE_BUILD_TYPE=Debug
+  cmake-options -DQT_QMAKE_EXECUTABLE=/usr/bin/qmake-qt4
 
 # These are the default options passed to the make command.  The default tries
 # to build with 2 parallel compiles.  If you are using distcc or have SMP, you
@@ -73,7 +69,28 @@ global
   purge-old-logs true
 end global
 
-module-set kdevelop
-  repository kde-projects
-  use-modules kdevelop/kdevplatform kdevelop/kdevelop
-end module-set
+#module-set kdevelop
+#  repository kde-projects
+#  use-modules kdevelop/kdevplatform kdevelop/kdevelop
+#end module-set
+
+#module kdelibs-frameworks
+#  kdedir /opt/kf5
+#  repository kde:kdelibs
+#  branch frameworks
+#  cmake-options -DSUPERBUILD=ON
+#  cmake-options -DDLIB_INSTALL_DIR=lib
+#  cmake-options -DHUPNP_ENABLE=OFF
+#end module
+
+module kactivities-frameworks
+   kdedir /opt/kf5
+   repository kde:kactivities
+   branch frameworks
+end module
+
+module plasma-framework
+  kdedir /opt/kf5
+  repository kde:plasma-framework
+  cmake-options -DLIB_INSTALL_DIR=lib
+end module
