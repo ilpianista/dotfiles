@@ -40,13 +40,6 @@ plugins=(command-not-found extract gem git mvn nanoc npm vundle)
 
 source $ZSH/oh-my-zsh.sh
 
-# Key bindings
-autoload zkbd
-source ~/.zkbd/$TERM-${${DISPLAY:t}:-$VENDOR-$OSTYPE}
-[[ -n ${key[Home]} ]] && bindkey "${key[Home]}" beginning-of-line
-[[ -n ${key[End]} ]] && bindkey "${key[End]}" end-of-line
-[[ -n ${key[Delete]} ]] && bindkey "${key[Delete]}" delete-char
-
 # pacman stuff
 alias upgrade='sudo pacman -Syu; echo "Checking for AUR updates..."; cower -uddf'
 alias asdeps='sudo pacman -S --asdeps'
@@ -58,7 +51,7 @@ search() { pacman -Ss ${1}; cower -s ${1} }
 build() { cower -d ${1}; cd /tmp/${1}; makepkg -si }
 
 scan () {
-  pacman -Qlq $1 | xargs file | grep ELF | awk -F: '{print $1}' |
+  pacman -Qlq ${1} | xargs file | grep ELF | awk -F: '{print $1}' |
     while read elfobj; do
     readelf -d $elfobj | sed -n 's|.*NEEDED.*\[\(.*\)\].*|'$elfobj' -- \1|p'
   done
@@ -72,12 +65,13 @@ alias sign='gpg --detach-sign --use-agent'
 
 alias yt2mp3='youtube-dl -x --audio-format=mp3'
 alias yt2song='youtube-dl -x'
-yt2stream() { vlc "$(youtube-dl -g ${1})" }
+yt2stream() { cvlc "$(youtube-dl -g ${1})" }
 
 alias dmesg='dmesg -H'
 alias df='df -H'
 alias du='du -ch'
 alias diff='colordiff'
+alias lls='ls -lh'
 alias mount='mount | column -t'
 alias jobs='jobs -l'
 alias -g '...'='../..'

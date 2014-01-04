@@ -12,7 +12,7 @@ export GEM_HOME=~/.gem/ruby/2.0.0
 export KDEDIRS=/usr/local:$KDEDIRS
 
 if [ -n "$DISPLAY" ]; then
-   export BROWSER=rekonq
+   export BROWSER=chromium
 fi
 
 export DE=kde
@@ -24,8 +24,11 @@ export CCACHE_DIR="/tmp/ccache"
 export DISTCC_HOSTS="localhost/3"
 
 # Java stuff
-#export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
+export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
 #export _JAVA_AWT_WM_NONREPARENTING=1
 
 export LESSOPEN="| src-hilite-lesspipe.sh %s"
 export LESS=' -R '
+
+# SSH agent
+eval $(ssh-agent)

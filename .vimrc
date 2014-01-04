@@ -35,11 +35,11 @@ Bundle 'mattn/gist-vim'
 " Vim plugin to list, select and switch between buffers
 Bundle 'jeetsukumaran/vim-buffergator'
 " Unite and create user interfaces
-Bundle 'Shougo/unite.vim'
+"Bundle 'Shougo/unite.vim'
 " helpers for UNIX
 Bundle 'tpope/vim-eunuch'
 " a Git wrapper so awesome, it should be illegal
-Bundle 'tpope/vim-fugitive'
+"Bundle 'tpope/vim-fugitive'
 " Vim Markdown runtime files
 Bundle 'tpope/vim-markdown'
 " True Sublime Text style multiple selections for Vim
@@ -57,17 +57,17 @@ Bundle 'groenewege/vim-less'
 Bundle 'timgreen/vim-nanoc'
 
 " Improved PHP omnicompletion
-Bundle 'shawncplus/phpcomplete.vim'
+"Bundle 'shawncplus/phpcomplete.vim'
 
 "" Prolog
 " Prolog Integration for Vim
-Bundle 'adimit/prolog.vim'
+"Bundle 'adimit/prolog.vim'
 
 "" Ruby
 " wisely add 'end' in ruby, endfunction/endif/more in vim script, etc
 Bundle 'tpope/vim-endwise'
 " Vim runtime files for Haml, Sass, and SCSS
-"Bundle 'tpope/vim-haml'
+Bundle 'tpope/vim-haml'
 " Ruby on Rails power tools
 "Bundle 'tpope/vim-rails'
 
@@ -78,16 +78,16 @@ Bundle 'moll/vim-node'
 Bundle 'peterhoeg/vim-qml'
 
 " Provides database access to many dbms (Oracle, Sybase, Microsoft, MySQL, DBI,..)
-Bundle 'vim-scripts/dbext.vim'
+"Bundle 'vim-scripts/dbext.vim'
 "" PostgreSQL
 " Postgresql syntax
 Bundle 'exu/pgsql.vim'
 
 "" color schemes
 " Molokai color scheme for Vim
-Bundle 'tomasr/molokai'
+"Bundle 'tomasr/molokai'
 " Dark and light color scheme
-Bundle 'vim-scripts/Lucius'
+"Bundle 'vim-scripts/Lucius'
 " precision colorscheme for the vim text editor
 Bundle 'altercation/vim-colors-solarized'
 
