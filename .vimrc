@@ -41,8 +41,6 @@ Bundle 'jeetsukumaran/vim-buffergator'
 Bundle 'tpope/vim-eunuch'
 " a Git wrapper so awesome, it should be illegal
 "Bundle 'tpope/vim-fugitive'
-" True Sublime Text style multiple selections for Vim
-Bundle 'terryma/vim-multiple-cursors'
 " Vim plugin that displays tags in a window, ordered by class etc.
 Bundle 'majutsushi/tagbar'
 " Syntax checking hacks for vim
@@ -77,7 +75,7 @@ Bundle 'timgreen/vim-nanoc'
 " wisely add 'end' in ruby, endfunction/endif/more in vim script, etc
 Bundle 'tpope/vim-endwise'
 " Vim runtime files for Haml, Sass, and SCSS
-Bundle 'tpope/vim-haml'
+"Bundle 'tpope/vim-haml'
 " Ruby on Rails power tools
 "Bundle 'tpope/vim-rails'
 
@@ -108,8 +106,8 @@ Bundle 'altercation/vim-colors-solarized'
 set encoding=utf-8 " necessary to show unicode glyphs
 set showcmd        " display incomplete commands
 set number         " turn line numbering on
-set cursorline     " highlight the cursor line
-set cursorcolumn   " highlight the cursor column
+"set cursorline     " highlight the cursor line
+"set cursorcolumn   " highlight the cursor column
 set history=50     " keep 50 lines of command line history
 set ruler          " show the cursor position all the time
 set laststatus=2   " always show the status line
@@ -137,9 +135,9 @@ set incsearch       " incremental searching
 set ignorecase      " searches are case insensitive...
 set smartcase       " ... unless they contain at least one capital letter
 
-"set wildmode=full
-"set wildmenu        " command-line completion operates in an enhanced mode
-"set completeopt=longest,menuone " completion popup menu work just like in an IDE
+set wildmode=full
+set wildmenu        " command-line completion operates in an enhanced mode
+set completeopt=longest,menuone " completion popup menu work just like in an IDE
 
 " Disable output and VCS files
 set wildignore+=*.o,*.out,*.obj,.git,*.rbc,*.rbo,*.class,.svn,*.gem
@@ -154,11 +152,9 @@ set wildignore+=*.swp,*~,._*
 set backupdir^=~/.vim/_backup//    " where to put backup files.
 set directory^=~/.vim/_temp//      " where to put swap files.
 
-" YCM gives you popups and splits by default that some people might not
-" like, so these should tidy it up a bit for you.
-"let g:ycm_add_preview_to_completeopt = 0
-"let g:ycm_confirm_extra_conf = 0
-"set completeopt-=preview
+" Enable intent-guides
+au VimEnter * :IndentGuidesEnable
+let g:indent_guides_guide_size = 1
 
 " use patched powerline fonts
 "let g:airline_powerline_fonts = 1
@@ -173,6 +169,23 @@ autocmd FileType html,css EmmetInstall
 " gist-vim
 let g:github_user = 'andreascarpino'
 let g:gist_detect_filetype = 1
+
+" automatically start NERDTree when vim starts up with no files specified
+autocmd vimenter * if !argc() | NERDTree | endif
+
+" Buffergator
+nnoremap <F7> :BuffergatorToggle<CR>
+
+" TagBar
+nnoremap <F8> :TagbarToggle<CR>
+
+" NERDTree
+nnoremap <F9> :NERDTreeToggle<CR>
+
+" Tern
+let g:tern#command = ['node', '/usr/bin/tern', '--no-port-file']
+let g:tern_show_argument_hints = "on_move"
+nnoremap K :TernDoc<CR>
 
 " Shortcut to rapidly toggle `set list`
 nmap <leader>l :set list!<CR>
