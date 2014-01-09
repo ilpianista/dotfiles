@@ -11,17 +11,18 @@ Bundle 'gmarik/vundle'
 
 "" plugins
 " dependencies for snipmate
-Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
-Bundle "honza/vim-snippets"
+Bundle "MarcWeber/vim-addon-mw-utils"
 " a concise vim script that implements some of TextMate's snippets
 Bundle 'garbas/vim-snipmate'
+" vim-snipmate default snippets
+Bundle "honza/vim-snippets"
 " quoting/parenthesizing made simple
-Bundle 'tpope/vim-surround'
+"Bundle 'tpope/vim-surround'
 " pairs of handy bracket mappings
 Bundle 'tpope/vim-unimpaired'
 " Perform all your vim insert mode completions with Tab
-Bundle 'ervandew/supertab'
+"Bundle 'ervandew/supertab'
 " lean & mean status/tabline for vim that's light as air
 Bundle 'bling/vim-airline'
 " A tree explorer plugin for vim
@@ -40,10 +41,19 @@ Bundle 'jeetsukumaran/vim-buffergator'
 Bundle 'tpope/vim-eunuch'
 " a Git wrapper so awesome, it should be illegal
 "Bundle 'tpope/vim-fugitive'
-" Vim Markdown runtime files
-Bundle 'tpope/vim-markdown'
 " True Sublime Text style multiple selections for Vim
 Bundle 'terryma/vim-multiple-cursors'
+" Vim plugin that displays tags in a window, ordered by class etc.
+Bundle 'majutsushi/tagbar'
+" Syntax checking hacks for vim
+Bundle 'scrooloose/syntastic'
+" A Vim plugin for visually displaying indent levels in code
+Bundle 'nathanaelkane/vim-indent-guides'
+" Vim plugin, provides insert mode auto-completion for quotes, parens, brackets, etc.
+Bundle 'Raimondi/delimitMate'
+
+" Vim Markdown runtime files
+Bundle 'tpope/vim-markdown'
 
 "" HTML/CSS
 " emmet for vim
@@ -71,17 +81,20 @@ Bundle 'tpope/vim-haml'
 " Ruby on Rails power tools
 "Bundle 'tpope/vim-rails'
 
-" Tools to make Vim superb for developing with Node.js
-Bundle 'moll/vim-node'
+" Enhanced javascript syntax file for Vim
+Bundle 'jelera/vim-javascript-syntax'
+" Vastly improved Javascript indentation and syntax support in Vim
+Bundle 'pangloss/vim-javascript'
+" A plugin that integrates JSHint with Vim
+Bundle 'walm/jshint.vim'
+" Tern plugin for Vim
+Bundle 'marijnh/tern_for_vim'
 
 " QML syntax highlighting for VIM
 Bundle 'peterhoeg/vim-qml'
 
-" Provides database access to many dbms (Oracle, Sybase, Microsoft, MySQL, DBI,..)
-"Bundle 'vim-scripts/dbext.vim'
-"" PostgreSQL
-" Postgresql syntax
-Bundle 'exu/pgsql.vim'
+" PGSQL syntax
+"Bundle 'exu/pgsql.vim'
 
 "" color schemes
 " Molokai color scheme for Vim
@@ -124,9 +137,9 @@ set incsearch       " incremental searching
 set ignorecase      " searches are case insensitive...
 set smartcase       " ... unless they contain at least one capital letter
 
-set wildmode=full
-set wildmenu        " command-line completion operates in an enhanced mode
-set completeopt=longest,menuone " completion popup menu work just like in an IDE
+"set wildmode=full
+"set wildmenu        " command-line completion operates in an enhanced mode
+"set completeopt=longest,menuone " completion popup menu work just like in an IDE
 
 " Disable output and VCS files
 set wildignore+=*.o,*.out,*.obj,.git,*.rbc,*.rbo,*.class,.svn,*.gem
@@ -141,11 +154,25 @@ set wildignore+=*.swp,*~,._*
 set backupdir^=~/.vim/_backup//    " where to put backup files.
 set directory^=~/.vim/_temp//      " where to put swap files.
 
+" YCM gives you popups and splits by default that some people might not
+" like, so these should tidy it up a bit for you.
+"let g:ycm_add_preview_to_completeopt = 0
+"let g:ycm_confirm_extra_conf = 0
+"set completeopt-=preview
+
 " use patched powerline fonts
 "let g:airline_powerline_fonts = 1
 
+" This does what it says on the tin. It will check your file on open too, not just on save.
+let g:syntastic_check_on_open = 1
+
+" Enable emmet just for HTML/CSS
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
+
 " gist-vim
 let g:github_user = 'andreascarpino'
+let g:gist_detect_filetype = 1
 
 " Shortcut to rapidly toggle `set list`
 nmap <leader>l :set list!<CR>
