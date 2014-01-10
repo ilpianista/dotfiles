@@ -77,3 +77,6 @@ alias jobs='jobs -l'
 alias -g '...'='../..'
 
 alias wakerome='wol 00:04:ac:65:42:1e'
+
+# Solarized LS_COLORS
+eval $(dircolors $HOME/.dir_colors)

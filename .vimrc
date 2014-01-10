@@ -18,7 +18,7 @@ Bundle 'garbas/vim-snipmate'
 " vim-snipmate default snippets
 Bundle "honza/vim-snippets"
 " quoting/parenthesizing made simple
-"Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-surround'
 " pairs of handy bracket mappings
 Bundle 'tpope/vim-unimpaired'
 " Perform all your vim insert mode completions with Tab
@@ -117,7 +117,7 @@ filetype plugin indent on " turn on filetype detection, filetype plugins, and au
 syntax on           " turn syntax highlighting on
 set t_Co=256        " explicitly tell vim that the terminal supports 256 colors
 colorscheme solarized " because we prefer a non default colorscheme
-highlight clear
+"highlight clear
 highlight Pmenu guibg=brown gui=bold
 
 "" whitespace
