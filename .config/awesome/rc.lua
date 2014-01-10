@@ -128,7 +128,7 @@ memicon:set_image(beautiful.widget_mem)
 -- Initialize widget
 memwidget = wibox.widget.textbox()
 -- Register widget
-vicious.register(memwidget, vicious.widgets.mem, "$1% ($2MB)", 10)
+vicious.register(memwidget, vicious.widgets.mem, "$1%", 10)
 memwidget:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn("konsole -e htop") end)))
 memicon:buttons(memwidget:buttons())
 -- }}}
@@ -173,7 +173,7 @@ volwidget:buttons(awful.util.table.join(
      awful.button({ }, 4,
      function() awful.util.spawn_with_shell("amixer -q set Master 5%+ unmute") end),
      awful.button({ }, 5,
-     function() awful.util.spawn_with_shell("amixer -q set Master 5%+ unmute") end)
+     function() awful.util.spawn_with_shell("amixer -q set Master 5%- unmute") end)
 ))
 volicon:buttons(volwidget:buttons())
 -- }}}
@@ -181,7 +181,7 @@ volicon:buttons(volwidget:buttons())
 -- {{{ Network usage
 dnicon = wibox.widget.imagebox()
 upicon = wibox.widget.imagebox()
-dnicon:set_image(beautiful.widget_net)
+dnicon:set_image(beautiful.widget_netdown)
 upicon:set_image(beautiful.widget_netup)
 -- Initialize widget
 netwidget = wibox.widget.textbox()
@@ -212,7 +212,7 @@ vicious.register(wifiwidget, vicious.widgets.wifi,
       return 'Disconnected'
     else
       wifiicon:set_image(beautiful.widget_wifi)
-      return args["{ssid}"] .. ' (' .. args["{link}"] .. ')'
+      return args["{ssid}"]
     end
   end, 60, "wlan0")
 wifiwidget:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn("kde-nm-connection-editor") end)))
@@ -295,7 +295,9 @@ mytasklist.buttons = awful.util.table.join(
                                                   instance:hide()
                                                   instance = nil
                                               else
-                                                  instance = awful.menu.clients({ width=250 })
+                                                  instance = awful.menu:clients({
+                                                    theme = { width = 250 }
+                                                  })
                                               end
                                           end),
                      awful.button({ }, 4, function ()
@@ -439,7 +441,13 @@ globalkeys = awful.util.table.join(
                   awful.util.getdir("cache") .. "/history_eval")
               end),
     -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end)
+    --awful.key({ modkey }, "p", function() menubar.show() end),
+
+    -- Application Switcher
+     awful.key({ "Mod1" }, "Escape", function ()
+      awful.menu.menu_keys.down = { "Down", "Alt_L" }
+      awful.menu:clients({ theme = { width = 500 } })
+     end)
 )
 
 clientkeys = awful.util.table.join(
@@ -523,7 +531,7 @@ awful.rules.rules = {
                      focus = awful.client.focus.filter,
                      keys = clientkeys,
                      buttons = clientbuttons } },
-    { rule = { class = "Dragon" }, callback = function(c)
+    { rule = { class = "Vlc" }, callback = function(c)
       awful.client.movetotag(tags[mouse.screen][3], c) end,
       properties = { floating = true } },
     { rule = { class = "pinentry" },
@@ -540,9 +548,15 @@ awful.rules.rules = {
       properties = { tag = tags[1][4] } },
     { rule = { class = "Ktp-text-ui" },
       properties = { tag = tags[1][4] } },
+    { rule = { class = "Konversation" },
+      properties = { tag = tags[1][4] } },
+    { rule = { class = "Skype" },
+      properties = { tag = tags[1][4] } },
     { rule = { class = "Gvim" }, callback = function(c)
       awful.client.movetotag(tags[mouse.screen][5], c) end,
-      properties = { size_hints_honor = false } }
+      properties = { size_hints_honor = false } },
+    { rule = { class = "jetbrains-idea" }, callback = function(c)
+      awful.client.movetotag(tags[mouse.screen][5], c) end }
 }
 -- }}}
 
