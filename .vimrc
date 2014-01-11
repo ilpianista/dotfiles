@@ -40,7 +40,7 @@ Bundle 'jeetsukumaran/vim-buffergator'
 " helpers for UNIX
 Bundle 'tpope/vim-eunuch'
 " a Git wrapper so awesome, it should be illegal
-"Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-fugitive'
 " Vim plugin that displays tags in a window, ordered by class etc.
 Bundle 'majutsushi/tagbar'
 " Syntax checking hacks for vim

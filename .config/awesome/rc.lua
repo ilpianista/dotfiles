@@ -157,7 +157,7 @@ vicious.register(batwidget, vicious.widgets.bat,
     else
       return args[1] .. args[2] .. "%"
     end
-  end, 60, "BAT1")
+  end, 120, "BAT1")
 -- }}}
 
 -- {{{ Volume information
@@ -211,10 +211,14 @@ vicious.register(wifiwidget, vicious.widgets.wifi,
       wifiicon:set_image(beautiful.widget_wifidown)
       return 'Disconnected'
     else
-      wifiicon:set_image(beautiful.widget_wifi)
+      if args["{link}"] <= 40 then
+        wifiicon:set_image(beautiful.widget_wifilow)
+      else
+        wifiicon:set_image(beautiful.widget_wifi)
+      end
       return args["{ssid}"]
     end
-  end, 60, "wlan0")
+  end, 15, "wlan0")
 wifiwidget:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn("kde-nm-connection-editor") end)))
 wifiicon:buttons(wifiwidget:buttons())
 -- }}}
@@ -551,11 +555,9 @@ awful.rules.rules = {
       properties = { floating = true } },
     { rule = { class = "gimp" },
       properties = { maximized_vertical = true, maximized_horizontal = true } },
-    { rule = { class = "Rekonq" }, properties = { maximized_vertical = true,
-      maximized_horizontal = true }, callback = function(c)
+    { rule = { class = "Rekonq" }, callback = function(c)
       awful.client.movetotag(tags[mouse.screen][2], c) end },
-    { rule = { class = "Chromium" }, properties = { maximized_vertical = true,
-      maximized_horizontal = true }, callback = function(c)
+    { rule = { class = "Chromium" }, callback = function(c)
       awful.client.movetotag(tags[mouse.screen][2], c) end },
     { rule = { class = "Ktp-contactlist" },
       properties = { tag = tags[1][4] } },
