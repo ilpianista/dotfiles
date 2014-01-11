@@ -1,9 +1,10 @@
 ---------------------------
 -- Default awesome theme --
 ---------------------------
+local awful = require("awful")
 
 theme = {}
-theme.confdir       = os.getenv("HOME") .. "/.config/awesome"
+theme.confdir       = awful.util.getdir("config")
 theme.name          = "mine"
 theme.path          = theme.confdir .. "/themes/" .. theme.name
 
