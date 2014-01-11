@@ -224,8 +224,8 @@ wifiicon:buttons(wifiwidget:buttons())
 -- }}}
 
 -- {{{ Date and time
-dateicon = wibox.widget.imagebox()
-dateicon:set_image(beautiful.widget_date)
+--dateicon = wibox.widget.imagebox()
+--dateicon:set_image(beautiful.widget_date)
 -- Initialize widget
 datewidget = wibox.widget.textbox()
 -- Register widget
@@ -277,41 +277,41 @@ mytaglist.buttons = awful.util.table.join(
                     awful.button({ }, 5, function(t) awful.tag.viewprev(awful.tag.getscreen(t)) end)
                     )
 mytasklist = {}
-mytasklist.buttons = awful.util.table.join(
-                     awful.button({ }, 1, function (c)
-                                              if c == client.focus then
-                                                  c.minimized = true
-                                              else
-                                                  -- Without this, the following
-                                                  -- :isvisible() makes no sense
-                                                  c.minimized = false
-                                                  if not c:isvisible() then
-                                                      awful.tag.viewonly(c:tags()[1])
-                                                  end
-                                                  -- This will also un-minimize
-                                                  -- the client, if needed
-                                                  client.focus = c
-                                                  c:raise()
-                                              end
-                                          end),
-                     awful.button({ }, 3, function ()
-                                              if instance then
-                                                  instance:hide()
-                                                  instance = nil
-                                              else
-                                                  instance = awful.menu:clients({
-                                                    theme = { width = 250 }
-                                                  })
-                                              end
-                                          end),
-                     awful.button({ }, 4, function ()
-                                              awful.client.focus.byidx(1)
-                                              if client.focus then client.focus:raise() end
-                                          end),
-                     awful.button({ }, 5, function ()
-                                              awful.client.focus.byidx(-1)
-                                              if client.focus then client.focus:raise() end
-                                          end))
+--mytasklist.buttons = awful.util.table.join(
+--                     awful.button({ }, 1, function (c)
+--                                              if c == client.focus then
+--                                                  c.minimized = true
+--                                              else
+--                                                  -- Without this, the following
+--                                                  -- :isvisible() makes no sense
+--                                                  c.minimized = false
+--                                                  if not c:isvisible() then
+--                                                      awful.tag.viewonly(c:tags()[1])
+--                                                  end
+--                                                  -- This will also un-minimize
+--                                                  -- the client, if needed
+--                                                  client.focus = c
+--                                                  c:raise()
+--                                              end
+--                                          end),
+--                     awful.button({ }, 3, function ()
+--                                              if instance then
+--                                                  instance:hide()
+--                                                  instance = nil
+--                                              else
+--                                                  instance = awful.menu:clients({
+--                                                    theme = { width = 250 }
+--                                                  })
+--                                              end
+--                                          end),
+--                     awful.button({ }, 4, function ()
+--                                              awful.client.focus.byidx(1)
+--                                              if client.focus then client.focus:raise() end
+--                                          end),
+--                     awful.button({ }, 5, function ()
+--                                              awful.client.focus.byidx(-1)
+--                                              if client.focus then client.focus:raise() end
+--                                          end))
 
 for s = 1, screen.count() do
     -- Create a promptbox for each screen
@@ -348,8 +348,8 @@ for s = 1, screen.count() do
         right_layout:add(memicon)
         right_layout:add(memwidget)
         right_layout:add(dnicon)
-        right_layout:add(upicon)
         right_layout:add(netwidget)
+        right_layout:add(upicon)
         right_layout:add(wifiicon)
         right_layout:add(wifiwidget)
         right_layout:add(volicon)
@@ -357,10 +357,10 @@ for s = 1, screen.count() do
         right_layout:add(baticon)
         right_layout:add(batwidget)
         right_layout:add(chaticon)
-        right_layout:add(spacer)
         right_layout:add(wibox.widget.systray())
     end
-    right_layout:add(dateicon)
+    right_layout:add(spacer)
+--    right_layout:add(dateicon)
     right_layout:add(datewidget)
     right_layout:add(spacer)
     right_layout:add(mylayoutbox[s])
@@ -399,7 +399,7 @@ globalkeys = awful.util.table.join(
             awful.client.focus.byidx(-1)
             if client.focus then client.focus:raise() end
         end),
-    awful.key({ modkey,           }, "w", function () mymainmenu:show() end),
+--    awful.key({ modkey,           }, "w", function () mymainmenu:show() end),
 
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
@@ -418,7 +418,7 @@ globalkeys = awful.util.table.join(
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
-    awful.key({ modkey, "Shift"   }, "q", awesome.quit),
+--    awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end),
     awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)    end),
@@ -437,13 +437,13 @@ globalkeys = awful.util.table.join(
     -- Prompt
     awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
 
-    awful.key({ modkey }, "x",
-              function ()
-                  awful.prompt.run({ prompt = "Run Lua code: " },
-                  mypromptbox[mouse.screen].widget,
-                  awful.util.eval, nil,
-                  awful.util.getdir("cache") .. "/history_eval")
-              end),
+--    awful.key({ modkey }, "x",
+--              function ()
+--                  awful.prompt.run({ prompt = "Run Lua code: " },
+--                  mypromptbox[mouse.screen].widget,
+--                  awful.util.eval, nil,
+--                  awful.util.getdir("cache") .. "/history_eval")
+--              end),
     -- Menubar
     --awful.key({ modkey }, "p", function() menubar.show() end),
 
