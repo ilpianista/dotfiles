@@ -152,7 +152,7 @@ batwidget = wibox.widget.textbox()
 -- Register widget
 vicious.register(batwidget, vicious.widgets.bat,
   function(widget, args)
-    if args[1] == '-' and args[2] <= 15 then
+    if args[1] == '−' and args[2] <= 15 then
       return "<span color='#cc9393'>" .. args[1] .. args[2] .. "%</span>"
     else
       return args[1] .. args[2] .. "%"
@@ -534,15 +534,21 @@ awful.rules.rules = {
                      floating = false,
                      maximized_vertical = false,
                      maximized_horizontal = false } },
-    { rule = { class = "Vlc" }, callback = function(c)
-      awful.client.movetotag(tags[mouse.screen][3], c) end,
-      properties = { floating = true } },
     { rule = { class = "pinentry" },
+      properties = { floating = true } },
+    { rule = { class = "Polkit-kde-authentication-agent-1" },
+      properties = { floating = true } },
+    { rule = { class = "Kdialog" },
       properties = { floating = true } },
     { rule = { class = "Kontact" },
       properties = { maximized_vertical = true, maximized_horizontal = true } },
+    { rule = { class = "Choqok" },
+      properties = { floating = true } },
     { rule = { class = "Amarok" },
       properties = { tag = tags[1][3] } },
+    { rule = { class = "Vlc" }, callback = function(c)
+      awful.client.movetotag(tags[mouse.screen][3], c) end,
+      properties = { floating = true } },
     { rule = { class = "gimp" },
       properties = { maximized_vertical = true, maximized_horizontal = true } },
     { rule = { class = "Rekonq" }, properties = { maximized_vertical = true,
