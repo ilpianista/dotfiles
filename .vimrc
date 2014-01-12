@@ -10,8 +10,9 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 "" plugins
-" dependencies for snipmate
+" Some utility functions for VIM (needed by snipmate)
 Bundle "tomtom/tlib_vim"
+" interpret a file by function and cache file automatically (needed by snipmate)
 Bundle "MarcWeber/vim-addon-mw-utils"
 " a concise vim script that implements some of TextMate's snippets
 Bundle 'garbas/vim-snipmate'
@@ -29,7 +30,7 @@ Bundle 'bling/vim-airline'
 Bundle 'scrooloose/nerdtree'
 " plugin for intensely orgasmic commenting
 Bundle 'scrooloose/nerdcommenter'
-" needed by gist-vim
+" vim interface to Web API (needed by gist-vim)
 Bundle 'mattn/webapi-vim'
 " vimscript for gist
 Bundle 'mattn/gist-vim'
@@ -49,6 +50,10 @@ Bundle 'scrooloose/syntastic'
 Bundle 'nathanaelkane/vim-indent-guides'
 " Vim plugin, provides insert mode auto-completion for quotes, parens, brackets, etc.
 Bundle 'Raimondi/delimitMate'
+" Miscellaneous auto-load Vim scripts (needed by vim-session)
+Bundle 'xolox/vim-misc'
+" Extended session management for Vim
+Bundle 'xolox/vim-session'
 
 " Vim Markdown runtime files
 Bundle 'tpope/vim-markdown'
@@ -100,7 +105,9 @@ Bundle 'peterhoeg/vim-qml'
 " Dark and light color scheme
 "Bundle 'vim-scripts/Lucius'
 " precision colorscheme for the vim text editor
-Bundle 'altercation/vim-colors-solarized'
+"Bundle 'altercation/vim-colors-solarized'
+" Base16 for Vim
+Bundle 'chriskempson/base16-vim'
 
 "" general stuff
 set encoding=utf-8 " necessary to show unicode glyphs
@@ -116,8 +123,8 @@ filetype plugin indent on " turn on filetype detection, filetype plugins, and au
 "" color stuffs
 syntax on           " turn syntax highlighting on
 set t_Co=256        " explicitly tell vim that the terminal supports 256 colors
-colorscheme solarized " because we prefer a non default colorscheme
-"highlight clear
+set background=dark
+colorscheme base16-default " because we prefer a non default colorscheme
 highlight Pmenu guibg=brown gui=bold
 
 "" whitespace
@@ -170,21 +177,26 @@ autocmd FileType html,css EmmetInstall
 let g:github_user = 'andreascarpino'
 let g:gist_detect_filetype = 1
 
+" vim-session
+let g:session_autoload = 'no'
+let g:session_autosave = 'no'
+
 " automatically start NERDTree when vim starts up with no files specified
-autocmd vimenter * if !argc() | NERDTree | endif
+"autocmd vimenter * if !argc() | NERDTree | endif
 
 " Buffergator
 nnoremap <F7> :BuffergatorToggle<CR>
 
-" TagBar
-nnoremap <F8> :TagbarToggle<CR>
-
 " NERDTree
-nnoremap <F9> :NERDTreeToggle<CR>
+nnoremap <F8> :NERDTreeToggle<CR>
+
+" TagBar
+nnoremap <F9> :TagbarToggle<CR>
 
 " Tern
 let g:tern#command = ['node', '/usr/bin/tern', '--no-port-file']
-let g:tern_show_argument_hints = "on_move"
+let g:tern_show_argument_hints = "on_hold"
+set updatetime=1000
 nnoremap K :TernDoc<CR>
 
 " Shortcut to rapidly toggle `set list`
