@@ -33,12 +33,19 @@ DISABLE_CORRECTION="true"
 # much faster.
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
 
+# Uncomment following line if you want to  shown in the command execution time stamp
+# in the history command output. The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|
+# yyyy-mm-dd
+# HIST_STAMPS="mm/dd/yyyy"
+
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(command-not-found extract gem git mvn nanoc npm vundle)
+plugins=(colorize command-not-found extract gem git mvn nanoc npm sbt)
 
 source $ZSH/oh-my-zsh.sh
+
+# User configuration
 
 # pacman stuff
 alias upgrade='sudo pacman -Syu; echo "Checking for AUR updates..."; cower -uddf'
@@ -48,8 +55,9 @@ alias useless='pacman -Qqtd'
 alias makepkg='makepkg -L'
 
 search() { pacman -Ss ${1}; cower -s ${1} }
-build() { cower -d ${1}; cd /tmp/${1}; makepkg -si }
+aurpkg() { cower -d ${1}; cd /tmp/${1}; makepkg -s }
 
+# Show needed libraries
 scan () {
   pacman -Qlq ${1} | xargs file | grep ELF | awk -F: '{print $1}' |
     while read elfobj; do
@@ -57,26 +65,35 @@ scan () {
   done
 }
 
-# use my university proxy
-alias uniba="export {http,https,ftp}_proxy='http://wproxy.ict.uniba.it:80'"
+# Colorize less
+less() { colorize ${1} | /usr/bin/less }
 
-# useful stuff
-alias sign='gpg --detach-sign --use-agent'
-
+# YouTube
 alias yt2mp3='youtube-dl -x --audio-format=mp3'
 alias yt2song='youtube-dl -x'
 yt2stream() { cvlc "$(youtube-dl -g ${1})" }
 
+# useful stuff
 alias dmesg='dmesg -H'
-alias df='df -H'
+alias df='df -h'
 alias du='du -ch'
 alias diff='colordiff'
 alias lls='ls -lh'
 alias mount='mount | column -t'
 alias jobs='jobs -l'
 alias -g '...'='../..'
+alias sign='gpg --detach-sign --use-agent'
 
+alias uniba="export {http,https,ftp}_proxy='http://wproxy.ict.uniba.it:80'"
 alias wakerome='wol 00:04:ac:65:42:1e'
+
+alias connect='nmcli con up id'
+alias disconnect='nmcli con down id'
+alias disconnectiface='nmcli dev disconnect iface'
+alias wifilist='nmcli dev wifi list iface wlan0'
+
+# Workaround for non-repainting WM
+alias idea='wmname LG3D; intellij-idea-ultimate-edition'
 
 # Solarized LS_COLORS
 eval $(dircolors $HOME/.dir_colors)

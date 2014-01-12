@@ -24,11 +24,7 @@ export CCACHE_DIR="/tmp/ccache"
 export DISTCC_HOSTS="localhost/3"
 
 # Java stuff
-export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
-export _JAVA_AWT_WM_NONREPARENTING=1
-
-export LESSOPEN="| src-hilite-lesspipe.sh %s"
-export LESS=' -R '
+export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true'
 
 # SSH agent
 eval $(ssh-agent)

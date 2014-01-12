@@ -207,13 +207,6 @@ wifiwidget = wibox.widget.textbox()
 -- Register widget
 vicious.register(wifiwidget, vicious.widgets.wifi,
   function(widget, args)
---    local nmcli = io.popen("nmcli -t -f name con list")
---    local s = {}
---    for line in nmcli:lines() do
---      s[line] = line
---    end
---    nmcli:close()
---    awful.menu( { items = s } ):show()
     if args["{ssid}"] == "N/A" then
       wifiicon:set_image(beautiful.widget_wifidown)
       return 'Disconnected'
