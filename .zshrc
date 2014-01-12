@@ -41,11 +41,19 @@ DISABLE_CORRECTION="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(colorize command-not-found extract gem git mvn nanoc npm sbt)
+plugins=(command-not-found extract gem git mvn nanoc npm sbt)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
+
+# Key bindings
+autoload zkbd
+source ~/.zkbd/$TERM-${${DISPLAY:t}:-$VENDOR-$OSTYPE}
+
+[[ -n ${key[Home]} ]] && bindkey "${key[Home]}" beginning-of-line
+[[ -n ${key[End]} ]] && bindkey "${key[End]}" end-of-line
+[[ -n ${key[Delete]} ]] && bindkey "${key[Delete]}" delete-char
 
 # pacman stuff
 alias upgrade='sudo pacman -Syu; echo "Checking for AUR updates..."; cower -uddf'
@@ -64,9 +72,6 @@ scan () {
     readelf -d $elfobj | sed -n 's|.*NEEDED.*\[\(.*\)\].*|'$elfobj' -- \1|p'
   done
 }
-
-# Colorize less
-less() { colorize ${1} | /usr/bin/less }
 
 # YouTube
 alias yt2mp3='youtube-dl -x --audio-format=mp3'
@@ -92,8 +97,5 @@ alias disconnect='nmcli con down id'
 alias disconnectiface='nmcli dev disconnect iface'
 alias wifilist='nmcli dev wifi list iface wlan0'
 
-# Workaround for non-repainting WM
-alias idea='wmname LG3D; intellij-idea-ultimate-edition'
-
-# Solarized LS_COLORS
+# LS_COLORS
 eval $(dircolors $HOME/.dir_colors)

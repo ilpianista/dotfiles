@@ -1,30 +1,49 @@
 ---------------------------
--- Default awesome theme --
+-- Solarized Light awesome theme --
 ---------------------------
 local awful = require("awful")
 
 theme = {}
+
 theme.confdir       = awful.util.getdir("config")
-theme.name          = "mine"
+theme.name          = "solarized_dark"
 theme.path          = theme.confdir .. "/themes/" .. theme.name
 
 theme.font          = "Monaco 9"
 
-theme.bg_normal     = "#222222"
-theme.bg_focus      = "#535d6c"
-theme.bg_urgent     = "#ff0000"
-theme.bg_minimize   = "#444444"
+-- Solarized colors
+theme.solarized_base03  = "#002b36"
+theme.solarized_base02  = "#073642"
+theme.solarized_base01  = "#586e75"
+theme.solarized_base00  = "#657b83"
+theme.solarized_base0   = "#839496"
+theme.solarized_base1   = "#93a1a1"
+theme.solarized_base2   = "#eee8d5"
+theme.solarized_base3   = "#fdf6e3"
+theme.solarized_yellow  = "#b58900"
+theme.solarized_orange  = "#cb4b16"
+theme.solarized_red     = "#dc322f"
+theme.solarized_magenta = "#d33682"
+theme.solarized_violet  = "#6c71c4"
+theme.solarized_blue    = "#268bd2"
+theme.solarized_cyan    = "#2aa198"
+theme.solarized_green   = "#859900"
+
+theme.bg_normal     = theme.solarized_base03
+theme.bg_focus      = theme.solarized_base02
+theme.bg_urgent     = theme.solarized_magenta
+theme.bg_minimize   = theme.solarized_base03
 theme.bg_systray    = theme.bg_normal
 
-theme.fg_normal     = "#aaaaaa"
-theme.fg_focus      = "#ffffff"
-theme.fg_urgent     = "#ffffff"
-theme.fg_minimize   = "#ffffff"
+theme.fg_normal     = theme.solarized_base0
+theme.fg_focus      = theme.solarized_base1
+theme.fg_urgent     = theme.solarized_base01
+theme.fg_minimize   = theme.solarized_base01
 
 theme.border_width  = "1"
-theme.border_normal = "#000000"
-theme.border_focus  = "#535d6c"
-theme.border_marked = "#91231c"
+theme.border_normal = theme.solarized_base03
+theme.border_focus  = theme.solarized_base03
+theme.border_marked = theme.solarized_magenta
 
 -- There are other variable sets
 -- overriding the default one when
@@ -119,9 +138,9 @@ theme.layout_dwindle = theme.path .. "/icons/layouts/dwindle.png"
 
 theme.awesome_icon = theme.path .. "/icons/arch.png"
 
--- Define the icon theme for application icons. If not set then the icons 
+-- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
-theme.icon_theme = Caledonia
+theme.icon_theme = elementary
 
 return theme
 -- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80

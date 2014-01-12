@@ -1,30 +1,49 @@
 ---------------------------
--- Default awesome theme --
+-- Solarized Light awesome theme --
 ---------------------------
 local awful = require("awful")
 
 theme = {}
+
 theme.confdir       = awful.util.getdir("config")
-theme.name          = "mine"
+theme.name          = "base16_dark"
 theme.path          = theme.confdir .. "/themes/" .. theme.name
 
 theme.font          = "Monaco 9"
 
-theme.bg_normal     = "#222222"
-theme.bg_focus      = "#535d6c"
-theme.bg_urgent     = "#ff0000"
-theme.bg_minimize   = "#444444"
+-- Base16 colors
+theme.base16_base00 = "#151515"
+theme.base16_base01 = "#202020"
+theme.base16_base02 = "#303030"
+theme.base16_base03 = "#505050"
+theme.base16_base04 = "#b0b0b0"
+theme.base16_base05 = "#d0d0d0"
+theme.base16_base06 = "#e0e0e0"
+theme.base16_base07 = "#f5f5f5"
+theme.base16_base08 = "#ac4142"
+theme.base16_base09 = "#d28445"
+theme.base16_base0A = "#f4bf75"
+theme.base16_base0B = "#90a959"
+theme.base16_base0C = "#75b5aa"
+theme.base16_base0D = "#6a9fb5"
+theme.base16_base0E = "#aa759f"
+theme.base16_base0F = "#8f5536"
+
+theme.bg_normal     = theme.base16_base00
+theme.bg_focus      = theme.base16_base05
+theme.bg_urgent     = theme.base16_base08
+theme.bg_minimize   = theme.base16_base03
 theme.bg_systray    = theme.bg_normal
 
-theme.fg_normal     = "#aaaaaa"
-theme.fg_focus      = "#ffffff"
-theme.fg_urgent     = "#ffffff"
-theme.fg_minimize   = "#ffffff"
+theme.fg_normal     = theme.base16_base0B
+theme.fg_focus      = theme.base16_base00
+theme.fg_urgent     = theme.base16_base01
+theme.fg_minimize   = theme.base16_base07
 
 theme.border_width  = "1"
-theme.border_normal = "#000000"
-theme.border_focus  = "#535d6c"
-theme.border_marked = "#91231c"
+theme.border_normal = theme.base16_base00
+theme.border_focus  = theme.base16_base00
+theme.border_marked = theme.base16_base08
 
 -- There are other variable sets
 -- overriding the default one when
@@ -48,16 +67,16 @@ theme.menu_height = "15"
 theme.menu_width  = "100"
 
 -- {{{ Widgets
-theme.widget_bat_fg     = theme.fg_normal
+theme.widget_bat_fg     = theme.base16_base09
 theme.widget_batlow_fg  = theme.bg_urgent
 theme.widget_netdown_fg = theme.bg_urgent
-theme.widget_netup_fg   = theme.fg_normal
-theme.widget_wifi_fg    = theme.fg_normal
-theme.widget_mem_fg     = theme.fg_normal
-theme.widget_cpu_fg     = theme.fg_normal
-theme.widget_vol_fg     = theme.fg_normal
+theme.widget_netup_fg   = theme.base16_base0D
+theme.widget_wifi_fg    = theme.base16_base0D
+theme.widget_mem_fg     = theme.base16_base0A
+theme.widget_cpu_fg     = theme.base16_base0A
+theme.widget_vol_fg     = theme.base16_base0E
 theme.widget_date_fg    = theme.fg_normal
-theme.widget_chat_fg    = theme.fg_normal
+theme.widget_chat_fg    = theme.base16_base0D
 -- }}}
 
 -- {{{ Widget icons
@@ -119,9 +138,9 @@ theme.layout_dwindle = theme.path .. "/icons/layouts/dwindle.png"
 
 theme.awesome_icon = theme.path .. "/icons/arch.png"
 
--- Define the icon theme for application icons. If not set then the icons 
+-- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
-theme.icon_theme = Caledonia
+theme.icon_theme = elementary
 
 return theme
 -- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80

@@ -41,10 +41,10 @@ end
 local config = awful.util.getdir("config")
 
 -- Themes define colours, icons, and wallpapers
-beautiful.init(config .. "/themes/solarized_light/theme.lua")
+beautiful.init(config .. "/themes/base16_dark/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "konsole"
+terminal = "urxvt"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -128,8 +128,8 @@ memicon:set_image(beautiful.widget_mem)
 -- Initialize widget
 memwidget = wibox.widget.textbox()
 -- Register widget
-vicious.register(memwidget, vicious.widgets.mem, "$1%", 10)
-memwidget:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn("konsole -e htop") end)))
+vicious.register(memwidget, vicious.widgets.mem, '<span color="' .. beautiful.widget_mem_fg .. '">$1%</span>', 10)
+memwidget:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn("urxvt -e htop") end)))
 memicon:buttons(memwidget:buttons())
 -- }}}
 
@@ -139,7 +139,7 @@ cpuicon:set_image(beautiful.widget_cpu)
 -- Initialize widget
 cpuwidget = wibox.widget.textbox()
 -- Register widget
-vicious.register(cpuwidget, vicious.widgets.cpu, "$1%", 2)
+vicious.register(cpuwidget, vicious.widgets.cpu, '<span color="' .. beautiful.widget_cpu_fg .. '">$1%</span>', 2)
 cpuwidget:buttons(memwidget:buttons())
 cpuicon:buttons(cpuwidget:buttons())
 -- }}}
@@ -152,11 +152,11 @@ batwidget = wibox.widget.textbox()
 -- Register widget
 vicious.register(batwidget, vicious.widgets.bat,
   function(widget, args)
+    local color = beautiful.widget_bat_fg
     if args[1] == '−' and args[2] <= 15 then
-      return '<span color="' .. beautiful.fg_bat_widget .. '">' .. args[1] .. args[2] .. '%</span>'
-    else
-      return args[1] .. args[2] .. '%'
+      color = beautiful.widget_batlow_fg
     end
+    return '<span color="' .. color .. '">' .. args[1] .. args[2] .. '%</span>'
   end, 120, "BAT1")
 -- }}}
 
@@ -166,7 +166,7 @@ volicon:set_image(beautiful.widget_vol)
 -- Initialize widget
 volwidget = wibox.widget.textbox()
 -- Register widget
-vicious.register(volwidget, vicious.widgets.volume, "$1% $2", 2, "Master")
+vicious.register(volwidget, vicious.widgets.volume, '<span color="' .. beautiful.widget_vol_fg .. '">$1% $2</span>', 2, "Master")
 volwidget:buttons(awful.util.table.join(
      awful.button({ }, 1,
      function() awful.util.spawn_with_shell("amixer -q set Master toggle") end),
@@ -188,8 +188,8 @@ netwidget = wibox.widget.textbox()
 -- Register widget
 vicious.register(netwidget, vicious.widgets.net,
   function(widget, args)
-    local string = '<span color="' .. beautiful.fg_netdn_widget ..'">%s</span> '
-                .. '<span color="' .. beautiful.fg_netup_widget ..'">%s</span>'
+    local string = '<span color="' .. beautiful.widget_netdown_fg ..'">%s</span> '
+                .. '<span color="' .. beautiful.widget_netup_fg .. '">%s</span>'
     if args["{eth0 carrier}"] == 1 then
       return string.format(string, args["{eth0 down_kb}"], args["{eth0 up_kb}"])
     elseif args["{usb0 carrier}"] == 1 then
@@ -207,17 +207,18 @@ wifiwidget = wibox.widget.textbox()
 -- Register widget
 vicious.register(wifiwidget, vicious.widgets.wifi,
   function(widget, args)
+    local text = "Disconnected"
     if args["{ssid}"] == "N/A" then
       wifiicon:set_image(beautiful.widget_wifidown)
-      return 'Disconnected'
     else
       if args["{link}"] <= 40 then
         wifiicon:set_image(beautiful.widget_wifilow)
       else
         wifiicon:set_image(beautiful.widget_wifi)
       end
-      return args["{ssid}"]
+      text = args["{ssid}"]
     end
+    return '<span color="' .. beautiful.widget_wifi_fg .. '">' .. text .. '</span>'
   end, 15, "wlan0")
 wifiwidget:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn("kde-nm-connection-editor") end)))
 wifiicon:buttons(wifiwidget:buttons())
@@ -229,7 +230,7 @@ wifiicon:buttons(wifiwidget:buttons())
 -- Initialize widget
 datewidget = wibox.widget.textbox()
 -- Register widget
-vicious.register(datewidget, vicious.widgets.date, "%A %d, %R", 60)
+vicious.register(datewidget, vicious.widgets.date, '<span color="' .. beautiful.widget_date_fg ..'">%A %d, %R</span>', 60)
 -- }}}
 
 -- {{{ MPD
@@ -428,7 +429,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1)         end),
     awful.key({ modkey,           }, "space", function () awful.layout.inc(layouts,  1) end),
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
-    
+
     awful.key({ "Control", "Mod1" }, "l", function () awful.util.spawn("kshutdown -k") end),
     awful.key({ "Control", "Mod1" }, "Escape", function () awful.util.spawn("xkill") end),
 
@@ -545,7 +546,7 @@ awful.rules.rules = {
         properties = { tag = tags[1][2],
           maximized_vertical = true,
           maximized_horizontal = true } },
-    { rule = { instance = "gwenview" },
+    { rule_any = { instance = { "gimp", "gwenview" } },
         except = { type = "dialog" },
         properties = { maximized_vertical = true,
           maximized_horizontal = true } },
@@ -556,29 +557,19 @@ awful.rules.rules = {
     { rule = { class = "Vlc" },
         callback = function(c) awful.client.movetotag(tags[mouse.screen][3], c) end,
         properties = { floating = true } },
-    { rule = { instance = "gimp" },
-        except = { type = "dialog" },
-        properties = { maximized_vertical = true,
-          maximized_horizontal = true } },
-    { rule = { class = "Rekonq" },
+    { rule_any = { class = { "Rekonq", "Chromium" } },
        callback = function(c) awful.client.movetotag(tags[mouse.screen][2], c) end },
-    { rule = { class = "Chromium" },
-        callback = function(c) awful.client.movetotag(tags[mouse.screen][2], c) end },
-    { rule = { class = "Ktp-contactlist" },
+    { rule_any = { class = { "Konversation", "Ktp-contactlist", "Ktp-text-ui", "Skype" } },
         properties = { tag = tags[1][4] } },
-    { rule = { class = "Ktp-text-ui" },
-        properties = { tag = tags[1][4] } },
-    { rule = { class = "Konversation" },
-        properties = { tag = tags[1][4] } },
-    { rule = { class = "Skype" },
-        properties = { tag = tags[1][4] } },
+    { rule = { instance = "urxvt" },
+        properties = { size_hints_honor = false } },
     { rule = { class = "Gvim" },
         except = { type = "dialog" },
         callback = function(c) awful.client.movetotag(tags[mouse.screen][5], c) end,
         properties = { size_hints_honor = false,
           maximized_vertical = true,
           maximized_horizontal = true } },
-    { rule = { class = "jetbrains-idea" },
+    { rule_any = { class = { "jetbrains-idea", "KDevelop", "Kate", "QtCreator" } },
         except = { type = "dialog" },
         callback = function(c) awful.client.movetotag(tags[mouse.screen][5], c) end,
         properties = { maximized_vertical = true,
