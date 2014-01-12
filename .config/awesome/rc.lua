@@ -41,7 +41,7 @@ end
 local config = awful.util.getdir("config")
 
 -- Themes define colours, icons, and wallpapers
-beautiful.init(config .. "/themes/mine/theme.lua")
+beautiful.init(config .. "/themes/solarized_light/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "konsole"
@@ -85,7 +85,7 @@ end
 -- Define a tag table which hold all screen tags.
 tags = {
     names = { "*", "www", "media", "chat", "dev" },
-    layouts = { layouts[1], layouts[10], layouts[1], layouts[3], layouts[6] }
+    layouts = { layouts[2], layouts[10], layouts[1], layouts[2], layouts[3] }
 }
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
@@ -153,9 +153,9 @@ batwidget = wibox.widget.textbox()
 vicious.register(batwidget, vicious.widgets.bat,
   function(widget, args)
     if args[1] == '−' and args[2] <= 15 then
-      return "<span color='#cc9393'>" .. args[1] .. args[2] .. "%</span>"
+      return '<span color="' .. beautiful.fg_bat_widget .. '">' .. args[1] .. args[2] .. '%</span>'
     else
-      return args[1] .. args[2] .. "%"
+      return args[1] .. args[2] .. '%'
     end
   end, 120, "BAT1")
 -- }}}
@@ -207,6 +207,13 @@ wifiwidget = wibox.widget.textbox()
 -- Register widget
 vicious.register(wifiwidget, vicious.widgets.wifi,
   function(widget, args)
+--    local nmcli = io.popen("nmcli -t -f name con list")
+--    local s = {}
+--    for line in nmcli:lines() do
+--      s[line] = line
+--    end
+--    nmcli:close()
+--    awful.menu( { items = s } ):show()
     if args["{ssid}"] == "N/A" then
       wifiicon:set_image(beautiful.widget_wifidown)
       return 'Disconnected'
@@ -541,6 +548,11 @@ awful.rules.rules = {
     { rule = { type = "dialog" },
       properties = { floating = true } },
     { rule = { instance = "kontact" },
+        except = { type = "dialog" },
+        properties = { tag = tags[1][2],
+          maximized_vertical = true,
+          maximized_horizontal = true } },
+    { rule = { instance = "gwenview" },
         except = { type = "dialog" },
         properties = { maximized_vertical = true,
           maximized_horizontal = true } },
