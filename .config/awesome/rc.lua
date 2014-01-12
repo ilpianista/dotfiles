@@ -129,7 +129,7 @@ memicon:set_image(beautiful.widget_mem)
 memwidget = wibox.widget.textbox()
 -- Register widget
 vicious.register(memwidget, vicious.widgets.mem, '<span color="' .. beautiful.widget_mem_fg .. '">$1%</span>', 10)
-memwidget:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn("urxvt -e htop") end)))
+memwidget:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn(terminal .. " -e htop") end)))
 memicon:buttons(memwidget:buttons())
 -- }}}
 
@@ -207,7 +207,7 @@ wifiwidget = wibox.widget.textbox()
 -- Register widget
 vicious.register(wifiwidget, vicious.widgets.wifi,
   function(widget, args)
-    local text = "Disconnected"
+    local text = "Offline"
     if args["{ssid}"] == "N/A" then
       wifiicon:set_image(beautiful.widget_wifidown)
     else
@@ -420,6 +420,8 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
 --    awful.key({ modkey, "Shift"   }, "q", awesome.quit),
+    awful.key({ modkey,           }, "BackSpace", function () awful.util.spawn("dolphin") end),
+    awful.key({ modkey,           }, "Delete", function () awful.util.spawn("chromium") end),
 
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end),
     awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)    end),
