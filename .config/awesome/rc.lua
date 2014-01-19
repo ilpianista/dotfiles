@@ -219,7 +219,7 @@ vicious.register(wifiwidget, vicious.widgets.wifi,
       text = args["{ssid}"]
     end
     return '<span color="' .. beautiful.widget_wifi_fg .. '">' .. text .. '</span>'
-  end, 15, "wlan0")
+  end, 10, "wlan0")
 wifiwidget:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn("kde-nm-connection-editor") end)))
 wifiicon:buttons(wifiwidget:buttons())
 -- }}}
@@ -545,14 +545,12 @@ awful.rules.rules = {
       properties = { floating = true } },
     { rule = { instance = "kontact" },
         except = { type = "dialog" },
-        properties = { tag = tags[1][2],
-          maximized_vertical = true,
-          maximized_horizontal = true } },
+        properties = { tag = tags[1][2] } },
     { rule_any = { instance = { "gimp", "gwenview" } },
         except = { type = "dialog" },
         properties = { maximized_vertical = true,
           maximized_horizontal = true } },
-    { rule = { instance = "choqok" },
+    { rule_any = { instance = { "choqok", "dia" } },
         properties = { floating = true } },
     { rule = { class = "Amarok" },
         properties = { tag = tags[1][3] } },
@@ -571,7 +569,7 @@ awful.rules.rules = {
         properties = { size_hints_honor = false,
           maximized_vertical = true,
           maximized_horizontal = true } },
-    { rule_any = { class = { "jetbrains-idea", "KDevelop", "Kate", "QtCreator" } },
+    { rule_any = { class = { "jetbrains-idea", "Kdevelop", "Kate", "QtCreator", "Designer-qt4", "Designer-qt5" } },
         except = { type = "dialog" },
         callback = function(c) awful.client.movetotag(tags[mouse.screen][5], c) end,
         properties = { maximized_vertical = true,
