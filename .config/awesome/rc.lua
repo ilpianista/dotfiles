@@ -95,21 +95,28 @@ end
 
 -- {{{ Menu
 -- Create a laucher widget and a main menu
-myawesomemenu = {
-   { "lock", "kshutdown -k" },
-   { "manual", terminal .. " -e man awesome" },
-   { "edit config", editor_cmd .. " " .. awesome.conffile },
-   { "reboot", "kshutdown -r" },
-   { "shutdown", "kshutdown -s" }
-}
+--myawesomemenu = {
+--  { "lock", "kshutdown -k" },
+--  { "manual", terminal .. " -e man awesome" },
+--  { "edit config", editor_cmd .. " " .. awesome.conffile },
+--  { "reboot", "kshutdown -r" },
+--  { "shutdown", "kshutdown -s" }
+--}
 
-mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "open terminal", terminal }
-                                  }
-                        })
+--mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
+--                                    { "open terminal", terminal }
+--                                  }
+--                        })
 
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
-                                     menu = mymainmenu })
+powermenu = awful.menu({ items = {
+    { "lock", "kshutdown -k" },
+    { "reboot", "kshutdown -r" },
+    { "shutdown", "kshutdown -s" }
+  }
+})
+
+mylauncher = awful.widget.launcher({ image = beautiful.widget_power,
+                                     menu = powermenu })
 
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
@@ -123,25 +130,25 @@ separator:set_markup("|")
 
 -- {{{ Wibox
 -- {{{ Memory usage
-memicon = wibox.widget.imagebox()
-memicon:set_image(beautiful.widget_mem)
+--memicon = wibox.widget.imagebox()
+--memicon:set_image(beautiful.widget_mem)
 -- Initialize widget
-memwidget = wibox.widget.textbox()
+--memwidget = wibox.widget.textbox()
 -- Register widget
-vicious.register(memwidget, vicious.widgets.mem, '<span color="' .. beautiful.widget_mem_fg .. '">$1%</span>', 10)
-memwidget:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn(terminal .. " -e htop") end)))
-memicon:buttons(memwidget:buttons())
+--vicious.register(memwidget, vicious.widgets.mem, '<span color="' .. beautiful.widget_mem_fg .. '">$1%</span>', 10)
+--memwidget:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn(terminal .. " -e htop") end)))
+--memicon:buttons(memwidget:buttons())
 -- }}}
 
 -- {{{ CPU usage
-cpuicon = wibox.widget.imagebox()
-cpuicon:set_image(beautiful.widget_cpu)
+--cpuicon = wibox.widget.imagebox()
+--cpuicon:set_image(beautiful.widget_cpu)
 -- Initialize widget
-cpuwidget = wibox.widget.textbox()
+--cpuwidget = wibox.widget.textbox()
 -- Register widget
-vicious.register(cpuwidget, vicious.widgets.cpu, '<span color="' .. beautiful.widget_cpu_fg .. '">$1%</span>', 2)
-cpuwidget:buttons(memwidget:buttons())
-cpuicon:buttons(cpuwidget:buttons())
+--vicious.register(cpuwidget, vicious.widgets.cpu, '<span color="' .. beautiful.widget_cpu_fg .. '">$1%</span>', 2)
+--cpuwidget:buttons(memwidget:buttons())
+--cpuicon:buttons(cpuwidget:buttons())
 -- }}}
 
 -- {{{ Battery state
@@ -152,21 +159,44 @@ batwidget = wibox.widget.textbox()
 -- Register widget
 vicious.register(batwidget, vicious.widgets.bat,
   function(widget, args)
-    local color = beautiful.widget_bat_fg
-    if args[1] == '−' and args[2] <= 15 then
-      color = beautiful.widget_batlow_fg
+    if args[2] > 80 then
+      power = '<span color="' .. beautiful.widget_bat_fg .. '">' .. args[1] .. args[1] .. args[1] .. args[1] .. args[1] .. '</span>'
+    elseif args[2] > 60 then
+      power = '<span color="' .. beautiful.widget_bat_fg .. '">' .. args[1] .. args[1] .. args[1] .. args[1] .. '</span><span color="' .. beautiful.fg_focus .. '">' .. args[1] .. '</span>'
+    elseif args[2] > 40 then
+      power = '<span color="' .. beautiful.widget_bat_fg .. '">' .. args[1] .. args[1] .. args[1] .. '</span><span color="' .. beautiful.fg_focus .. '">' .. args[1] .. args[1] .. '</span>'
+    elseif args[2] > 20 then
+      power = '<span color="' .. beautiful.widget_bat_fg .. '">' .. args[1] .. args[1] .. '</span><span color="' .. beautiful.fg_focus .. '">' .. args[1] .. args[1] .. args[1] .. '</span>'
+    else
+      power = '<span color="' .. beautiful.widget_batlow_fg .. '">' .. args[1] .. args[1] .. args[1] .. args[1] .. args[1] .. '</span>'
     end
-    return '<span color="' .. color .. '">' .. args[1] .. args[2] .. '%</span>'
+    return power
   end, 120, "BAT1")
 -- }}}
 
 -- {{{ Volume information
-volicon = wibox.widget.imagebox()
-volicon:set_image(beautiful.widget_vol)
+--volicon = wibox.widget.imagebox()
+--volicon:set_image(beautiful.widget_vol)
 -- Initialize widget
 volwidget = wibox.widget.textbox()
 -- Register widget
-vicious.register(volwidget, vicious.widgets.volume, '<span color="' .. beautiful.widget_vol_fg .. '">$1% $2</span>', 2, "Master")
+vicious.register(volwidget, vicious.widgets.volume,
+  function(widget, args)
+    if args[2] == "♩" or args[1] == 0 then
+      volume = '♩              '
+    elseif args[1] > 80 then
+      volume = args[2] .. ' )))))'
+    elseif args[1] > 60 then
+      volume = args[2] .. ' )))) '
+    elseif args[1] > 40 then
+      volume = args[2] .. ' )))  '
+    elseif args[1] > 20 then
+      volume = args[2] .. ' ))   '
+    else
+      volume = args[2] .. ' )    '
+    end
+    return '<span color="' .. beautiful.widget_vol_fg .. '">' .. volume .. '</span>'
+  end, 2, "Master")
 volwidget:buttons(awful.util.table.join(
      awful.button({ }, 1,
      function() awful.util.spawn_with_shell("amixer -q set Master toggle") end),
@@ -175,29 +205,29 @@ volwidget:buttons(awful.util.table.join(
      awful.button({ }, 5,
      function() awful.util.spawn_with_shell("amixer -q set Master 5%- unmute") end)
 ))
-volicon:buttons(volwidget:buttons())
+--volicon:buttons(volwidget:buttons())
 -- }}}
 
 -- {{{ Network usage
-dnicon = wibox.widget.imagebox()
-upicon = wibox.widget.imagebox()
-dnicon:set_image(beautiful.widget_netdown)
-upicon:set_image(beautiful.widget_netup)
+--dnicon = wibox.widget.imagebox()
+--upicon = wibox.widget.imagebox()
+--dnicon:set_image(beautiful.widget_netdown)
+--upicon:set_image(beautiful.widget_netup)
 -- Initialize widget
-netwidget = wibox.widget.textbox()
+--netwidget = wibox.widget.textbox()
 -- Register widget
-vicious.register(netwidget, vicious.widgets.net,
-  function(widget, args)
-    local string = '<span color="' .. beautiful.widget_netdown_fg ..'">%s</span> '
-                .. '<span color="' .. beautiful.widget_netup_fg .. '">%s</span>'
-    if args["{eth0 carrier}"] == 1 then
-      return string.format(string, args["{eth0 down_kb}"], args["{eth0 up_kb}"])
-    elseif args["{usb0 carrier}"] == 1 then
-      return string.format(string, args["{usb0 down_kb}"], args["{usb0 up_kb}"])
-    else
-      return string.format(string, args["{wlan0 down_kb}"], args["{wlan0 up_kb}"])
-    end
-  end, 3)
+--vicious.register(netwidget, vicious.widgets.net,
+--  function(widget, args)
+--    local string = '<span color="' .. beautiful.widget_netdown_fg ..'">%s</span> '
+--                .. '<span color="' .. beautiful.widget_netup_fg .. '">%s</span>'
+--    if args["{eth0 carrier}"] == 1 then
+--      return string.format(string, args["{eth0 down_kb}"], args["{eth0 up_kb}"])
+--    elseif args["{usb0 carrier}"] == 1 then
+--      return string.format(string, args["{usb0 down_kb}"], args["{usb0 up_kb}"])
+--    else
+--      return string.format(string, args["{wlan0 down_kb}"], args["{wlan0 up_kb}"])
+--    end
+--  end, 3)
 -- }}}
 
 -- {{{ Wireless
@@ -207,14 +237,14 @@ wifiwidget = wibox.widget.textbox()
 -- Register widget
 vicious.register(wifiwidget, vicious.widgets.wifi,
   function(widget, args)
-    local text = "Offline"
     if args["{ssid}"] == "N/A" then
-      wifiicon:set_image(beautiful.widget_wifidown)
+      wifiicon:set_image()
+      text = "No Wifi"
     else
-      if args["{link}"] <= 40 then
-        wifiicon:set_image(beautiful.widget_wifilow)
-      else
+      if args["{linp}"] > 70 then
         wifiicon:set_image(beautiful.widget_wifi)
+      else
+        wifiicon:set_image(beautiful.widget_wifilow)
       end
       text = args["{ssid}"]
     end
@@ -228,9 +258,10 @@ wifiicon:buttons(wifiwidget:buttons())
 --dateicon = wibox.widget.imagebox()
 --dateicon:set_image(beautiful.widget_date)
 -- Initialize widget
-datewidget = wibox.widget.textbox()
+datewidget = awful.widget.textclock("%A %d, %R")
+--datewidget = wibox.widget.textbox()
 -- Register widget
-vicious.register(datewidget, vicious.widgets.date, '<span color="' .. beautiful.widget_date_fg ..'">%A %d, %R</span>', 60)
+--vicious.register(datewidget, vicious.widgets.date, '<span color="' .. beautiful.widget_date_fg ..'">%A %d, %R</span>', 60)
 -- }}}
 
 -- {{{ MPD
@@ -259,9 +290,9 @@ vicious.register(datewidget, vicious.widgets.date, '<span color="' .. beautiful.
 -- }}}
 
 -- {{{ Instant Messaging
-chaticon = wibox.widget.imagebox()
-chaticon:set_image(beautiful.widget_chat)
-chaticon:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn("ktp-contactlist") end)))
+--chaticon = wibox.widget.imagebox()
+--chaticon:set_image(beautiful.widget_chat)
+--chaticon:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn("ktp-contactlist") end)))
 -- }}}
 
 -- Create a wibox for each screen and add it
@@ -330,13 +361,14 @@ for s = 1, screen.count() do
 
     -- Create a tasklist widget
     mytasklist[s] = awful.widget.tasklist(s, awful.widget.tasklist.filter.focused)
+    theme.tasklist_disable_icon = true
 
     -- Create the wibox
     mywibox[s] = awful.wibox({ position = "top", screen = s })
 
     -- Widgets that are aligned to the left
     local left_layout = wibox.layout.fixed.horizontal()
-    left_layout:add(mylauncher)
+    left_layout:add(mylayoutbox[s])
     left_layout:add(mytaglist[s])
     left_layout:add(mypromptbox[s])
 
@@ -344,27 +376,28 @@ for s = 1, screen.count() do
     local right_layout = wibox.layout.fixed.horizontal()
 
     if s == 1 then
-        right_layout:add(cpuicon)
-        right_layout:add(cpuwidget)
-        right_layout:add(memicon)
-        right_layout:add(memwidget)
-        right_layout:add(dnicon)
-        right_layout:add(netwidget)
-        right_layout:add(upicon)
+--        right_layout:add(cpuicon)
+--        right_layout:add(cpuwidget)
+--        right_layout:add(memicon)
+--        right_layout:add(memwidget)
+--        right_layout:add(dnicon)
+--        right_layout:add(netwidget)
+--        right_layout:add(upicon)
         right_layout:add(wifiicon)
         right_layout:add(wifiwidget)
-        right_layout:add(volicon)
+        right_layout:add(spacer)
+--        right_layout:add(volicon)
         right_layout:add(volwidget)
         right_layout:add(baticon)
         right_layout:add(batwidget)
-        right_layout:add(chaticon)
-        right_layout:add(wibox.widget.systray())
+--        right_layout:add(chaticon)
+--        right_layout:add(wibox.widget.systray())
+        right_layout:add(spacer)
     end
-    right_layout:add(spacer)
 --    right_layout:add(dateicon)
     right_layout:add(datewidget)
     right_layout:add(spacer)
-    right_layout:add(mylayoutbox[s])
+    right_layout:add(mylauncher)
 
     -- Now bring it all together (with the tasklist in the middle)
     local layout = wibox.layout.align.horizontal()
@@ -378,7 +411,8 @@ end
 
 -- {{{ Mouse bindings
 root.buttons(awful.util.table.join(
-    awful.button({ }, 3, function () mymainmenu:toggle() end),
+    awful.button({ }, 3, function () menu = awful.menu:clients({ theme = { width = 500 } }) end),
+    awful.button({ }, 3, nil, function () menu:hide() end),
     awful.button({ }, 4, awful.tag.viewnext),
     awful.button({ }, 5, awful.tag.viewprev)
 ))
@@ -448,13 +482,12 @@ globalkeys = awful.util.table.join(
 --                  awful.util.getdir("cache") .. "/history_eval")
 --              end),
     -- Menubar
-    --awful.key({ modkey }, "p", function() menubar.show() end),
+--    awful.key({ modkey }, "p", function() menubar.show() end),
 
     -- Application Switcher
-     awful.key({ "Mod1" }, "Escape", function ()
-      awful.menu.menu_keys.down = { "Down", "Alt_L" }
+    awful.key({ "Mod1" }, "Escape", function ()
       awful.menu:clients({ theme = { width = 500 } })
-     end)
+    end)
 )
 
 clientkeys = awful.util.table.join(
@@ -569,7 +602,8 @@ awful.rules.rules = {
         properties = { size_hints_honor = false,
           maximized_vertical = true,
           maximized_horizontal = true } },
-    { rule_any = { class = { "jetbrains-idea", "Kdevelop", "Kate", "QtCreator", "Designer-qt4", "Designer-qt5" } },
+    { rule_any = { class = { "jetbrains-idea", "Kdevelop", "Kate", "QtCreator",
+          "Designer-qt4", "Designer-qt5", "JavaFXSceneBuilder" } },
         except = { type = "dialog" },
         callback = function(c) awful.client.movetotag(tags[mouse.screen][5], c) end,
         properties = { maximized_vertical = true,
