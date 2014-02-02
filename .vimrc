@@ -202,6 +202,9 @@ nnoremap K :TernDoc<CR>
 " Shortcut to rapidly toggle `set list`
 nmap <leader>l :set list!<CR>
 
+" Shorcut to toggle indent guides
+nmap <leader>g :IndentGuidesToggle<CR>
+
 " Hide serach results
 nnoremap <F3> :set hlsearch!<CR>
 

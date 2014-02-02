@@ -23,8 +23,12 @@ export CCACHE_PREFIX="distcc"
 export CCACHE_DIR="/tmp/ccache"
 export DISTCC_HOSTS="localhost/3"
 
+export LESSOPEN="| source-highlight-esc.sh %s"
+export LESS=' -R '
+
 # Java stuff
-export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true'
+export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=lcd'
+export JAVA_FONTS='/usr/share/fonts/TTF'
 
 # SSH agent
 eval $(ssh-agent)
