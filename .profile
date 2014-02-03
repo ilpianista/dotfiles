@@ -4,10 +4,10 @@ export EDITOR=vim
 export PATH="$HOME/bin:$PATH"
 
 # RubyGems
-export PATH="$HOME/.gem/ruby/2.0.0/bin:$PATH"
+export PATH="$(ruby -e 'puts Gem.user_dir')/bin:$PATH"
 
 # Set bunlder to install rubies in $HOME
-export GEM_HOME=~/.gem/ruby/2.0.0
+export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
 
 export KDEDIRS=/usr/local:$KDEDIRS
 
