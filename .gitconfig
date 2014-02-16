@@ -1,6 +1,7 @@
 [user]
   email = me@andreascarpino.it
   name = Andrea Scarpino
+  signingkey = D30DB0AD
 [sendemail]
   smtpencryption = tls
   smtpserver = smtp.googlemail.com
@@ -13,7 +14,7 @@
 [core]
   excludesfile = $HOME/.gitexcludes
   autocrlf = input
-	editor = vim
+  editor = vim
 [merge]
   tool = vimdiff
 [diff]
@@ -22,9 +23,9 @@
 [push]
   default = simple
 [format]
-	pretty = oneline
+  pretty = oneline
 [status]
-	short = true
+  short = true
 
 [url "git://anongit.kde.org/"]
   insteadOf = kde:
@@ -34,5 +35,4 @@
 [github]
   user = andreascarpino
 [alias]
-  post-review = !post-review --guess-summary --guess-description --username=scarpino --parent=master --tracking-branch=origin/master
-	fakepush = push --dry-run
+  fakepush = push --dry-run

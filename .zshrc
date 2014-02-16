@@ -47,14 +47,6 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-# Key bindings
-autoload zkbd
-source ~/.zkbd/$TERM-${${DISPLAY:t}:-$VENDOR-$OSTYPE}
-
-[[ -n ${key[Home]} ]] && bindkey "${key[Home]}" beginning-of-line
-[[ -n ${key[End]} ]] && bindkey "${key[End]}" end-of-line
-[[ -n ${key[Delete]} ]] && bindkey "${key[Delete]}" delete-char
-
 # pacman stuff
 alias upgrade='sudo pacman -Syu; echo "Checking for AUR updates..."; cower -uddf'
 alias asdeps='sudo pacman -S --asdeps'
