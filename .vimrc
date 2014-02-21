@@ -96,6 +96,9 @@ Bundle 'marijnh/tern_for_vim'
 " QML syntax highlighting for VIM
 Bundle 'peterhoeg/vim-qml'
 
+" Integration of Scala into Vim
+Bundle 'derekwyatt/vim-scala'
+
 " PGSQL syntax
 "Bundle 'exu/pgsql.vim'
 
