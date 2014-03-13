@@ -1,5 +1,3 @@
 if has("gui_running")
-  set background=dark
-  colorscheme solarized
-  set guifont=Monaco\ 10
+  set guifont=Anonymous\ Pro\ 11
 endif

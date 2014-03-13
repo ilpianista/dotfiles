@@ -197,7 +197,7 @@ nnoremap <F8> :NERDTreeToggle<CR>
 nnoremap <F9> :TagbarToggle<CR>
 
 " Tern
-let g:tern#command = ['node', '/usr/bin/tern', '--no-port-file']
+let g:tern#command = ['node', 'node_modules/.bin/tern', '--no-port-file']
 let g:tern_show_argument_hints = "on_hold"
 set updatetime=1000
 nnoremap K :TernDoc<CR>

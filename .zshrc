@@ -10,7 +10,7 @@ ZSH_THEME="jreese"
 # Set to this to use case-sensitive completion
 CASE_SENSITIVE="true"
 
-# Comment this out to disable bi-weekly auto-update checks
+# Uncomment this to disable bi-weekly auto-update checks
 DISABLE_AUTO_UPDATE="true"
 
 # Uncomment to change how often before auto-updates occur? (in days)
@@ -23,7 +23,7 @@ DISABLE_AUTO_UPDATE="true"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment following line if you want to disable command autocorrection
-DISABLE_CORRECTION="true"
+# DISABLE_CORRECTION="true"
 
 # Uncomment following line if you want red dots to be displayed while waiting for completion
 # COMPLETION_WAITING_DOTS="true"
@@ -75,7 +75,6 @@ alias dmesg='dmesg -H'
 alias df='df -h'
 alias du='du -ch'
 alias diff='colordiff'
-alias lls='ls -lh'
 alias mount='mount | column -t'
 alias jobs='jobs -l'
 alias -g '...'='../..'
@@ -87,6 +86,8 @@ alias wakerome='wol 00:04:ac:65:42:1e'
 alias connect='nmcli con up id'
 alias disconnectiface='nmcli dev disconnect iface'
 alias wifilist='nmcli dev wifi list iface wlan0'
+
+alias giff='git diff'
 
 # LS_COLORS
 eval $(dircolors -b $HOME/.dir_colors)
