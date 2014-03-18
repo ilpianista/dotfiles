@@ -44,7 +44,7 @@ local config = awful.util.getdir("config")
 beautiful.init(config .. "/themes/base16_dark/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "urxvt"
+terminal = "konsole"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -84,8 +84,8 @@ end
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
 tags = {
-    names = { "*", "www", "media", "chat", "dev" },
-    layouts = { layouts[2], layouts[10], layouts[1], layouts[2], layouts[3] }
+    names = { "*", "www", "media", "chat", "dev", "6", "7", "8", "9" },
+    layouts = { layouts[2], layouts[10], layouts[1], layouts[2], layouts[3], layouts[2], layouts[2], layouts[2], layouts[2] }
 }
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
@@ -141,13 +141,13 @@ separator:set_markup("|")
 -- }}}
 
 -- {{{ CPU usage
---cpuicon = wibox.widget.imagebox()
---cpuicon:set_image(beautiful.widget_cpu)
+cpuicon = wibox.widget.imagebox()
+cpuicon:set_image(beautiful.widget_cpu)
 -- Initialize widget
---cpuwidget = wibox.widget.textbox()
+cpuwidget = wibox.widget.textbox()
 -- Register widget
---vicious.register(cpuwidget, vicious.widgets.cpu, '<span color="' .. beautiful.widget_cpu_fg .. '">$1%</span>', 2)
---cpuwidget:buttons(memwidget:buttons())
+vicious.register(cpuwidget, vicious.widgets.uptime, '<span color="' .. beautiful.widget_cpu_fg .. '">$4</span>', 2)
+cpuwidget:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn(terminal .. " -e htop") end)))
 --cpuicon:buttons(cpuwidget:buttons())
 -- }}}
 
@@ -160,51 +160,51 @@ batwidget = wibox.widget.textbox()
 vicious.register(batwidget, vicious.widgets.bat,
   function(widget, args)
     if args[2] > 80 then
-      power = '<span color="' .. beautiful.widget_bat_fg .. '">' .. args[1] .. args[1] .. args[1] .. args[1] .. args[1] .. '</span>'
+      power = '<span color="' .. beautiful.widget_bat_fg .. '">' .. args[1] .. args[1] .. args[1] .. args[1] .. args[1] .. ' (' .. args[2] .. '%)</span>'
     elseif args[2] > 60 then
-      power = '<span color="' .. beautiful.widget_bat_fg .. '">' .. args[1] .. args[1] .. args[1] .. args[1] .. '</span><span color="' .. beautiful.fg_focus .. '">' .. args[1] .. '</span>'
+      power = '<span color="' .. beautiful.widget_bat_fg .. '">' .. args[1] .. args[1] .. args[1] .. args[1] .. ' (' .. args[2] .. '%)</span>'
     elseif args[2] > 40 then
-      power = '<span color="' .. beautiful.widget_bat_fg .. '">' .. args[1] .. args[1] .. args[1] .. '</span><span color="' .. beautiful.fg_focus .. '">' .. args[1] .. args[1] .. '</span>'
+      power = '<span color="' .. beautiful.widget_bat_fg .. '">' .. args[1] .. args[1] .. args[1] .. ' (' .. args[2] .. '%)</span>'
     elseif args[2] > 20 then
-      power = '<span color="' .. beautiful.widget_bat_fg .. '">' .. args[1] .. args[1] .. '</span><span color="' .. beautiful.fg_focus .. '">' .. args[1] .. args[1] .. args[1] .. '</span>'
+      power = '<span color="' .. beautiful.widget_bat_fg .. '">' .. args[1] .. args[1] .. ' (' .. args[2] .. '%)</span>'
     else
-      power = '<span color="' .. beautiful.widget_batlow_fg .. '">' .. args[1] .. args[1] .. args[1] .. args[1] .. args[1] .. '</span>'
+      power = '<span color="' .. beautiful.widget_batlow_fg .. '">' .. args[1] .. ' (' .. args[2] .. '%)</span>'
     end
     return power
-  end, 120, "BAT1")
+  end, 60, "BAT1")
 -- }}}
 
 -- {{{ Volume information
 --volicon = wibox.widget.imagebox()
 --volicon:set_image(beautiful.widget_vol)
 -- Initialize widget
-volwidget = wibox.widget.textbox()
+--volwidget = wibox.widget.textbox()
 -- Register widget
-vicious.register(volwidget, vicious.widgets.volume,
-  function(widget, args)
-    if args[2] == "♩" or args[1] == 0 then
-      volume = '♩              '
-    elseif args[1] > 80 then
-      volume = args[2] .. ' )))))'
-    elseif args[1] > 60 then
-      volume = args[2] .. ' )))) '
-    elseif args[1] > 40 then
-      volume = args[2] .. ' )))  '
-    elseif args[1] > 20 then
-      volume = args[2] .. ' ))   '
-    else
-      volume = args[2] .. ' )    '
-    end
-    return '<span color="' .. beautiful.widget_vol_fg .. '">' .. volume .. '</span>'
-  end, 2, "Master")
-volwidget:buttons(awful.util.table.join(
-     awful.button({ }, 1,
-     function() awful.util.spawn_with_shell("amixer -q set Master toggle") end),
-     awful.button({ }, 4,
-     function() awful.util.spawn_with_shell("amixer -q set Master 5%+ unmute") end),
-     awful.button({ }, 5,
-     function() awful.util.spawn_with_shell("amixer -q set Master 5%- unmute") end)
-))
+--vicious.register(volwidget, vicious.widgets.volume,
+--  function(widget, args)
+--    if args[2] == "♩" or args[1] == 0 then
+--      volume = '♩              '
+--    elseif args[1] > 80 then
+--      volume = args[2] .. ' )))))'
+--    elseif args[1] > 60 then
+--      volume = args[2] .. ' )))) '
+--    elseif args[1] > 40 then
+--      volume = args[2] .. ' )))  '
+--    elseif args[1] > 20 then
+--      volume = args[2] .. ' ))   '
+--    else
+--      volume = args[2] .. ' )    '
+--    end
+--    return '<span color="' .. beautiful.widget_vol_fg .. '">' .. volume .. '</span>'
+--  end, 2, "Master")
+--volwidget:buttons(awful.util.table.join(
+--     awful.button({ }, 1,
+--     function() awful.util.spawn_with_shell("amixer -q set Master toggle") end),
+--     awful.button({ }, 4,
+--     function() awful.util.spawn_with_shell("amixer -q set Master 5%+ unmute") end),
+--     awful.button({ }, 5,
+--     function() awful.util.spawn_with_shell("amixer -q set Master 5%- unmute") end)
+--))
 --volicon:buttons(volwidget:buttons())
 -- }}}
 
@@ -239,14 +239,14 @@ vicious.register(wifiwidget, vicious.widgets.wifi,
   function(widget, args)
     if args["{ssid}"] == "N/A" then
       wifiicon:set_image()
-      text = "No Wifi"
+      text = ""
     else
       if args["{linp}"] > 70 then
         wifiicon:set_image(beautiful.widget_wifi)
       else
         wifiicon:set_image(beautiful.widget_wifilow)
       end
-      text = args["{ssid}"]
+      text = args["{ssid}"] .. ' (' .. args["{linp}"] .. '%)'
     end
     return '<span color="' .. beautiful.widget_wifi_fg .. '">' .. text .. '</span>'
   end, 10, "wlan0")
@@ -376,6 +376,8 @@ for s = 1, screen.count() do
     local right_layout = wibox.layout.fixed.horizontal()
 
     if s == 1 then
+--        right_layout:add(wibox.widget.systray())
+--        right_layout:add(spacer)
 --        right_layout:add(cpuicon)
 --        right_layout:add(cpuwidget)
 --        right_layout:add(memicon)
@@ -387,11 +389,13 @@ for s = 1, screen.count() do
         right_layout:add(wifiwidget)
         right_layout:add(spacer)
 --        right_layout:add(volicon)
-        right_layout:add(volwidget)
+--        right_layout:add(volwidget)
         right_layout:add(baticon)
         right_layout:add(batwidget)
+        right_layout:add(spacer)
 --        right_layout:add(chaticon)
---        right_layout:add(wibox.widget.systray())
+        right_layout:add(cpuicon)
+        right_layout:add(cpuwidget)
         right_layout:add(spacer)
     end
 --    right_layout:add(dateicon)
@@ -577,7 +581,6 @@ awful.rules.rules = {
     { rule = { type = "dialog" },
       properties = { floating = true } },
     { rule = { instance = "kontact" },
-        except = { type = "dialog" },
         properties = { tag = tags[1][2] } },
     { rule_any = { instance = { "gimp", "gwenview" } },
         except = { type = "dialog" },
@@ -590,7 +593,7 @@ awful.rules.rules = {
     { rule = { class = "Vlc" },
         callback = function(c) awful.client.movetotag(tags[mouse.screen][3], c) end,
         properties = { floating = true } },
-    { rule_any = { class = { "Rekonq", "Chromium" } },
+    { rule_any = { class = { "Rekonq", "Firefox" } },
        callback = function(c) awful.client.movetotag(tags[mouse.screen][2], c) end },
     { rule_any = { class = { "Konversation", "Ktp-contactlist", "Ktp-text-ui", "Skype" } },
         properties = { tag = tags[1][4] } },
