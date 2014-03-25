@@ -7,110 +7,110 @@ call vundle#rc()
 
 " let Vundle manage Vundle
 "  " required!
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/vundle'
 
 "" plugins
 " Some utility functions for VIM (needed by snipmate)
-Bundle "tomtom/tlib_vim"
+Plugin 'tomtom/tlib_vim'
 " interpret a file by function and cache file automatically (needed by snipmate)
-Bundle "MarcWeber/vim-addon-mw-utils"
+Plugin 'MarcWeber/vim-addon-mw-utils'
 " a concise vim script that implements some of TextMate's snippets
-Bundle 'garbas/vim-snipmate'
+Plugin 'garbas/vim-snipmate'
 " vim-snipmate default snippets
-Bundle "honza/vim-snippets"
+Plugin 'honza/vim-snippets'
 " quoting/parenthesizing made simple
-Bundle 'tpope/vim-surround'
+Plugin 'tpope/vim-surround'
 " pairs of handy bracket mappings
-Bundle 'tpope/vim-unimpaired'
+Plugin 'tpope/vim-unimpaired'
 " Perform all your vim insert mode completions with Tab
-"Bundle 'ervandew/supertab'
+"Plugin 'ervandew/supertab'
 " lean & mean status/tabline for vim that's light as air
-Bundle 'bling/vim-airline'
+Plugin 'bling/vim-airline'
 " A tree explorer plugin for vim
-Bundle 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdtree'
 " plugin for intensely orgasmic commenting
-Bundle 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/nerdcommenter'
 " vim interface to Web API (needed by gist-vim)
-Bundle 'mattn/webapi-vim'
+Plugin 'mattn/webapi-vim'
 " vimscript for gist
-Bundle 'mattn/gist-vim'
+Plugin 'mattn/gist-vim'
 " Vim plugin to list, select and switch between buffers
-Bundle 'jeetsukumaran/vim-buffergator'
+Plugin 'jeetsukumaran/vim-buffergator'
 " Unite and create user interfaces
-"Bundle 'Shougo/unite.vim'
+"Plugin 'Shougo/unite.vim'
 " helpers for UNIX
-Bundle 'tpope/vim-eunuch'
+Plugin 'tpope/vim-eunuch'
 " a Git wrapper so awesome, it should be illegal
-Bundle 'tpope/vim-fugitive'
+Plugin 'tpope/vim-fugitive'
 " Vim plugin that displays tags in a window, ordered by class etc.
-Bundle 'majutsushi/tagbar'
+Plugin 'majutsushi/tagbar'
 " Syntax checking hacks for vim
-Bundle 'scrooloose/syntastic'
+Plugin 'scrooloose/syntastic'
 " A Vim plugin for visually displaying indent levels in code
-Bundle 'nathanaelkane/vim-indent-guides'
+Plugin 'nathanaelkane/vim-indent-guides'
 " Vim plugin, provides insert mode auto-completion for quotes, parens, brackets, etc.
-Bundle 'Raimondi/delimitMate'
+Plugin 'Raimondi/delimitMate'
 " Miscellaneous auto-load Vim scripts (needed by vim-session)
-Bundle 'xolox/vim-misc'
+Plugin 'xolox/vim-misc'
 " Extended session management for Vim
-Bundle 'xolox/vim-session'
+Plugin 'xolox/vim-session'
 
 " Vim Markdown runtime files
-Bundle 'tpope/vim-markdown'
+Plugin 'tpope/vim-markdown'
 
 "" HTML/CSS
 " emmet for vim
-Bundle 'mattn/emmet-vim'
+Plugin 'mattn/emmet-vim'
 " Highlight colors in css files" Highlight colors in css files
-Bundle 'skammer/vim-css-color'
+Plugin 'skammer/vim-css-color'
 " vim syntax for LESS (dynamic CSS)
-Bundle 'groenewege/vim-less'
+Plugin 'groenewege/vim-less'
 
 " a vim plugin for Nanoc
-Bundle 'timgreen/vim-nanoc'
+Plugin 'timgreen/vim-nanoc'
 
 " Improved PHP omnicompletion
-"Bundle 'shawncplus/phpcomplete.vim'
+"Plugin 'shawncplus/phpcomplete.vim'
 
 "" Prolog
 " Prolog Integration for Vim
-"Bundle 'adimit/prolog.vim'
+"Plugin 'adimit/prolog.vim'
 
 "" Ruby
 " wisely add 'end' in ruby, endfunction/endif/more in vim script, etc
-Bundle 'tpope/vim-endwise'
+Plugin 'tpope/vim-endwise'
 " Vim runtime files for Haml, Sass, and SCSS
-"Bundle 'tpope/vim-haml'
+"Plugin 'tpope/vim-haml'
 " Ruby on Rails power tools
-"Bundle 'tpope/vim-rails'
+"Plugin 'tpope/vim-rails'
 
 " Enhanced javascript syntax file for Vim
-Bundle 'jelera/vim-javascript-syntax'
+Plugin 'jelera/vim-javascript-syntax'
 " Vastly improved Javascript indentation and syntax support in Vim
-Bundle 'pangloss/vim-javascript'
+Plugin 'pangloss/vim-javascript'
 " A plugin that integrates JSHint with Vim
-Bundle 'walm/jshint.vim'
+Plugin 'walm/jshint.vim'
 " Tern plugin for Vim
-Bundle 'marijnh/tern_for_vim'
+Plugin 'marijnh/tern_for_vim'
 
 " QML syntax highlighting for VIM
-Bundle 'peterhoeg/vim-qml'
+Plugin 'peterhoeg/vim-qml'
 
 " Integration of Scala into Vim
-Bundle 'derekwyatt/vim-scala'
+Plugin 'derekwyatt/vim-scala'
 
 " PGSQL syntax
-"Bundle 'exu/pgsql.vim'
+"Plugin 'exu/pgsql.vim'
 
 "" color schemes
 " Molokai color scheme for Vim
-"Bundle 'tomasr/molokai'
+"Plugin 'tomasr/molokai'
 " Dark and light color scheme
-"Bundle 'vim-scripts/Lucius'
+"Plugin 'vim-scripts/Lucius'
 " precision colorscheme for the vim text editor
-"Bundle 'altercation/vim-colors-solarized'
+"Plugin 'altercation/vim-colors-solarized'
 " Base16 for Vim
-Bundle 'chriskempson/base16-vim'
+Plugin 'chriskempson/base16-vim'
 
 "" general stuff
 set encoding=utf-8 " necessary to show unicode glyphs
