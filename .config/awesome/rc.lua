@@ -11,6 +11,8 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
 local vicious = require("vicious")
+-- Provides Mac OSX like 'Expose' view
+local revelation=require("revelation")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -42,9 +44,10 @@ local config = awful.util.getdir("config")
 
 -- Themes define colours, icons, and wallpapers
 beautiful.init(config .. "/themes/base16_dark/theme.lua")
+revelation.init()
 
 -- This is used later as the default terminal and editor to run.
-terminal = "konsole"
+terminal = os.getenv("TERMINAL") or "konsole"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -59,17 +62,17 @@ modkey = "Mod4"
 local layouts =
 {
     awful.layout.suit.floating,
-    awful.layout.suit.tile,
+--    awful.layout.suit.tile,
     awful.layout.suit.tile.left,
-    awful.layout.suit.tile.bottom,
+--    awful.layout.suit.tile.bottom,
     awful.layout.suit.tile.top,
     awful.layout.suit.fair,
     awful.layout.suit.fair.horizontal,
-    awful.layout.suit.spiral,
-    awful.layout.suit.spiral.dwindle,
+--    awful.layout.suit.spiral,
+--    awful.layout.suit.spiral.dwindle,
     awful.layout.suit.max,
-    awful.layout.suit.max.fullscreen,
-    awful.layout.suit.magnifier
+--    awful.layout.suit.max.fullscreen,
+--    awful.layout.suit.magnifier
 }
 -- }}}
 
@@ -85,7 +88,7 @@ end
 -- Define a tag table which hold all screen tags.
 tags = {
     names = { "*", "www", "media", "chat", "dev", "6", "7", "8", "9" },
-    layouts = { layouts[2], layouts[10], layouts[1], layouts[2], layouts[3], layouts[2], layouts[2], layouts[2], layouts[2] }
+    layouts = { layouts[4], layouts[6], layouts[1], layouts[2], layouts[4], layouts[4], layouts[4], layouts[4], layouts[4] }
 }
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
@@ -458,8 +461,6 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
 --    awful.key({ modkey, "Shift"   }, "q", awesome.quit),
-    awful.key({ modkey,           }, "BackSpace", function () awful.util.spawn("dolphin") end),
-    awful.key({ modkey,           }, "Delete", function () awful.util.spawn("chromium") end),
 
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end),
     awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)    end),
@@ -491,7 +492,9 @@ globalkeys = awful.util.table.join(
     -- Application Switcher
     awful.key({ "Mod1" }, "Escape", function ()
       awful.menu:clients({ theme = { width = 500 } })
-    end)
+    end),
+
+    awful.key({ modkey}, "e", revelation)
 )
 
 clientkeys = awful.util.table.join(

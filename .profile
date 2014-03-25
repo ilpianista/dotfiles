@@ -1,4 +1,9 @@
 export EDITOR=vim
+export TERMINAL=konsole
+
+if [ -n "$DISPLAY" ]; then
+  export BROWSER=firefox
+fi
 
 # Use ~/bin
 export PATH="$HOME/bin:$PATH"
@@ -14,12 +19,6 @@ export PATH="$HOME/node_modules/.bin:$PATH"
 
 # Load KDE stuff from /usr/local
 export KDEDIRS=/usr/local:$KDEDIRS
-
-if [ -n "$DISPLAY" ]; then
-  export BROWSER=firefox
-fi
-
-export DE=kde
 
 # Speed-up rebuilds
 export PATH="/usr/lib/ccache/bin:$PATH"

@@ -13,6 +13,7 @@ zstyle ':prezto:load' pmodule \
   'spectrum' \
   'utility' \
   'completion' \
+  'history-substring-search' \
   'prompt' \
   'git' \
   'node' \
@@ -48,3 +49,5 @@ zstyle ':prezto:module:screen:auto-start' remote 'yes'
 # Auto set the tab and window titles.
 zstyle ':prezto:module:terminal' auto-title 'yes'
 
+# Set the SSH identities to load into the agent.
+zstyle ':prezto:module:ssh:load' identities 'id_rsa' 'id_ecdsa'
