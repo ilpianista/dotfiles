@@ -87,8 +87,8 @@ end
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
 tags = {
-    names = { "*", "www", "media", "chat", "dev", "6", "7", "8", "9" },
-    layouts = { layouts[4], layouts[6], layouts[1], layouts[2], layouts[4], layouts[4], layouts[4], layouts[4], layouts[4] }
+    names = { "*", "www", "media", "chat", "8", "9", "dev" },
+    layouts = { layouts[4], layouts[6], layouts[1], layouts[2], layouts[4], layouts[4], layouts[4] }
 }
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
@@ -518,17 +518,18 @@ clientkeys = awful.util.table.join(
 )
 
 -- Compute the maximum number of digit we need, limited to 9
-keynumber = 0
-for s = 1, screen.count() do
-   keynumber = math.min(9, math.max(#tags[s], keynumber));
-end
+--keynumber = 0
+--for s = 1, screen.count() do
+--   keynumber = math.min(10, math.max(#tags[s], keynumber));
+--end
+keynumber = {1, 2, 3, 4, 8, 9, 10}
 
 -- Bind all key numbers to tags.
 -- Be careful: we use keycodes to make it works on any keyboard layout.
 -- This should map on the top row of your keyboard, usually 1 to 9.
-for i = 1, keynumber do
+for i, k in next, keynumber do
     globalkeys = awful.util.table.join(globalkeys,
-        awful.key({ modkey }, "#" .. i + 9,
+        awful.key({ modkey }, "#" .. k + 9,
                   function ()
                         local screen = mouse.screen
                         local tag = awful.tag.gettags(screen)[i]
@@ -536,7 +537,7 @@ for i = 1, keynumber do
                            awful.tag.viewonly(tag)
                         end
                   end),
-        awful.key({ modkey, "Control" }, "#" .. i + 9,
+        awful.key({ modkey, "Control" }, "#" .. k + 9,
                   function ()
                       local screen = mouse.screen
                       local tag = awful.tag.gettags(screen)[i]
@@ -544,14 +545,14 @@ for i = 1, keynumber do
                          awful.tag.viewtoggle(tag)
                       end
                   end),
-        awful.key({ modkey, "Shift" }, "#" .. i + 9,
+        awful.key({ modkey, "Shift" }, "#" .. k + 9,
                   function ()
                       local tag = awful.tag.gettags(client.focus.screen)[i]
                       if client.focus and tag then
                           awful.client.movetotag(tag)
                       end
                   end),
-        awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9,
+        awful.key({ modkey, "Control", "Shift" }, "#" .. k + 9,
                   function ()
                       local tag = awful.tag.gettags(client.focus.screen)[i]
                       if client.focus and tag then
