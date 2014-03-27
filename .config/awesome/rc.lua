@@ -597,7 +597,7 @@ awful.rules.rules = {
     { rule = { class = "Vlc" },
         callback = function(c) awful.client.movetotag(tags[mouse.screen][3], c) end,
         properties = { floating = true } },
-    { rule_any = { class = { "Rekonq", "Firefox" } },
+    { rule_any = { class = { "Dwb", "Firefox" } },
        callback = function(c) awful.client.movetotag(tags[mouse.screen][2], c) end },
     { rule_any = { class = { "Konversation", "Ktp-contactlist", "Ktp-text-ui", "Skype" } },
         properties = { tag = tags[1][4] } },

@@ -2,7 +2,7 @@ export EDITOR=vim
 export TERMINAL=konsole
 
 if [ -n "$DISPLAY" ]; then
-  export BROWSER=firefox
+  export BROWSER=dwb
 fi
 
 # Use ~/bin

@@ -52,7 +52,5 @@ alias connect='nmcli con up id'
 alias disconnectiface='nmcli dev disconnect iface'
 alias wifilist='nmcli dev wifi list iface wlan0'
 
-alias giff='git diff'
-
 # LS_COLORS
 eval $(dircolors -b $HOME/.dir_colors)
