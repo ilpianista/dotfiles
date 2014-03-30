@@ -11,8 +11,6 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
 local vicious = require("vicious")
--- Provides Mac OSX like 'Expose' view
-local revelation=require("revelation")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -41,10 +39,8 @@ end
 
 -- {{{ Variable definitions
 local config = awful.util.getdir("config")
-
--- Themes define colours, icons, and wallpapers
+-- Themes define colours, icons, font and wallpapers.
 beautiful.init(config .. "/themes/base16_dark/theme.lua")
-revelation.init()
 
 -- This is used later as the default terminal and editor to run.
 terminal = os.getenv("TERMINAL") or "konsole"
@@ -492,9 +488,7 @@ globalkeys = awful.util.table.join(
     -- Application Switcher
     awful.key({ "Mod1" }, "Escape", function ()
       awful.menu:clients({ theme = { width = 500 } })
-    end),
-
-    awful.key({ modkey}, "e", revelation)
+    end)
 )
 
 clientkeys = awful.util.table.join(
@@ -529,6 +523,7 @@ keynumber = {1, 2, 3, 4, 8, 9, 10}
 -- This should map on the top row of your keyboard, usually 1 to 9.
 for i, k in next, keynumber do
     globalkeys = awful.util.table.join(globalkeys,
+        -- View tag only.
         awful.key({ modkey }, "#" .. k + 9,
                   function ()
                         local screen = mouse.screen
@@ -537,6 +532,7 @@ for i, k in next, keynumber do
                            awful.tag.viewonly(tag)
                         end
                   end),
+        -- Toggle tag.
         awful.key({ modkey, "Control" }, "#" .. k + 9,
                   function ()
                       local screen = mouse.screen
@@ -545,18 +541,24 @@ for i, k in next, keynumber do
                          awful.tag.viewtoggle(tag)
                       end
                   end),
+        -- Move client to tag.
         awful.key({ modkey, "Shift" }, "#" .. k + 9,
                   function ()
-                      local tag = awful.tag.gettags(client.focus.screen)[i]
-                      if client.focus and tag then
-                          awful.client.movetotag(tag)
+                      if client.focus then
+                          local tag = awful.tag.gettags(client.focus.screen)[i]
+                          if tag then
+                              awful.client.movetotag(tag)
+                          end
                       end
                   end),
+        -- Toggle tag.
         awful.key({ modkey, "Control", "Shift" }, "#" .. k + 9,
                   function ()
-                      local tag = awful.tag.gettags(client.focus.screen)[i]
-                      if client.focus and tag then
-                          awful.client.toggletag(tag)
+                      if client.focus then
+                          local tag = awful.tag.gettags(client.focus.screen)[i]
+                          if tag then
+                              awful.client.toggletag(tag)
+                          end
                       end
                   end))
 end
@@ -571,12 +573,14 @@ root.keys(globalkeys)
 -- }}}
 
 -- {{{ Rules
+-- Rules to apply to new clients (through the "manage" signal).
 awful.rules.rules = {
     -- All clients will match this rule.
     { rule = { },
       properties = { border_width = beautiful.border_width,
                      border_color = beautiful.border_normal,
                      focus = awful.client.focus.filter,
+                     raise = true,
                      keys = clientkeys,
                      buttons = clientbuttons,
                      floating = false,
@@ -605,14 +609,14 @@ awful.rules.rules = {
         properties = { size_hints_honor = false } },
     { rule = { class = "Gvim" },
         except = { type = "dialog" },
-        callback = function(c) awful.client.movetotag(tags[mouse.screen][5], c) end,
+        callback = function(c) awful.client.movetotag(tags[mouse.screen][7], c) end,
         properties = { size_hints_honor = false,
           maximized_vertical = true,
           maximized_horizontal = true } },
     { rule_any = { class = { "jetbrains-idea", "Kdevelop", "Kate", "QtCreator",
           "Designer-qt4", "Designer-qt5", "JavaFXSceneBuilder" } },
         except = { type = "dialog" },
-        callback = function(c) awful.client.movetotag(tags[mouse.screen][5], c) end,
+        callback = function(c) awful.client.movetotag(tags[mouse.screen][7], c) end,
         properties = { maximized_vertical = true,
           maximized_horizontal = true } }
 }
