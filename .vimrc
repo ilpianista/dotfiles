@@ -224,3 +224,6 @@ match Error /\s\+$/
 " pgsql syntax highlight
 au BufNewFile,BufRead *.pgsql setf pgsql
 au BufNewFile,BufRead *.plpgsql setf pgsql
+
+" Reformat XML file
+au FileType xml exe ":silent %!xmllint --format --recover - 2>/dev/null"

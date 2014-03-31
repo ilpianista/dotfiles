@@ -40,7 +40,7 @@ theme.fg_focus      = theme.solarized_base1
 theme.fg_urgent     = theme.solarized_base01
 theme.fg_minimize   = theme.solarized_base01
 
-theme.border_width  = "1"
+theme.border_width  = 1
 theme.border_normal = theme.solarized_base03
 theme.border_focus  = theme.solarized_base03
 theme.border_marked = theme.solarized_magenta
@@ -48,7 +48,8 @@ theme.border_marked = theme.solarized_magenta
 -- There are other variable sets
 -- overriding the default one when
 -- defined, the sets are:
--- [taglist|tasklist]_[bg|fg]_[focus|urgent]
+-- taglist_[bg|fg]_[focus|urgent|occupied|empty]
+-- tasklist_[bg|fg]_[focus|urgent]
 -- titlebar_[bg|fg]_[normal|focus]
 -- tooltip_[font|opacity|fg_color|bg_color|border_width|border_color]
 -- mouse_finder_[color|timeout|animate_timeout|radius|factor]
@@ -63,8 +64,8 @@ theme.taglist_squares_unsel = theme.path .. "/icons/taglist/unsel.png"
 -- menu_[bg|fg]_[normal|focus]
 -- menu_[border_color|border_width]
 theme.menu_submenu_icon = theme.path .. "/icons/submenu.png"
-theme.menu_height = "15"
-theme.menu_width  = "100"
+theme.menu_height = 15
+theme.menu_width  = 100
 
 -- {{{ Widgets
 theme.widget_bat_fg     = theme.fg_normal

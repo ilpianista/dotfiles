@@ -584,16 +584,14 @@ awful.rules.rules = {
                      keys = clientkeys,
                      buttons = clientbuttons,
                      floating = false,
-                     maximized_vertical = false,
-                     maximized_horizontal = false } },
+                     maximized = false } },
     { rule = { type = "dialog" },
       properties = { floating = true } },
     { rule = { instance = "kontact" },
         properties = { tag = tags[1][2] } },
     { rule_any = { instance = { "gimp", "gwenview" } },
         except = { type = "dialog" },
-        properties = { maximized_vertical = true,
-          maximized_horizontal = true } },
+        properties = { maximized = true } },
     { rule_any = { instance = { "choqok", "dia" } },
         properties = { floating = true } },
     { rule = { class = "Amarok" },
@@ -611,14 +609,12 @@ awful.rules.rules = {
         except = { type = "dialog" },
         callback = function(c) awful.client.movetotag(tags[mouse.screen][7], c) end,
         properties = { size_hints_honor = false,
-          maximized_vertical = true,
-          maximized_horizontal = true } },
+          maximized = true } },
     { rule_any = { class = { "jetbrains-idea", "Kdevelop", "Kate", "QtCreator",
           "Designer-qt4", "Designer-qt5", "JavaFXSceneBuilder" } },
         except = { type = "dialog" },
         callback = function(c) awful.client.movetotag(tags[mouse.screen][7], c) end,
-        properties = { maximized_vertical = true,
-          maximized_horizontal = true } }
+        properties = { maximized = true } }
 }
 -- }}}
 
