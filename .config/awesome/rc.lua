@@ -316,7 +316,7 @@ mytasklist = {}
 --                                                  instance:hide()
 --                                                  instance = nil
 --                                              else
---                                                  instance = awful.menu:clients({
+--                                                  instance = awful.menu.clients({
 --                                                    theme = { width = 250 }
 --                                                  })
 --                                              end
@@ -401,7 +401,7 @@ end
 
 -- {{{ Mouse bindings
 root.buttons(awful.util.table.join(
-    awful.button({ }, 3, function () menu = awful.menu:clients({ theme = { width = 500 } }) end),
+    awful.button({ }, 3, function () menu = awful.menu.clients({ theme = { width = 500 } }) end),
     awful.button({ }, 3, nil, function () menu:hide() end),
     awful.button({ }, 4, awful.tag.viewnext),
     awful.button({ }, 5, awful.tag.viewprev)
@@ -474,7 +474,7 @@ globalkeys = awful.util.table.join(
 
     -- Application Switcher
     awful.key({ "Mod1" }, "Escape", function ()
-      awful.menu:clients({ theme = { width = 500 } })
+      awful.menu.clients({ theme = { width = 500 } })
     end)
 )
 
