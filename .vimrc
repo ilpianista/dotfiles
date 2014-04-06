@@ -30,10 +30,6 @@ Plugin 'bling/vim-airline'
 Plugin 'scrooloose/nerdtree'
 " plugin for intensely orgasmic commenting
 Plugin 'scrooloose/nerdcommenter'
-" vim interface to Web API (needed by gist-vim)
-Plugin 'mattn/webapi-vim'
-" vimscript for gist
-Plugin 'mattn/gist-vim'
 " Vim plugin to list, select and switch between buffers
 Plugin 'jeetsukumaran/vim-buffergator'
 " Unite and create user interfaces
@@ -175,10 +171,6 @@ let g:syntastic_check_on_open = 1
 " Enable emmet just for HTML/CSS
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
-
-" gist-vim
-let g:github_user = 'andreascarpino'
-let g:gist_detect_filetype = 1
 
 " vim-session
 let g:session_autoload = 'no'

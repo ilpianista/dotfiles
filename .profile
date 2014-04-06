@@ -22,9 +22,7 @@ export KDEDIRS=/usr/local:$KDEDIRS
 
 # Speed-up rebuilds
 export PATH="/usr/lib/ccache/bin:$PATH"
-export CCACHE_PREFIX="distcc"
 export CCACHE_DIR="/tmp/ccache"
-export DISTCC_HOSTS="localhost/3"
 
 # Highlighting support in less
 export LESSOPEN="| source-highlight-esc.sh %s"

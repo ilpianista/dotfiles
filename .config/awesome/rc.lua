@@ -107,15 +107,15 @@ end
 --                                  }
 --                        })
 
-powermenu = awful.menu({ items = {
-    { "lock", "kshutdown -k" },
-    { "reboot", "kshutdown -r" },
-    { "shutdown", "kshutdown -s" }
-  }
-})
-
-mylauncher = awful.widget.launcher({ image = beautiful.widget_power,
-                                     menu = powermenu })
+powerlauncher = awful.widget.launcher({ image = beautiful.widget_power,
+                                     menu = awful.menu({
+                                       items = {
+                                        { "lock", "kshutdown -k" },
+                                        { "reboot", "kshutdown -r" },
+                                        { "shutdown", "kshutdown -s" }
+                                      }
+                                    })
+                                  })
 
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
@@ -158,53 +158,39 @@ batwidget = wibox.widget.textbox()
 -- Register widget
 vicious.register(batwidget, vicious.widgets.bat,
   function(widget, args)
-    if args[2] > 80 then
-      power = '<span color="' .. beautiful.widget_bat_fg .. '">' .. args[1] .. args[1] .. args[1] .. args[1] .. args[1] .. ' (' .. args[2] .. '%)</span>'
-    elseif args[2] > 60 then
-      power = '<span color="' .. beautiful.widget_bat_fg .. '">' .. args[1] .. args[1] .. args[1] .. args[1] .. ' (' .. args[2] .. '%)</span>'
-    elseif args[2] > 40 then
-      power = '<span color="' .. beautiful.widget_bat_fg .. '">' .. args[1] .. args[1] .. args[1] .. ' (' .. args[2] .. '%)</span>'
-    elseif args[2] > 20 then
-      power = '<span color="' .. beautiful.widget_bat_fg .. '">' .. args[1] .. args[1] .. ' (' .. args[2] .. '%)</span>'
+    if args[2] > 20 then
+      power = '<span color="' .. beautiful.widget_bat_fg .. '">' .. args[1] .. args[2] .. '%</span>'
     else
-      power = '<span color="' .. beautiful.widget_batlow_fg .. '">' .. args[1] .. ' (' .. args[2] .. '%)</span>'
+      power = '<span color="' .. beautiful.widget_batlow_fg .. '">' .. args[1] .. args[2] .. '%</span>'
     end
     return power
-  end, 60, "BAT1")
+  end, 60, "BAT0")
 -- }}}
 
 -- {{{ Volume information
---volicon = wibox.widget.imagebox()
---volicon:set_image(beautiful.widget_vol)
+volicon = wibox.widget.imagebox()
+volicon:set_image(beautiful.widget_vol)
 -- Initialize widget
---volwidget = wibox.widget.textbox()
+volwidget = wibox.widget.textbox()
 -- Register widget
---vicious.register(volwidget, vicious.widgets.volume,
---  function(widget, args)
---    if args[2] == "♩" or args[1] == 0 then
---      volume = '♩              '
---    elseif args[1] > 80 then
---      volume = args[2] .. ' )))))'
---    elseif args[1] > 60 then
---      volume = args[2] .. ' )))) '
---    elseif args[1] > 40 then
---      volume = args[2] .. ' )))  '
---    elseif args[1] > 20 then
---      volume = args[2] .. ' ))   '
---    else
---      volume = args[2] .. ' )    '
---    end
---    return '<span color="' .. beautiful.widget_vol_fg .. '">' .. volume .. '</span>'
---  end, 2, "Master")
---volwidget:buttons(awful.util.table.join(
---     awful.button({ }, 1,
---     function() awful.util.spawn_with_shell("amixer -q set Master toggle") end),
---     awful.button({ }, 4,
---     function() awful.util.spawn_with_shell("amixer -q set Master 5%+ unmute") end),
---     awful.button({ }, 5,
---     function() awful.util.spawn_with_shell("amixer -q set Master 5%- unmute") end)
---))
---volicon:buttons(volwidget:buttons())
+vicious.register(volwidget, vicious.widgets.volume,
+  function(widget, args)
+    if args[2] == "♩" or args[1] == 0 then
+      volume = '♩'
+    else
+      volume = args[1]
+    end
+    return '<span color="' .. beautiful.widget_vol_fg .. '">' .. volume .. '</span>'
+  end, 2, "Master")
+volwidget:buttons(awful.util.table.join(
+     awful.button({ }, 1,
+     function() awful.util.spawn_with_shell("amixer -q set Master toggle") end),
+     awful.button({ }, 4,
+     function() awful.util.spawn_with_shell("amixer -q set Master 5%+ unmute") end),
+     awful.button({ }, 5,
+     function() awful.util.spawn_with_shell("amixer -q set Master 5%- unmute") end)
+))
+volicon:buttons(volwidget:buttons())
 -- }}}
 
 -- {{{ Network usage
@@ -245,7 +231,7 @@ vicious.register(wifiwidget, vicious.widgets.wifi,
       else
         wifiicon:set_image(beautiful.widget_wifilow)
       end
-      text = args["{ssid}"] .. ' (' .. args["{linp}"] .. '%)'
+      text = args["{ssid}"]
     end
     return '<span color="' .. beautiful.widget_wifi_fg .. '">' .. text .. '</span>'
   end, 10, "wlan0")
@@ -375,8 +361,6 @@ for s = 1, screen.count() do
     local right_layout = wibox.layout.fixed.horizontal()
 
     if s == 1 then
---        right_layout:add(wibox.widget.systray())
---        right_layout:add(spacer)
 --        right_layout:add(cpuicon)
 --        right_layout:add(cpuwidget)
 --        right_layout:add(memicon)
@@ -387,8 +371,9 @@ for s = 1, screen.count() do
         right_layout:add(wifiicon)
         right_layout:add(wifiwidget)
         right_layout:add(spacer)
---        right_layout:add(volicon)
---        right_layout:add(volwidget)
+        right_layout:add(volicon)
+        right_layout:add(volwidget)
+        right_layout:add(spacer)
         right_layout:add(baticon)
         right_layout:add(batwidget)
         right_layout:add(spacer)
@@ -396,11 +381,13 @@ for s = 1, screen.count() do
         right_layout:add(cpuicon)
         right_layout:add(cpuwidget)
         right_layout:add(spacer)
+        right_layout:add(wibox.widget.systray())
+        right_layout:add(spacer)
     end
 --    right_layout:add(dateicon)
     right_layout:add(datewidget)
     right_layout:add(spacer)
-    right_layout:add(mylauncher)
+    right_layout:add(powerlauncher)
 
     -- Now bring it all together (with the tasklist in the middle)
     local layout = wibox.layout.align.horizontal()
