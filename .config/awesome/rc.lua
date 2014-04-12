@@ -213,18 +213,24 @@ volicon:buttons(volwidget:buttons())
 -- {{{ Wireless
 wifiicon = wibox.widget.imagebox()
 
-wifiwidget = lain.widgets.net({
+lain.widgets.net({
   timeout = 10,
   iface = "wlan0",
   units = 1024,
   settings = function()
     if net_now.state == "down" then
       wifiicon:set_image()
-      widget:set_markup()
     else
       wifiicon:set_image(beautiful.widget_wifi)
-      widget:set_markup('<span color="' .. beautiful.widget_wifi_fg .. '">Connected</span>')
     end
+  end
+})
+
+wifiwidget = lain.widgets.base({
+  timeout = 10,
+  cmd = "iwgetid -r",
+  settings = function()
+    widget:set_markup('<span color="' .. beautiful.widget_wifi_fg .. '">' .. output .. '</span>')
   end
 })
 
