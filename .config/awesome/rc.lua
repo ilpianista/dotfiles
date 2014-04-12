@@ -401,7 +401,7 @@ end
 
 -- {{{ Mouse bindings
 root.buttons(awful.util.table.join(
-    awful.button({ }, 3, function () menu = awful.menu.clients({ theme = { width = 500 } }) end),
+    awful.button({ }, 3, function () menu = awful.menu.clients({ theme = { width = 300 } }) end),
     awful.button({ }, 3, nil, function () menu:hide() end),
     awful.button({ }, 4, awful.tag.viewnext),
     awful.button({ }, 5, awful.tag.viewprev)
@@ -580,7 +580,8 @@ awful.rules.rules = {
         except = { type = "dialog" },
         properties = { maximized = true } },
     { rule_any = { instance = { "choqok", "dia" } },
-        properties = { floating = true } },
+        properties = { floating = true,
+          maximized = false } },
     { rule = { class = "Amarok" },
         properties = { tag = tags[1][3] } },
     { rule = { class = "Vlc" },
