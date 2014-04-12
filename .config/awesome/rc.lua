@@ -10,7 +10,8 @@ local beautiful = require("beautiful")
 -- Notification library
 local naughty = require("naughty")
 local menubar = require("menubar")
-local vicious = require("vicious")
+-- Lain library (extra layouts, utilities and widgets)
+local lain = require("lain")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -68,8 +69,19 @@ local layouts =
 --    awful.layout.suit.spiral.dwindle,
     awful.layout.suit.max,
 --    awful.layout.suit.max.fullscreen,
---    awful.layout.suit.magnifier
+--    awful.layout.suit.magnifier,
+--    lain.layout.termfair,
+--    lain.layout.centerfair,
+--    lain.layout.cascade,
+--    lain.layout.cascadetile,
+--    lain.layout.centerwork,
+    lain.layout.uselessfair
+--    lain.layout.uselesspiral,
+--    lain.layout.uselesstile
 }
+
+-- gaps width
+theme.useless_gap_width = 15
 -- }}}
 
 -- {{{ Wallpaper
@@ -84,7 +96,7 @@ end
 -- Define a tag table which hold all screen tags.
 tags = {
     names = { "*", "www", "media", "chat", "8", "9", "dev" },
-    layouts = { layouts[4], layouts[6], layouts[1], layouts[2], layouts[4], layouts[4], layouts[4] }
+    layouts = { layouts[7], layouts[6], layouts[1], layouts[2], layouts[4], layouts[4], layouts[4] }
 }
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
@@ -128,60 +140,65 @@ spacer:set_markup(" ")
 separator:set_markup("|")
 
 -- {{{ Wibox
--- {{{ Memory usage
---memicon = wibox.widget.imagebox()
---memicon:set_image(beautiful.widget_mem)
--- Initialize widget
---memwidget = wibox.widget.textbox()
--- Register widget
---vicious.register(memwidget, vicious.widgets.mem, '<span color="' .. beautiful.widget_mem_fg .. '">$1%</span>', 10)
---memwidget:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn(terminal .. " -e htop") end)))
---memicon:buttons(memwidget:buttons())
--- }}}
 
 -- {{{ CPU usage
 cpuicon = wibox.widget.imagebox()
 cpuicon:set_image(beautiful.widget_cpu)
--- Initialize widget
-cpuwidget = wibox.widget.textbox()
--- Register widget
-vicious.register(cpuwidget, vicious.widgets.uptime, '<span color="' .. beautiful.widget_cpu_fg .. '">$4</span>', 2)
+
+cpuwidget = lain.widgets.sysload({
+  timeout = 5,
+  settings = function()
+    widget:set_markup('<span color="' .. beautiful.widget_cpu_fg .. '">' .. load_1 .. '</span>')
+  end
+})
+--cpuwidget = lain.widgets.cpu({
+--  timeout = 2,
+--  settings = function()
+--    widget:set_markup('<span color="' .. beautiful.widget_cpu_fg .. '">' .. cpu_now.usage .. '</span>')
+--  end
+--})
 cpuwidget:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn(terminal .. " -e htop") end)))
---cpuicon:buttons(cpuwidget:buttons())
 -- }}}
+
 
 -- {{{ Battery state
 baticon = wibox.widget.imagebox()
 baticon:set_image(beautiful.widget_bat)
--- Initialize widget
-batwidget = wibox.widget.textbox()
--- Register widget
-vicious.register(batwidget, vicious.widgets.bat,
-  function(widget, args)
-    if args[2] > 20 then
-      power = '<span color="' .. beautiful.widget_bat_fg .. '">' .. args[1] .. args[2] .. '%</span>'
-    else
-      power = '<span color="' .. beautiful.widget_batlow_fg .. '">' .. args[1] .. args[2] .. '%</span>'
+
+batwidget = lain.widgets.bat({
+  timeout = 60,
+  battery = "BAT0",
+  notify = off,
+  settings = function()
+    local symbol = ""
+    if bat_now.status == "Charging" then
+      symbol = "↯"
     end
-    return power
-  end, 60, "BAT0")
+    if tonumber(bat_now.perc) > 20 then
+      widget:set_markup('<span color="' .. beautiful.widget_bat_fg .. '">' .. symbol .. bat_now.perc .. '%</span>')
+    else
+      widget:set_markup('<span color="' .. beautiful.widget_batlow_fg .. '">' .. symbol .. bat_now.perc .. '%</span>')
+    end
+  end
+})
 -- }}}
 
 -- {{{ Volume information
 volicon = wibox.widget.imagebox()
 volicon:set_image(beautiful.widget_vol)
--- Initialize widget
-volwidget = wibox.widget.textbox()
--- Register widget
-vicious.register(volwidget, vicious.widgets.volume,
-  function(widget, args)
-    if args[2] == "♩" or args[1] == 0 then
-      volume = '♩'
+
+volwidget = lain.widgets.alsa({
+  timeout = 2,
+  channel = "Master",
+  settings = function()
+    if volume_now.status == "off" or volume_now.level == 0 then
+      widget:set_markup('<span color="' .. beautiful.widget_vol_fg .. '">♩</span>')
     else
-      volume = args[1]
+      widget:set_markup('<span color="' .. beautiful.widget_vol_fg .. '">' .. volume_now.level .. '</span>')
     end
-    return '<span color="' .. beautiful.widget_vol_fg .. '">' .. volume .. '</span>'
-  end, 2, "Master")
+  end
+})
+
 volwidget:buttons(awful.util.table.join(
      awful.button({ }, 1,
      function() awful.util.spawn_with_shell("amixer -q set Master toggle") end),
@@ -193,48 +210,24 @@ volwidget:buttons(awful.util.table.join(
 volicon:buttons(volwidget:buttons())
 -- }}}
 
--- {{{ Network usage
---dnicon = wibox.widget.imagebox()
---upicon = wibox.widget.imagebox()
---dnicon:set_image(beautiful.widget_netdown)
---upicon:set_image(beautiful.widget_netup)
--- Initialize widget
---netwidget = wibox.widget.textbox()
--- Register widget
---vicious.register(netwidget, vicious.widgets.net,
---  function(widget, args)
---    local string = '<span color="' .. beautiful.widget_netdown_fg ..'">%s</span> '
---                .. '<span color="' .. beautiful.widget_netup_fg .. '">%s</span>'
---    if args["{eth0 carrier}"] == 1 then
---      return string.format(string, args["{eth0 down_kb}"], args["{eth0 up_kb}"])
---    elseif args["{usb0 carrier}"] == 1 then
---      return string.format(string, args["{usb0 down_kb}"], args["{usb0 up_kb}"])
---    else
---      return string.format(string, args["{wlan0 down_kb}"], args["{wlan0 up_kb}"])
---    end
---  end, 3)
--- }}}
-
 -- {{{ Wireless
 wifiicon = wibox.widget.imagebox()
--- Initialize widget
-wifiwidget = wibox.widget.textbox()
--- Register widget
-vicious.register(wifiwidget, vicious.widgets.wifi,
-  function(widget, args)
-    if args["{ssid}"] == "N/A" then
+
+wifiwidget = lain.widgets.net({
+  timeout = 10,
+  iface = "wlan0",
+  units = 1024,
+  settings = function()
+    if net_now.state == "down" then
       wifiicon:set_image()
-      text = ""
+      widget:set_markup()
     else
-      if args["{linp}"] > 70 then
-        wifiicon:set_image(beautiful.widget_wifi)
-      else
-        wifiicon:set_image(beautiful.widget_wifilow)
-      end
-      text = args["{ssid}"]
+      wifiicon:set_image(beautiful.widget_wifi)
+      widget:set_markup('<span color="' .. beautiful.widget_wifi_fg .. '">Connected</span>')
     end
-    return '<span color="' .. beautiful.widget_wifi_fg .. '">' .. text .. '</span>'
-  end, 10, "wlan0")
+  end
+})
+
 wifiwidget:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn("kde-nm-connection-editor") end)))
 wifiicon:buttons(wifiwidget:buttons())
 -- }}}
@@ -242,42 +235,14 @@ wifiicon:buttons(wifiwidget:buttons())
 -- {{{ Date and time
 --dateicon = wibox.widget.imagebox()
 --dateicon:set_image(beautiful.widget_date)
--- Initialize widget
+
 datewidget = awful.widget.textclock("%A %d, %R")
---datewidget = wibox.widget.textbox()
--- Register widget
---vicious.register(datewidget, vicious.widgets.date, '<span color="' .. beautiful.widget_date_fg ..'">%A %d, %R</span>', 60)
 -- }}}
 
--- {{{ MPD
---mpdicon = wibox.widget.imagebox()
---mpdicon:set_image(beautiful.widget_music)
--- Initialize widget
---mpdwidget = wibox.widget.textbox()
--- Register widget
---vicious.register(mpdwidget, vicious.widgets.mpd,
---    function (widget, args)
---        if args["{state}"] == "Stop" then
---            return "Stopped"
---        else
---            return args["{Artist}"]..' - '.. args["{Title}"]
---        end
---    end, 10)
--- }}}
-
--- {{{ GMail
---mailicon = wibox.widget.imagebox()
---mailicon:set_image(beautiful.widget_mail)
--- Initalize widget
---mailwidget = wibox.widget.textbox()
--- Register widget
---vicious.register(mailwidget, vicious.widgets.gmail, "(${count}) Unread mails", 120)
--- }}}
-
--- {{{ Instant Messaging
---chaticon = wibox.widget.imagebox()
---chaticon:set_image(beautiful.widget_chat)
---chaticon:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn("ktp-contactlist") end)))
+-- {{{ Launcher
+--app1icon = wibox.widget.imagebox()
+--app1icon:set_image(beautiful.widget_chat)
+--app1icon:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn("ktp-contactlist") end)))
 -- }}}
 
 -- Create a wibox for each screen and add it
