@@ -168,7 +168,7 @@ baticon:set_image(beautiful.widget_bat)
 batwidget = lain.widgets.bat({
   timeout = 60,
   battery = "BAT0",
-  notify = off,
+  notify = "off",
   settings = function()
     local symbol = ""
     if bat_now.status == "Charging" then
@@ -217,6 +217,7 @@ lain.widgets.net({
   timeout = 10,
   iface = "wlan0",
   units = 1024,
+  notify = "off",
   settings = function()
     if net_now.state == "down" then
       wifiicon:set_image()
@@ -550,7 +551,7 @@ awful.rules.rules = {
     { rule_any = { instance = { "gimp", "gwenview" } },
         except = { type = "dialog" },
         properties = { maximized = true } },
-    { rule_any = { instance = { "choqok", "dia" } },
+    { rule_any = { instance = { "choqok", "dia", "kruler" } },
         properties = { floating = true,
           maximized = false } },
     { rule = { class = "Amarok" },
