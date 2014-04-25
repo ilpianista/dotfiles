@@ -119,15 +119,18 @@ end
 --                                  }
 --                        })
 
-powerlauncher = awful.widget.launcher({ image = beautiful.widget_power,
-                                     menu = awful.menu({
-                                       items = {
-                                        { "lock", "kshutdown -k" },
-                                        { "reboot", "kshutdown -r" },
-                                        { "shutdown", "kshutdown -s" }
-                                      }
-                                    })
-                                  })
+powermenu = awful.menu({ items = {
+    { "lock", "kshutdown -k" },
+    { "suspend", "kshutdown -S" },
+    { "reboot", "kshutdown -r" },
+    { "shutdown", "kshutdown -s" }
+  }
+})
+powerwidget = wibox.widget.textbox()
+powerwidget:set_markup('<span font="Icon 10" color="' .. beautiful.fg_focus .. '"></span>')
+powerwidget:buttons(awful.util.table.join(
+  awful.button({ }, 1, function (c) powermenu:toggle() end)
+))
 
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
@@ -142,13 +145,10 @@ separator:set_markup("|")
 -- {{{ Wibox
 
 -- {{{ CPU usage
-cpuicon = wibox.widget.imagebox()
-cpuicon:set_image(beautiful.widget_cpu)
-
 cpuwidget = lain.widgets.sysload({
   timeout = 5,
   settings = function()
-    widget:set_markup('<span color="' .. beautiful.widget_cpu_fg .. '">' .. load_1 .. '</span>')
+    widget:set_markup('<span font="Icon 10" color="' .. beautiful.widget_cpu_fg .. '"></span> <span color="' .. beautiful.widget_cpu_fg .. '">' .. load_1 .. '</span>')
   end
 })
 --cpuwidget = lain.widgets.cpu({
@@ -162,39 +162,33 @@ cpuwidget:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.u
 
 
 -- {{{ Battery state
-baticon = wibox.widget.imagebox()
-baticon:set_image(beautiful.widget_bat)
-
 batwidget = lain.widgets.bat({
   timeout = 60,
   battery = "BAT0",
   notify = "off",
   settings = function()
-    local symbol = ""
-    if bat_now.status == "Charging" then
-      symbol = "↯"
-    end
-    if tonumber(bat_now.perc) > 20 then
-      widget:set_markup('<span color="' .. beautiful.widget_bat_fg .. '">' .. symbol .. bat_now.perc .. '%</span>')
+    if bat_now.status == "Charging" or bat_now.status == "Full" then
+      widget:set_markup('<span font="Icon 10" color="' .. beautiful.widget_bat_fg .. '"></span> <span color="' .. beautiful.widget_bat_fg .. '">' .. bat_now.perc .. '%</span>')
+    elseif tonumber(bat_now.perc) > 50 then
+      widget:set_markup('<span font="Icon 10" color="' .. beautiful.widget_bat_fg .. '"></span> <span color="' .. beautiful.widget_bat_fg .. '">' .. bat_now.perc .. '%</span>')
+    elseif tonumber(bat_now.perc) > 20 then
+      widget:set_markup('<span font="Icon 10" color="' .. beautiful.widget_bat_fg .. '"></span> <span color="' .. beautiful.widget_bat_fg .. '">' .. bat_now.perc .. '%</span>')
     else
-      widget:set_markup('<span color="' .. beautiful.widget_batlow_fg .. '">' .. symbol .. bat_now.perc .. '%</span>')
+      widget:set_markup('<span font="Icon 10" color="' .. beautiful.widget_batlow_fg .. '"></span> <span color="' .. beautiful.widget_batlow_fg .. '">' .. bat_now.perc .. '%</span>')
     end
   end
 })
 -- }}}
 
 -- {{{ Volume information
-volicon = wibox.widget.imagebox()
-volicon:set_image(beautiful.widget_vol)
-
 volwidget = lain.widgets.alsa({
   timeout = 2,
   channel = "Master",
   settings = function()
     if volume_now.status == "off" or volume_now.level == 0 then
-      widget:set_markup('<span color="' .. beautiful.widget_vol_fg .. '">♩</span>')
+      widget:set_markup('<span font="Icon 10" color="' .. beautiful.widget_vol_fg .. '"></span> <span color="' .. beautiful.widget_vol_fg .. '">' .. volume_now.level .. '</span>')
     else
-      widget:set_markup('<span color="' .. beautiful.widget_vol_fg .. '">' .. volume_now.level .. '</span>')
+      widget:set_markup('<span font="Icon 10" color="' .. beautiful.widget_vol_fg .. '"></span> <span color="' .. beautiful.widget_vol_fg .. '">' .. volume_now.level .. '</span>')
     end
   end
 })
@@ -207,42 +201,23 @@ volwidget:buttons(awful.util.table.join(
      awful.button({ }, 5,
      function() awful.util.spawn_with_shell("amixer -q set Master 5%- unmute") end)
 ))
-volicon:buttons(volwidget:buttons())
 -- }}}
 
 -- {{{ Wireless
-wifiicon = wibox.widget.imagebox()
-
-lain.widgets.net({
-  timeout = 10,
-  iface = "wlan0",
-  units = 1024,
-  notify = "off",
-  settings = function()
-    if net_now.state == "down" then
-      wifiicon:set_image()
-    else
-      wifiicon:set_image(beautiful.widget_wifi)
-    end
-  end
-})
-
 wifiwidget = lain.widgets.base({
   timeout = 10,
   cmd = "iwgetid -r",
   settings = function()
-    widget:set_markup('<span color="' .. beautiful.widget_wifi_fg .. '">' .. output .. '</span>')
+    widget:set_markup('<span font="Icon 10" color="' .. beautiful.widget_wifi_fg .. '"></span> <span color="' .. beautiful.widget_wifi_fg .. '">' .. output .. '</span>')
   end
 })
 
 wifiwidget:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn("kde-nm-connection-editor") end)))
-wifiicon:buttons(wifiwidget:buttons())
 -- }}}
 
 -- {{{ Date and time
---dateicon = wibox.widget.imagebox()
---dateicon:set_image(beautiful.widget_date)
-
+dateicon = wibox.widget.textbox()
+dateicon:set_markup('<span font="Icon 10"></span> ')
 datewidget = awful.widget.textclock("%A %d, %R")
 -- }}}
 
@@ -333,33 +308,27 @@ for s = 1, screen.count() do
     local right_layout = wibox.layout.fixed.horizontal()
 
     if s == 1 then
---        right_layout:add(cpuicon)
---        right_layout:add(cpuwidget)
 --        right_layout:add(memicon)
 --        right_layout:add(memwidget)
 --        right_layout:add(dnicon)
 --        right_layout:add(netwidget)
 --        right_layout:add(upicon)
-        right_layout:add(wifiicon)
         right_layout:add(wifiwidget)
         right_layout:add(spacer)
-        right_layout:add(volicon)
         right_layout:add(volwidget)
         right_layout:add(spacer)
-        right_layout:add(baticon)
         right_layout:add(batwidget)
         right_layout:add(spacer)
 --        right_layout:add(chaticon)
-        right_layout:add(cpuicon)
         right_layout:add(cpuwidget)
         right_layout:add(spacer)
         right_layout:add(wibox.widget.systray())
         right_layout:add(spacer)
     end
---    right_layout:add(dateicon)
+    right_layout:add(dateicon)
     right_layout:add(datewidget)
     right_layout:add(spacer)
-    right_layout:add(powerlauncher)
+    right_layout:add(powerwidget)
 
     -- Now bring it all together (with the tasklist in the middle)
     local layout = wibox.layout.align.horizontal()
