@@ -33,7 +33,7 @@ man() {
 # YouTube
 alias yt2mp3='youtube-dl -x --audio-format=mp3'
 alias yt2song='youtube-dl -x'
-yt2stream() { cvlc "$(youtube-dl -g ${1})" }
+yt2stream() { vlc "$(youtube-dl -g ${1})" }
 
 # useful stuff
 alias dmesg='dmesg -H'
@@ -49,6 +49,7 @@ alias uniba="export {http,https,ftp}_proxy='http://wproxy.ict.uniba.it:80'"
 alias wakerome='wol 00:04:ac:65:42:1e'
 
 alias connect='nmcli con up id'
+alias disconnect='nmcli con down id'
 alias disconnectiface='nmcli dev disconnect iface'
 alias wifilist='nmcli dev wifi list iface wlan0'
 

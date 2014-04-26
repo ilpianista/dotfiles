@@ -32,8 +32,8 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 " Vim plugin to list, select and switch between buffers
 Plugin 'jeetsukumaran/vim-buffergator'
-" Unite and create user interfaces
-"Plugin 'Shougo/unite.vim'
+" Fuzzy file, buffer, mru, tag, etc finder
+Plugin 'kien/ctrlp.vim'
 " helpers for UNIX
 Plugin 'tpope/vim-eunuch'
 " a Git wrapper so awesome, it should be illegal
@@ -164,6 +164,8 @@ let g:indent_guides_guide_size = 1
 
 " use patched powerline fonts
 "let g:airline_powerline_fonts = 1
+" Automatically displays all buffers when there's only one tab open
+let g:airline#extensions#tabline#enabled = 1
 
 " This does what it says on the tin. It will check your file on open too, not just on save.
 let g:syntastic_check_on_open = 1

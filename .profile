@@ -2,7 +2,7 @@ export EDITOR=vim
 export TERMINAL=konsole
 
 if [ -n "$DISPLAY" ]; then
-  export BROWSER=dwb
+  export BROWSER=firefox
 fi
 
 # Use ~/bin
@@ -23,10 +23,6 @@ export KDEDIRS=/usr/local:$KDEDIRS
 # Speed-up rebuilds
 export PATH="/usr/lib/ccache/bin:$PATH"
 export CCACHE_DIR="/tmp/ccache"
-
-# Highlighting support in less
-export LESSOPEN="| source-highlight-esc.sh %s"
-export LESS=' -R '
 
 # Java fonts stuff
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=lcd -Dswing.aatext=true'

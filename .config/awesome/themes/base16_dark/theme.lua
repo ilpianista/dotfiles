@@ -10,6 +10,7 @@ theme.name          = "base16_dark"
 theme.path          = theme.confdir .. "/themes/" .. theme.name
 
 theme.font          = "Anonymous Pro 10"
+theme.iconFont      = "Icon 10"
 
 -- Base16 colors
 theme.base16_base00 = "#151515"
@@ -78,23 +79,6 @@ theme.widget_cpu_fg     = theme.base16_base0A
 theme.widget_vol_fg     = theme.base16_base0E
 theme.widget_date_fg    = theme.fg_normal
 theme.widget_chat_fg    = theme.base16_base0D
--- }}}
-
--- {{{ Widget icons
-theme.widget_bat    = theme.path .. "/icons/bat.png"
-theme.widget_netdown = theme.path .. "/icons/down.png"
-theme.widget_netup  = theme.path .. "/icons/up.png"
-theme.widget_wifi   = theme.path .. "/icons/wifi.png"
-theme.widget_wifidown = theme.path .. "/icons/wifidown.png"
-theme.widget_wifilow = theme.path .. "/icons/wifilow.png"
-theme.widget_mail   = theme.path .. "/icons/mail.png"
-theme.widget_mem    = theme.path .. "/icons/mem.png"
-theme.widget_music  = theme.path .. "/icons/music.png"
-theme.widget_cpu    = theme.path .. "/icons/cpu.png"
-theme.widget_vol    = theme.path .. "/icons/vol.png"
-theme.widget_date   = theme.path .. "/icons/time.png"
-theme.widget_chat   = theme.path .. "/icons/chat.png"
-theme.widget_power   = theme.path .. "/icons/power.png"
 -- }}}
 
 -- Define the image to load

@@ -17,8 +17,7 @@ zstyle ':prezto:load' pmodule \
   'prompt' \
   'git' \
   'node' \
-  'pacman' \
-  'ssh'
+  'pacman'
 
 # Set case-sensitivity for completion, history lookup, etc.
 zstyle ':prezto:*:*' case-sensitive 'yes'
@@ -50,4 +49,4 @@ zstyle ':prezto:module:screen:auto-start' remote 'yes'
 zstyle ':prezto:module:terminal' auto-title 'yes'
 
 # Set the SSH identities to load into the agent.
-zstyle ':prezto:module:ssh:load' identities 'id_rsa' 'id_ecdsa'
+#zstyle ':prezto:module:ssh:load' identities 'id_rsa' 'id_ecdsa'

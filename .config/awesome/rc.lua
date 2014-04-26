@@ -119,19 +119,6 @@ end
 --                                  }
 --                        })
 
-powermenu = awful.menu({ items = {
-    { "lock", "kshutdown -k" },
-    { "suspend", "kshutdown -S" },
-    { "reboot", "kshutdown -r" },
-    { "shutdown", "kshutdown -s" }
-  }
-})
-powerwidget = wibox.widget.textbox()
-powerwidget:set_markup('<span font="Icon 10" color="' .. beautiful.fg_focus .. '"></span>')
-powerwidget:buttons(awful.util.table.join(
-  awful.button({ }, 1, function (c) powermenu:toggle() end)
-))
-
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
@@ -144,19 +131,37 @@ separator:set_markup("|")
 
 -- {{{ Wibox
 
+-- {{{ Power menu
+powermenu = awful.menu({ items = {
+    { "lock", "kshutdown -k" },
+    { "suspend", "kshutdown -S" },
+    { "reboot", "kshutdown -r" },
+    { "shutdown", "kshutdown -s" }
+  }
+})
+
+powerwidget = wibox.widget.textbox()
+powerwidget:set_markup('<span font="' .. beautiful.iconFont .. '" color="' .. beautiful.fg_focus .. '"></span>')
+powerwidget:buttons(awful.util.table.join(
+  awful.button({ }, 1, function (c) powermenu:toggle() end)
+))
+-- }}}
+
 -- {{{ CPU usage
 cpuwidget = lain.widgets.sysload({
   timeout = 5,
   settings = function()
-    widget:set_markup('<span font="Icon 10" color="' .. beautiful.widget_cpu_fg .. '"></span> <span color="' .. beautiful.widget_cpu_fg .. '">' .. load_1 .. '</span>')
+    widget:set_markup('<span font="' .. beautiful.iconFont .. '" color="' .. beautiful.widget_cpu_fg .. '"></span> <span color="' .. beautiful.widget_cpu_fg .. '">' .. load_1 .. '</span>')
   end
 })
+
 --cpuwidget = lain.widgets.cpu({
 --  timeout = 2,
 --  settings = function()
 --    widget:set_markup('<span color="' .. beautiful.widget_cpu_fg .. '">' .. cpu_now.usage .. '</span>')
 --  end
 --})
+
 cpuwidget:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn(terminal .. " -e htop") end)))
 -- }}}
 
@@ -168,13 +173,13 @@ batwidget = lain.widgets.bat({
   notify = "off",
   settings = function()
     if bat_now.status == "Charging" or bat_now.status == "Full" then
-      widget:set_markup('<span font="Icon 10" color="' .. beautiful.widget_bat_fg .. '"></span> <span color="' .. beautiful.widget_bat_fg .. '">' .. bat_now.perc .. '%</span>')
-    elseif tonumber(bat_now.perc) > 50 then
-      widget:set_markup('<span font="Icon 10" color="' .. beautiful.widget_bat_fg .. '"></span> <span color="' .. beautiful.widget_bat_fg .. '">' .. bat_now.perc .. '%</span>')
+      widget:set_markup('<span font="' ..  beautiful.iconFont .. '" color="' .. beautiful.widget_bat_fg .. '"></span> <span color="' .. beautiful.widget_bat_fg .. '">' .. bat_now.perc .. '%</span>')
+    elseif tonumber(bat_now.perc) > 60 then
+      widget:set_markup('<span font="' .. beautiful.iconFont .. '" color="' .. beautiful.widget_bat_fg .. '"></span> <span color="' .. beautiful.widget_bat_fg .. '">' .. bat_now.perc .. '%</span>')
     elseif tonumber(bat_now.perc) > 20 then
-      widget:set_markup('<span font="Icon 10" color="' .. beautiful.widget_bat_fg .. '"></span> <span color="' .. beautiful.widget_bat_fg .. '">' .. bat_now.perc .. '%</span>')
+      widget:set_markup('<span font="' .. beautiful.iconFont .. '" color="' .. beautiful.widget_bat_fg .. '"></span> <span color="' .. beautiful.widget_bat_fg .. '">' .. bat_now.perc .. '%</span>')
     else
-      widget:set_markup('<span font="Icon 10" color="' .. beautiful.widget_batlow_fg .. '"></span> <span color="' .. beautiful.widget_batlow_fg .. '">' .. bat_now.perc .. '%</span>')
+      widget:set_markup('<span font="' .. beautiful.iconFont .. '" color="' .. beautiful.widget_batlow_fg .. '"></span> <span color="' .. beautiful.widget_batlow_fg .. '">' .. bat_now.perc .. '%</span>')
     end
   end
 })
@@ -185,10 +190,14 @@ volwidget = lain.widgets.alsa({
   timeout = 2,
   channel = "Master",
   settings = function()
-    if volume_now.status == "off" or volume_now.level == 0 then
-      widget:set_markup('<span font="Icon 10" color="' .. beautiful.widget_vol_fg .. '"></span> <span color="' .. beautiful.widget_vol_fg .. '">' .. volume_now.level .. '</span>')
+    if volume_now.status == "off" or volume_now.level == "0" then
+      widget:set_markup('<span font="' .. beautiful.iconFont .. '" color="' .. beautiful.widget_vol_fg .. '"></span> <span color="' .. beautiful.widget_vol_fg .. '">' .. volume_now.level .. '</span>')
+    elseif tonumber(volume_now.level) > 80 then
+      widget:set_markup('<span font="' .. beautiful.iconFont .. '" color="' .. beautiful.widget_vol_fg .. '"></span> <span color="' .. beautiful.widget_vol_fg .. '">' .. volume_now.level .. '</span>')
+    elseif tonumber(volume_now.level) > 40 then
+      widget:set_markup('<span font="' .. beautiful.iconFont .. '" color="' .. beautiful.widget_vol_fg .. '"></span> <span color="' .. beautiful.widget_vol_fg .. '">' .. volume_now.level .. '</span>')
     else
-      widget:set_markup('<span font="Icon 10" color="' .. beautiful.widget_vol_fg .. '"></span> <span color="' .. beautiful.widget_vol_fg .. '">' .. volume_now.level .. '</span>')
+      widget:set_markup('<span font="' .. beautiful.iconFont .. '" color="' .. beautiful.widget_vol_fg .. '"></span> <span color="' .. beautiful.widget_vol_fg .. '">' .. volume_now.level .. '</span>')
     end
   end
 })
@@ -208,7 +217,7 @@ wifiwidget = lain.widgets.base({
   timeout = 10,
   cmd = "iwgetid -r",
   settings = function()
-    widget:set_markup('<span font="Icon 10" color="' .. beautiful.widget_wifi_fg .. '"></span> <span color="' .. beautiful.widget_wifi_fg .. '">' .. output .. '</span>')
+    widget:set_markup('<span font="' .. beautiful.iconFont .. '" color="' .. beautiful.widget_wifi_fg .. '"></span> <span color="' .. beautiful.widget_wifi_fg .. '">' .. output .. '</span>')
   end
 })
 
@@ -217,7 +226,7 @@ wifiwidget:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.
 
 -- {{{ Date and time
 dateicon = wibox.widget.textbox()
-dateicon:set_markup('<span font="Icon 10"></span> ')
+dateicon:set_markup('<span font="' .. beautiful.iconFont .. '"></span> ')
 datewidget = awful.widget.textclock("%A %d, %R")
 -- }}}
 
