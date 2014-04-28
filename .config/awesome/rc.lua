@@ -217,7 +217,9 @@ wifiwidget = lain.widgets.base({
   timeout = 10,
   cmd = "iwgetid -r",
   settings = function()
-    widget:set_markup('<span font="' .. beautiful.iconFont .. '" color="' .. beautiful.widget_wifi_fg .. '"></span> <span color="' .. beautiful.widget_wifi_fg .. '">' .. output .. '</span>')
+    if output ~= nil and output ~= '' then
+      widget:set_markup('<span font="' .. beautiful.iconFont .. '" color="' .. beautiful.widget_wifi_fg .. '"></span> <span color="' .. beautiful.widget_wifi_fg .. '">' .. output .. '</span>')
+    end
   end
 })
 
@@ -305,7 +307,7 @@ for s = 1, screen.count() do
     theme.tasklist_disable_icon = true
 
     -- Create the wibox
-    mywibox[s] = awful.wibox({ position = "top", screen = s })
+    mywibox[s] = awful.wibox({ position = "top", height = "20", screen = s })
 
     -- Widgets that are aligned to the left
     local left_layout = wibox.layout.fixed.horizontal()
