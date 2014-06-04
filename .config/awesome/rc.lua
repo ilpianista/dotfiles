@@ -214,11 +214,12 @@ volwidget:buttons(awful.util.table.join(
 
 -- {{{ Wireless
 wifiwidget = lain.widgets.base({
-  timeout = 10,
   cmd = "iwgetid -r",
   settings = function()
-    if output ~= nil and output ~= '' then
+    if output ~= '' then
       widget:set_markup('<span font="' .. beautiful.iconFont .. '" color="' .. beautiful.widget_wifi_fg .. '"></span> <span color="' .. beautiful.widget_wifi_fg .. '">' .. output .. '</span>')
+    else
+      widget:set_markup('')
     end
   end
 })
@@ -228,7 +229,7 @@ wifiwidget:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.
 
 -- {{{ Date and time
 dateicon = wibox.widget.textbox()
-dateicon:set_markup('<span font="' .. beautiful.iconFont .. '"></span> ')
+--dateicon:set_markup('<span font="' .. beautiful.iconFont .. '"></span> ')
 datewidget = awful.widget.textclock("%A %d, %R")
 -- }}}
 
@@ -539,18 +540,16 @@ awful.rules.rules = {
     { rule = { class = "Vlc" },
         callback = function(c) awful.client.movetotag(tags[mouse.screen][3], c) end,
         properties = { floating = true } },
-    { rule_any = { class = { "Dwb", "Firefox" } },
+    { rule_any = { class = { "Firefox" } },
        callback = function(c) awful.client.movetotag(tags[mouse.screen][2], c) end },
     { rule_any = { class = { "Konversation", "Ktp-contactlist", "Ktp-text-ui", "Skype" } },
         properties = { tag = tags[1][4] } },
-    { rule = { instance = "urxvt" },
-        properties = { size_hints_honor = false } },
     { rule = { class = "Gvim" },
         except = { type = "dialog" },
         callback = function(c) awful.client.movetotag(tags[mouse.screen][7], c) end,
         properties = { size_hints_honor = false,
           maximized = true } },
-    { rule_any = { class = { "jetbrains-idea", "Kdevelop", "Kate", "QtCreator",
+    { rule_any = { class = { "Eclipse", "Kdevelop", "Kate", "QtCreator",
           "Designer-qt4", "Designer-qt5", "JavaFXSceneBuilder" } },
         except = { type = "dialog" },
         callback = function(c) awful.client.movetotag(tags[mouse.screen][7], c) end,

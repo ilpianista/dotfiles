@@ -32,6 +32,8 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 " Vim plugin to list, select and switch between buffers
 Plugin 'jeetsukumaran/vim-buffergator'
+" Next generation completion framework after neocomplcache
+Plugin 'Shougo/neocomplete.vim'
 " Fuzzy file, buffer, mru, tag, etc finder
 Plugin 'kien/ctrlp.vim'
 " helpers for UNIX
@@ -157,6 +159,15 @@ set wildignore+=*.swp,*~,._*
 "" Backup and swap files
 set backupdir^=~/.vim/_backup//    " where to put backup files.
 set directory^=~/.vim/_temp//      " where to put swap files.
+
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
 
 " Enable intent-guides
 au VimEnter * :IndentGuidesEnable

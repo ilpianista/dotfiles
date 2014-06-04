@@ -17,6 +17,8 @@ export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
 # NodeJS modules installed with npm
 export PATH="$HOME/node_modules/.bin:$PATH"
 
+export GCC_COLORS="error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01"
+
 # Load KDE stuff from /usr/local
 export KDEDIRS=/usr/local:$KDEDIRS
 
