@@ -154,7 +154,6 @@ cpuwidget = lain.widgets.sysload({
     widget:set_markup('<span font="' .. beautiful.iconFont .. '" color="' .. beautiful.widget_cpu_fg .. '"></span> <span color="' .. beautiful.widget_cpu_fg .. '">' .. load_1 .. '</span>')
   end
 })
-
 --cpuwidget = lain.widgets.cpu({
 --  timeout = 2,
 --  settings = function()
@@ -163,15 +162,52 @@ cpuwidget = lain.widgets.sysload({
 --})
 
 cpuwidget:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn(terminal .. " -e htop") end)))
+
+local cpunotification
+cpuwidget:connect_signal("mouse::enter", function()
+  local cpuusage
+  lain.widgets.cpu({
+    settings = function()
+      cpuusage = cpu_now.usage
+    end
+  })
+
+  local ramtotal
+  local ramusage
+  local swaptotal
+  local swapusage
+  lain.widgets.mem({
+    settings = function()
+      ramusage = mem_now.used
+      ramtotal = mem_now.total
+      swapusage = mem_now.swapused
+      swaptotal = mem_now.swapf
+    end
+  })
+  cpunotification = naughty.notify({
+    text = "CPU: " .. cpuusage .. "%\nRAM: " .. ramusage .. "/" .. ramtotal .. " MB\nSWAP: " .. swapusage .. "/" .. swaptotal .. " MB",
+    position = "top_right",
+    timeout = 0
+  })
+end)
+cpuwidget:connect_signal("mouse::leave", function()
+  if (cpunotification ~= nil) then
+    naughty.destroy(cpunotification)
+    cpunotification = nil
+  end
+end)
+
 -- }}}
 
 
 -- {{{ Battery state
+local remainingtime
 batwidget = lain.widgets.bat({
   timeout = 60,
   battery = "BAT0",
   notify = "off",
   settings = function()
+    remainingtime = bat_now.time
     if bat_now.status == "Charging" or bat_now.status == "Full" then
       widget:set_markup('<span font="' ..  beautiful.iconFont .. '" color="' .. beautiful.widget_bat_fg .. '"></span> <span color="' .. beautiful.widget_bat_fg .. '">' .. bat_now.perc .. '%</span>')
     elseif tonumber(bat_now.perc) > 60 then
@@ -183,6 +219,20 @@ batwidget = lain.widgets.bat({
     end
   end
 })
+local batnotification
+batwidget:connect_signal("mouse::enter", function()
+  batnotification = naughty.notify({
+    text = "Remaining time: " .. remainingtime,
+    position = "top_right",
+    timeout = 0
+  })
+end)
+batwidget:connect_signal("mouse::leave", function()
+  if (batnotification ~= nil) then
+    naughty.destroy(batnotification)
+    batnotification = nil
+  end
+end)
 -- }}}
 
 -- {{{ Volume information
@@ -216,7 +266,7 @@ volwidget:buttons(awful.util.table.join(
 wifiwidget = lain.widgets.base({
   cmd = "iwgetid -r",
   settings = function()
-    if output ~= '' then
+    if output ~= nil and output ~= '' then
       widget:set_markup('<span font="' .. beautiful.iconFont .. '" color="' .. beautiful.widget_wifi_fg .. '"></span> <span color="' .. beautiful.widget_wifi_fg .. '">' .. output .. '</span>')
     else
       widget:set_markup('')
@@ -225,12 +275,36 @@ wifiwidget = lain.widgets.base({
 })
 
 wifiwidget:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn("kde-nm-connection-editor") end)))
+
+local wifinotification
+wifiwidget:connect_signal("mouse::enter", function()
+  local f = assert(io.popen("iwgetid -ar"))
+  local wifiaccesspoint = f:read()
+  f:close()
+
+  f = assert(io.popen("iwconfig wlan0 | grep 'Link Quality' | awk '{print $2}' | awk -F'=' '{print $2}'"))
+  local wifiquality = f:read()
+  f:close()
+
+  wifinotification = naughty.notify({
+    text = "Access Point: " .. wifiaccesspoint .. "\nLink Quality: " .. wifiquality,
+    position = "top_right",
+    timeout = 0
+  })
+end)
+wifiwidget:connect_signal("mouse::leave", function()
+  if (wifinotification ~= nil) then
+    naughty.destroy(wifinotification)
+    wifinotification = nil
+  end
+end)
 -- }}}
 
 -- {{{ Date and time
 dateicon = wibox.widget.textbox()
 --dateicon:set_markup('<span font="' .. beautiful.iconFont .. '"></span> ')
-datewidget = awful.widget.textclock("%A %d, %R")
+datewidget = awful.widget.textclock("%A, %R")
+lain.widgets.calendar:attach(datewidget, { icons = '', font = "Monospace", font_size = 10 })
 -- }}}
 
 -- {{{ Launcher
