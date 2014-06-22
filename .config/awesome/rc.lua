@@ -502,7 +502,19 @@ globalkeys = awful.util.table.join(
     -- Application Switcher
     awful.key({ "Mod1" }, "Escape", function ()
       awful.menu.clients({ theme = { width = 500 } })
-    end)
+    end),
+
+    -- Print screen
+    awful.key({ }, "Print", function () awful.util.spawn("ksnapshot") end),
+
+    -- Volume
+    awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer -q set Master 5%+ unmute") end),
+    awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer -q set Master 5%- unmute") end),
+    awful.key({ }, "XF86AudioMute", function () awful.util.spawn("amixer -q set Master toggle") end),
+    awful.key({ }, "XF86AudioMicMute", function () awful.util.spawn("amixer -q set Capture toggle") end),
+
+    -- Launcher
+    awful.key({}, "XF86Launch1", function () awful.util.spawn(terminal) end)
 )
 
 clientkeys = awful.util.table.join(
