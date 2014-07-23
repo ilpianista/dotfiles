@@ -104,5 +104,4 @@ alias wakerome='wol 00:04:ac:65:42:1e'
 
 alias connect='nmcli con up id'
 alias disconnect='nmcli con down id'
-alias disconnectiface='nmcli dev disconnect iface'
-alias wifilist='nmcli dev wifi list iface wlan0'
+alias wifilist='nmcli dev wifi list'

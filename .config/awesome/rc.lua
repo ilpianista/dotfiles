@@ -615,7 +615,7 @@ awful.rules.rules = {
       properties = { floating = true } },
     { rule = { instance = "kontact" },
         properties = { tag = tags[1][2] } },
-    { rule_any = { instance = { "gimp", "gwenview" } },
+    { rule_any = { instance = { "gimp" } },
         except = { type = "dialog" },
         properties = { maximized = true } },
     { rule_any = { instance = { "choqok", "dia", "kruler" } },

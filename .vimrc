@@ -52,6 +52,8 @@ Plugin 'Raimondi/delimitMate'
 Plugin 'xolox/vim-misc'
 " Extended session management for Vim
 Plugin 'xolox/vim-session'
+" Vim plugin for the Perl module / CLI script 'ack'
+Plugin 'mileszs/ack.vim'
 
 " Vim Markdown runtime files
 Plugin 'tpope/vim-markdown'
