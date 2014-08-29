@@ -7,12 +7,8 @@ ZSH=/usr/share/oh-my-zsh/
 # time that oh-my-zsh is loaded.
 ZSH_THEME="robbyrussell"
 
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
 # Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+CASE_SENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
 DISABLE_AUTO_UPDATE="true"
@@ -47,8 +43,7 @@ DISABLE_AUTO_UPDATE="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(command-not-found cp git gem history-substring-search nanoc node npm sbt sudo)
+plugins=(colored-man command-not-found cp extract git history-substring-search npm sudo)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -72,18 +67,6 @@ scan() {
   done
 }
 
-# Colors for man pages
-man() {
-    env LESS_TERMCAP_mb=$'\E[01;31m' \
-    LESS_TERMCAP_md=$'\E[01;38;5;74m' \
-    LESS_TERMCAP_me=$'\E[0m' \
-    LESS_TERMCAP_se=$'\E[0m' \
-    LESS_TERMCAP_so=$'\E[38;5;246m' \
-    LESS_TERMCAP_ue=$'\E[0m' \
-    LESS_TERMCAP_us=$'\E[04;38;5;146m' \
-    man "$@"
-}
-
 # YouTube
 alias yt2mp3='youtube-dl -x --audio-format=mp3'
 alias yt2song='youtube-dl -x'
@@ -96,7 +79,10 @@ alias du='du -ch'
 alias diff='colordiff'
 alias mount='mount | column -t'
 alias jobs='jobs -l'
-alias -g '...'='../..'
+alias ...='cd ../../'
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
 alias sign='gpg --detach-sign --use-agent'
 
 alias uniba="export {http,https,ftp}_proxy='http://wproxy.ict.uniba.it:80'"

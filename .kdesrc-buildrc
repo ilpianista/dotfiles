@@ -23,7 +23,24 @@ global
 
 end global
 
+module-set choqok
+  repository kde-projects
+  use-modules choqok
+end module-set
+
+module telepathy-qt
+  repository git://anongit.freedesktop.org/telepathy/telepathy-qt4
+  branch master
+  cmake-options -DPYTHON_EXECUTABLE=/usr/bin/python2 -DDESIRED_QT_VERSION=4
+end module
+
+module-set telpathy-logger-qt
+  repository kde-projects
+  use-modules telepathy-logger-qt
+  cmake-options -DPYTHON_EXECUTABLE=/usr/bin/python2 -DDESIRED_QT_VERSION=4
+end module-set
+
 module-set ktp
   repository kde-projects
-  use-modules libkpeople ktp-common-internals ktp-accounts-kcm ktp-approver ktp-auth-handler ktp-contact-list ktp-filetransfer-handler ktp-kded-module ktp-send-file ktp-text-ui
+  use-modules libkpeople ktp-common-internals ktp-accounts-kcm ktp-approver ktp-auth-handler ktp-contact-list ktp-filetransfer-handler ktp-kded-module ktp-send-file ktp-text-ui ktp-call-ui ktp-kipi-plugin
 end module-set

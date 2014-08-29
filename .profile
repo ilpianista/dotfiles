@@ -32,3 +32,6 @@ export JAVA_FONTS="/usr/share/fonts/TTF"
 
 # SSH agent
 eval $(ssh-agent)
+
+# LS_COLORS
+eval $(dircolors ~/.dir_colors)
