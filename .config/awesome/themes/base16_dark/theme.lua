@@ -1,5 +1,5 @@
 ---------------------------
--- Solarized Light awesome theme --
+-- Base16 Default Dark awesome theme --
 ---------------------------
 local awful = require("awful")
 

@@ -85,9 +85,11 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias sign='gpg --detach-sign --use-agent'
 
-alias uniba="export {http,https,ftp}_proxy='http://wproxy.ict.uniba.it:80'"
 alias wakerome='wol 00:04:ac:65:42:1e'
 
 alias connect='nmcli con up id'
 alias disconnect='nmcli con down id'
 alias wifilist='nmcli dev wifi list'
+
+# Quickly start download any torrent file :-)
+downTorrent() { scp "${1}" www.andreascarpino.it:/media/disk/torrents/ }
