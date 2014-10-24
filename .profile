@@ -35,3 +35,5 @@ eval $(ssh-agent)
 
 # LS_COLORS
 eval $(dircolors ~/.dir_colors)
+
+export KDEWM=awesome

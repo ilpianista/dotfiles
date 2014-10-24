@@ -59,12 +59,12 @@ modkey = "Mod4"
 local layouts =
 {
     awful.layout.suit.floating,
---    awful.layout.suit.tile,
+    awful.layout.suit.tile,
     awful.layout.suit.tile.left,
---    awful.layout.suit.tile.bottom,
+    awful.layout.suit.tile.bottom,
     awful.layout.suit.tile.top,
-    awful.layout.suit.fair,
-    awful.layout.suit.fair.horizontal,
+--    awful.layout.suit.fair,
+--    awful.layout.suit.fair.horizontal,
 --    awful.layout.suit.spiral,
 --    awful.layout.suit.spiral.dwindle,
     awful.layout.suit.max,
@@ -75,9 +75,9 @@ local layouts =
 --    lain.layout.cascade,
 --    lain.layout.cascadetile,
 --    lain.layout.centerwork,
-    lain.layout.uselessfair
+--    lain.layout.uselessfair
 --    lain.layout.uselesspiral,
---    lain.layout.uselesstile
+    lain.layout.uselesstile
 }
 
 -- gaps width
@@ -96,7 +96,7 @@ end
 -- Define a tag table which hold all screen tags.
 tags = {
     names = { "*", "www", "media", "chat", "8", "9", "dev" },
-    layouts = { layouts[7], layouts[6], layouts[1], layouts[2], layouts[4], layouts[4], layouts[4] }
+    layouts = { layouts[7], layouts[6], layouts[6], layouts[2], layouts[2], layouts[2], layouts[2] }
 }
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
@@ -107,11 +107,11 @@ end
 -- {{{ Menu
 -- Create a laucher widget and a main menu
 --myawesomemenu = {
---  { "lock", "kshutdown -k" },
+--  { "lock", "qdbus org.kde.ksmserver /ScreenSaver Lock" },
 --  { "manual", terminal .. " -e man awesome" },
 --  { "edit config", editor_cmd .. " " .. awesome.conffile },
---  { "reboot", "kshutdown -r" },
---  { "shutdown", "kshutdown -s" }
+--  { "reboot", "qdbus org.kde.ksmserver /KSMServer logout 0 1 0" },
+--  { "shutdown", "qdbus org.kde.ksmserver /KSMServer logout 0 2 0" }
 --}
 
 --mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
@@ -133,10 +133,10 @@ separator:set_markup("|")
 
 -- {{{ Power menu
 powermenu = awful.menu({ items = {
-    { "lock", "kshutdown -k" },
-    { "suspend", "kshutdown -S" },
-    { "reboot", "kshutdown -r" },
-    { "shutdown", "kshutdown -s" }
+    { "lock", "qdbus org.kde.ksmserver /ScreenSaver Lock" },
+    { "suspend", "qdbus org.kde.Solid.PowerManagement /org/freedesktop/PowerManagement Suspend" },
+    { "reboot", "qdbus org.kde.ksmserver /KSMServer logout 0 1 0" },
+    { "shutdown", "qdbus org.kde.ksmserver /KSMServer logout 0 2 0" }
   }
 })
 
@@ -274,7 +274,7 @@ wifiwidget = lain.widgets.base({
   end
 })
 
-wifiwidget:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn("kde-nm-connection-editor") end)))
+wifiwidget:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn("kde5-nm-connection-editor") end)))
 
 local wifinotification
 wifiwidget:connect_signal("mouse::enter", function()
@@ -304,7 +304,7 @@ end)
 dateicon = wibox.widget.textbox()
 --dateicon:set_markup('<span font="' .. beautiful.iconFont .. '"></span> ')
 datewidget = awful.widget.textclock("%A, %R")
-lain.widgets.calendar:attach(datewidget, { icons = '', font = "Monospace", font_size = 10 })
+lain.widgets.calendar:attach(datewidget, { icons = '', font = "Anonymous Pro", font_size = 10 })
 -- }}}
 
 -- {{{ Launcher
@@ -481,7 +481,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "space", function () awful.layout.inc(layouts,  1) end),
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
 
-    awful.key({ "Control", "Mod1" }, "l", function () awful.util.spawn("kshutdown -k") end),
+    awful.key({ "Control", "Mod1" }, "l", function () awful.util.spawn("qdbus org.kde.ksmserver /ScreenSaver Lock") end),
     awful.key({ "Control", "Mod1" }, "Escape", function () awful.util.spawn("xkill") end),
 
     awful.key({ modkey, "Control" }, "n", awful.client.restore),

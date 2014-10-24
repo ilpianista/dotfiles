@@ -9,8 +9,8 @@ style "user-font"
 widget_class "*" style "user-font"
 gtk-font-name="Oxygen-Sans Sans-Book 10"
 gtk-theme-name="oxygen-gtk"
-gtk-icon-theme-name="elementary"
-gtk-fallback-icon-theme="elementary"
+gtk-icon-theme-name="breeze"
+gtk-fallback-icon-theme="breeze"
 gtk-toolbar-style=GTK_TOOLBAR_BOTH_HORIZ
 gtk-menu-images=1
 gtk-button-images=1
