@@ -86,6 +86,7 @@ alias mv='mv -i'
 alias sign='gpg --detach-sign --use-agent'
 
 alias wakerome='wol 00:04:ac:65:42:1e'
+alias wakelupino='wol b8:27:eb:43:fb:46'
 
 alias connect='nmcli con up id'
 alias disconnect='nmcli con down id'

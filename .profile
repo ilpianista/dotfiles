@@ -30,10 +30,13 @@ export CCACHE_DIR="/tmp/ccache"
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=lcd -Dswing.aatext=true"
 export JAVA_FONTS="/usr/share/fonts/TTF"
 
+# Extra Qt styles from KDE4
+#export QT_PLUGIN_PATH=/usr/local/lib/kde4/plugins:/usr/local/lib/qt/plugins/:/usr/lib/kde4/plugins/:/usr/lib/qt/plugins
+
+#export XDG_DATA_DIRS="/usr/share:/usr/local/share"
+
 # SSH agent
 eval $(ssh-agent)
 
 # LS_COLORS
 eval $(dircolors ~/.dir_colors)
-
-export KDEWM=awesome

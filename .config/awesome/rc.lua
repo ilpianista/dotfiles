@@ -104,21 +104,6 @@ for s = 1, screen.count() do
 end
 -- }}}
 
--- {{{ Menu
--- Create a laucher widget and a main menu
---myawesomemenu = {
---  { "lock", "qdbus org.kde.ksmserver /ScreenSaver Lock" },
---  { "manual", terminal .. " -e man awesome" },
---  { "edit config", editor_cmd .. " " .. awesome.conffile },
---  { "reboot", "qdbus org.kde.ksmserver /KSMServer logout 0 1 0" },
---  { "shutdown", "qdbus org.kde.ksmserver /KSMServer logout 0 2 0" }
---}
-
---mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
---                                    { "open terminal", terminal }
---                                  }
---                        })
-
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
@@ -161,7 +146,7 @@ cpuwidget = lain.widgets.sysload({
 --  end
 --})
 
-cpuwidget:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn(terminal .. " -e htop") end)))
+cpuwidget:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn("ksysguard") end)))
 
 local cpunotification
 cpuwidget:connect_signal("mouse::enter", function()
@@ -481,7 +466,6 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "space", function () awful.layout.inc(layouts,  1) end),
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
 
-    awful.key({ "Control", "Mod1" }, "l", function () awful.util.spawn("qdbus org.kde.ksmserver /ScreenSaver Lock") end),
     awful.key({ "Control", "Mod1" }, "Escape", function () awful.util.spawn("xkill") end),
 
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
@@ -513,8 +497,15 @@ globalkeys = awful.util.table.join(
     awful.key({ }, "XF86AudioMute", function () awful.util.spawn("amixer -q set Master toggle") end),
     awful.key({ }, "XF86AudioMicMute", function () awful.util.spawn("amixer -q set Capture toggle") end),
 
+    -- Brightness
+  --awful.key({ }, "XF86MonBrightnessDown", function () awful.util.spawn("xbacklight -dec 10") end),
+  --awful.key({ }, "XF86MonBrightnessUp", function () awful.util.spawn("xbacklight -inc 10") end),
+
+  -- Lock screen
+  --awful.key({ }, "XF86ScreenSaver", function () awful.util.spawn("slock") end),
+
     -- Launcher
-    awful.key({}, "XF86Launch1", function () awful.util.spawn(terminal) end)
+    awful.key({}, "XF86Launch1", function () awful.util.spawn("firefox") end)
 )
 
 clientkeys = awful.util.table.join(
@@ -714,4 +705,11 @@ end)
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+-- }}}
+
+-- {{{ Autostart
+-- Autostart apps after login
+--awful.util.spawn_with_shell("xrdb -quiet -merge -nocpp $HOME/.Xresources")
+--awful.util.spawn_with_shell("xsetroot -cursor_name left_ptr")
+awful.util.spawn_with_shell("sh $HOME/bin/askpass.sh")
 -- }}}
