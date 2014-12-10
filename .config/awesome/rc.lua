@@ -146,7 +146,7 @@ cpuwidget = lain.widgets.sysload({
 --  end
 --})
 
-cpuwidget:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn("ksysguard") end)))
+cpuwidget:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn(terminal .. " -e htop") end)))
 
 local cpunotification
 cpuwidget:connect_signal("mouse::enter", function()
@@ -612,7 +612,7 @@ awful.rules.rules = {
     { rule_any = { instance = { "choqok", "dia", "kruler" } },
         properties = { floating = true,
           maximized = false } },
-    { rule = { class = "Amarok" },
+    { rule_any = { class = { "Amarok", "cantata" } },
         properties = { tag = tags[1][3] } },
     { rule = { class = "Vlc" },
         callback = function(c) awful.client.movetotag(tags[mouse.screen][3], c) end,
@@ -711,5 +711,4 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- Autostart apps after login
 --awful.util.spawn_with_shell("xrdb -quiet -merge -nocpp $HOME/.Xresources")
 --awful.util.spawn_with_shell("xsetroot -cursor_name left_ptr")
-awful.util.spawn_with_shell("sh $HOME/bin/askpass.sh")
 -- }}}

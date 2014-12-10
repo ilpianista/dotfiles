@@ -93,4 +93,4 @@ alias disconnect='nmcli con down id'
 alias wifilist='nmcli dev wifi list'
 
 # Quickly start download any torrent file :-)
-downTorrent() { scp "${1}" www.andreascarpino.it:/media/disk/torrents/ }
+downTorrent() { scp "${1}" fuffy.mooo.com:/media/disk/torrents/ }

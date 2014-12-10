@@ -62,7 +62,7 @@ Plugin 'tpope/vim-markdown'
 " emmet for vim
 Plugin 'mattn/emmet-vim'
 " Highlight colors in css files" Highlight colors in css files
-Plugin 'skammer/vim-css-color'
+Plugin 'ap/vim-css-color'
 " vim syntax for LESS (dynamic CSS)
 Plugin 'groenewege/vim-less'
 

@@ -35,8 +35,17 @@ export JAVA_FONTS="/usr/share/fonts/TTF"
 
 #export XDG_DATA_DIRS="/usr/share:/usr/local/share"
 
+# LS_COLORS
+eval $(dircolors ~/.dir_colors)
+
 # SSH agent
 eval $(ssh-agent)
 
-# LS_COLORS
-eval $(dircolors ~/.dir_colors)
+# gpg-agent
+envfile="$HOME/.gnupg/gpg-agent.env"
+if [[ -e "$envfile" ]] && kill -0 $(grep GPG_AGENT_INFO "$envfile" | cut -d: -f 2) 2>/dev/null; then
+  eval "$(cat "$envfile")"
+else
+  eval "$(gpg-agent --daemon --write-env-file "$envfile")"
+fi
+export GPG_AGENT_INFO
