@@ -40,6 +40,8 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'tpope/vim-eunuch'
 " a Git wrapper so awesome, it should be illegal
 Plugin 'tpope/vim-fugitive'
+" A Vim plugin which shows a git diff in the gutter (sign column) and stages/reverts hunks.
+Plugin 'airblade/vim-gitgutter'
 " Vim plugin that displays tags in a window, ordered by class etc.
 Plugin 'majutsushi/tagbar'
 " Syntax checking hacks for vim
@@ -69,8 +71,15 @@ Plugin 'groenewege/vim-less'
 " a vim plugin for Nanoc
 Plugin 'timgreen/vim-nanoc'
 
-" Improved PHP omnicompletion
-"Plugin 'shawncplus/phpcomplete.vim'
+" Vim support for Rust file detection and syntax highlighting
+Plugin 'wting/rust.vim'
+
+" Interactive command execution in Vim. (needed by ghcmod-vim)
+Plugin 'Shougo/vimproc.vim'
+" Happy Haskell programming on Vim, powered by ghc-mod
+Plugin 'eagletmt/ghcmod-vim'
+" Vim plugin for Haskell development
+Plugin 'bitc/vim-hdevtools'
 
 "" Prolog
 " Prolog Integration for Vim
@@ -78,7 +87,7 @@ Plugin 'timgreen/vim-nanoc'
 
 "" Ruby
 " wisely add 'end' in ruby, endfunction/endif/more in vim script, etc
-Plugin 'tpope/vim-endwise'
+"Plugin 'tpope/vim-endwise'
 " Vim runtime files for Haml, Sass, and SCSS
 "Plugin 'tpope/vim-haml'
 " Ruby on Rails power tools
@@ -159,8 +168,8 @@ set wildignore+=*/vendor/gems/*,*/vendor/cache/*,*/.bundle/*,*/.sass-cache/*
 set wildignore+=*.swp,*~,._*
 
 "" Backup and swap files
-set backupdir^=~/.vim/_backup//    " where to put backup files.
-set directory^=~/.vim/_temp//      " where to put swap files.
+set backupdir^=~/.vim/_backup/    " where to put backup files.
+set directory^=~/.vim/_temp/      " where to put swap files.
 
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
@@ -204,7 +213,7 @@ nnoremap <F8> :NERDTreeToggle<CR>
 nnoremap <F9> :TagbarToggle<CR>
 
 " Tern
-let g:tern#command = ['node', 'node_modules/.bin/tern', '--no-port-file']
+let g:tern#command = ['tern', '--no-port-file']
 let g:tern_show_argument_hints = "on_hold"
 set updatetime=1000
 nnoremap K :TernDoc<CR>
@@ -234,3 +243,8 @@ au BufNewFile,BufRead *.plpgsql setf pgsql
 
 " Reformat XML file
 au FileType xml exe ":silent %!xmllint --format --recover - 2>/dev/null"
+
+" ghc-mod Reload
+map <silent> tu :call GHC_BrowseAll()<CR>
+" ghc-moc Type Lookup
+map <silent> tw :call GHC_ShowType(1)<CR>
