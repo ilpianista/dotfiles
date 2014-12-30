@@ -12,6 +12,8 @@ import XMonad.Actions.SpawnOn
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.SetWMName
+import XMonad.Layout.NoBorders
+import XMonad.Layout.PerWorkspace
 import XMonad.Util.Run(spawnPipe)
 import Data.Monoid
 import System.IO
@@ -71,7 +73,7 @@ myFocusedBorderColor = "#303030"
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- launch a terminal
-    [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
+    [ ((modm,               xK_Return), spawn $ XMonad.terminal conf)
 
     -- launch dmenu
     , ((modm,               xK_r     ), spawn "dmenu_run")
@@ -101,7 +103,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_m     ), windows W.focusMaster  )
 
     -- Swap the focused window and the master window
-    , ((modm,               xK_Return), windows W.swapMaster)
+    , ((modm .|. shiftMask, xK_Return), windows W.swapMaster)
 
     -- Swap the focused window with the next window
     , ((modm .|. shiftMask, xK_j     ), windows W.swapDown  )
@@ -158,6 +160,27 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     --    | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
     --    , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
+    -- Audio bindings
+    ++
+    [ ((0, 0x1008ff13), spawn "amixer -q set Master 5%+ unmute") -- XF86AudioRaiseVolume
+    , ((0, 0x1008ff11), spawn "amixer -q set Master 5%- unmute") -- XF86AudioLowerVolume
+    , ((0, 0x1008ff12), spawn "amixer -q set Master toggle") -- XF86AudioMute
+    , ((0, 0x1008ffb2), spawn "amixer -q set Capture toggle") -- XF86AudioMicMute
+    ]
+
+    -- Brightness bindings
+    -- ++
+    --[ ((0, 0x1008ff03), spawn "xbacklight -dec 10") -- XF86MonBrightnessDown
+    --, ((0, 0x1008ff02), spawn "xbacklight -inc 10") -- XF86MonBrightnessUp
+    --]
+
+    -- Extra bindings
+    ++
+    [ ((0, 0x1008ff41), spawn "firefox") -- XF86Launch1
+    --, ((0, 0x1008ff2d), spawn "slock") -- XF86ScreenSaver
+    ]
+
+
 
 ------------------------------------------------------------------------
 -- Mouse bindings: default actions bound to mouse events
@@ -189,7 +212,15 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myLayout = avoidStruts $ tiled ||| Mirror tiled ||| Full
+myLayout = avoidStruts $
+
+  -- borders automatically disappear for fullscreen windows
+  smartBorders $
+
+  -- custom layouts per workspaces
+  onWorkspace "web" (Full ||| tiled) $
+
+  tiled ||| Mirror tiled ||| Full
   where
      -- default tiling algorithm partitions the screen into two panes
     tiled   = Tall nmaster delta ratio
@@ -219,10 +250,24 @@ myLayout = avoidStruts $ tiled ||| Mirror tiled ||| Full
 -- 'className' and 'resource' are used below.
 --
 myManageHook = composeAll
-    [ className =? "MPlayer"        --> doFloat
-    , className =? "Gimp"           --> doFloat
-    , resource  =? "desktop_window" --> doIgnore
-    , resource  =? "kdesktop"       --> doIgnore ]
+    [ className =? "Firefox"            --> doShift "web"
+    , resource  =? "kontact"            --> doShift "web"
+    , className =? "Vlc"                --> doFloat <+> doShift "media"
+    , className =? "Amarok"             --> doShift "media"
+    , className =? "cantata"            --> doShift "media"
+    , className =? "Konversation"       --> doShift "chat"
+    , className =? "Ktp-contactlist"    --> doShift "chat"
+    , className =? "Ktp-text-ui"        --> doShift "chat"
+    , className =? "Skype"              --> doShift "chat"
+    , className =? "jetbrains-idea"     --> doShift "dev"
+    , className =? "KDevelop"           --> doShift "dev"
+    , className =? "Kate"               --> doShift "dev"
+    , className =? "QtCreator"          --> doShift "dev"
+    , className =? "Designer-qt4"       --> doShift "dev"
+    , className =? "Designer-qt5"       --> doShift "dev"
+    , className =? "JavaFXSceneBuilder" --> doShift "dev"
+    , resource  =? "choqok"          --> doFloat
+    ]
 
 ------------------------------------------------------------------------
 -- Event handling
@@ -250,11 +295,7 @@ myEventHook = mempty
 -- with mod-q.  Used by, e.g., XMonad.Layout.PerWorkspace to initialize
 -- per-workspace layout choices.
 --
-myStartupHook = setWMName "LG3D"
-  >> spawnHere "feh --bg-fill $HOME/Pictures/wallpapers/wall_148.jpg"
-  >> spawnHere "dunst"
---  >> spawnHere "xrdb -quiet -merge -nocpp $HOME/.Xresources"
---  >> spawnHere "xsetroot -cursor_name left_ptr"
+myStartupHook = setWMName "LG3D" -- pre java 7 workaround for some apps
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
@@ -263,6 +304,10 @@ myStartupHook = setWMName "LG3D"
 --
 main = do
   xmproc <- spawnPipe "xmobar"
+  spawn "feh --bg-fill $HOME/Pictures/wallpapers/wall_148.jpg"
+  spawn "dunst"
+--  spawn "xrdb -quiet -merge -nocpp $HOME/.Xresources"
+--  spawn "xsetroot -cursor_name left_ptr"
   xmonad $ defaults {
            logHook = dynamicLogWithPP $ xmobarPP
                    { ppOutput = hPutStrLn xmproc

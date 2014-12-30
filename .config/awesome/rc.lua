@@ -484,9 +484,9 @@ globalkeys = awful.util.table.join(
 --    awful.key({ modkey }, "p", function() menubar.show() end),
 
     -- Application Switcher
-    awful.key({ "Mod1" }, "Escape", function ()
-      awful.menu.clients({ theme = { width = 500 } })
-    end),
+    --awful.key({ "Mod1" }, "Escape", function ()
+    --  awful.menu.clients({ theme = { width = 500 } })
+    --end),
 
     -- Print screen
     awful.key({ }, "Print", function () awful.util.spawn("ksnapshot") end),
@@ -626,7 +626,7 @@ awful.rules.rules = {
         callback = function(c) awful.client.movetotag(tags[mouse.screen][7], c) end,
         properties = { size_hints_honor = false,
           maximized = true } },
-    { rule_any = { class = { "Eclipse", "Kdevelop", "Kate", "QtCreator",
+    { rule_any = { class = { "jetbrains-idea", "Kdevelop", "Kate", "QtCreator",
           "Designer-qt4", "Designer-qt5", "JavaFXSceneBuilder" } },
         except = { type = "dialog" },
         callback = function(c) awful.client.movetotag(tags[mouse.screen][7], c) end,

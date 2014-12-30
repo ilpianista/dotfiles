@@ -1,17 +1,18 @@
 Config {
 
    -- appearance
-     font =         "xft:Anonymous Pro:size=10:antialias=true"
+     font =         "xft:Anonymous Pro:size=10,Ionicons:size=10"
    , bgColor =      "#151515"
    , fgColor =      "#90a959"
    , position =     Top
    , border =       BottomB
    , borderColor =  "#151515"
+   , iconRoot =     "."
 
    -- layout
    , sepChar =  "%"   -- delineator between plugin names and straight text
    , alignSep = "}{"  -- separator between left-right alignment
-   , template = "%StdinReader%}{%battery% | %multicpu% | %coretemp% | %memory% | %dynnetwork% | %date%"
+   , template = "%StdinReader%}{%wlan0wi% %default:Master% %battery% %multicpu% %date%"
 
    -- general behavior
    , lowerOnStart =     True    -- send to bottom of window stack on start
@@ -37,62 +38,32 @@ Config {
    --   see http://projects.haskell.org/xmobar/#system-monitor-plugins.
    , commands =
 
-        -- weather monitor
-        --[ Run Weather "RJTT" [ "--template", "<skyCondition> | <fc=#4682B4><tempC></fc>°C | <fc=#4682B4><rh></fc>% | <fc=#4682B4><pressure></fc>hPa"
-        --                     ] 36000
-
         -- network activity monitor (dynamic interface resolution)
-        [ Run DynNetwork     [ "--template" , "<dev>: <tx>kB/s|<rx>kB/s"
-                             , "--Low"      , "1000"       -- units: kB/s
-                             , "--High"     , "5000"       -- units: kB/s
-                             , "--low"      , "darkgreen"
-                             , "--normal"   , "darkorange"
-                             , "--high"     , "darkred"
-                             ] 10
+        [ Run Wireless "wlan0" [ "--template" , "<fc=#6a9fb5> <essid></fc>"
+                               ] 15
 
-        -- cpu activity monitor
-        , Run MultiCpu       [ "--template" , "Cpu: <total0>%|<total1>%"
-                             , "--Low"      , "50"         -- units: %
-                             , "--High"     , "85"         -- units: %
-                             , "--low"      , "darkgreen"
-                             , "--normal"   , "darkorange"
-                             , "--high"     , "darkred"
-                             ] 10
-
-        -- cpu core temperature monitor
-        , Run CoreTemp       [ "--template" , "Temp: <core0>°C|<core1>°C"
-                             , "--Low"      , "70"        -- units: °C
-                             , "--High"     , "80"        -- units: °C
-                             , "--low"      , "darkgreen"
-                             , "--normal"   , "darkorange"
-                             , "--high"     , "darkred"
-                             ] 50
-
-        -- memory usage monitor
-        , Run Memory         [ "--template" ,"Mem: <usedratio>%"
-                             , "--Low"      , "20"        -- units: %
-                             , "--High"     , "90"        -- units: %
-                             , "--low"      , "darkgreen"
-                             , "--normal"   , "darkorange"
-                             , "--high"     , "darkred"
-                             ] 10
+        , Run Volume "default" "Master" [ "--template" , "<status>"
+                                        , "--"
+                                        , "-c"         , "#aa759f"
+                                        , "-o"         , ""
+                                        , "-C"         , "#aa759f"
+                                        , "-O"         , " <volume>"
+                                        ] 10
 
         -- battery monitor
-        , Run Battery        [ "--template" , "Batt: <acstatus>"
-                             , "--Low"      , "10"        -- units: %
-                             , "--High"     , "80"        -- units: %
-                             , "--low"      , "darkred"
-                             , "--normal"   , "darkorange"
-                             , "--high"     , "darkgreen"
+        , Run BatteryP ["BAT0"] [ "--template" , "<acstatus>"
+                                , "--Low"      , "20"        -- units: %
+                                , "--High"     , "80"        -- units: %
+                                , "--low"      , "#ac4142"
+                                , "--high"     , "#d28445"
+                                , "--"
+                                , "-o"         , "<fc=#d28445> <left>%</fc>"
+                                , "-O"         , "<fc=#d28445> <left>%</fc>"
+                                ] 60
 
-                             , "--" -- battery specific options
-                                       -- discharging status
-                                       , "-o" , "<left>% (<timeleft>)"
-                                       -- AC "on" status
-                                       , "-O" , "<fc=#dAA520>Charging</fc>"
-                                       -- charged status
-                                       , "-i" , "<fc=#006000>Charged</fc>"
-                             ] 50
+        -- system load monitor
+        , Run MultiCpu          [ "--template" , "<fc=#f4bf75> <total>%</fc>"
+                                ] 15
 
         -- time and date indicator
         , Run Date           "%A, %R" "date" 60
