@@ -58,7 +58,7 @@ myModMask       = mod4Mask
 --
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
-myWorkspaces    = ["*","web","media","chat"] ++ map show [5..8] ++ ["dev"]
+myWorkspaces    = ["*","web","media","chat"] ++ map show [5..9] ++ ["dev"]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
@@ -148,7 +148,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- mod-shift-[1..9], Move client to workspace N
     --
     [((m .|. modm, k), windows $ f i)
-        | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
+        | (i, k) <- zip (XMonad.workspaces conf) ([xK_1 .. xK_9] ++ [xK_0])
         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
     -- ++
 
@@ -313,7 +313,7 @@ main = do
                    { ppOutput = hPutStrLn xmproc
                    , ppCurrent = xmobarColor "#d0d0d0" ""
                    , ppVisible = xmobarColor "#90a959" ""
-                   , ppTitle = xmobarColor "#d0d0d0" "" . shorten 80
+                   , ppTitle = xmobarColor "#d0d0d0" "" . shorten 140
                    }
            }
 
