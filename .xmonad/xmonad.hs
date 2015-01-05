@@ -1,14 +1,8 @@
 --
--- xmonad example config file.
---
--- A template showing all available configuration hooks,
--- and how to override the defaults in your own xmonad.hs conf file.
---
--- Normally, you'd only override those defaults you care about.
+-- xmonad config file.
 --
 
 import XMonad
-import XMonad.Actions.SpawnOn
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.SetWMName
@@ -259,7 +253,7 @@ myManageHook = composeAll
     , className =? "Ktp-contactlist"    --> doShift "chat"
     , className =? "Ktp-text-ui"        --> doShift "chat"
     , className =? "Skype"              --> doShift "chat"
-    , className =? "jetbrains-idea"     --> doShift "dev"
+    , className =? "Eclipse"            --> doShift "dev"
     , className =? "KDevelop"           --> doShift "dev"
     , className =? "Kate"               --> doShift "dev"
     , className =? "QtCreator"          --> doShift "dev"
@@ -311,8 +305,11 @@ main = do
   xmonad $ defaults {
            logHook = dynamicLogWithPP $ xmobarPP
                    { ppOutput = hPutStrLn xmproc
-                   , ppCurrent = xmobarColor "#d0d0d0" ""
-                   , ppVisible = xmobarColor "#90a959" ""
+                   , ppCurrent = xmobarColor "#d0d0d0" "#151515"
+                   , ppUrgent = xmobarColor "#202020" "#ac4142"
+                   , ppVisible = xmobarColor "#90a959" "#151515"
+                   , ppSep = " ~ "
+                   , ppOrder = \(ws:_:t:_) -> [ws,t]
                    , ppTitle = xmobarColor "#d0d0d0" "" . shorten 140
                    }
            }

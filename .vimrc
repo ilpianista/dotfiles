@@ -68,12 +68,11 @@ Plugin 'ap/vim-css-color'
 " vim syntax for LESS (dynamic CSS)
 Plugin 'groenewege/vim-less'
 
-" a vim plugin for Nanoc
-Plugin 'timgreen/vim-nanoc'
-
 " Vim support for Rust file detection and syntax highlighting
-Plugin 'wting/rust.vim'
+"Plugin 'wting/rust.vim'
 
+" vim2hs :: Vim -> Haskell
+Plugin 'dag/vim2hs'
 " Interactive command execution in Vim. (needed by ghcmod-vim)
 Plugin 'Shougo/vimproc.vim'
 " Happy Haskell programming on Vim, powered by ghc-mod

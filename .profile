@@ -11,9 +11,6 @@ export PATH="$HOME/bin:$PATH"
 # RubyGems
 export PATH="$(ruby -e 'puts Gem.user_dir')/bin:$PATH"
 
-# Set bunlder to install rubies in $HOME
-export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
-
 # Cabal
 export PATH="$HOME/.cabal/bin:$PATH"
 
