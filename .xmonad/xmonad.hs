@@ -3,6 +3,7 @@
 --
 
 import XMonad
+import XMonad.Actions.GridSelect
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.SetWMName
@@ -60,6 +61,13 @@ myNormalBorderColor :: [Char]
 myNormalBorderColor  = "#151515"
 myFocusedBorderColor :: [Char]
 myFocusedBorderColor = "#303030"
+
+powerMenu :: [(String, X ())]
+powerMenu = [ ("lock" , spawn "qdbus org.kde.ksmserver /ScreenSaver Lock")
+            , ("suspend" , spawn "qdbus org.kde.Solid.PowerManagement /org/freedesktop/PowerManagement Suspend")
+            , ("reboot" , spawn "qdbus org.kde.ksmserver /KSMServer logout 0 1 0")
+            , ("shutdown" , spawn "qdbus org.kde.ksmserver /KSMServer logout 0 2 0")
+            ]
 
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
@@ -120,6 +128,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Deincrement the number of windows in the master area
     , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
 
+    , ((controlMask .|. mod1Mask, xK_l), runSelectedAction defaultGSConfig powerMenu)
+
     -- Toggle the status bar gap
     -- Use this binding with avoidStruts from Hooks.ManageDocks.
     -- See also the statusBar function from Hooks.DynamicLog.
@@ -127,7 +137,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- , ((modm              , xK_b     ), sendMessage ToggleStruts)
 
     -- Quit xmonad
-    , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
+    --, ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
 
     -- Restart xmonad
     , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
@@ -138,21 +148,21 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     ++
 
     --
-    -- mod-[1..9], Switch to workspace N
-    -- mod-shift-[1..9], Move client to workspace N
+    -- mod-[1..0], Switch to workspace N
+    -- mod-shift-[1..0], Move client to workspace N
     --
     [((m .|. modm, k), windows $ f i)
         | (i, k) <- zip (XMonad.workspaces conf) ([xK_1 .. xK_9] ++ [xK_0])
         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
-    -- ++
+    ++
 
     --
-    -- mod-{w,e,r}, Switch to physical/Xinerama screens 1, 2, or 3
-    -- mod-shift-{w,e,r}, Move client to screen 1, 2, or 3
+    -- mod-w, Switch to physical/Xinerama screens 1
+    -- mod-shift-w, Move client to screen 1
     --
-    --[((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
-    --    | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
-    --    , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
+    [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
+      | (key, sc) <- zip [xK_w] [0]
+        , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
     -- Audio bindings
     ++
@@ -171,9 +181,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Extra bindings
     ++
     [ ((0, 0x1008ff41), spawn "firefox") -- XF86Launch1
-    --, ((0, 0x1008ff2d), spawn "slock") -- XF86ScreenSaver
+    , ((0, 0x1008ff2d), spawn "qdbus org.kde.ksmserver /ScreenSaver Lock") -- XF86ScreenSaver
+    , ((0, xK_Print  ), spawn "ksnapshot") -- XF86ScreenSaver
     ]
-
 
 
 ------------------------------------------------------------------------
@@ -260,7 +270,7 @@ myManageHook = composeAll
     , className =? "Designer-qt4"       --> doShift "dev"
     , className =? "Designer-qt5"       --> doShift "dev"
     , className =? "JavaFXSceneBuilder" --> doShift "dev"
-    , resource  =? "choqok"          --> doFloat
+    , className =? "Xmessage"           --> doFloat
     ]
 
 ------------------------------------------------------------------------
