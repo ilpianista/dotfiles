@@ -3,7 +3,7 @@
 --
 
 import XMonad
-import XMonad.Actions.GridSelect
+--import XMonad.Actions.GridSelect
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.SetWMName
@@ -12,7 +12,6 @@ import XMonad.Layout.PerWorkspace
 import XMonad.Util.Run(spawnPipe)
 import Data.Monoid
 import System.IO
-import System.Exit
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
@@ -21,7 +20,7 @@ import qualified Data.Map        as M
 -- certain contrib modules.
 --
 myTerminal :: [Char]
-myTerminal      = "konsole"
+myTerminal = "konsole"
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
@@ -34,7 +33,7 @@ myClickJustFocuses = False
 -- Width of the window border in pixels.
 --
 myBorderWidth :: Dimension
-myBorderWidth   = 1
+myBorderWidth = 1
 
 -- modMask lets you specify which modkey you want to use. The default
 -- is mod1Mask ("left alt").  You may also consider using mod3Mask
@@ -42,7 +41,7 @@ myBorderWidth   = 1
 -- "windows key" is usually mod4Mask.
 --
 myModMask :: KeyMask
-myModMask       = mod4Mask
+myModMask = mod4Mask
 
 -- The default number of workspaces (virtual screens) and their names.
 -- By default we use numeric strings, but any string may be used as a
@@ -53,7 +52,7 @@ myModMask       = mod4Mask
 --
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
-myWorkspaces    = ["*","web","media","chat"] ++ map show [5..9] ++ ["dev"]
+myWorkspaces = ["*","web","media","chat"] ++ map show [5..9] ++ ["dev"]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
@@ -62,12 +61,12 @@ myNormalBorderColor  = "#151515"
 myFocusedBorderColor :: [Char]
 myFocusedBorderColor = "#303030"
 
-powerMenu :: [(String, X ())]
-powerMenu = [ ("lock" , spawn "qdbus org.kde.ksmserver /ScreenSaver Lock")
-            , ("suspend" , spawn "qdbus org.kde.Solid.PowerManagement /org/freedesktop/PowerManagement Suspend")
-            , ("reboot" , spawn "qdbus org.kde.ksmserver /KSMServer logout 0 1 0")
-            , ("shutdown" , spawn "qdbus org.kde.ksmserver /KSMServer logout 0 2 0")
-            ]
+--powerMenu :: [(String, X ())]
+--powerMenu = [ ("lock" , spawn "qdbus org.kde.ksmserver /ScreenSaver Lock")
+--            , ("suspend" , spawn "qdbus org.kde.Solid.PowerManagement /org/freedesktop/PowerManagement Suspend")
+--            , ("reboot" , spawn "qdbus org.kde.ksmserver /KSMServer logout 0 1 0")
+--            , ("shutdown" , spawn "qdbus org.kde.ksmserver /KSMServer logout 0 2 0")
+--            ]
 
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
@@ -82,6 +81,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- close focused window
     , ((modm .|. shiftMask, xK_c     ), kill)
+
+    , ((controlMask .|. mod1Mask, xK_Escape), spawn "xkill")
 
      -- Rotate through the available layout algorithms
     , ((modm,               xK_space ), sendMessage NextLayout)
@@ -128,7 +129,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Deincrement the number of windows in the master area
     , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
 
-    , ((controlMask .|. mod1Mask, xK_l), runSelectedAction defaultGSConfig powerMenu)
+    --, ((controlMask .|. mod1Mask, xK_l), runSelectedAction defaultGSConfig powerMenu)
+
+    , ((controlMask .|. mod1Mask, xK_l), spawn "qdbus org.kde.ksmserver /ScreenSaver Lock")
 
     -- Toggle the status bar gap
     -- Use this binding with avoidStruts from Hooks.ManageDocks.
@@ -181,8 +184,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Extra bindings
     ++
     [ ((0, 0x1008ff41), spawn "firefox") -- XF86Launch1
-    , ((0, 0x1008ff2d), spawn "qdbus org.kde.ksmserver /ScreenSaver Lock") -- XF86ScreenSaver
-    , ((0, xK_Print  ), spawn "ksnapshot") -- XF86ScreenSaver
+    --, ((0, 0x1008ff2d), spawn "qdbus org.kde.ksmserver /ScreenSaver Lock") -- XF86ScreenSaver
+    , ((0, xK_Print  ), spawn "ksnapshot") -- XF86Print
     ]
 
 
