@@ -4,6 +4,7 @@
 
 import XMonad
 --import XMonad.Actions.GridSelect
+import XMonad.Actions.CycleWS
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.SetWMName
@@ -24,7 +25,7 @@ myTerminal = "konsole"
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
-myFocusFollowsMouse = True
+myFocusFollowsMouse = False
 
 -- Whether clicking on a window to focus also passes the click to the window
 myClickJustFocuses :: Bool
@@ -159,12 +160,11 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
     ++
 
+    -- mod-{w,e}, Switch to previous/next Xinerama screen
+    -- mod-shift-{w,e}, Move client to previous/next Xinerama screen
     --
-    -- mod-w, Switch to physical/Xinerama screens 1
-    -- mod-shift-w, Move client to screen 1
-    --
-    [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
-      | (key, sc) <- zip [xK_w] [0]
+    [((m .|. modm, key), sc >>= screenWorkspace >>= flip whenJust (windows . f))
+        | (key, sc) <- zip [xK_w, xK_e] [(screenBy (-1)),(screenBy 1)]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
     -- Audio bindings
