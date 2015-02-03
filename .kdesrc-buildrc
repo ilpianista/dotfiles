@@ -28,6 +28,11 @@ module-set choqok
   use-modules choqok
 end module-set
 
+module-set kdeutils
+  repository kde-projects
+  use-modules kgpg
+end module-set
+
 #module telepathy-qt
 #  repository git://anongit.freedesktop.org/telepathy/telepathy-qt4
 #  branch master

@@ -19,8 +19,11 @@ export PATH="$HOME/node_modules/.bin:$PATH"
 
 export GCC_COLORS="error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01"
 
-# Load KDE stuff from /usr/local
+# Load KDE4 stuff from /usr/local
 export KDEDIRS="/usr/local:$KDEDIRS"
+
+# Extra Qt plugins from /usr/local
+export QT_PLUGIN_PATH=/usr/local/lib/qt/plugins:${QT_PLUGIN_PATH}
 
 # Speed-up rebuilds
 export PATH="/usr/lib/ccache/bin:$PATH"
@@ -30,10 +33,7 @@ export CCACHE_DIR="/tmp/ccache"
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=lcd -Dswing.aatext=true"
 export JAVA_FONTS="/usr/share/fonts/TTF"
 
-# Extra Qt styles from KDE4
-#export QT_PLUGIN_PATH=/usr/local/lib/kde4/plugins:/usr/local/lib/qt/plugins/:/usr/lib/kde4/plugins/:/usr/lib/qt/plugins
-
-#export XDG_DATA_DIRS="/usr/share:/usr/local/share"
+#export XDG_DATA_DIRS="/usr/local/share:/usr/share"
 
 # LS_COLORS
 eval $(dircolors ~/.dir_colors)
@@ -49,3 +49,6 @@ else
   eval "$(gpg-agent --daemon --write-env-file "$envfile")"
 fi
 export GPG_AGENT_INFO
+
+# Automatically startx
+#[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx
