@@ -120,6 +120,9 @@ Plugin 'derekwyatt/vim-scala'
 " Base16 for Vim
 Plugin 'chriskempson/base16-vim'
 
+" Load KDE settings
+source /home/andrea/projects/KDE/kde/kdesdk/kde-dev-scripts/kde-devel-vim.vim
+
 "" general stuff
 set encoding=utf-8 " necessary to show unicode glyphs
 set showcmd        " display incomplete commands

@@ -21,6 +21,15 @@ export GCC_COLORS="error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 
 # Load KDE4 stuff from /usr/local
 export KDEDIRS="/usr/local:$KDEDIRS"
+# Disable Dr Konqui
+export KDE_DEBUG=1
+# Will make KDebug produce colored output
+export KDE_COLOR_DEBUG=1
+
+# Equivalent of KDebug colored output for Qt5
+c=`echo -e "\033"`
+export QT_MESSAGE_PATTERN="%{appname}(%{pid})/(%{category}) $c\[31m%{if-debug}$c\[34m%{endif}%{function}$c\[0m: %{message}"
+unset c
 
 # Extra Qt plugins from /usr/local
 export QT_PLUGIN_PATH=/usr/local/lib/qt/plugins:${QT_PLUGIN_PATH}
