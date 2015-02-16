@@ -28,7 +28,7 @@ export KDE_COLOR_DEBUG=1
 
 # Equivalent of KDebug colored output for Qt5
 c=`echo -e "\033"`
-export QT_MESSAGE_PATTERN="%{appname}(%{pid})/(%{category}) $c\[31m%{if-debug}$c\[34m%{endif}%{function}$c\[0m: %{message}"
+export QT_MESSAGE_PATTERN="[%{appname}(%{pid})/(%{category}) ${c}[31m%{if-debug}${c}[34m%{endif}%{function}${c}[0m: %{message}"
 unset c
 
 # Extra Qt plugins from /usr/local
