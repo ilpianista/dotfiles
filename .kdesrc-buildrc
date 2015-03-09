@@ -30,7 +30,12 @@ end module-set
 
 module-set kdeutils
   repository kde-projects
-  use-modules kgpg
+  use-modules kdf kgpg
+end module-set
+
+module-set kdesdk
+  repository kde-projects
+  use-modules kde-dev-scripts
 end module-set
 
 #module telepathy-qt

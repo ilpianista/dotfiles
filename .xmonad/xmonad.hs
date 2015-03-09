@@ -25,7 +25,7 @@ myTerminal = "konsole"
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
-myFocusFollowsMouse = False
+myFocusFollowsMouse = True
 
 -- Whether clicking on a window to focus also passes the click to the window
 myClickJustFocuses :: Bool
@@ -226,6 +226,7 @@ myLayout = avoidStruts $
 
   -- custom layouts per workspaces
   onWorkspace "web" (Full ||| tiled) $
+  onWorkspace "dev" (Mirror tiled ||| Full) $
 
   tiled ||| Mirror tiled ||| Full
   where
@@ -267,7 +268,7 @@ myManageHook = composeAll
     , className =? "Ktp-text-ui"        --> doShift "chat"
     , className =? "Skype"              --> doShift "chat"
     , className =? "Eclipse"            --> doShift "dev"
-    , className =? "KDevelop"           --> doShift "dev"
+    , className =? "Kdevelop"           --> doShift "dev"
     , className =? "Kate"               --> doShift "dev"
     , className =? "QtCreator"          --> doShift "dev"
     , className =? "Designer-qt4"       --> doShift "dev"
