@@ -194,7 +194,7 @@ batwidget = lain.widgets.bat({
   settings = function()
     remainingtime = bat_now.time
     if bat_now.status == "Charging" or bat_now.status == "Full" then
-      widget:set_markup('<span font="' ..  beautiful.iconFont .. '" color="' .. beautiful.widget_bat_fg .. '"></span> <span color="' .. beautiful.widget_bat_fg .. '">' .. bat_now.perc .. '%</span>')
+      widget:set_markup('<span font="' .. beautiful.iconFont .. '" color="' .. beautiful.widget_bat_fg .. '"></span> <span color="' .. beautiful.widget_bat_fg .. '">' .. bat_now.perc .. '%</span>')
     elseif tonumber(bat_now.perc) > 60 then
       widget:set_markup('<span font="' .. beautiful.iconFont .. '" color="' .. beautiful.widget_bat_fg .. '"></span> <span color="' .. beautiful.widget_bat_fg .. '">' .. bat_now.perc .. '%</span>')
     elseif tonumber(bat_now.perc) > 20 then
@@ -289,7 +289,7 @@ end)
 dateicon = wibox.widget.textbox()
 --dateicon:set_markup('<span font="' .. beautiful.iconFont .. '"></span> ')
 datewidget = awful.widget.textclock("%A, %R")
-lain.widgets.calendar:attach(datewidget, { icons = '', font = "Anonymous Pro", font_size = 10 })
+lain.widgets.calendar:attach(datewidget, { icons = '', font = "Source Code Pro", font_size = 10 })
 -- }}}
 
 -- {{{ Launcher
@@ -609,7 +609,7 @@ awful.rules.rules = {
     { rule_any = { instance = { "gimp" } },
         except = { type = "dialog" },
         properties = { maximized = true } },
-    { rule_any = { instance = { "choqok", "dia", "kruler" } },
+    { rule_any = { instance = { "dia", "kruler" } },
         properties = { floating = true,
           maximized = false } },
     { rule_any = { class = { "Amarok", "cantata" } },
@@ -619,14 +619,14 @@ awful.rules.rules = {
         properties = { floating = true } },
     { rule_any = { class = { "Firefox" } },
        callback = function(c) awful.client.movetotag(tags[mouse.screen][2], c) end },
-    { rule_any = { class = { "Konversation", "Ktp-contactlist", "Ktp-text-ui", "Skype" } },
+    { rule_any = { class = { "Konversation", "ktpcontactlist", "Ktp-text-ui", "Skype" } },
         properties = { tag = tags[1][4] } },
     { rule = { class = "Gvim" },
         except = { type = "dialog" },
         callback = function(c) awful.client.movetotag(tags[mouse.screen][7], c) end,
         properties = { size_hints_honor = false,
           maximized = true } },
-    { rule_any = { class = { "jetbrains-idea", "Kdevelop", "Kate", "QtCreator",
+    { rule_any = { class = { "jetbrains-idea-ce", "jetbrains-android-studio", "Kdevelop", "kate", "QtCreator",
           "Designer-qt4", "Designer-qt5", "JavaFXSceneBuilder" } },
         except = { type = "dialog" },
         callback = function(c) awful.client.movetotag(tags[mouse.screen][7], c) end,
