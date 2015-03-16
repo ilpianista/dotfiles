@@ -10,8 +10,11 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.SetWMName
 import XMonad.Layout.NoBorders
 import XMonad.Layout.PerWorkspace
+import XMonad.Prompt.Shell
+import XMonad.Prompt
 import XMonad.Util.Run(spawnPipe)
 import Data.Monoid
+import Data.List(isPrefixOf)
 import System.IO
 
 import qualified XMonad.StackSet as W
@@ -78,7 +81,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [ ((modm,               xK_Return), spawn $ XMonad.terminal conf)
 
     -- launch dmenu
-    , ((modm,               xK_r     ), spawn "dmenu_run")
+    , ((modm,               xK_r     ), shellPrompt myXPConfig)
 
     -- close focused window
     , ((modm .|. shiftMask, xK_c     ), kill)
@@ -188,6 +191,28 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((0, xK_Print  ), spawn "ksnapshot") -- XF86Print
     ]
 
+myXPConfig :: XPConfig
+myXPConfig =
+    XPC { font              = "xft:Source Code Pro:size=9"
+        , bgColor           = "#151515"
+        , fgColor           = "#90a959"
+        , fgHLight          = "#d0d0d0"
+        , bgHLight          = "#151515"
+        , borderColor       = "#151515"
+        , promptBorderWidth = 0
+        , promptKeymap      = defaultXPKeymap
+        , completionKey     = xK_Tab
+        , changeModeKey     = xK_grave
+        , position          = Top
+        , height            = 22
+        , historySize       = 256
+        , historyFilter     = id
+        , defaultText       = []
+        , autoComplete      = Nothing
+        , showCompletionOnTab = False
+        , searchPredicate   = isPrefixOf
+        , alwaysHighlight   = False
+        }
 
 ------------------------------------------------------------------------
 -- Mouse bindings: default actions bound to mouse events
@@ -263,7 +288,7 @@ myManageHook = composeAll
     , className =? "Vlc"                --> doFloat <+> doShift "media"
     , className =? "Amarok"             --> doShift "media"
     , className =? "cantata"            --> doShift "media"
-    , className =? "Konversation"       --> doShift "chat"
+    , className =? "konversation"       --> doShift "chat"
     , className =? "ktpcontactlist"     --> doShift "chat"
     , className =? "Ktp-text-ui"        --> doShift "chat"
     , className =? "Skype"              --> doShift "chat"

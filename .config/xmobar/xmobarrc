@@ -1,14 +1,18 @@
 Config {
 
    -- appearance
-     font =         "xft:Anonymous Pro:size=10,Ionicons:size=10"
-   , bgColor =      "#151515"
-   , fgColor =      "#90a959"
-   , position =     Top
-   , border =       NoBorder
-   , borderColor =  "#151515"
-   , borderWidth =  1
-   , iconRoot =     "."
+     font            = "xft:Source Code Pro:size=9,Ionicons:size=10"
+   , additionalFonts = []
+   , bgColor         = "#151515"
+   , fgColor         = "#90a959"
+   , alpha           = 255
+   , position        = Top
+   , border          = NoBorder
+   , borderColor     = "#151515"
+   , borderWidth     = 0
+   , textOffset      = -1
+   , iconOffset      = -1
+   , iconRoot        = "."
 
    -- layout
    , sepChar =  "%"   -- delineator between plugin names and straight text
@@ -39,10 +43,12 @@ Config {
    --   see http://projects.haskell.org/xmobar/#system-monitor-plugins.
    , commands =
 
-        -- network activity monitor (dynamic interface resolution)
-        [ Run Wireless "wlan0" [ "--template" , "<action=`kde5-nm-connection-editor`><fc=#6a9fb5> <essid></fc></action>"
-                               ] 15
+        [
+        -- wireless network activity monitor
+        Run Wireless "wlan0" [ "--template" , "<action=`kde5-nm-connection-editor`><fc=#6a9fb5> <essid></fc></action>"
+                             ] 15
 
+        -- volume monitor
         , Run Volume "default" "Master" [ "--template" , "<action=`amixer -q set Master toggle`><status></action>"
                                         , "--"
                                         , "-c"         , "#aa759f"
@@ -68,7 +74,7 @@ Config {
                                 ] 15
 
         -- time and date indicator
-        , Run Date           "%A, %R" "date" 60
+        , Run Date              "%A, %R" "date" 60
 
         , Run StdinReader
         ]
