@@ -9,7 +9,7 @@ call vundle#rc()
 "  " required!
 Plugin 'gmarik/vundle'
 
-"" plugins
+"" General plugins
 " Some utility functions for VIM (needed by snipmate)
 Plugin 'tomtom/tlib_vim'
 " interpret a file by function and cache file automatically (needed by snipmate)
@@ -39,7 +39,7 @@ Plugin 'kien/ctrlp.vim'
 " helpers for UNIX
 Plugin 'tpope/vim-eunuch'
 " a Git wrapper so awesome, it should be illegal
-Plugin 'tpope/vim-fugitive'
+"Plugin 'tpope/vim-fugitive'
 " A Vim plugin which shows a git diff in the gutter (sign column) and stages/reverts hunks.
 Plugin 'airblade/vim-gitgutter'
 " Vim plugin that displays tags in a window, ordered by class etc.
@@ -68,17 +68,21 @@ Plugin 'ap/vim-css-color'
 " vim syntax for LESS (dynamic CSS)
 Plugin 'groenewege/vim-less'
 
+"" Rust
 " Vim support for Rust file detection and syntax highlighting
 "Plugin 'wting/rust.vim'
 
+"" Haskell
 " vim2hs :: Vim -> Haskell
 Plugin 'dag/vim2hs'
+" A completion plugin for Haskell, using ghc-mod
+Plugin 'eagletmt/neco-ghc'
 " Interactive command execution in Vim. (needed by ghcmod-vim)
 Plugin 'Shougo/vimproc.vim'
 " Happy Haskell programming on Vim, powered by ghc-mod
 Plugin 'eagletmt/ghcmod-vim'
-" Vim plugin for Haskell development
-Plugin 'bitc/vim-hdevtools'
+" Create ctags compatible tags files for Haskell programs
+Plugin 'bitc/lushtags'
 
 "" Prolog
 " Prolog Integration for Vim
@@ -92,6 +96,7 @@ Plugin 'bitc/vim-hdevtools'
 " Ruby on Rails power tools
 "Plugin 'tpope/vim-rails'
 
+"" JavaScript
 " Enhanced javascript syntax file for Vim
 Plugin 'jelera/vim-javascript-syntax'
 " Vastly improved Javascript indentation and syntax support in Vim
@@ -101,9 +106,11 @@ Plugin 'walm/jshint.vim'
 " Tern plugin for Vim
 Plugin 'marijnh/tern_for_vim'
 
+"" Qt
 " QML syntax highlighting for VIM
 Plugin 'peterhoeg/vim-qml'
 
+"" Scala
 " Integration of Scala into Vim
 Plugin 'derekwyatt/vim-scala'
 
