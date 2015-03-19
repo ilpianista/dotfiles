@@ -14,7 +14,6 @@ import XMonad.Prompt.Shell
 import XMonad.Prompt
 import XMonad.Util.Run(spawnPipe)
 import Data.Monoid
-import Data.List(isPrefixOf)
 import System.IO
 
 import qualified XMonad.StackSet as W
@@ -51,10 +50,6 @@ myModMask = mod4Mask
 -- By default we use numeric strings, but any string may be used as a
 -- workspace name. The number of workspaces is determined by the length
 -- of this list.
---
--- A tagging example:
---
--- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
 myWorkspaces = ["*","web","media","chat"] ++ map show [5..9] ++ ["dev"]
 
@@ -192,27 +187,18 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     ]
 
 myXPConfig :: XPConfig
-myXPConfig =
-    XPC { font              = "xft:Source Code Pro:size=9"
-        , bgColor           = "#151515"
-        , fgColor           = "#90a959"
-        , fgHLight          = "#d0d0d0"
-        , bgHLight          = "#151515"
-        , borderColor       = "#151515"
-        , promptBorderWidth = 0
-        , promptKeymap      = defaultXPKeymap
-        , completionKey     = xK_Tab
-        , changeModeKey     = xK_grave
-        , position          = Top
-        , height            = 22
-        , historySize       = 256
-        , historyFilter     = id
-        , defaultText       = []
-        , autoComplete      = Nothing
-        , showCompletionOnTab = False
-        , searchPredicate   = isPrefixOf
-        , alwaysHighlight   = False
-        }
+myXPConfig = defaultXPConfig
+    { font                = "xft:Source Code Pro:size=9"
+    , bgColor             = "#151515"
+    , fgColor             = "#90a959"
+    , fgHLight            = "#d0d0d0"
+    , bgHLight            = "#151515"
+    , borderColor         = "#151515"
+    , promptBorderWidth   = 0
+    , position            = Top
+    , height              = 22
+    , showCompletionOnTab = True
+    }
 
 ------------------------------------------------------------------------
 -- Mouse bindings: default actions bound to mouse events
@@ -246,26 +232,26 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 --
 myLayout = avoidStruts $
 
-  -- borders automatically disappear for fullscreen windows
-  smartBorders $
+    -- borders automatically disappear for fullscreen windows
+    smartBorders $
 
-  -- custom layouts per workspaces
-  onWorkspace "web" (Full ||| tiled) $
-  onWorkspace "dev" (Mirror tiled ||| Full) $
+    -- custom layouts per workspaces
+    onWorkspace "web" (Full ||| tiled) $
+    onWorkspace "dev" (Mirror tiled ||| Full) $
 
-  tiled ||| Mirror tiled ||| Full
-  where
-     -- default tiling algorithm partitions the screen into two panes
-    tiled   = Tall nmaster delta ratio
+    tiled ||| Mirror tiled ||| Full
+    where
+       -- default tiling algorithm partitions the screen into two panes
+      tiled   = Tall nmaster delta ratio
 
-    -- The default number of windows in the master pane
-    nmaster = 1
+      -- The default number of windows in the master pane
+      nmaster = 1
 
-    -- Default proportion of screen occupied by master pane
-    ratio   = 1/2
+      -- Default proportion of screen occupied by master pane
+      ratio   = 1/2
 
-    -- Percent of screen to increment by when resizing panes
-    delta   = 3/100
+      -- Percent of screen to increment by when resizing panes
+      delta   = 3/100
 
 ------------------------------------------------------------------------
 -- Window rules:
@@ -275,31 +261,24 @@ myLayout = avoidStruts $
 -- particular program, or have a client always appear on a particular
 -- workspace.
 --
--- To find the property name associated with a program, use
--- > xprop | grep WM_CLASS
--- and click on the client you're interested in.
---
--- To match on the WM_NAME, you can use 'title' in the same way that
--- 'className' and 'resource' are used below.
---
 myManageHook = composeAll
-    [ className =? "Firefox"            --> doShift "web"
-    , resource  =? "kontact"            --> doShift "web"
-    , className =? "Vlc"                --> doFloat <+> doShift "media"
-    , className =? "Amarok"             --> doShift "media"
-    , className =? "cantata"            --> doShift "media"
-    , className =? "konversation"       --> doShift "chat"
-    , className =? "ktpcontactlist"     --> doShift "chat"
-    , className =? "Ktp-text-ui"        --> doShift "chat"
-    , className =? "Skype"              --> doShift "chat"
-    , className =? "jetbrains-idea-ce"  --> doShift "dev"
+    [ className =? "Firefox"                  --> doShift "web"
+    , resource  =? "kontact"                  --> doShift "web"
+    , className =? "Vlc"                      --> doFloat <+> doShift "media"
+    , className =? "Amarok"                   --> doShift "media"
+    , className =? "cantata"                  --> doShift "media"
+    , className =? "konversation"             --> doShift "chat"
+    , className =? "ktpcontactlist"           --> doShift "chat"
+    , className =? "Ktp-text-ui"              --> doShift "chat"
+    , className =? "Skype"                    --> doShift "chat"
+    , className =? "jetbrains-idea-ce"        --> doShift "dev"
     , className =? "jetbrains-android-studio" --> doShift "dev"
-    , className =? "Kdevelop"           --> doShift "dev"
-    , className =? "QtCreator"          --> doShift "dev"
-    , className =? "Designer-qt4"       --> doShift "dev"
-    , className =? "Designer-qt5"       --> doShift "dev"
-    , className =? "JavaFXSceneBuilder" --> doShift "dev"
-    , className =? "Xmessage"           --> doFloat
+    , className =? "Kdevelop"                 --> doShift "dev"
+    , className =? "QtCreator"                --> doShift "dev"
+    , className =? "Designer-qt4"             --> doShift "dev"
+    , className =? "Designer-qt5"             --> doShift "dev"
+    , className =? "JavaFXSceneBuilder"       --> doShift "dev"
+    , className =? "Xmessage"                 --> doFloat
     ]
 
 ------------------------------------------------------------------------
@@ -328,56 +307,51 @@ myEventHook = mempty
 -- with mod-q.  Used by, e.g., XMonad.Layout.PerWorkspace to initialize
 -- per-workspace layout choices.
 --
+myStartupHook :: X()
 myStartupHook = setWMName "LG3D" -- pre java 7 workaround for some apps
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
 
--- Run xmonad with the settings you specify. No need to modify this.
+-- Run xmonad with the settings you specify.
 --
+main :: IO()
 main = do
-  xmproc <- spawnPipe "xmobar"
-  spawn "feh --bg-fill $HOME/Pictures/wallpapers/wall_148.jpg"
-  spawn "dunst"
---  spawn "xrdb -quiet -merge -nocpp $HOME/.Xresources"
---  spawn "xsetroot -cursor_name left_ptr"
-  xmonad $ defaults {
-           logHook = dynamicLogWithPP $ xmobarPP
-                   { ppOutput = hPutStrLn xmproc
-                   , ppCurrent = xmobarColor "#d0d0d0" "#151515"
-                   , ppUrgent = xmobarColor "#202020" "#ac4142"
-                   , ppVisible = xmobarColor "#90a959" "#151515"
-                   , ppSep = " ~ "
-                   , ppOrder = \(ws:_:t:_) -> [ws,t]
-                   , ppTitle = xmobarColor "#d0d0d0" "" . shorten 140
-                   }
-           }
+    xmproc <- spawnPipe "xmobar"
+    spawn "feh --bg-fill $HOME/Pictures/wallpapers/wall_148.jpg"
+    spawn "dunst"
+--    spawn "xrdb -quiet -merge -nocpp $HOME/.Xresources"
+--    spawn "xsetroot -cursor_name left_ptr"
+    xmonad $ defaults
+        { logHook = dynamicLogWithPP $ xmobarPP
+            { ppOutput  = hPutStrLn xmproc
+            , ppCurrent = xmobarColor "#d0d0d0" "#151515"
+            , ppUrgent  = xmobarColor "#202020" "#ac4142"
+            , ppVisible = xmobarColor "#90a959" "#151515"
+            , ppSep     = " ~ "
+            , ppOrder   = \(ws:_:t:_) -> [ws,t]
+            , ppTitle   = xmobarColor "#d0d0d0" "" . shorten 140
+            }
+        }
 
 -- A structure containing your configuration settings, overriding
 -- fields in the default config. Any you don't override, will
 -- use the defaults defined in xmonad/XMonad/Config.hs
 --
--- No need to modify this.
---
-defaults = defaultConfig {
-      -- simple stuff
-        terminal           = myTerminal,
-        focusFollowsMouse  = myFocusFollowsMouse,
-        clickJustFocuses   = myClickJustFocuses,
-        borderWidth        = myBorderWidth,
-        modMask            = myModMask,
-        workspaces         = myWorkspaces,
-        normalBorderColor  = myNormalBorderColor,
-        focusedBorderColor = myFocusedBorderColor,
-
-      -- key bindings
-        keys               = myKeys,
-        mouseBindings      = myMouseBindings,
-
-      -- hooks, layouts
-        layoutHook         = myLayout,
-        manageHook         = myManageHook,
-        handleEventHook    = myEventHook,
---        logHook            = myLogHook,
-        startupHook        = myStartupHook
+defaults = defaultConfig
+    { terminal           = myTerminal
+    , focusFollowsMouse  = myFocusFollowsMouse
+    , clickJustFocuses   = myClickJustFocuses
+    , borderWidth        = myBorderWidth
+    , modMask            = myModMask
+    , workspaces         = myWorkspaces
+    , normalBorderColor  = myNormalBorderColor
+    , focusedBorderColor = myFocusedBorderColor
+    , keys               = myKeys
+    , mouseBindings      = myMouseBindings
+    , layoutHook         = myLayout
+    , manageHook         = myManageHook
+    , handleEventHook    = myEventHook
+    , startupHook        = myStartupHook
     }
+
