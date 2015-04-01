@@ -466,7 +466,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "space", function () awful.layout.inc(layouts,  1) end),
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
 
-    awful.key({ "Control", "Mod1" }, "Escape", function () awful.util.spawn("xkill") end),
+    awful.key({ "Mod1", "Control" }, "Escape", function () awful.util.spawn("xkill") end),
 
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
@@ -498,11 +498,12 @@ globalkeys = awful.util.table.join(
     awful.key({ }, "XF86AudioMicMute", function () awful.util.spawn("amixer -q set Capture toggle") end),
 
     -- Brightness
-  --awful.key({ }, "XF86MonBrightnessDown", function () awful.util.spawn("xbacklight -dec 10") end),
-  --awful.key({ }, "XF86MonBrightnessUp", function () awful.util.spawn("xbacklight -inc 10") end),
+    --awful.key({ }, "XF86MonBrightnessDown", function () awful.util.spawn("xbacklight -dec 10") end),
+    --awful.key({ }, "XF86MonBrightnessUp", function () awful.util.spawn("xbacklight -inc 10") end),
 
-  -- Lock screen
-  --awful.key({ }, "XF86ScreenSaver", function () awful.util.spawn("slock") end),
+    -- Lock screen
+    awful.key({ "Mod1", "Control" }, "l", function () awful.util.spawn("qdbus org.kde.ksmserver /ScreenSaver Lock") end),
+    awful.key({ }, "XF86ScreenSaver", function () awful.util.spawn("qdbus org.kde.ksmserver /ScreenSaver Lock") end),
 
     -- Launcher
     awful.key({}, "XF86Launch1", function () awful.util.spawn("firefox") end)
