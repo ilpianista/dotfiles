@@ -196,7 +196,7 @@ myXPConfig = defaultXPConfig
     , borderColor         = "#151515"
     , promptBorderWidth   = 0
     , position            = Top
-    , height              = 22
+    , height              = 18
     , showCompletionOnTab = True
     }
 
@@ -269,15 +269,15 @@ myManageHook = composeAll
     , className =? "cantata"                  --> doShift "media"
     , className =? "konversation"             --> doShift "chat"
     , className =? "ktpcontactlist"           --> doShift "chat"
-    , className =? "Ktp-text-ui"              --> doShift "chat"
+    , className =? "ktp-text-ui"              --> doShift "chat"
     , className =? "Skype"                    --> doShift "chat"
     , className =? "jetbrains-idea-ce"        --> doShift "dev"
     , className =? "jetbrains-android-studio" --> doShift "dev"
     , className =? "Kdevelop"                 --> doShift "dev"
     , className =? "QtCreator"                --> doShift "dev"
     , className =? "Designer-qt4"             --> doShift "dev"
-    , className =? "Designer-qt5"             --> doShift "dev"
-    , className =? "JavaFXSceneBuilder"       --> doShift "dev"
+    , className =? "Designer"                 --> doShift "dev"
+    , className =? "Scenebuilder"             --> doShift "dev"
     , className =? "Xmessage"                 --> doFloat
     ]
 

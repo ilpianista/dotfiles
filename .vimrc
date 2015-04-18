@@ -251,7 +251,7 @@ au BufNewFile,BufRead *.pgsql setf pgsql
 au BufNewFile,BufRead *.plpgsql setf pgsql
 
 " Reformat XML file
-au FileType xml exe ":silent %!xmllint --format --recover - 2>/dev/null"
+"au FileType xml exe ":silent %!xmllint --format --recover - 2>/dev/null"
 
 " ghc-mod Reload
 map <silent> tu :call GHC_BrowseAll()<CR>
