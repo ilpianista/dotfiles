@@ -49,7 +49,7 @@ Config {
                              ] 15
 
         -- volume monitor
-        , Run Volume "default" "Master" [ "--template" , "<action=`amixer -q set Master toggle`><status></action>"
+        , Run Volume "default" "Master" [ "--template" , "<action=`pactl set-sink-mute 0 toggle`><status></action>"
                                         , "--"
                                         , "-c"         , "#aa759f"
                                         , "-o"         , ""

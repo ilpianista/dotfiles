@@ -7,6 +7,7 @@ import XMonad
 import XMonad.Actions.CycleWS
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.SetWMName
 import XMonad.Layout.NoBorders
 import XMonad.Layout.PerWorkspace
@@ -167,23 +168,32 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- Audio bindings
     ++
-    [ ((0, 0x1008ff13), spawn "amixer -q set Master 5%+ unmute") -- XF86AudioRaiseVolume
-    , ((0, 0x1008ff11), spawn "amixer -q set Master 5%- unmute") -- XF86AudioLowerVolume
-    , ((0, 0x1008ff12), spawn "amixer -q set Master toggle") -- XF86AudioMute
-    , ((0, 0x1008ffb2), spawn "amixer -q set Capture toggle") -- XF86AudioMicMute
+    [ ((0, 0x1008ff13), spawn "pactl set-sink-volume 0 +5%") -- XF86AudioRaiseVolume
+    , ((0, 0x1008ff11), spawn "pactl set-sink-volume 0 -5%") -- XF86AudioLowerVolume
+    , ((0, 0x1008ff12), spawn "pactl set-sink-mute 0 toggle") -- XF86AudioMute
+    , ((0, 0x1008ffb2), spawn "pactl set-source-mute 1 toggle") -- XF86AudioMicMute
+    ]
+
+    -- Media bindings
+    ++
+    [ ((0, 0x1008ff14), spawn "playerctl play-pause") -- XF86AudioPlay
+    , ((0, 0x1008ff16), spawn "playerctl previous") --XF86AudioPrev
+    , ((0, 0x1008ff17), spawn "playerctl next") --XF86AudioNext
+    , ((0, 0x1008ff15), spawn "playerctl stop") --XF86AudioStop
     ]
 
     -- Brightness bindings
-    -- ++
-    --[ ((0, 0x1008ff03), spawn "xbacklight -dec 10") -- XF86MonBrightnessDown
-    --, ((0, 0x1008ff02), spawn "xbacklight -inc 10") -- XF86MonBrightnessUp
-    --]
+    ++
+    [ ((0, 0x1008ff03), spawn "xbacklight -dec 20") -- XF86MonBrightnessDown
+    , ((0, 0x1008ff02), spawn "xbacklight -inc 20") -- XF86MonBrightnessUp
+    ]
 
     -- Extra bindings
     ++
     [ ((0, 0x1008ff41), spawn "firefox") -- XF86Launch1
-    --, ((0, 0x1008ff2d), spawn "qdbus org.kde.ksmserver /ScreenSaver Lock") -- XF86ScreenSaver
+    , ((0, 0x1008ff2d), spawn "qdbus org.kde.ksmserver /ScreenSaver Lock") -- XF86ScreenSaver
     , ((0, xK_Print  ), spawn "ksnapshot") -- XF86Print
+    --, ((0, 0x1008ff93), spawn "") -- XF86Battery
     ]
 
 myXPConfig :: XPConfig
@@ -279,6 +289,7 @@ myManageHook = composeAll
     , className =? "Designer"                 --> doShift "dev"
     , className =? "Scenebuilder"             --> doShift "dev"
     , className =? "Xmessage"                 --> doFloat
+    , isFullscreen                            --> doFullFloat
     ]
 
 ------------------------------------------------------------------------
