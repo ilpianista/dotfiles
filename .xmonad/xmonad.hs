@@ -246,8 +246,8 @@ myLayout = avoidStruts $
     smartBorders $
 
     -- custom layouts per workspaces
-    onWorkspace "web" (Full ||| tiled) $
-    onWorkspace "dev" (Mirror tiled ||| Full) $
+    onWorkspace "web" Full $
+    onWorkspace "media" Full $
 
     tiled ||| Mirror tiled ||| Full
     where
@@ -272,24 +272,24 @@ myLayout = avoidStruts $
 -- workspace.
 --
 myManageHook = composeAll
-    [ className =? "Firefox"                  --> doShift "web"
-    , resource  =? "kontact"                  --> doShift "web"
-    , className =? "Vlc"                      --> doFloat <+> doShift "media"
-    , className =? "Amarok"                   --> doShift "media"
-    , className =? "cantata"                  --> doShift "media"
-    , className =? "konversation"             --> doShift "chat"
-    , className =? "ktpcontactlist"           --> doShift "chat"
-    , className =? "ktp-text-ui"              --> doShift "chat"
-    , className =? "Skype"                    --> doShift "chat"
-    , className =? "jetbrains-idea-ce"        --> doShift "dev"
-    , className =? "jetbrains-android-studio" --> doShift "dev"
-    , className =? "Kdevelop"                 --> doShift "dev"
-    , className =? "QtCreator"                --> doShift "dev"
-    , className =? "Designer-qt4"             --> doShift "dev"
-    , className =? "Designer"                 --> doShift "dev"
-    , className =? "Scenebuilder"             --> doShift "dev"
-    , className =? "Xmessage"                 --> doFloat
-    , isFullscreen                            --> doFullFloat
+    [ className =? "Firefox"           --> doShift "web"
+    , resource  =? "kontact"           --> doShift "web"
+    , className =? "Vlc"               --> doFloat <+> doShift "media"
+    , className =? "Amarok"            --> doShift "media"
+    , className =? "cantata"           --> doShift "media"
+    , className =? "konversation"      --> doShift "chat"
+    , className =? "ktpcontactlist"    --> doShift "chat"
+    , className =? "ktp-text-ui"       --> doShift "chat"
+    , className =? "Skype"             --> doShift "chat"
+    , className =? "jetbrains-idea-ce" --> doShift "dev"
+    , className =? "jetbrains-studio"  --> doShift "dev"
+    , className =? "Kdevelop"          --> doShift "dev"
+    , className =? "QtCreator"         --> doShift "dev"
+    , className =? "Designer-qt4"      --> doShift "dev"
+    , className =? "Designer"          --> doShift "dev"
+    , className =? "Scenebuilder"      --> doShift "dev"
+    , className =? "Xmessage"          --> doFloat
+    , isFullscreen                     --> doFullFloat
     ]
 
 ------------------------------------------------------------------------
