@@ -289,6 +289,7 @@ myManageHook = composeAll
     , className =? "Designer"          --> doShift "dev"
     , className =? "Scenebuilder"      --> doShift "dev"
     , className =? "Xmessage"          --> doFloat
+    , className =? "stalonetray"       --> doIgnore
     , isFullscreen                     --> doFullFloat
     ]
 
@@ -331,6 +332,7 @@ main = do
     xmproc <- spawnPipe "xmobar"
     spawn "feh --bg-fill $HOME/Pictures/wallpapers/wall_148.jpg"
     spawn "dunst"
+    spawn "stalonetray"
 --    spawn "xrdb -quiet -merge -nocpp $HOME/.Xresources"
 --    spawn "xsetroot -cursor_name left_ptr"
     xmonad $ defaults
