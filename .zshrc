@@ -81,6 +81,7 @@ alias mount='mount | column -t'
 alias jobs='jobs -l'
 alias ...='cd ../../'
 alias rm='rm -i'
+alias ls='ls --color=tty -h'
 alias cp='cp -i'
 alias mv='mv -i'
 alias sign='gpg --detach-sign --use-agent'
@@ -91,6 +92,9 @@ alias wakelupino='wol b8:27:eb:43:fb:46'
 alias connect='nmcli con up id'
 alias disconnect='nmcli con down id'
 alias wifilist='nmcli dev wifi list'
+
+alias mount500='sudo cryptsetup luksOpen /dev/sdc1 --key-file $HOME/Documents/500-keyfile 500'
+alias mount750='sudo cryptsetup luksOpen /dev/sdc1 --key-file $HOME/Documents/750-keyfile 750'
 
 # Quickly start download any torrent file :-)
 downTorrent() { scp "${1}" fuffy.mooo.com:/media/disk/torrents/ }

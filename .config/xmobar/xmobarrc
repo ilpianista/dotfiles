@@ -43,39 +43,39 @@ Config {
    --   see http://projects.haskell.org/xmobar/#system-monitor-plugins.
    , commands =
 
-        [
+      [
         -- wireless network activity monitor
         Run Wireless "wlan0" [ "--template" , "<action=`kde5-nm-connection-editor`><fc=#6a9fb5> <essid></fc></action>"
-                             ] 15
+                             ] 10
 
         -- volume monitor
-        , Run Volume "default" "Master" [ "--template" , "<action=`pactl set-sink-mute 0 toggle`><status></action>"
-                                        , "--"
-                                        , "-c"         , "#aa759f"
-                                        , "-o"         , ""
-                                        , "-C"         , "#aa759f"
-                                        , "-O"         , " <volume>"
-                                        ] 10
+      , Run Volume "default" "Master" [ "--template" , "<action=`pactl set-sink-mute 0 toggle`><status></action>"
+                                      , "--"
+                                      , "-c"         , "#aa759f"
+                                      , "-o"         , ""
+                                      , "-C"         , "#aa759f"
+                                      , "-O"         , " <volume>"
+                                      ] 10
 
         -- battery monitor
-        , Run BatteryP ["BAT0"] [ "--template" , "<acstatus>"
-                                , "--Low"      , "20"        -- units: %
-                                , "--High"     , "80"        -- units: %
-                                , "--low"      , "#ac4142"
-                                , "--high"     , "#d28445"
-                                , "--"
-                                , "-o"         , "<fc=#d28445> <left>%</fc>"
-                                , "-O"         , "<fc=#d28445> <left>%</fc>"
-                                , "-i"         , "<fc=#d28445> <left>%</fc>"
-                                ] 60
+      , Run BatteryP ["BAT0"] [ "--template" , "<acstatus>"
+                              , "--Low"      , "20"        -- units: %
+                              , "--High"     , "80"        -- units: %
+                              , "--low"      , "#ac4142"
+                              , "--high"     , "#d28445"
+                              , "--"
+                              , "-o"         , "<fc=#d28445> <left>%</fc>"
+                              , "-O"         , "<fc=#d28445> <left>%</fc>"
+                              , "-i"         , "<fc=#d28445> <left>%</fc>"
+                              ] 120
 
         -- system load monitor
-        , Run MultiCpu          [ "--template" , "<action=`konsole -e htop`><fc=#f4bf75> <total>%</fc></action>"
-                                ] 15
+      , Run MultiCpu          [ "--template" , "<action=`konsole -e htop`><fc=#f4bf75> <total>%</fc></action>"
+                              ] 15
 
         -- time and date indicator
-        , Run Date              "%A, %R" "date" 60
+      , Run Date              "<action=`konsole --noclose -e cal -3`>%A, %R</action>" "date" 60
 
-        , Run StdinReader
-        ]
+      , Run StdinReader
+      ]
    }

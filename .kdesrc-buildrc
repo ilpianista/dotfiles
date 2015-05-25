@@ -26,20 +26,19 @@ end global
 module-set choqok
   repository kde-projects
   use-modules choqok
-  branch frameworks
-end module-set
-
-module-set kdeconnect-kde
-  repository kde-projects
-  use-modules kdeconnect-kde
   cmake-options -DKDE_INSTALL_USE_QT_SYS_PATHS=ON -DBUILD_TESTING=OFF
-  branch frameworks
 end module-set
 
-module-set kdeutils
-  repository kde-projects
-  use-modules kdf
-end module-set
+#module-set kdeconnect-kde
+#  repository kde-projects
+#  use-modules kdeconnect-kde
+#  cmake-options -DKDE_INSTALL_USE_QT_SYS_PATHS=ON -DBUILD_TESTING=OFF
+#end module-set
+
+#module-set kdeutils
+#  repository kde-projects
+#  use-modules kdf
+#end module-set
 
 module-set kdesdk
   repository kde-projects
