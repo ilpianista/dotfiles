@@ -58,16 +58,16 @@ Config {
                                       ] 10
 
         -- battery monitor
-      , Run BatteryP ["BAT0"] [ "--template" , "<acstatus>"
-                              , "--Low"      , "20"        -- units: %
-                              , "--High"     , "80"        -- units: %
-                              , "--low"      , "#ac4142"
-                              , "--high"     , "#d28445"
-                              , "--"
-                              , "-o"         , "<fc=#d28445> <left>%</fc>"
-                              , "-O"         , "<fc=#d28445> <left>%</fc>"
-                              , "-i"         , "<fc=#d28445> <left>%</fc>"
-                              ] 120
+      , Run Battery [ "--template" , "<acstatus>"
+                    , "--Low"      , "20"        -- units: %
+                    , "--High"     , "80"        -- units: %
+                    , "--low"      , "#ac4142"
+                    , "--high"     , "#d28445"
+                    , "--"
+                    , "-o"         , "<fc=#d28445> <left>%</fc>"
+                    , "-O"         , "<fc=#d28445> <left>%</fc>"
+                    , "-i"         , "<fc=#d28445> <left>%</fc>"
+                    ] 120
 
         -- system load monitor
       , Run MultiCpu          [ "--template" , "<action=`konsole -e htop`><fc=#f4bf75> <total>%</fc></action>"

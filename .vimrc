@@ -2,12 +2,12 @@
 set nocompatible   " be iMproved
 filetype off       " required!
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim/
+call vundle#begin()
 
 " let Vundle manage Vundle
 "  " required!
-Plugin 'gmarik/vundle'
+Plugin 'gmarik/Vundle.vim'
 
 "" General plugins
 " Some utility functions for VIM (needed by snipmate)
@@ -105,14 +105,12 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'walm/jshint.vim'
 " Tern plugin for Vim
 Plugin 'marijnh/tern_for_vim'
+" vim plugin which formated javascript files by js-beautify
+Plugin 'maksimr/vim-jsbeautify'
 
 "" Qt
 " QML syntax highlighting for VIM
 Plugin 'peterhoeg/vim-qml'
-
-"" Scala
-" Integration of Scala into Vim
-Plugin 'derekwyatt/vim-scala'
 
 " PGSQL syntax
 "Plugin 'exu/pgsql.vim'
@@ -126,6 +124,8 @@ Plugin 'derekwyatt/vim-scala'
 "Plugin 'altercation/vim-colors-solarized'
 " Base16 for Vim
 Plugin 'chriskempson/base16-vim'
+
+call vundle#end()
 
 " Load KDE settings
 source /home/andrea/projects/KDE/kde/kdesdk/kde-dev-scripts/kde-devel-vim.vim
@@ -199,7 +199,7 @@ let g:indent_guides_guide_size = 1
 let g:airline#extensions#tabline#enabled = 1
 
 " This does what it says on the tin. It will check your file on open too, not just on save.
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 
 " Enable emmet just for HTML/CSS
 let g:user_emmet_install_global = 0

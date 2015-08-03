@@ -25,6 +25,8 @@ export KDEDIRS="/usr/local:$KDEDIRS"
 export KDE_DEBUG=1
 # Will make KDebug produce colored output
 export KDE_COLOR_DEBUG=1
+# Qt 5 looks for KDEHOME, https://git.reviewboard.kde.org/r/118865/
+export KDEHOME="$HOME/.kde4"
 
 # Equivalent of KDebug colored output for Qt5
 c=`echo -e "\033"`
@@ -32,7 +34,7 @@ export QT_MESSAGE_PATTERN="[%{appname}(%{pid})/(%{category}) ${c}[31m%{if-debug}
 unset c
 
 # Extra Qt plugins from /usr/local
-export QT_PLUGIN_PATH=/usr/local/lib/qt/plugins:${QT_PLUGIN_PATH}
+export QT_PLUGIN_PATH="/usr/local/lib/qt/plugins:${QT_PLUGIN_PATH}"
 
 # Speed-up rebuilds
 export PATH="/usr/lib/ccache/bin:$PATH"
