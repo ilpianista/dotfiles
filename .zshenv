@@ -12,7 +12,7 @@ export PATH="$HOME/bin:$PATH"
 export PATH="$(ruby -e 'puts Gem.user_dir')/bin:$PATH"
 
 # Cabal
-export PATH="$HOME/.cabal/bin:$PATH"
+#export PATH="$HOME/.cabal/bin:$PATH"
 
 # NodeJS modules installed with npm
 export PATH="$HOME/node_modules/.bin:$PATH"
@@ -44,22 +44,3 @@ export CCACHE_DIR="/tmp/ccache"
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=lcd -Dswing.aatext=true"
 export JAVA_FONTS="/usr/share/fonts/TTF"
 
-#export XDG_DATA_DIRS="/usr/local/share:/usr/share"
-
-# LS_COLORS
-eval $(dircolors ~/.dir_colors)
-
-# SSH agent
-eval $(ssh-agent)
-
-# gpg-agent
-envfile="$HOME/.gnupg/gpg-agent.env"
-if [[ -e "$envfile" ]] && kill -0 $(grep GPG_AGENT_INFO "$envfile" | cut -d: -f 2) 2>/dev/null; then
-  eval "$(cat "$envfile")"
-else
-  eval "$(gpg-agent --daemon --write-env-file "$envfile")"
-fi
-export GPG_AGENT_INFO
-
-# Automatically startx
-#[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx

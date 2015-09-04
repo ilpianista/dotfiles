@@ -43,7 +43,7 @@ DISABLE_AUTO_UPDATE="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-plugins=(cabal colored-man command-not-found cp extract git history-substring-search sbt)
+plugins=(colored-man command-not-found cp extract git history-substring-search)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -95,6 +95,9 @@ alias wifilist='nmcli dev wifi list'
 
 alias mount500='sudo cryptsetup luksOpen /dev/sdc1 --key-file $HOME/Documents/500-keyfile 500'
 alias mount750='sudo cryptsetup luksOpen /dev/sdc1 --key-file $HOME/Documents/750-keyfile 750'
+
+# LS_COLORS
+[[ -r $HOME/.dir_colors ]] && eval $(dircolors -b $HOME/.dir_colors)
 
 # Quickly start download any torrent file :-)
 downTorrent() { scp "${1}" fuffy.mooo.com:/media/disk/torrents/ }

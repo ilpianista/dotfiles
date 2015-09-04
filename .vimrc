@@ -128,7 +128,7 @@ Plugin 'chriskempson/base16-vim'
 call vundle#end()
 
 " Load KDE settings
-source /home/andrea/projects/KDE/kde/kdesdk/kde-dev-scripts/kde-devel-vim.vim
+source /home/ilpianista/projects/KDE/kde/kdesdk/kde-dev-scripts/kde-devel-vim.vim
 
 "" general stuff
 set encoding=utf-8 " necessary to show unicode glyphs
