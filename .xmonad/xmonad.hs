@@ -11,10 +11,10 @@ import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.SetWMName
 import XMonad.Layout.NoBorders
 import XMonad.Layout.PerWorkspace
+import XMonad.Layout.SimplestFloat
 import XMonad.Prompt.Shell
 import XMonad.Prompt
 import XMonad.Util.Run(spawnPipe)
-import Data.Monoid
 import System.IO
 
 import qualified XMonad.StackSet as W
@@ -28,7 +28,7 @@ myTerminal = "konsole"
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
-myFocusFollowsMouse = True
+myFocusFollowsMouse = False
 
 -- Whether clicking on a window to focus also passes the click to the window
 myClickJustFocuses :: Bool
@@ -92,6 +92,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- Resize viewed windows to the correct size
     , ((modm,               xK_n     ), refresh)
+
+    -- Move focus to the next window when they are overlapping
+    , ((modm,               xK_Tab   ), windows W.focusUp >> windows W.shiftMaster)
 
     -- Move focus to the next window
     , ((mod1Mask,           xK_Tab   ), windows W.focusDown)
@@ -192,7 +195,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     ++
     [ ((0, 0x1008ff41), spawn "firefox") -- XF86Launch1
     , ((0, 0x1008ff2d), spawn "qdbus org.kde.ksmserver /ScreenSaver Lock") -- XF86ScreenSaver
-    , ((0, xK_Print  ), spawn "ksnapshot") -- XF86Print
+    , ((0, xK_Print  ), spawn "kscreengenie") -- XF86Print
     --, ((0, 0x1008ff93), spawn "") -- XF86Battery
     ]
 
@@ -249,7 +252,7 @@ myLayout = avoidStruts $
     onWorkspace "web" Full $
     onWorkspace "media" Full $
 
-    tiled ||| Mirror tiled ||| Full
+    tiled ||| Mirror tiled ||| Full ||| simplestFloat
     where
        -- default tiling algorithm partitions the screen into two panes
       tiled   = Tall nmaster delta ratio
@@ -284,12 +287,14 @@ myManageHook = composeAll
     , className =? "jetbrains-idea-ce" --> doShift "dev"
     , className =? "jetbrains-studio"  --> doShift "dev"
     , className =? "Kdevelop"          --> doShift "dev"
+    , className =? "Eclipse"           --> doShift "dev"
     , className =? "QtCreator"         --> doShift "dev"
     , className =? "Designer-qt4"      --> doShift "dev"
     , className =? "Designer"          --> doShift "dev"
     , className =? "Scenebuilder"      --> doShift "dev"
     , className =? "Xmessage"          --> doFloat
     , className =? "stalonetray"       --> doIgnore
+    , title =? "SailfishOS Emulator [Running] - Oracle VM VirtualBox" --> doFloat
     , isFullscreen                     --> doFullFloat
     ]
 

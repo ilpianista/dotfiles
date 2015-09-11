@@ -5,18 +5,6 @@ if [ -n "$DISPLAY" ]; then
   export BROWSER=firefox
 fi
 
-# Use ~/bin
-export PATH="$HOME/bin:$PATH"
-
-# RubyGems
-export PATH="$(ruby -e 'puts Gem.user_dir')/bin:$PATH"
-
-# Cabal
-#export PATH="$HOME/.cabal/bin:$PATH"
-
-# NodeJS modules installed with npm
-export PATH="$HOME/node_modules/.bin:$PATH"
-
 export GCC_COLORS="error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01"
 
 # Load KDE4 stuff from /usr/local
