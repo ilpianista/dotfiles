@@ -35,10 +35,10 @@ end module-set
 #  cmake-options -DKDE_INSTALL_USE_QT_SYS_PATHS=ON -DBUILD_TESTING=OFF
 #end module-set
 
-#module-set kdeutils
-#  repository kde-projects
-#  use-modules kdf
-#end module-set
+module-set kdeutils
+  repository kde-projects
+  use-modules kgpg
+end module-set
 
 module-set kdesdk
   repository kde-projects

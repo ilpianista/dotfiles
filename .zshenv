@@ -21,9 +21,6 @@ c=`echo -e "\033"`
 export QT_MESSAGE_PATTERN="[%{appname}(%{pid})/(%{category}) ${c}[31m%{if-debug}${c}[34m%{endif}%{function}${c}[0m: %{message}"
 unset c
 
-# Extra Qt plugins from /usr/local
-export QT_PLUGIN_PATH="/usr/local/lib/qt/plugins:${QT_PLUGIN_PATH}"
-
 # Speed-up rebuilds
 export PATH="/usr/lib/ccache/bin:$PATH"
 export CCACHE_DIR="/tmp/ccache"
