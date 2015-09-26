@@ -1,0 +1,15 @@
+#xrdb -quiet -merge -nocpp $HOME/.Xresources &
+#xsetroot -cursor_name left_ptr &
+feh --bg-fill $HOME/Pictures/wallpapers/wall_148.jpg &
+dunst &
+stalonetray &
+
+# Statusbar loop
+#while true; do
+#  xsetroot -name " $(iwgetid -r) | \
+# $(pactl list sinks | grep 'Base Volume' | awk -F'/ ' '{print $2}') | \
+#$(acpi -b | awk 'sub(/,/,"") {print $3, $4}') | \
+# $(grep 'cpu ' /proc/stat | awk '{usage=($2+$4)*100/($2+$4+$5)} END {print usage "%"}') | \
+#$(date +"%A, %R")"
+#  sleep 15s    # Update every 15 seconds
+#done &

@@ -134,8 +134,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
 
     --, ((controlMask .|. mod1Mask, xK_l), runSelectedAction defaultGSConfig powerMenu)
-    --, ((controlMask .|. mod1Mask, xK_l), spawn "qdbus org.kde.ksmserver /ScreenSaver Lock")
-    , ((controlMask .|. mod1Mask, xK_l), spawn "slock")
+    , ((controlMask .|. mod1Mask, xK_l), spawn "qdbus org.kde.ksmserver /ScreenSaver Lock")
+    --, ((controlMask .|. mod1Mask, xK_l), spawn "slock")
 
     -- Toggle the status bar gap
     -- Use this binding with avoidStruts from Hooks.ManageDocks.
@@ -195,7 +195,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Extra bindings
     ++
     [ ((0, 0x1008ff41), spawn "firefox") -- XF86Launch1
-    , ((0, 0x1008ff2d), spawn "slock") -- XF86ScreenSaver
+    , ((0, 0x1008ff2d), spawn "qdbus org.kde.ksmserver /ScreenSaver Lock") -- XF86ScreenSaver
     , ((0, xK_Print  ), spawn "kscreengenie") -- XF86Print
     --, ((0, 0x1008ff93), spawn "") -- XF86Battery
     ]
@@ -337,12 +337,6 @@ myStartupHook = setWMName "LG3D" -- pre java 7 workaround for some apps
 main :: IO()
 main = do
     xmproc <- spawnPipe "xmobar"
-    spawn "xrdb -quiet -merge -nocpp $HOME/.Xresources"
-    spawn "xsetroot -cursor_name left_ptr"
-    spawn "feh --bg-fill $HOME/Pictures/wallpapers/wall_148.jpg"
-    spawn "dunst"
-    spawn "stalonetray"
-    spawn "xautolock -time 10 -locker slock"
     xmonad $ defaults
         { logHook = dynamicLogWithPP $ xmobarPP
             { ppOutput  = hPutStrLn xmproc

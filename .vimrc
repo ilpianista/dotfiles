@@ -89,12 +89,14 @@ Plugin 'bitc/lushtags'
 "Plugin 'adimit/prolog.vim'
 
 "" Ruby
+" Vim/Ruby Configuration Files
+Plugin 'vim-ruby/vim-ruby'
 " wisely add 'end' in ruby, endfunction/endif/more in vim script, etc
-"Plugin 'tpope/vim-endwise'
+Plugin 'tpope/vim-endwise'
 " Vim runtime files for Haml, Sass, and SCSS
 "Plugin 'tpope/vim-haml'
 " Ruby on Rails power tools
-"Plugin 'tpope/vim-rails'
+Plugin 'tpope/vim-rails'
 
 "" JavaScript
 " Enhanced javascript syntax file for Vim
@@ -111,6 +113,8 @@ Plugin 'maksimr/vim-jsbeautify'
 "" Qt
 " QML syntax highlighting for VIM
 Plugin 'peterhoeg/vim-qml'
+" qmake project highlighting support for the Vim editor
+Plugin 'artoj/qmake-syntax-vim'
 
 " PGSQL syntax
 "Plugin 'exu/pgsql.vim'
@@ -163,6 +167,8 @@ set incsearch       " incremental searching
 set ignorecase      " searches are case insensitive...
 set smartcase       " ... unless they contain at least one capital letter
 
+set modelines=0     " https://lists.alioth.debian.org/pipermail/pkg-vim-maintainers/2007-June/004020.html
+
 set wildmode=full
 set wildmenu        " command-line completion operates in an enhanced mode
 set completeopt=longest,menuone " completion popup menu work just like in an IDE
@@ -179,6 +185,8 @@ set wildignore+=*.swp,*~,._*
 "" Backup and swap files
 set backupdir^=~/.vim/_backup/    " where to put backup files.
 set directory^=~/.vim/_temp/      " where to put swap files.
+
+let mapleader=","
 
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
