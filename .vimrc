@@ -74,15 +74,15 @@ Plugin 'groenewege/vim-less'
 
 "" Haskell
 " vim2hs :: Vim -> Haskell
-Plugin 'dag/vim2hs'
+"Plugin 'dag/vim2hs'
 " A completion plugin for Haskell, using ghc-mod
-Plugin 'eagletmt/neco-ghc'
+"Plugin 'eagletmt/neco-ghc'
 " Interactive command execution in Vim. (needed by ghcmod-vim)
-Plugin 'Shougo/vimproc.vim'
+"Plugin 'Shougo/vimproc.vim'
 " Happy Haskell programming on Vim, powered by ghc-mod
-Plugin 'eagletmt/ghcmod-vim'
+"Plugin 'eagletmt/ghcmod-vim'
 " Create ctags compatible tags files for Haskell programs
-Plugin 'bitc/lushtags'
+"Plugin 'bitc/lushtags'
 
 "" Prolog
 " Prolog Integration for Vim

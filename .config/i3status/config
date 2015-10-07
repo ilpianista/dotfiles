@@ -1,0 +1,58 @@
+# i3status configuration file.
+# see "man i3status" for documentation.
+
+# It is important that this file is edited as UTF-8.
+# The following line should contain a sharp s:
+# ß
+# If the above line is not correctly displayed, fix your editor first!
+
+general {
+        colors = true
+        interval = 10
+
+        color_good = "#6a9fb5"
+        color_degraded = "#d28445"
+        color_bad = "#ac4142"
+}
+
+order += "wireless wlp3s0"
+order += "battery 0"
+order += "load"
+order += "volume master"
+order += "tztime local"
+
+wireless wlp3s0 {
+        format_up = "%essid"
+        format_down = ""
+#        color_good = "#6a9fb5"
+}
+
+battery 0 {
+        format = "%status%percentage"
+        format_down = "No battery"
+        status_chr = ""
+        status_bat = ""
+        low_threshold = 20
+        threshold_type = percentage
+#        color_good = "#ac4142"
+#        color_bad = "#d28445"
+}
+
+tztime local {
+        format = "%A, %R"
+#        color_good = "#90a959"
+}
+
+volume master {
+        format = "%volume"
+        format_muted = ""
+        device = "pulse"
+        color_good = "#aa759f"
+        color_bad = "#aa759f"
+}
+
+load {
+        format = "%5min"
+#        color_good = "#f4bf75"
+}
+

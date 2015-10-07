@@ -627,8 +627,7 @@ awful.rules.rules = {
         callback = function(c) awful.client.movetotag(tags[mouse.screen][7], c) end,
         properties = { size_hints_honor = false,
           maximized = true } },
-    { rule_any = { class = { "jetbrains-idea-ce", "jetbrains-android-studio", "Kdevelop", "QtCreator",
-          "Designer-qt4", "Designer", "Scenebuilder" } },
+    { rule_any = { class = { "Eclipse", "Kdevelop", "QtCreator", "Designer"} },
         except = { type = "dialog" },
         callback = function(c) awful.client.movetotag(tags[mouse.screen][7], c) end,
         properties = { maximized = true } }
