@@ -7,7 +7,7 @@ call vundle#begin()
 
 " let Vundle manage Vundle
 "  " required!
-Plugin 'gmarik/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim'
 
 "" General plugins
 " Some utility functions for VIM (needed by snipmate)
@@ -94,7 +94,7 @@ Plugin 'vim-ruby/vim-ruby'
 " wisely add 'end' in ruby, endfunction/endif/more in vim script, etc
 Plugin 'tpope/vim-endwise'
 " Vim runtime files for Haml, Sass, and SCSS
-"Plugin 'tpope/vim-haml'
+Plugin 'tpope/vim-haml'
 " Ruby on Rails power tools
 Plugin 'tpope/vim-rails'
 
@@ -109,6 +109,8 @@ Plugin 'walm/jshint.vim'
 Plugin 'marijnh/tern_for_vim'
 " vim plugin which formated javascript files by js-beautify
 Plugin 'maksimr/vim-jsbeautify'
+" CoffeeScript support for vim
+Plugin 'kchmck/vim-coffee-script'
 
 "" Qt
 " QML syntax highlighting for VIM
@@ -118,6 +120,9 @@ Plugin 'artoj/qmake-syntax-vim'
 
 " PGSQL syntax
 "Plugin 'exu/pgsql.vim'
+
+" Vim syntax for i3 window manager config
+Plugin 'PotatoesMaster/i3-vim-syntax'
 
 "" color schemes
 " Molokai color scheme for Vim
@@ -260,6 +265,9 @@ au BufNewFile,BufRead *.plpgsql setf pgsql
 
 " Reformat XML file
 "au FileType xml exe ":silent %!xmllint --format --recover - 2>/dev/null"
+
+" Automatically removing all trailing whitespace
+autocmd BufWritePre * :%s/\s\+$//e
 
 " ghc-mod Reload
 map <silent> tu :call GHC_BrowseAll()<CR>

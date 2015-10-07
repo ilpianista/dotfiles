@@ -15,7 +15,7 @@ import XMonad.Layout.SimplestFloat
 import XMonad.Prompt.Shell
 import XMonad.Prompt
 import XMonad.Util.Run(spawnPipe)
-import System.Exit
+--import System.Exit
 import System.IO
 
 import qualified XMonad.StackSet as W
@@ -144,7 +144,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- , ((modm              , xK_b     ), sendMessage ToggleStruts)
 
     -- Quit xmonad
-    , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
+    --, ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
 
     -- Restart xmonad
     , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
@@ -286,14 +286,11 @@ myManageHook = composeAll
     , className =? "ktpcontactlist"    --> doShift "chat"
     , className =? "ktp-text-ui"       --> doShift "chat"
     , className =? "Skype"             --> doShift "chat"
-    , className =? "jetbrains-idea-ce" --> doShift "dev"
     , className =? "jetbrains-studio"  --> doShift "dev"
     , className =? "Kdevelop"          --> doShift "dev"
     , className =? "Eclipse"           --> doShift "dev"
     , className =? "QtCreator"         --> doShift "dev"
-    , className =? "Designer-qt4"      --> doShift "dev"
     , className =? "Designer"          --> doShift "dev"
-    , className =? "Scenebuilder"      --> doShift "dev"
     , className =? "Xmessage"          --> doFloat
     , className =? "stalonetray"       --> doIgnore
     , title =? "SailfishOS Emulator [Running] - Oracle VM VirtualBox" --> doFloat

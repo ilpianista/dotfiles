@@ -1,6 +1,6 @@
 #xrdb -quiet -merge -nocpp $HOME/.Xresources &
 #xsetroot -cursor_name left_ptr &
-feh --bg-fill $HOME/Pictures/wallpapers/wall_148.jpg &
+sh ~/.fehbg &
 dunst &
 stalonetray &
 
