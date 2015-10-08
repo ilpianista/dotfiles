@@ -142,7 +142,7 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 20
 bindsym XF86Launch1 exec firefox
 bindsym XF86ScreenSaver exec i3lock --color=000000 --dpms
 bindsym Ctrl+Mod1+l exec i3lock --color=000000 --dpms
-bindsym XF86Print exec spectacle
+bindsym Print exec spectacle
 
 # reload the configuration file
 bindsym Mod1+Shift+r reload
