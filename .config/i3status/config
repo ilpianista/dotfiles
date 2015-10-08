@@ -10,9 +10,9 @@ general {
         colors = true
         interval = 10
 
-        color_good = "#6a9fb5"
-        color_degraded = "#d28445"
-        color_bad = "#ac4142"
+        color_good = "#7cafc2"
+        color_degraded = "#dc9656"
+        color_bad = "#ab4642"
 }
 
 order += "wireless wlp3s0"
@@ -24,7 +24,6 @@ order += "tztime local"
 wireless wlp3s0 {
         format_up = "%essid"
         format_down = ""
-#        color_good = "#6a9fb5"
 }
 
 battery 0 {
@@ -34,25 +33,19 @@ battery 0 {
         status_bat = ""
         low_threshold = 20
         threshold_type = percentage
-#        color_good = "#ac4142"
-#        color_bad = "#d28445"
 }
 
 tztime local {
         format = "%A, %R"
-#        color_good = "#90a959"
 }
 
 volume master {
         format = "%volume"
         format_muted = ""
         device = "pulse"
-        color_good = "#aa759f"
-        color_bad = "#aa759f"
 }
 
 load {
         format = "%5min"
-#        color_good = "#f4bf75"
 }
 
