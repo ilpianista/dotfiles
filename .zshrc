@@ -51,6 +51,9 @@ source $ZSH/oh-my-zsh.sh
 
 [[ -r $HOME/bin/base16-default.dark.sh ]] && source $HOME/bin/base16-default.dark.sh
 
+bindkey "\e[1~" beginning-of-line
+bindkey "\e[4~" end-of-line
+
 # pacman stuff
 alias upgrade='sudo pacman -Syu; echo "Checking for AUR updates..."; cower -uddf'
 alias asdeps='sudo pacman -S --asdeps'

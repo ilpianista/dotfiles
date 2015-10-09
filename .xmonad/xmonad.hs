@@ -58,9 +58,9 @@ myWorkspaces = ["*","web","media","chat"] ++ map show [5..9] ++ ["dev"]
 -- Border colors for unfocused and focused windows, respectively.
 --
 myNormalBorderColor :: [Char]
-myNormalBorderColor  = "#151515"
+myNormalBorderColor  = "#181818"
 myFocusedBorderColor :: [Char]
-myFocusedBorderColor = "#303030"
+myFocusedBorderColor = "#383838"
 
 --powerMenu :: [(String, X ())]
 --powerMenu = [ ("lock" , spawn "qdbus org.kde.ksmserver /ScreenSaver Lock")
@@ -181,9 +181,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Media bindings
     ++
     [ ((0, 0x1008ff14), spawn "playerctl play-pause") -- XF86AudioPlay
-    , ((0, 0x1008ff16), spawn "playerctl previous") --XF86AudioPrev
-    , ((0, 0x1008ff17), spawn "playerctl next") --XF86AudioNext
-    , ((0, 0x1008ff15), spawn "playerctl stop") --XF86AudioStop
+    , ((0, 0x1008ff16), spawn "playerctl previous") -- XF86AudioPrev
+    , ((0, 0x1008ff17), spawn "playerctl next") -- XF86AudioNext
+    , ((0, 0x1008ff15), spawn "playerctl stop") -- XF86AudioStop
     ]
 
     -- Brightness bindings
@@ -196,18 +196,18 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     ++
     [ ((0, 0x1008ff41), spawn "firefox") -- XF86Launch1
     , ((0, 0x1008ff2d), spawn "qdbus org.kde.ksmserver /ScreenSaver Lock") -- XF86ScreenSaver
-    , ((0, xK_Print  ), spawn "kscreengenie") -- XF86Print
+    , ((0, xK_Print  ), spawn "spectacle") -- XF86Print
     --, ((0, 0x1008ff93), spawn "") -- XF86Battery
     ]
 
 myXPConfig :: XPConfig
 myXPConfig = defaultXPConfig
     { font                = "xft:Source Code Pro:size=9"
-    , bgColor             = "#151515"
-    , fgColor             = "#90a959"
-    , fgHLight            = "#d0d0d0"
-    , bgHLight            = "#151515"
-    , borderColor         = "#151515"
+    , bgColor             = "#181818"
+    , fgColor             = "#a1b56c"
+    , fgHLight            = "#d8d8d8"
+    , bgHLight            = "#181818"
+    , borderColor         = "#181818"
     , promptBorderWidth   = 0
     , position            = Top
     , height              = 18

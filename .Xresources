@@ -59,7 +59,7 @@ Xft.lcdfilter:                        lcddefault
 *color21:      base06
 
 ! URxvt !
-URxvt*termName: screen-256color
+URxvt*termName: xterm-256color
 URxvt.scrollBar: false
 URxvt.savelines: 1000
 URxvt.perl-ext-common: default,matcher

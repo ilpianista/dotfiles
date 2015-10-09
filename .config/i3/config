@@ -20,7 +20,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+c kill
 
 # start dmenu (a program launcher)
-bindsym $mod+r exec --no-startup-id i3-dmenu-desktop --dmenu "dmenu -i -nb '#151515' -nf '#90a959' -sb '#151515' -sf '#d0d0d0' -fn 'Source Code Pro-9'"
+bindsym $mod+r exec --no-startup-id j4-dmenu-desktop --dmenu "dmenu -i -nb '#181818' -nf '#d8d8d8' -sb '#181818' -sf '#a1b56c' -fn 'Source Code Pro-9'"
 
 #exec_always ~/bin/per-workspace-layout.pl
 
@@ -147,7 +147,7 @@ bindsym Print exec spectacle
 # reload the configuration file
 bindsym Mod1+Shift+r reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+q restart
+#bindsym $mod+q restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+q exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
@@ -173,10 +173,10 @@ set $base0D #7cafc2
 set $base0E #ba8baf
 set $base0F #a16946
 
-client.focused $base01 $base01 $base0D $base01
+client.focused $base01 $base01 $base0B $base01
 client.focused_inactive $base01 $base01 $base05 $base01
 client.unfocused $base01 $base01 $base05 $base01
-client.urgent $base08 $base01 $base08 $base08
+client.urgent $base01 $base01 $base08 $base08
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -217,9 +217,9 @@ bar {
                 separator $base03
                 background $base01
                 statusline $base05
-                focused_workspace $base01 $base01 $base0D
+                focused_workspace $base01 $base01 $base0B
                 active_workspace $base01 $base01 $base05
                 inactive_workspace $base01 $base01 $base05
-                urgent_workspace $base01 $base08 $base08
+                urgent_workspace $base01 $base08 $base01
         }
 }
