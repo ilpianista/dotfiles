@@ -137,7 +137,7 @@ Plugin 'chriskempson/base16-vim'
 call vundle#end()
 
 " Load KDE settings
-source /home/ilpianista/projects/KDE/kde/kdesdk/kde-dev-scripts/kde-devel-vim.vim
+source /usr/share/kde-dev-scripts/kde-devel-vim.vim
 
 "" general stuff
 set encoding=utf-8 " necessary to show unicode glyphs
@@ -154,13 +154,15 @@ filetype plugin indent on " turn on filetype detection, filetype plugins, and au
 syntax on           " turn syntax highlighting on
 set t_Co=256        " explicitly tell vim that the terminal supports 256 colors
 set background=dark
+let base16colorspace=256   " workaround needed with some 256 colors terminal
 colorscheme base16-default " because we prefer a non default colorscheme
 highlight Pmenu guibg=brown gui=bold
 
 "" whitespace
 set nowrap          " lines longer than the width of the window will not wrap
-set tabstop=2       " tabs count as 2 spaces
-set shiftwidth=2    " number of spaces to use in autoindent
+set tabstop=4       " tabs count as 2 spaces
+set softtabstop=4   " tabs count as 2 spaces in insert mode
+set shiftwidth=4    " number of spaces to use in autoindent
 set expandtab       " use spaces instead of tabs
 "set list            " show invisible characters
 set backspace=indent,eol,start    " backspace through everything in insert mode
@@ -172,7 +174,8 @@ set incsearch       " incremental searching
 set ignorecase      " searches are case insensitive...
 set smartcase       " ... unless they contain at least one capital letter
 
-set modelines=0     " https://lists.alioth.debian.org/pipermail/pkg-vim-maintainers/2007-June/004020.html
+"set modelines=0     " https://lists.alioth.debian.org/pipermail/pkg-vim-maintainers/2007-June/004020.html
+set lazyredraw      " redraw only when needed, means faster macros
 
 set wildmode=full
 set wildmenu        " command-line completion operates in an enhanced mode
@@ -270,6 +273,6 @@ au BufNewFile,BufRead *.plpgsql setf pgsql
 autocmd BufWritePre * :%s/\s\+$//e
 
 " ghc-mod Reload
-map <silent> tu :call GHC_BrowseAll()<CR>
+"map <silent> tu :call GHC_BrowseAll()<CR>
 " ghc-moc Type Lookup
-map <silent> tw :call GHC_ShowType(1)<CR>
+"map <silent> tw :call GHC_ShowType(1)<CR>

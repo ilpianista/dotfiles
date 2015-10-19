@@ -51,8 +51,8 @@ source $ZSH/oh-my-zsh.sh
 
 [[ -r $HOME/bin/base16-default.dark.sh ]] && source $HOME/bin/base16-default.dark.sh
 
-bindkey "\e[1~" beginning-of-line
-bindkey "\e[4~" end-of-line
+bindkey "\e[7~" beginning-of-line
+bindkey "\e[8~" end-of-line
 
 # pacman stuff
 alias upgrade='sudo pacman -Syu; echo "Checking for AUR updates..."; cower -uddf'
@@ -91,18 +91,18 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias sign='gpg --detach-sign --use-agent'
 
-alias wakerome='wol 00:04:ac:65:42:1e'
-alias wakelupino='wol b8:27:eb:43:fb:46'
-
 alias connect='nmcli con up id'
 alias disconnect='nmcli con down id'
 alias wifilist='nmcli dev wifi list'
 
-alias mount500='sudo cryptsetup luksOpen /dev/sdc1 --key-file $HOME/Documents/500-keyfile 500'
-alias mount750='sudo cryptsetup luksOpen /dev/sdc1 --key-file $HOME/Documents/750-keyfile 750'
+alias mount500='sudo cryptsetup luksOpen /dev/sdb1 --key-file $HOME/Documents/500-keyfile 500'
+alias mount750='sudo cryptsetup luksOpen /dev/sdb1 --key-file $HOME/Documents/750-keyfile 750'
 
 # LS_COLORS
 [[ -r $HOME/.dir_colors ]] && eval $(dircolors -b $HOME/.dir_colors)
 
 # Quickly start download any torrent file :-)
 downTorrent() { scp "${1}" fuffy.mooo.com:/media/disk/torrents/ }
+
+# Wake-On-LAN aliases
+wake() { wol $(cat $HOME/.wol/"${1}") }

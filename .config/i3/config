@@ -20,7 +20,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+c kill
 
 # start dmenu (a program launcher)
-bindsym $mod+r exec --no-startup-id j4-dmenu-desktop --dmenu "dmenu -i -nb '#181818' -nf '#d8d8d8' -sb '#181818' -sf '#a1b56c' -fn 'Source Code Pro-9'"
+bindsym $mod+r exec --no-startup-id j4-dmenu-desktop --dmenu "dmenu -i -nb '#181818' -nf '#d8d8d8' -sb '#181818' -sf '#a1b56c' -fn 'Source Code Pro-9'" --use-xdg-de
 
 #exec_always ~/bin/per-workspace-layout.pl
 
@@ -126,10 +126,10 @@ assign [class="Designer"] 10:dev
 for_window [title="SailfishOS Emulator [Running] - Oracle VM VirtualBox"] floating enable
 assign [title="SailfishOS Emulator [Running] - Oracle VM VirtualBox"] 10:dev
 
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +5%
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -5%
-bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
-bindsym XF86AudioMicMute exec pactl set-source-mute 1 toggle
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +10%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -10%
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioPrev exec playerctl previous
