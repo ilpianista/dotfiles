@@ -43,7 +43,7 @@ DISABLE_AUTO_UPDATE="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-plugins=(colored-man command-not-found cp extract git history-substring-search)
+plugins=(colored-man command-not-found cp extract git history-substring-search nanoc npm rails screen)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -90,6 +90,7 @@ alias ls='ls --color=tty -h'
 alias cp='cp -i'
 alias mv='mv -i'
 alias sign='gpg --detach-sign --use-agent'
+alias cal='cal -3'
 
 alias connect='nmcli con up id'
 alias disconnect='nmcli con down id'
