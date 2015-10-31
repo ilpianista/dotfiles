@@ -59,7 +59,7 @@ Xft.lcdfilter:                        lcddefault
 *color21:      base06
 
 ! URxvt !
-URxvt*termName: xterm-256color
+URxvt.termName: rxvt-unicode
 URxvt.scrollBar: false
 URxvt.savelines: 1000
 URxvt.perl-ext-common: default,matcher
@@ -69,10 +69,10 @@ URxvt.font: xft:Source Code Pro:pixelsize=12
 URxvt.boldfont: xft:Source Code Pro:bold:pixelsize=12
 URxvt*scrollTtyOutput: false
 URxvt*scrollWithBuffer: true
-URxvt.keysym.Home: \033[7~
-URxvt.keysym.End: \033[8~
-URxvt.keysym.KP_Home: \033[7~
-URxvt.keysym.KP_End:  \033[8~
+!URxvt.keysym.Home: \033[7~
+!URxvt.keysym.End: \033[8~
+!URxvt.keysym.KP_Home: \033[7~
+!URxvt.keysym.KP_End:  \033[8~
 
 ! URxvt*tintColor:                      color
 ! URxvt*fadeColor:                      color
