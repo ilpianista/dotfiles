@@ -20,7 +20,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+c kill
 
 # start dmenu (a program launcher)
-bindsym $mod+r exec --no-startup-id j4-dmenu-desktop --dmenu "dmenu -i -nb '#181818' -nf '#d8d8d8' -sb '#181818' -sf '#a1b56c' -fn 'Source Code Pro-9'" --use-xdg-de
+bindsym $mod+r exec --no-startup-id dmenu_run -i -nb '#181818' -nf '#d8d8d8' -sb '#181818' -sf '#a1b56c' -fn 'Source Code Pro-9'
 
 #exec_always ~/bin/per-workspace-layout.pl
 
@@ -108,6 +108,9 @@ bindsym $mod+Shift+4 move container to workspace $tag4
 bindsym $mod+Shift+8 move container to workspace $tag8
 bindsym $mod+Shift+9 move container to workspace $tag9
 bindsym $mod+Shift+0 move container to workspace $tag10
+
+bindsym $mod-o move workspace to output VGA1
+#bindsym $mod+o move container to output VGA1
 
 assign [class="QupZilla"] 2:web
 assign [class="Firefox"] 2:web
@@ -212,6 +215,7 @@ bar {
         tray_output primary
         separator_symbol "·"
         strip_workspace_numbers yes
+        font pango:Source Code Pro, Ionicons 9
 
         colors {
                 separator $base03
