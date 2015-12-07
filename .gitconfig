@@ -10,9 +10,11 @@
 [color]
   ui = auto
 #[commit]
-#  template = $HOME/.commit-template
+#  template = ~/.commit-template
+[init]
+  templatedir = ~/.git-templates
 [core]
-  excludesfile = $HOME/.gitexcludes
+  excludesfile = ~/.gitexcludes
   autocrlf = input
   editor = vim
 [merge]
@@ -27,12 +29,13 @@
 [status]
   short = true
 
+[alias]
+  fakepush = push --dry-run
+
 [url "git://anongit.kde.org/"]
   insteadOf = kde:
 [url "git@git.kde.org:"]
   pushInsteadOf = kde:
 
 [github]
-  user = andreascarpino
-[alias]
-  fakepush = push --dry-run
+  user = ascarpino
