@@ -109,7 +109,8 @@ bindsym $mod+Shift+8 move container to workspace $tag8
 bindsym $mod+Shift+9 move container to workspace $tag9
 bindsym $mod+Shift+0 move container to workspace $tag10
 
-bindsym $mod-o move workspace to output VGA1
+bindsym $mod+o move workspace to output VGA1
+bindsym $mod+p move workspace to output LVDS1
 #bindsym $mod+o move container to output VGA1
 
 assign [class="QupZilla"] 2:web
@@ -117,7 +118,7 @@ assign [class="Firefox"] 2:web
 assign [class="kontact"] 2:web
 for_window [class="Vlc"] floating enable
 assign [class="Vlc"] 3:media
-assign [class="amarok"] 3:media
+assign [class="Amarok"] 3:media
 assign [class="konversation"] 4:chat
 assign [class="ktpcontactlist"] 4:chat
 assign [class="ktp-text-ui"] 4:chat
@@ -134,18 +135,18 @@ bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -10%
 bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
-bindsym XF86AudioPlay exec playerctl play-pause
-bindsym XF86AudioPrev exec playerctl previous
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioStop exec playerctl stop
+bindsym XF86AudioPlay exec qdbus org.mpris.MediaPlayer2.amarok /org/mpris/MediaPlayer2 PlayPause
+bindsym XF86AudioPrev exec qdbus org.mpris.MediaPlayer2.amarok /org/mpris/MediaPlayer2 Previous
+bindsym XF86AudioNext exec qdbus org.mpris.MediaPlayer2.amarok /org/mpris/MediaPlayer2 Next
+bindsym XF86AudioStop exec qdbus org.mpris.MediaPlayer2.amarok /org/mpris/MediaPlayer2 Stop
 
-bindsym XF86MonBrightnessDown exec xbacklight -dec 20
-bindsym XF86MonBrightnessUp exec xbacklight -inc 20
+bindsym XF86MonBrightnessDown exec qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl setBrightness $(expr $(qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl brightness) - $(qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl brightnessMax) / 5)
+bindsym XF86MonBrightnessUp exec qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl setBrightness $(expr $(qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl brightness) + $(qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl brightnessMax) / 5)
 
-bindsym XF86Launch1 exec firefox
+bindsym XF86Launch1 exec i3-sensible-browser
 bindsym XF86ScreenSaver exec i3lock --color=000000 --dpms
 bindsym Ctrl+Mod1+l exec i3lock --color=000000 --dpms
-bindsym Print exec spectacle
+bindsym Print exec qdbus org.kde.Spectacle / StartAgent
 
 # reload the configuration file
 bindsym Mod1+Shift+r reload
