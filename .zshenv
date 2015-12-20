@@ -1,5 +1,5 @@
 export EDITOR=vim
-export TERMINAL=urxvt
+export TERMINAL=konsole
 
 if [ -n "$DISPLAY" ]; then
   export BROWSER=firefox
@@ -22,8 +22,8 @@ export QT_MESSAGE_PATTERN="[%{appname}(%{pid})/(%{category}) ${c}[31m%{if-debug}
 unset c
 
 # Speed-up rebuilds
-export PATH="/usr/lib/ccache/bin:$PATH"
-export CCACHE_DIR="/tmp/ccache"
+#export PATH="/usr/lib/ccache/bin:$PATH"
+#export CCACHE_DIR="/tmp/ccache"
 
 # Java fonts stuff
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=lcd -Dswing.aatext=true"

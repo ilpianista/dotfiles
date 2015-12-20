@@ -8,7 +8,7 @@ export PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 #export PATH="$HOME/.cabal/bin:$PATH"
 
 # Python
-export PATH="$HOME/.local/bin:$PATH"
+#export PATH="$HOME/.local/bin:$PATH"
 
 # NodeJS modules installed with npm
 export PATH="$HOME/node_modules/.bin:$PATH"

@@ -33,10 +33,10 @@ if not origin:
 # This is where you adjust the code to fit your needs
 if 'kde.org' in origin.url or origin.url.startswith('kde:'):
     email = 'scarpino@kde.org'
-#elif 'archlinux.org' in origin.url:
-#    email = 'andrea@archlinux.org'
+elif 'archlinux.org' in origin.url:
+    email = 'andrea@archlinux.org'
 else:
-    print('** Failed to detect identity! **')
+#    print('** Failed to detect identity! **')
     sys.exit(0)
 
 # Write the option to .git/config

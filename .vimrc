@@ -121,6 +121,9 @@ Plugin 'artoj/qmake-syntax-vim'
 " PGSQL syntax
 "Plugin 'exu/pgsql.vim'
 
+" basic vim/vagrant integration
+Plugin 'markcornick/vim-vagrant'
+
 " Vim syntax for i3 window manager config
 Plugin 'PotatoesMaster/i3-vim-syntax'
 

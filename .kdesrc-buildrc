@@ -26,7 +26,14 @@ end global
 module-set choqok
   repository kde-projects
   use-modules choqok
-  cmake-options -DKDE_INSTALL_USE_QT_SYS_PATHS=ON -DBUILD_TESTING=OFF -DCMAKE_BUILD_TYPE=debug
+  cmake-options -DKDE_INSTALL_USE_QT_SYS_PATHS=ON -DBUILD_TESTING=OFF -DCMAKE_BUILD_TYPE=debug -DBUILD_DOC=OFF
+end module-set
+
+module-set amarok
+  repository kde-projects
+  branch kf5
+  use-modules amarok
+  cmake-options -DKDE_INSTALL_USE_QT_SYS_PATHS=ON -DBUILD_TESTING=OFF -DCMAKE_BUILD_TYPE=debug -DBUILD_DOC=OFF
 end module-set
 
 #module-set kdeconnect-kde
@@ -40,8 +47,14 @@ module-set kdeutils
   use-modules kgpg
 end module-set
 
-module-set kdesdk
-  repository kde-projects
-  use-modules kde-dev-scripts
-end module-set
+#module-set kdesdk
+#  repository kde-projects
+#  use-modules kde-dev-scripts
+#end module-set
+
+#module-set kdevelop
+#  repository kde-projects
+#  use-modules kdevplatform kdevelop/kdevelop kdevelop-pg-qt
+#  cmake-options -DKDE_INSTALL_USE_QT_SYS_PATHS=ON -DBUILD_TESTING=OFF
+#end module-set
 

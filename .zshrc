@@ -62,7 +62,7 @@ alias useless='pacman -Qqtd'
 alias makepkg='makepkg -L'
 
 search() { pacman -Ss ${1}; cower -s ${1} }
-aurpkg() { cower -d ${1}; cd /tmp/${1}; makepkg -s }
+aurpkg() { cower -dd ${1} && cd /tmp/${1} && makepkg -s }
 
 # Show needed libraries
 scan() {
@@ -103,7 +103,7 @@ alias mount750='sudo cryptsetup luksOpen /dev/sdb1 --key-file $HOME/Documents/75
 [[ -r $HOME/.dir_colors ]] && eval $(dircolors -b $HOME/.dir_colors)
 
 # Quickly start download any torrent file :-)
-downTorrent() { scp "${1}" fuffy.mooo.com:/media/disk/torrents/ }
+downTorrent() { scp "${1}" munich0.mooo.com:/media/disk/torrents/ }
 
 # Wake-On-LAN aliases
 wake() { wol $(cat $HOME/.wol/"${1}") }

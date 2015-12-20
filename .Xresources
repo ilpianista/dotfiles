@@ -59,9 +59,9 @@ Xft.lcdfilter:                        lcddefault
 *color21:      base06
 
 ! URxvt !
-URxvt.termName: rxvt-unicode
+URxvt.termName: xterm-256color
 URxvt.scrollBar: false
-URxvt.savelines: 1000
+URxvt.savelines: 5000
 URxvt.perl-ext-common: default,matcher
 URxvt.url-launcher: /usr/bin/firefox
 URxvt.matcher.button: 1

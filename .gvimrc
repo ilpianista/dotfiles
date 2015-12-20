@@ -1,3 +1,3 @@
 if has("gui_running")
-  set guifont=Anonymous\ Pro\ 11
+  set guifont=Source\ Code\ Pro\ 10
 endif

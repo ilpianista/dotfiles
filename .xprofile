@@ -2,7 +2,8 @@ xrdb -quiet -merge -nocpp $HOME/.Xresources
 xsetroot -cursor_name left_ptr
 sh ~/.fehbg
 xautolock -time 10 -locker 'i3lock --color=000000 --dpms' &
-~/bin/battery_low.sh &
+#~/bin/battery_low.sh &
 dunst &
+kded5 &
 ksshaskpass &
 #stalonetray &
