@@ -144,8 +144,8 @@ bindsym XF86MonBrightnessDown exec qdbus org.freedesktop.PowerManagement /org/kd
 bindsym XF86MonBrightnessUp exec qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl setBrightness $(expr $(qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl brightness) + $(qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl brightnessMax) / 5)
 
 bindsym XF86Launch1 exec i3-sensible-browser
-bindsym XF86ScreenSaver exec i3lock --color=000000 --dpms
-bindsym Ctrl+Mod1+l exec i3lock --color=000000 --dpms
+bindsym XF86ScreenSaver exec /usr/lib/kscreenlocker_greet
+bindsym Ctrl+Mod1+l exec /usr/lib/kscreenlocker_greet
 bindsym Print exec qdbus org.kde.Spectacle / StartAgent
 
 # reload the configuration file
@@ -177,9 +177,9 @@ set $base0D #7cafc2
 set $base0E #ba8baf
 set $base0F #a16946
 
-client.focused $base01 $base01 $base0B $base01
-client.focused_inactive $base01 $base01 $base05 $base01
-client.unfocused $base01 $base01 $base05 $base01
+client.focused $base01 $base01 $base05 $base01
+client.focused_inactive $base01 $base01 $base0B $base01
+client.unfocused $base01 $base01 $base0B $base01
 client.urgent $base01 $base01 $base08 $base08
 
 # resize window (you can also use the mouse for that)
@@ -222,9 +222,9 @@ bar {
                 separator $base03
                 background $base01
                 statusline $base05
-                focused_workspace $base01 $base01 $base0B
-                active_workspace $base01 $base01 $base05
-                inactive_workspace $base01 $base01 $base05
+                focused_workspace $base01 $base01 $base05
+                active_workspace $base01 $base01 $base0B
+                inactive_workspace $base01 $base01 $base0B
                 urgent_workspace $base01 $base08 $base01
         }
 }
