@@ -9,44 +9,43 @@
 general {
         colors = true
         interval = 10
-
-        color_good = "#7cafc2"
-        color_degraded = "#dc9656"
-        color_bad = "#ab4642"
+        markup = "pango"
 }
 
 order += "wireless wlp3s0"
+order += "volume master"
 order += "battery 0"
 order += "load"
-order += "volume master"
 order += "tztime local"
 
 wireless wlp3s0 {
-        format_up = "%essid"
+        format_up = "<span color='#7cafc2'>%essid</span>"
         format_down = ""
 }
 
-battery 0 {
-        format = "%status%percentage"
-        format_down = "No battery"
-        status_chr = ""
-        status_bat = ""
-        low_threshold = 10
-        threshold_type = percentage
-        #last_full_capacity = true
-}
-
-tztime local {
-        format = "%A, %R"
-}
-
 volume master {
-        format = "%volume"
-        format_muted = ""
+        format = "<span color='#ba8baf'>%volume</span>"
+        format_muted = "<span color='#ba8baf'></span>"
         device = "pulse"
 }
 
+battery 0 {
+        format = "<span color='#dc9656'>%status%percentage</span>"
+        format_down = "<span color='#dc9656'></span>"
+        status_chr = ""
+        status_bat = ""
+        status_full = ""
+        low_threshold = 20
+        threshold_type = percentage
+        last_full_capacity = true
+}
+
 load {
-        format = "%1min"
+        format = "<span color='#f7ca88'>%1min</span>"
+}
+
+tztime local {
+        format = "<span color='#a1b56c'>%time</span>"
+        format_time = "%A, %R"
 }
 
