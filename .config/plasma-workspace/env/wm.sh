@@ -1,3 +1,2 @@
 #!/bin/sh
-#export KDEWM=awesome
-export KDEWM=xmonad
+export KDEWM=i3
