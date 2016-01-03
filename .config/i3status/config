@@ -37,7 +37,7 @@ battery 0 {
         status_full = ""
         low_threshold = 20
         threshold_type = percentage
-        last_full_capacity = true
+        #last_full_capacity = true
 }
 
 load {

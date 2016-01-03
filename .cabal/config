@@ -20,8 +20,8 @@ world-file: /home/andrea/.cabal/world
 -- with-compiler:
 -- with-hc-pkg:
 -- scratchdir:
--- program-prefix: 
--- program-suffix: 
+-- program-prefix:
+-- program-suffix:
 -- library-vanilla: True
 -- library-profiling: False
 -- shared:

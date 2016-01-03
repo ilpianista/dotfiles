@@ -455,7 +455,7 @@ globalkeys = awful.util.table.join(
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
---    awful.key({ modkey, "Shift"   }, "q", awesome.quit),
+    awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end),
     awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)    end),
@@ -489,7 +489,7 @@ globalkeys = awful.util.table.join(
     --end),
 
     -- Print screen
-    awful.key({ }, "Print", function () awful.util.spawn("ksnapshot") end),
+    awful.key({ }, "Print", function () awful.util.spawn("spectacle") end),
 
     -- Volume
     awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer -q set Master 5%+ unmute") end),
