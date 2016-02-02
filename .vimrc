@@ -32,6 +32,8 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 " Vim plugin to list, select and switch between buffers
 Plugin 'jeetsukumaran/vim-buffergator'
+" Delete buffers and close files in Vim without closing your windows or messing up your layout
+Plugin 'moll/vim-bbye'
 " Next generation completion framework after neocomplcache
 Plugin 'Shougo/neocomplete.vim'
 " Fuzzy file, buffer, mru, tag, etc finder

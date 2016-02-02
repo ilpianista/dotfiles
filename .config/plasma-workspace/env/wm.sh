@@ -1,2 +1,2 @@
 #!/bin/sh
-export KDEWM=i3
+#export KDEWM=i3
