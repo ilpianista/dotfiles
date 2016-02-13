@@ -28,9 +28,8 @@
   pretty = oneline
 [status]
   short = true
-
-[alias]
-  fakepush = push --dry-run
+[branch]
+	autosetuprebase = always
 
 [url "git://anongit.kde.org/"]
   insteadOf = kde:
@@ -38,4 +37,4 @@
   pushInsteadOf = kde:
 
 [github]
-  user = ascarpino
+  user = ilpianista
