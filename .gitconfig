@@ -28,8 +28,6 @@
   pretty = oneline
 [status]
   short = true
-[branch]
-	autosetuprebase = always
 
 [url "git://anongit.kde.org/"]
   insteadOf = kde:

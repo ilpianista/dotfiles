@@ -113,7 +113,6 @@ bindsym $mod+o move workspace to output VGA1
 bindsym $mod+p move workspace to output LVDS1
 #bindsym $mod+o move container to output VGA1
 
-assign [class="QupZilla"] 2:web
 assign [class="Firefox"] 2:web
 assign [class="kontact"] 2:web
 for_window [class="Vlc"] floating enable
@@ -124,8 +123,8 @@ assign [class="ktpcontactlist"] 4:chat
 assign [class="ktp-text-ui"] 4:chat
 assign [class="Skype"] 4:chat
 assign [class="Eclipse"] 10:dev
-assign [class="kdevelop"] 10:dev
 assign [class="QtCreator"] 10:dev
+assign [class="jetbrains-studio"] 10:dev
 assign [class="Designer"] 10:dev
 for_window [title="SailfishOS Emulator [Running] - Oracle VM VirtualBox"] floating enable
 assign [title="SailfishOS Emulator [Running] - Oracle VM VirtualBox"] 10:dev
@@ -146,6 +145,8 @@ bindsym XF86MonBrightnessUp exec qdbus org.freedesktop.PowerManagement /org/kde/
 bindsym XF86Launch1 exec i3-sensible-browser
 bindsym XF86ScreenSaver exec /usr/lib/kscreenlocker_greet
 bindsym Ctrl+Mod1+l exec /usr/lib/kscreenlocker_greet
+bindsym Ctrl+Mod1+Escape exec konsole --noclose -e htop
+bindsym Ctrl+Escape exec konsole --noclose -e htop
 bindsym Print exec qdbus org.kde.Spectacle / StartAgent
 
 # reload the configuration file

@@ -31,3 +31,5 @@ export JAVA_FONTS="/usr/share/fonts/TTF"
 
 # Bundler install gems per-user
 export GEM_HOME=$(ruby -e 'print Gem.user_dir')
+
+export MP_FULLNAME="Andrea Scarpino"
