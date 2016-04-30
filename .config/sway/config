@@ -209,12 +209,14 @@ mode "resize" {
 
 bindsym $mod+Shift+r mode "resize"
 
+output "*" background /home/andrea/Pictures/wallpapers/wall_145.jpg fill
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
         position top
         status_command i3status
-        tray_output primary
+        #tray_output primary
         separator_symbol "·"
         strip_workspace_numbers yes
         font pango:Source Code Pro, Ionicons 9

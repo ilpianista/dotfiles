@@ -30,5 +30,7 @@ export XDG_CURRENT_DESKTOP="KDE"
 eval $(ssh-agent)
 export SSH_ASKPASS="/usr/bin/ksshaskpass"
 
+export XKB_DEFAULT_LAYOUT=gb
+
 # Automatically startx
-[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx
+#[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx
