@@ -154,7 +154,7 @@ bindsym Mod1+Shift+r reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 #bindsym $mod+q restart
 # exit i3 (poweroff)
-bindsym $mod+Shift+q exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to shutdown?' -b 'Yes, shutdown' 'systemctl poweroff -i'"
+bindsym $mod+Shift+q exec i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to shutdown?' -b 'Yes, shutdown' 'systemctl poweroff -i'
 
 hide_edge_borders none
 

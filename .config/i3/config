@@ -145,8 +145,8 @@ bindsym XF86MonBrightnessUp exec qdbus org.freedesktop.PowerManagement /org/kde/
 bindsym XF86Launch1 exec i3-sensible-browser
 bindsym XF86ScreenSaver exec /usr/lib/kscreenlocker_greet
 bindsym Ctrl+Mod1+l exec /usr/lib/kscreenlocker_greet
-bindsym Ctrl+Mod1+Escape exec konsole --noclose -e htop
-bindsym Ctrl+Escape exec konsole --noclose -e htop
+bindsym Ctrl+Mod1+Escape exec urxvt -e htop
+bindsym Ctrl+Escape exec urxvt -e htop
 bindsym Print exec qdbus org.kde.Spectacle / StartAgent
 
 # reload the configuration file

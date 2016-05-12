@@ -1,5 +1,5 @@
 export EDITOR=vim
-export TERMINAL=konsole
+export TERMINAL=urxvt
 
 if [ -n "$DISPLAY" ]; then
   export BROWSER=firefox
