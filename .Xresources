@@ -61,7 +61,7 @@ Xcursor.theme: breeze_cursors
 *color21:      base06
 
 ! URxvt !
-URxvt.termName: xterm-256color
+URxvt.termName: rxvt-256color
 URxvt.scrollBar: false
 URxvt.savelines: 5000
 URxvt.perl-ext-common: default,matcher

@@ -129,6 +129,9 @@ Plugin 'ekalinin/Dockerfile.vim'
 " basic vim/vagrant integration
 "Plugin 'markcornick/vim-vagrant'
 
+" A vim plugin for syntax highlighting Ansible's common filetypes
+Plugin 'pearofducks/ansible-vim'
+
 " Vim syntax for i3 window manager config
 Plugin 'PotatoesMaster/i3-vim-syntax'
 
@@ -150,7 +153,8 @@ source /usr/share/kde-dev-scripts/kde-devel-vim.vim
 "" general stuff
 set encoding=utf-8 " necessary to show unicode glyphs
 set showcmd        " display incomplete commands
-set number         " turn line numbering on
+"set number         " turn line numbering on
+set relativenumber " turn relative numbering on
 "set cursorline     " highlight the cursor line
 "set cursorcolumn   " highlight the cursor column
 set history=50     " keep 50 lines of command line history

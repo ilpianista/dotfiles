@@ -51,9 +51,6 @@ source $ZSH/oh-my-zsh.sh
 
 [[ -r $HOME/.config/base16-shell/base16-default.dark.sh ]] && source $HOME/.config/base16-shell/base16-default.dark.sh
 
-bindkey "\e[7~" beginning-of-line
-bindkey "\e[8~" end-of-line
-
 # pacman stuff
 alias upgrade='sudo pacman -Syu; echo "Checking for AUR updates..."; cower -uddf'
 alias asdeps='sudo pacman -S --asdeps'
@@ -93,7 +90,9 @@ alias cal='cal -3'
 
 alias connect='nmcli con up id'
 alias disconnect='nmcli con down id'
-alias wifilist='nmcli dev wifi list'
+alias wifi_list='nmcli dev wifi list'
+alias wifi_on='nmcli radio wifi on'
+alias wifi_off='nmcli radio wifi off'
 
 alias mount500='sudo cryptsetup luksOpen /dev/sdb1 --key-file $HOME/Documents/500-keyfile 500; /usr/bin/mount /mnt/500'
 alias mount750='sudo cryptsetup luksOpen /dev/sdb1 --key-file $HOME/Documents/750-keyfile 750; /usr/bin/mount /mnt/750'
