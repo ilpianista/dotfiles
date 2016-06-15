@@ -3,10 +3,9 @@
 xrdb -quiet -merge -nocpp $HOME/.Xresources
 xsetroot -cursor_name left_ptr
 sh ~/.fehbg
-xautolock -time 10 -locker '/usr/lib/kscreenlocker_greet --immediateLock' &
+xautolock -time 10 -locker "/usr/lib/kscreenlocker_greet --immediateLock" -noclose &
 #~/bin/battery_low.sh &
 dunst &
 kded5 &
-ksshaskpass &
 #stalonetray &
 redshift &

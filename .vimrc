@@ -41,7 +41,7 @@ Plugin 'kien/ctrlp.vim'
 " helpers for UNIX
 Plugin 'tpope/vim-eunuch'
 " a Git wrapper so awesome, it should be illegal
-"Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-fugitive'
 " A Vim plugin which shows a git diff in the gutter (sign column) and stages/reverts hunks.
 Plugin 'airblade/vim-gitgutter'
 " Vim plugin that displays tags in a window, ordered by class etc.
@@ -86,9 +86,9 @@ Plugin 'groenewege/vim-less'
 " Create ctags compatible tags files for Haskell programs
 "Plugin 'bitc/lushtags'
 
-"" Prolog
-" Prolog Integration for Vim
-"Plugin 'adimit/prolog.vim'
+" PowerShell
+" A Vim plugin for Windows PowerShell support
+Plugin 'PProvost/vim-ps1'
 
 "" Ruby
 " Vim/Ruby Configuration Files

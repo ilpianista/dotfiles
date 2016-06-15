@@ -1,7 +1,7 @@
 [user]
   email = me@andreascarpino.it
   name = Andrea Scarpino
-  signingkey = D30DB0AD
+  signingkey = 0x918F7DDFFD8D0B6E
 [sendemail]
   smtpencryption = tls
   smtpserver = smtp.googlemail.com
@@ -25,7 +25,7 @@
 [push]
   default = simple
 [format]
-  pretty = oneline
+  pretty = format:"%C(yellow)%h %C(cyan)%an %C(white)%s"
 [status]
   short = true
 
