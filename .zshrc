@@ -85,7 +85,7 @@ alias rm='rm -i'
 alias ls='ls --color=tty -h'
 alias cp='cp -i'
 alias mv='mv -i'
-alias sign='gpg --detach-sign --use-agent'
+alias sign='gpg --armor --detach-sign'
 alias cal='cal -3'
 
 alias connect='nmcli con up id'

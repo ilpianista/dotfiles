@@ -20,7 +20,6 @@
 [merge]
   tool = vimdiff
 [diff]
-  renames = true
   renameLimit = 7974
 [push]
   default = simple

@@ -17,7 +17,7 @@ export PATH="$HOME/node_modules/.bin:$PATH"
 export QT_PLUGIN_PATH="/usr/local/lib/qt/plugins:${QT_PLUGIN_PATH}"
 
 # KDE stuff
-export QT_DEVICE_PIXEL_RATIO=1
+export QT_AUTO_SCREEN_SCALE_FACTOR=0
 export XCURSOR_THEME="breeze_cursors"
 export KDE_FULL_SESSION=true
 export KDE_SESSION_VERSION=5

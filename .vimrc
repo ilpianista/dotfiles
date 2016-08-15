@@ -11,19 +11,19 @@ Plugin 'VundleVim/Vundle.vim'
 
 "" General plugins
 " Some utility functions for VIM (needed by snipmate)
-Plugin 'tomtom/tlib_vim'
+"Plugin 'tomtom/tlib_vim'
 " interpret a file by function and cache file automatically (needed by snipmate)
-Plugin 'MarcWeber/vim-addon-mw-utils'
+"Plugin 'MarcWeber/vim-addon-mw-utils'
 " a concise vim script that implements some of TextMate's snippets
-Plugin 'garbas/vim-snipmate'
+"Plugin 'garbas/vim-snipmate'
 " vim-snipmate default snippets
-Plugin 'honza/vim-snippets'
+"Plugin 'honza/vim-snippets'
+" A code-completion engine for Vim
+Plugin 'Valloric/YouCompleteMe'
 " quoting/parenthesizing made simple
 Plugin 'tpope/vim-surround'
 " pairs of handy bracket mappings
 Plugin 'tpope/vim-unimpaired'
-" Perform all your vim insert mode completions with Tab
-"Plugin 'ervandew/supertab'
 " lean & mean status/tabline for vim that's light as air
 Plugin 'bling/vim-airline'
 " A tree explorer plugin for vim
@@ -34,8 +34,6 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'jeetsukumaran/vim-buffergator'
 " Delete buffers and close files in Vim without closing your windows or messing up your layout
 Plugin 'moll/vim-bbye'
-" Next generation completion framework after neocomplcache
-Plugin 'Shougo/neocomplete.vim'
 " Fuzzy file, buffer, mru, tag, etc finder
 Plugin 'kien/ctrlp.vim'
 " helpers for UNIX
@@ -50,8 +48,6 @@ Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/syntastic'
 " A Vim plugin for visually displaying indent levels in code
 Plugin 'nathanaelkane/vim-indent-guides'
-" Vim plugin, provides insert mode auto-completion for quotes, parens, brackets, etc.
-Plugin 'Raimondi/delimitMate'
 " Miscellaneous auto-load Vim scripts (needed by vim-session)
 Plugin 'xolox/vim-misc'
 " Extended session management for Vim
@@ -71,8 +67,8 @@ Plugin 'ap/vim-css-color'
 Plugin 'groenewege/vim-less'
 
 "" Rust
-" Vim support for Rust file detection and syntax highlighting
-"Plugin 'wting/rust.vim'
+" Vim configuration for Rust
+Plugin 'rust-lang/rust.vim'
 
 "" Haskell
 " vim2hs :: Vim -> Haskell
@@ -167,7 +163,7 @@ syntax on           " turn syntax highlighting on
 set t_Co=256        " explicitly tell vim that the terminal supports 256 colors
 set background=dark
 let base16colorspace=256   " workaround needed with some 256 colors terminal
-colorscheme base16-default " because we prefer a non default colorscheme
+colorscheme base16-default-dark " because we prefer a non default colorscheme
 highlight Pmenu guibg=brown gui=bold
 
 "" whitespace
@@ -207,15 +203,6 @@ set backupdir^=~/.vim/_backup/    " where to put backup files.
 set directory^=~/.vim/_temp/      " where to put swap files.
 
 let mapleader=","
-
-" Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
 
 " Enable intent-guides
 au VimEnter * :IndentGuidesEnable
