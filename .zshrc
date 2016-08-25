@@ -45,6 +45,11 @@ DISABLE_AUTO_UPDATE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 plugins=(colored-man command-not-found cp extract git history-substring-search nanoc npm rails screen)
 
+ZSH_CACHE_DIR=$HOME/.oh-my-zsh-cache
+if [[ ! -d $ZSH_CACHE_DIR ]]; then
+  mkdir $ZSH_CACHE_DIR
+fi
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
