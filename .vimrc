@@ -132,12 +132,6 @@ Plugin 'pearofducks/ansible-vim'
 Plugin 'PotatoesMaster/i3-vim-syntax'
 
 "" color schemes
-" Molokai color scheme for Vim
-"Plugin 'tomasr/molokai'
-" Dark and light color scheme
-"Plugin 'vim-scripts/Lucius'
-" precision colorscheme for the vim text editor
-"Plugin 'altercation/vim-colors-solarized'
 " Base16 for Vim
 Plugin 'chriskempson/base16-vim'
 
@@ -160,7 +154,6 @@ filetype plugin indent on " turn on filetype detection, filetype plugins, and au
 
 "" color stuffs
 syntax on           " turn syntax highlighting on
-set t_Co=256        " explicitly tell vim that the terminal supports 256 colors
 set background=dark
 let base16colorspace=256   " workaround needed with some 256 colors terminal
 colorscheme base16-default-dark " because we prefer a non default colorscheme
@@ -216,6 +209,9 @@ let g:airline#extensions#tabline#enabled = 1
 " This does what it says on the tin. It will check your file on open too, not just on save.
 let g:syntastic_check_on_open = 0
 
+" Path to Rust source files
+let g:ycm_rust_src_path="/usr/src/rust/"
+
 " Enable emmet just for HTML/CSS
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
@@ -262,14 +258,18 @@ vnoremap > >gv
 match Error /\s\+$/
 
 " pgsql syntax highlight
-au BufNewFile,BufRead *.pgsql setf pgsql
-au BufNewFile,BufRead *.plpgsql setf pgsql
+"au BufNewFile,BufRead *.pgsql setf pgsql
+"au BufNewFile,BufRead *.plpgsql setf pgsql
 
 " Reformat XML file
 "au FileType xml exe ":silent %!xmllint --format --recover - 2>/dev/null"
 
 " Automatically removing all trailing whitespace
 autocmd BufWritePre * :%s/\s\+$//e
+
+" check file change every 4 seconds ('CursorHold') and reload the buffer upon detecting change
+set autoread
+au CursorHold * checktime
 
 " ghc-mod Reload
 "map <silent> tu :call GHC_BrowseAll()<CR>

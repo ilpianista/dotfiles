@@ -54,7 +54,7 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-[[ -r $HOME/.config/base16-shell/base16-default.dark.sh ]] && source $HOME/.config/base16-shell/base16-default.dark.sh
+[[ -r $HOME/.config/base16-shell/scripts/base16-default-dark.sh ]] && source $HOME/.config/base16-shell/scripts/base16-default-dark.sh
 
 # pacman stuff
 alias upgrade='sudo pacman -Syu; echo "Checking for AUR updates..."; cower -uddf'
