@@ -104,7 +104,7 @@ Plugin 'pangloss/vim-javascript'
 " A plugin that integrates JSHint with Vim
 Plugin 'walm/jshint.vim'
 " Tern plugin for Vim
-Plugin 'marijnh/tern_for_vim'
+"Plugin 'ternjs/tern_for_vim'
 " vim plugin which formated javascript files by js-beautify
 Plugin 'maksimr/vim-jsbeautify'
 " CoffeeScript support for vim
@@ -210,7 +210,9 @@ let g:airline#extensions#tabline#enabled = 1
 let g:syntastic_check_on_open = 0
 
 " Path to Rust source files
-let g:ycm_rust_src_path="/usr/src/rust/"
+let g:ycm_rust_src_path = "/usr/src/rust/src"
+
+nnoremap K :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 " Enable emmet just for HTML/CSS
 let g:user_emmet_install_global = 0
@@ -233,10 +235,10 @@ nnoremap <F8> :NERDTreeToggle<CR>
 nnoremap <F9> :TagbarToggle<CR>
 
 " Tern
-let g:tern#command = ['tern', '--no-port-file']
-let g:tern_show_argument_hints = "on_hold"
-set updatetime=1000
-nnoremap K :TernDoc<CR>
+"let g:tern#command = ['tern', '--no-port-file']
+"let g:tern_show_argument_hints = "on_hold"
+"set updatetime=1000
+"nnoremap K :TernDoc<CR>
 
 " Shortcut to rapidly toggle `set list`
 nmap <leader>l :set list!<CR>
