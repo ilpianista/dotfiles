@@ -18,9 +18,10 @@
   autocrlf = input
   editor = vim
 [merge]
-  tool = vimdiff
+	tool = vimdiff
 [diff]
   renameLimit = 7974
+	tool = vimdiff
 [push]
   default = simple
 [format]
@@ -35,3 +36,7 @@
 
 [github]
   user = ilpianista
+[mergetool]
+	prompt = false
+[difftool]
+	prompt = false
