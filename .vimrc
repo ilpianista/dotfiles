@@ -211,6 +211,8 @@ let g:syntastic_check_on_open = 0
 
 " Path to Rust source files
 let g:ycm_rust_src_path = "/usr/src/rust/src"
+" Enable automatic running of :RustFmt
+let g:rustfmt_autosave = 1
 
 nnoremap K :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
