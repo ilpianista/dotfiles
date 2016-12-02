@@ -3,7 +3,7 @@
 xrdb -quiet -merge -nocpp "$HOME/.Xresources"
 xsetroot -cursor_name left_ptr
 sh ~/.fehbg
-/usr/lib/libexec/org_kde_powerdevil &
+/usr/lib/org_kde_powerdevil &
 #xautolock -time 10 -locker "/usr/lib/kscreenlocker_greet --immediateLock" -noclose &
 #~/bin/battery_low.sh &
 dunst &

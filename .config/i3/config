@@ -22,8 +22,6 @@ bindsym $mod+Shift+c kill
 # start dmenu (a program launcher)
 bindsym $mod+r exec --no-startup-id dmenu_run -i -nb '#181818' -nf '#d8d8d8' -sb '#181818' -sf '#a1b56c' -fn 'Source Code Pro-9'
 
-#exec_always ~/bin/per-workspace-layout.pl
-
 # change focus
 bindsym $mod+j focus left
 bindsym $mod+k focus down
@@ -97,6 +95,9 @@ bindsym $mod+8 workspace $tag8
 bindsym $mod+9 workspace $tag9
 bindsym $mod+0 workspace $tag10
 
+# Saved layouts
+#exec --no-startup-id "i3-msg 'workspace 2:web; append_layout /home/andrea/.config/i3/workspace-2.json'"
+
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $tag1
 bindsym $mod+Shift+2 move container to workspace $tag2
@@ -134,10 +135,10 @@ bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -10%
 bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
-bindsym XF86AudioPlay exec qdbus org.mpris.MediaPlayer2.amarok /org/mpris/MediaPlayer2 PlayPause
-bindsym XF86AudioPrev exec qdbus org.mpris.MediaPlayer2.amarok /org/mpris/MediaPlayer2 Previous
-bindsym XF86AudioNext exec qdbus org.mpris.MediaPlayer2.amarok /org/mpris/MediaPlayer2 Next
-bindsym XF86AudioStop exec qdbus org.mpris.MediaPlayer2.amarok /org/mpris/MediaPlayer2 Stop
+bindsym XF86AudioPlay exec qdbus org.mpris.MediaPlayer2.clementine /org/mpris/MediaPlayer2 PlayPause
+bindsym XF86AudioPrev exec qdbus org.mpris.MediaPlayer2.clementine /org/mpris/MediaPlayer2 Previous
+bindsym XF86AudioNext exec qdbus org.mpris.MediaPlayer2.clementine /org/mpris/MediaPlayer2 Next
+bindsym XF86AudioStop exec qdbus org.mpris.MediaPlayer2.clementine /org/mpris/MediaPlayer2 Stop
 
 bindsym XF86MonBrightnessDown exec qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl setBrightness $(expr $(qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl brightness) - $(qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl brightnessMax) / 5)
 bindsym XF86MonBrightnessUp exec qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl setBrightness $(expr $(qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl brightness) + $(qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl brightnessMax) / 5)
@@ -145,7 +146,6 @@ bindsym XF86MonBrightnessUp exec qdbus org.freedesktop.PowerManagement /org/kde/
 bindsym XF86Launch1 exec i3-sensible-browser
 bindsym XF86ScreenSaver exec /usr/lib/kscreenlocker_greet
 bindsym Ctrl+Mod1+l exec /usr/lib/kscreenlocker_greet
-bindsym Ctrl+Mod1+Escape exec urxvt -e htop
 bindsym Ctrl+Escape exec urxvt -e htop
 bindsym Print exec qdbus org.kde.Spectacle / StartAgent
 

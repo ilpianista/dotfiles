@@ -20,14 +20,12 @@ Plugin 'VundleVim/Vundle.vim'
 "Plugin 'honza/vim-snippets'
 " A code-completion engine for Vim
 Plugin 'Valloric/YouCompleteMe'
-" quoting/parenthesizing made simple
-Plugin 'tpope/vim-surround'
-" pairs of handy bracket mappings
-Plugin 'tpope/vim-unimpaired'
 " lean & mean status/tabline for vim that's light as air
 Plugin 'bling/vim-airline'
+" provides insert mode auto-completion for quotes, parens, brackets, etc
+Plugin 'Raimondi/delimitMate'
 " A tree explorer plugin for vim
-Plugin 'scrooloose/nerdtree'
+"Plugin 'scrooloose/nerdtree'
 " plugin for intensely orgasmic commenting
 Plugin 'scrooloose/nerdcommenter'
 " Vim plugin to list, select and switch between buffers
@@ -46,8 +44,8 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'majutsushi/tagbar'
 " Syntax checking hacks for vim
 Plugin 'scrooloose/syntastic'
-" A Vim plugin for visually displaying indent levels in code
-Plugin 'nathanaelkane/vim-indent-guides'
+" Automated tag file generation and syntax highlighting of tags in Vim
+Plugin 'xolox/vim-easytags'
 " Miscellaneous auto-load Vim scripts (needed by vim-session)
 Plugin 'xolox/vim-misc'
 " Extended session management for Vim
@@ -84,7 +82,7 @@ Plugin 'rust-lang/rust.vim'
 
 " PowerShell
 " A Vim plugin for Windows PowerShell support
-Plugin 'PProvost/vim-ps1'
+"Plugin 'PProvost/vim-ps1'
 
 "" Ruby
 " Vim/Ruby Configuration Files
@@ -95,6 +93,8 @@ Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-haml'
 " Ruby on Rails power tools
 Plugin 'tpope/vim-rails'
+" Run Rspec specs from Vim
+Plugin 'thoughtbot/vim-rspec'
 
 "" JavaScript
 " Enhanced javascript syntax file for Vim
@@ -123,7 +123,7 @@ Plugin 'artoj/qmake-syntax-vim'
 Plugin 'ekalinin/Dockerfile.vim'
 
 " basic vim/vagrant integration
-"Plugin 'markcornick/vim-vagrant'
+Plugin 'markcornick/vim-vagrant'
 
 " A vim plugin for syntax highlighting Ansible's common filetypes
 Plugin 'pearofducks/ansible-vim'
@@ -147,6 +147,7 @@ set showcmd        " display incomplete commands
 set relativenumber " turn relative numbering on
 "set cursorline     " highlight the cursor line
 "set cursorcolumn   " highlight the cursor column
+set colorcolumn=80 " show 80th column
 set history=50     " keep 50 lines of command line history
 set ruler          " show the cursor position all the time
 set laststatus=2   " always show the status line
@@ -197,10 +198,6 @@ set directory^=~/.vim/_temp/      " where to put swap files.
 
 let mapleader=","
 
-" Enable intent-guides
-au VimEnter * :IndentGuidesEnable
-let g:indent_guides_guide_size = 1
-
 " use patched powerline fonts
 "let g:airline_powerline_fonts = 1
 " Automatically displays all buffers when there's only one tab open
@@ -231,7 +228,7 @@ let g:session_autosave = 'no'
 nnoremap <F7> :BuffergatorToggle<CR>
 
 " NERDTree
-nnoremap <F8> :NERDTreeToggle<CR>
+"nnoremap <F8> :NERDTreeToggle<CR>
 
 " TagBar
 nnoremap <F9> :TagbarToggle<CR>
@@ -245,14 +242,8 @@ nnoremap <F9> :TagbarToggle<CR>
 " Shortcut to rapidly toggle `set list`
 nmap <leader>l :set list!<CR>
 
-" Shorcut to toggle indent guides
-nmap <leader>g :IndentGuidesToggle<CR>
-
 " Hide serach results
 nnoremap <F3> :set hlsearch!<CR>
-
-" use jk as <Esc> alternative
-inoremap jk <Esc>
 
 " reselect visual block after indent/outdent
 vnoremap < <gv
@@ -279,3 +270,14 @@ au CursorHold * checktime
 "map <silent> tu :call GHC_BrowseAll()<CR>
 " ghc-moc Type Lookup
 "map <silent> tw :call GHC_ShowType(1)<CR>
+
+" CTags
+set tags=./tags;/
+let g:easytags_dynamic_files = 1
+
+" Use ag instead of ack
+let g:ackprg = 'ag --vimgrep --smart-case'
+cnoreabbrev ag Ack
+cnoreabbrev aG Ack
+cnoreabbrev Ag Ack
+cnoreabbrev AG Ack
