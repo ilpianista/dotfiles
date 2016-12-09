@@ -52,6 +52,8 @@ Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-session'
 " Vim plugin for the Perl module / CLI script 'ack'
 Plugin 'mileszs/ack.vim'
+" Provide easy code formatting in Vim by integrating existing code formatters
+Plugin 'Chiel92/vim-autoformat'
 
 " Vim Markdown runtime files
 Plugin 'tpope/vim-markdown'
@@ -162,9 +164,9 @@ highlight Pmenu guibg=brown gui=bold
 
 "" whitespace
 set nowrap          " lines longer than the width of the window will not wrap
-set tabstop=4       " tabs count as 2 spaces
-set softtabstop=4   " tabs count as 2 spaces in insert mode
-set shiftwidth=4    " number of spaces to use in autoindent
+set tabstop=2       " tabs count as 4 spaces
+set softtabstop=2   " tabs count as 4 spaces in insert mode
+set shiftwidth=2    " number of spaces to use in autoindent
 set expandtab       " use spaces instead of tabs
 "set list            " show invisible characters
 set backspace=indent,eol,start    " backspace through everything in insert mode
@@ -208,8 +210,6 @@ let g:syntastic_check_on_open = 0
 
 " Path to Rust source files
 let g:ycm_rust_src_path = "/usr/src/rust/src"
-" Enable automatic running of :RustFmt
-let g:rustfmt_autosave = 1
 
 nnoremap K :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
@@ -262,6 +262,11 @@ match Error /\s\+$/
 " Automatically removing all trailing whitespace
 autocmd BufWritePre * :%s/\s\+$//e
 
+" Autoformat code on save
+au BufWrite * :Autoformat
+" Disable removing trailing spaces on save (done above!)
+let g:autoformat_remove_trailing_spaces = 1
+
 " check file change every 4 seconds ('CursorHold') and reload the buffer upon detecting change
 set autoread
 au CursorHold * checktime
@@ -274,6 +279,9 @@ au CursorHold * checktime
 " CTags
 set tags=./tags;/
 let g:easytags_dynamic_files = 1
+let g:easytags_events = ['CursorHold', 'CursorHoldI']
+
+"autocmd BufWrite *.rs :silent exec "!rusty-tags vi --start-dir=" . expand('%:p:h') . "&"
 
 " Use ag instead of ack
 let g:ackprg = 'ag --vimgrep --smart-case'

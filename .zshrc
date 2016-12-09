@@ -96,8 +96,6 @@ alias cal='cal -3'
 alias connect='nmcli con up id'
 alias disconnect='nmcli con down id'
 alias wifi_list='nmcli dev wifi list'
-alias wifi_on='nmcli radio wifi on'
-alias wifi_off='nmcli radio wifi off'
 
 alias mount500='sudo cryptsetup luksOpen /dev/sdb1 --key-file $HOME/Documents/500-keyfile 500; /usr/bin/mount /mnt/500'
 alias mount750='sudo cryptsetup luksOpen /dev/sdb1 --key-file $HOME/Documents/750-keyfile 750; /usr/bin/mount /mnt/750'
