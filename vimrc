@@ -52,8 +52,6 @@ Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-session'
 " Vim plugin for the Perl module / CLI script 'ack'
 Plugin 'mileszs/ack.vim'
-" Provide easy code formatting in Vim by integrating existing code formatters
-Plugin 'Chiel92/vim-autoformat'
 
 " Vim Markdown runtime files
 Plugin 'tpope/vim-markdown'
@@ -262,10 +260,8 @@ match Error /\s\+$/
 " Automatically removing all trailing whitespace
 autocmd BufWritePre * :%s/\s\+$//e
 
-" Autoformat code on save
-au BufWrite * :Autoformat
-" Disable removing trailing spaces on save (done above!)
-let g:autoformat_remove_trailing_spaces = 1
+" Enable automatic running of :RustFmt
+let g:rustfmt_autosave = 1
 
 " check file change every 4 seconds ('CursorHold') and reload the buffer upon detecting change
 set autoread
@@ -284,37 +280,37 @@ let g:easytags_events = ['CursorHold', 'CursorHoldI']
 "autocmd BufWrite *.rs :silent exec "!rusty-tags vi --start-dir=" . expand('%:p:h') . "&"
 
 let g:tagbar_type_ansible = {
-			\ 'ctagstype' : 'ansible',
-			\ 'kinds' : [
-			\ 't:tasks'
-			\ ],
-			\ 'sort' : 0
-			\ }
+      \ 'ctagstype' : 'ansible',
+      \ 'kinds' : [
+      \ 't:tasks'
+      \ ],
+      \ 'sort' : 0
+      \ }
 
 let g:tagbar_type_ruby = {
-			\ 'kinds' : [
-			\ 'm:modules',
-			\ 'c:classes',
-			\ 'd:describes',
-			\ 'C:contexts',
-			\ 'f:methods',
-			\ 'F:singleton methods'
-			\ ]
-			\ }
+      \ 'kinds' : [
+      \ 'm:modules',
+      \ 'c:classes',
+      \ 'd:describes',
+      \ 'C:contexts',
+      \ 'f:methods',
+      \ 'F:singleton methods'
+      \ ]
+      \ }
 
 let g:tagbar_type_rust = {
-			\ 'ctagstype' : 'rust',
-			\ 'kinds' : [
-			\'T:types,type definitions',
-			\'f:functions,function definitions',
-			\'g:enum,enumeration names',
-			\'s:structure names',
-			\'m:modules,module names',
-			\'c:consts,static constants',
-			\'t:traits,traits',
-			\'i:impls,trait implementations',
-			\]
-			\}
+      \ 'ctagstype' : 'rust',
+      \ 'kinds' : [
+      \'T:types,type definitions',
+      \'f:functions,function definitions',
+      \'g:enum,enumeration names',
+      \'s:structure names',
+      \'m:modules,module names',
+      \'c:consts,static constants',
+      \'t:traits,traits',
+      \'i:impls,trait implementations',
+      \]
+      \}
 
 " Use ag instead of ack
 let g:ackprg = 'ag --vimgrep --smart-case'
