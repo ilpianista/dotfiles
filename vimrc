@@ -225,13 +225,13 @@ let g:session_autosave = 'no'
 "autocmd vimenter * if !argc() | NERDTree | endif
 
 " Buffergator
-nnoremap <F7> :BuffergatorToggle<CR>
-
-" NERDTree
-"nnoremap <F8> :NERDTreeToggle<CR>
+nmap <F7> :BuffergatorToggle<CR>
 
 " TagBar
-nnoremap <F9> :TagbarToggle<CR>
+nmap <F8> :TagbarToggle<CR>
+
+" NERDTree
+"nmap <F9> :NERDTreeToggle<CR>
 
 " Tern
 "let g:tern#command = ['tern', '--no-port-file']
@@ -277,11 +277,44 @@ au CursorHold * checktime
 "map <silent> tw :call GHC_ShowType(1)<CR>
 
 " CTags
-set tags=./tags;/
+set tags=./tags;/,/usr/src/rust/src/tags
 let g:easytags_dynamic_files = 1
 let g:easytags_events = ['CursorHold', 'CursorHoldI']
 
 "autocmd BufWrite *.rs :silent exec "!rusty-tags vi --start-dir=" . expand('%:p:h') . "&"
+
+let g:tagbar_type_ansible = {
+			\ 'ctagstype' : 'ansible',
+			\ 'kinds' : [
+			\ 't:tasks'
+			\ ],
+			\ 'sort' : 0
+			\ }
+
+let g:tagbar_type_ruby = {
+			\ 'kinds' : [
+			\ 'm:modules',
+			\ 'c:classes',
+			\ 'd:describes',
+			\ 'C:contexts',
+			\ 'f:methods',
+			\ 'F:singleton methods'
+			\ ]
+			\ }
+
+let g:tagbar_type_rust = {
+			\ 'ctagstype' : 'rust',
+			\ 'kinds' : [
+			\'T:types,type definitions',
+			\'f:functions,function definitions',
+			\'g:enum,enumeration names',
+			\'s:structure names',
+			\'m:modules,module names',
+			\'c:consts,static constants',
+			\'t:traits,traits',
+			\'i:impls,trait implementations',
+			\]
+			\}
 
 " Use ag instead of ack
 let g:ackprg = 'ag --vimgrep --smart-case'
