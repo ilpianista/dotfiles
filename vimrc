@@ -82,7 +82,7 @@ Plugin 'rust-lang/rust.vim'
 
 " PowerShell
 " A Vim plugin for Windows PowerShell support
-"Plugin 'PProvost/vim-ps1'
+Plugin 'PProvost/vim-ps1'
 
 "" Ruby
 " Vim/Ruby Configuration Files

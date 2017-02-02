@@ -102,9 +102,3 @@ alias mount750='sudo cryptsetup luksOpen /dev/sdb1 --key-file $HOME/Documents/75
 
 # LS_COLORS
 [[ -r $HOME/.dir_colors ]] && eval $(dircolors -b $HOME/.dir_colors)
-
-# Quickly start download any torrent file :-)
-downTorrent() { scp "${1}" munich0.mooo.com:/home/andrea/torrents/ && rm "${1}" }
-
-# Wake-On-LAN aliases
-wake() { wol $(cat $HOME/.wol/"${1}") }
