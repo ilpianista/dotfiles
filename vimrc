@@ -59,10 +59,14 @@ Plugin 'tpope/vim-markdown'
 "" HTML/CSS
 " emmet for vim
 Plugin 'mattn/emmet-vim'
+" HTML5 omnicomplete and syntax
+Plugin 'othree/html5.vim'
 " Highlight colors in css files" Highlight colors in css files
-Plugin 'ap/vim-css-color'
+"Plugin 'ap/vim-css-color'
 " vim syntax for LESS (dynamic CSS)
 Plugin 'groenewege/vim-less'
+" Vim syntax file for scss (Sassy CSS)
+Plugin 'cakebaker/scss-syntax.vim'
 
 "" Rust
 " Vim configuration for Rust
@@ -97,27 +101,25 @@ Plugin 'tpope/vim-rails'
 Plugin 'thoughtbot/vim-rspec'
 
 "" JavaScript
-" Enhanced javascript syntax file for Vim
-Plugin 'jelera/vim-javascript-syntax'
 " Vastly improved Javascript indentation and syntax support in Vim
 Plugin 'pangloss/vim-javascript'
-" A plugin that integrates JSHint with Vim
-Plugin 'walm/jshint.vim'
+" Syntax for JavaScript libraries
+Plugin 'othree/javascript-libraries-syntax.vim'
 " Tern plugin for Vim
-"Plugin 'ternjs/tern_for_vim'
+Plugin 'ternjs/tern_for_vim'
 " vim plugin which formated javascript files by js-beautify
 Plugin 'maksimr/vim-jsbeautify'
 " CoffeeScript support for vim
 Plugin 'kchmck/vim-coffee-script'
+
+" Vim plugin for the Elm programming language
+"Plugin 'lambdatoast/elm.vim'
 
 "" Qt
 " QML syntax highlighting for VIM
 Plugin 'peterhoeg/vim-qml'
 " qmake project highlighting support for the Vim editor
 Plugin 'artoj/qmake-syntax-vim'
-
-" PGSQL syntax
-"Plugin 'exu/pgsql.vim'
 
 " Vim syntax file & snippets for Docker's Dockerfile
 Plugin 'ekalinin/Dockerfile.vim'
@@ -156,9 +158,17 @@ filetype plugin indent on " turn on filetype detection, filetype plugins, and au
 "" color stuffs
 syntax on           " turn syntax highlighting on
 set background=dark
-let base16colorspace=256   " workaround needed with some 256 colors terminal
 colorscheme base16-default-dark " because we prefer a non default colorscheme
 highlight Pmenu guibg=brown gui=bold
+
+if $TERM !~# "konsole.*"
+    " As a work around for the following bugs in kde4's konsole:
+    "   use the output of 16.colorscheme.rb and don't set base16colorspace.
+    "   base-shell script will not be called
+    " https://github.com/chriskempson/base16-shell/issues/31
+    " https://bugs.kde.org/show_bug.cgi?id=344181
+    let base16colorspace=256
+endif
 
 "" whitespace
 set nowrap          " lines longer than the width of the window will not wrap
@@ -205,6 +215,7 @@ let g:airline#extensions#tabline#enabled = 1
 
 " This does what it says on the tin. It will check your file on open too, not just on save.
 let g:syntastic_check_on_open = 0
+let g:syntastic_javascript_checkers = ['jshint']
 
 " Path to Rust source files
 let g:ycm_rust_src_path = "/usr/src/rust/src"
@@ -280,37 +291,44 @@ let g:easytags_events = ['CursorHold', 'CursorHoldI']
 "autocmd BufWrite *.rs :silent exec "!rusty-tags vi --start-dir=" . expand('%:p:h') . "&"
 
 let g:tagbar_type_ansible = {
-      \ 'ctagstype' : 'ansible',
-      \ 'kinds' : [
-      \ 't:tasks'
-      \ ],
-      \ 'sort' : 0
-      \ }
+    \ 'ctagstype' : 'ansible',
+    \ 'kinds' : [
+        \ 't:tasks'
+    \ ],
+    \ 'sort' : 0
+\ }
 
 let g:tagbar_type_ruby = {
-      \ 'kinds' : [
-      \ 'm:modules',
-      \ 'c:classes',
-      \ 'd:describes',
-      \ 'C:contexts',
-      \ 'f:methods',
-      \ 'F:singleton methods'
-      \ ]
-      \ }
+    \ 'kinds' : [
+        \ 'm:modules',
+        \ 'c:classes',
+        \ 'd:describes',
+        \ 'C:contexts',
+        \ 'f:methods',
+        \ 'F:singleton methods'
+    \ ]
+\ }
 
 let g:tagbar_type_rust = {
-      \ 'ctagstype' : 'rust',
-      \ 'kinds' : [
-      \'T:types,type definitions',
-      \'f:functions,function definitions',
-      \'g:enum,enumeration names',
-      \'s:structure names',
-      \'m:modules,module names',
-      \'c:consts,static constants',
-      \'t:traits,traits',
-      \'i:impls,trait implementations',
-      \]
-      \}
+    \ 'ctagstype' : 'rust',
+    \ 'kinds' : [
+        \ 'T:types,type definitions',
+        \ 'f:functions,function definitions',
+        \ 'g:enum,enumeration names',
+        \ 's:structure names',
+        \ 'm:modules,module names',
+        \ 'c:consts,static constants',
+        \ 't:traits,traits',
+        \ 'i:impls,trait implementations',
+    \ ]
+\ }
+
+let g:easytags_languages = {
+    \ 'javascript': {
+      \ 'cmd': 'jsctags',
+      \ 'args': ['-f']
+    \ }
+\ }
 
 " Use ag instead of ack
 let g:ackprg = 'ag --vimgrep --smart-case'
@@ -318,3 +336,5 @@ cnoreabbrev ag Ack
 cnoreabbrev aG Ack
 cnoreabbrev Ag Ack
 cnoreabbrev AG Ack
+
+let g:used_javascript_libs = 'angularjs'
