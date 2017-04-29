@@ -84,6 +84,10 @@ Plugin 'rust-lang/rust.vim'
 " Create ctags compatible tags files for Haskell programs
 "Plugin 'bitc/lushtags'
 
+" PHP
+" Up-to-date PHP syntax file (5.3 – 7.1 support)
+Plugin 'StanAngeloff/php.vim'
+
 " PowerShell
 " A Vim plugin for Windows PowerShell support
 Plugin 'PProvost/vim-ps1'
@@ -111,6 +115,8 @@ Plugin 'ternjs/tern_for_vim'
 Plugin 'maksimr/vim-jsbeautify'
 " CoffeeScript support for vim
 Plugin 'kchmck/vim-coffee-script'
+" Typescript syntax files for Vim
+Plugin 'leafgarland/typescript-vim'
 
 " Vim plugin for the Elm programming language
 "Plugin 'lambdatoast/elm.vim'
@@ -158,17 +164,9 @@ filetype plugin indent on " turn on filetype detection, filetype plugins, and au
 "" color stuffs
 syntax on           " turn syntax highlighting on
 set background=dark
+let base16colorspace=256   " workaround needed with some 256 colors terminal
 colorscheme base16-default-dark " because we prefer a non default colorscheme
 highlight Pmenu guibg=brown gui=bold
-
-if $TERM !~# "konsole.*"
-    " As a work around for the following bugs in kde4's konsole:
-    "   use the output of 16.colorscheme.rb and don't set base16colorspace.
-    "   base-shell script will not be called
-    " https://github.com/chriskempson/base16-shell/issues/31
-    " https://bugs.kde.org/show_bug.cgi?id=344181
-    let base16colorspace=256
-endif
 
 "" whitespace
 set nowrap          " lines longer than the width of the window will not wrap

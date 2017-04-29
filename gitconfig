@@ -19,6 +19,7 @@
   editor = vim
 [merge]
 	tool = vimdiff
+	ff = false
 [diff]
   renameLimit = 7974
 	tool = vimdiff
@@ -33,6 +34,10 @@
   insteadOf = kde:
 [url "git@git.kde.org:"]
   pushInsteadOf = kde:
+[url "https://aur.archlinux.org/"]
+  insteadOf = aur:
+[url "ssh+git://aur@aur.archlinux.org/"]
+  pushInsteadOf = aur:
 
 [github]
   user = ilpianista
@@ -40,3 +45,7 @@
 	prompt = false
 [difftool]
 	prompt = false
+[fetch]
+	prune = true
+[pull]
+	rebase = true

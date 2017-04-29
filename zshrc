@@ -75,12 +75,9 @@ alias connect='nmcli con up id'
 alias disconnect='nmcli con down id'
 alias wifi_list='nmcli dev wifi list'
 
+alias mount256='sudo cryptsetup luksOpen /dev/sdb1 --key-file $HOME/Documents/256-keyfile 256; /usr/bin/mount /mnt/256'
 alias mount500='sudo cryptsetup luksOpen /dev/sdb1 --key-file $HOME/Documents/500-keyfile 500; /usr/bin/mount /mnt/500'
 alias mount750='sudo cryptsetup luksOpen /dev/sdb1 --key-file $HOME/Documents/750-keyfile 750; /usr/bin/mount /mnt/750'
 
 # LS_COLORS
 [[ -r $HOME/.dir_colors ]] && eval $(dircolors -b $HOME/.dir_colors)
-
-# If not running interactively, do not do anything
-[[ $- != *i* ]] && return
-[[ -z "$TMUX" ]] && exec tmux

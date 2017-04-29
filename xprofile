@@ -8,5 +8,4 @@ sh ~/.fehbg
 #~/bin/battery_low.sh &
 dunst &
 kded5 &
-#stalonetray &
 redshift &
