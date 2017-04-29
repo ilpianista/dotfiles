@@ -112,19 +112,17 @@ bindsym $mod+Shift+0 move container to workspace $tag10
 
 bindsym $mod+o move workspace to output VGA1
 bindsym $mod+p move workspace to output LVDS1
-#bindsym $mod+o move container to output VGA1
 
 assign [class="Firefox"] 2:web
 assign [class="kontact"] 2:web
-for_window [class="Vlc"] floating enable
-assign [class="Vlc"] 3:media
+for_window [class="mpv"] floating enable
+assign [class="mpv"] 3:media
 assign [class="Clementine"] 3:media
 assign [class="konversation"] 4:chat
 assign [class="ktpcontactlist"] 4:chat
 assign [class="ktp-text-ui"] 4:chat
-assign [class="Skype"] 4:chat
 assign [class="Eclipse"] 10:dev
-assign [class="QtCreator"] 10:dev
+assign [class="kdevelop"] 10:dev
 assign [class="jetbrains-studio"] 10:dev
 assign [class="Designer"] 10:dev
 for_window [title="SailfishOS Emulator [Running] - Oracle VM VirtualBox"] floating enable
@@ -152,7 +150,7 @@ bindsym Print exec spectacle
 # reload the configuration file
 bindsym Mod1+Shift+r reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-#bindsym $mod+q restart
+bindsym $mod+q restart
 # exit i3 (poweroff)
 bindsym $mod+Shift+q exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to shutdown?' -b 'Yes, shutdown' 'systemctl poweroff -i'"
 

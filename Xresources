@@ -71,6 +71,7 @@ URxvt.font: xft:Source Code Pro:pixelsize=12
 URxvt.boldfont: xft:Source Code Pro:bold:pixelsize=12
 URxvt*scrollTtyOutput: false
 URxvt*scrollWithBuffer: true
+URxvt*scrollTtyKeypress: true
 URxvt.keysym.Home: \033[7~
 URxvt.keysym.KP_Home: \033[7~
 URxvt.keysym.End: \033[8~
