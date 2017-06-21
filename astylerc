@@ -1,0 +1,23 @@
+## Qt coding style, see https://wiki.qt.io/Qt_Coding_Style#Artistic_Style
+#style=kr
+#indent=spaces=4
+#align-pointer=name
+#align-reference=name
+#convert-tabs
+#attach-namespaces
+#max-code-length=100
+#max-instatement-indent=120
+#pad-header
+#pad-oper
+
+## From astyle-kdelibs, https://cgit.kde.org/kde-dev-scripts.git/tree/astyle-kdelibs
+style=otbs
+indent=spaces=4
+align-pointer=name
+convert-tabs
+pad-header
+pad-oper
+keep-one-line-statements
+indent-preprocessor
+indent-labels
+unpad-paren

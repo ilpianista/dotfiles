@@ -8,6 +8,13 @@ set $mod Mod4
 # is used in the bar {} block below.
 font pango:Source Code Pro 9
 
+# use these keys for focus, movement, and resize directions when reaching for
+# the arrows is not convenient
+set $up l
+set $down k
+set $left j
+set $right semicolon
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -23,10 +30,10 @@ bindsym $mod+Shift+c kill
 bindsym $mod+r exec --no-startup-id dmenu_run -i -nb '#181818' -nf '#d8d8d8' -sb '#181818' -sf '#a1b56c' -fn 'Source Code Pro-9'
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -35,10 +42,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -71,6 +78,13 @@ bindsym $mod+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
+
+# move the currently focused window to the scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym $mod+minus scratchpad show
 
 set $tag1 "1:*"
 set $tag2 "2:web"
@@ -112,17 +126,15 @@ bindsym $mod+Shift+0 move container to workspace $tag10
 
 bindsym $mod+o move workspace to output VGA1
 bindsym $mod+p move workspace to output LVDS1
-#bindsym $mod+o move container to output VGA1
 
 assign [class="Firefox"] 2:web
 assign [class="kontact"] 2:web
 for_window [class="Vlc"] floating enable
 assign [class="Vlc"] 3:media
-assign [class="Clementine"] 3:media
+assign [class="Cantata"] 3:media
 assign [class="konversation"] 4:chat
 assign [class="ktpcontactlist"] 4:chat
 assign [class="ktp-text-ui"] 4:chat
-assign [class="Skype"] 4:chat
 assign [class="Eclipse"] 10:dev
 assign [class="QtCreator"] 10:dev
 assign [class="jetbrains-studio"] 10:dev
@@ -135,10 +147,10 @@ bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -10%
 bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
-bindsym XF86AudioPlay exec qdbus org.mpris.MediaPlayer2.clementine /org/mpris/MediaPlayer2 PlayPause
-bindsym XF86AudioPrev exec qdbus org.mpris.MediaPlayer2.clementine /org/mpris/MediaPlayer2 Previous
-bindsym XF86AudioNext exec qdbus org.mpris.MediaPlayer2.clementine /org/mpris/MediaPlayer2 Next
-bindsym XF86AudioStop exec qdbus org.mpris.MediaPlayer2.clementine /org/mpris/MediaPlayer2 Stop
+bindsym XF86AudioPlay exec qdbus org.mpris.MediaPlayer2.cantata /org/mpris/MediaPlayer2 PlayPause
+bindsym XF86AudioPrev exec qdbus org.mpris.MediaPlayer2.cantata /org/mpris/MediaPlayer2 Previous
+bindsym XF86AudioNext exec qdbus org.mpris.MediaPlayer2.cantata /org/mpris/MediaPlayer2 Next
+bindsym XF86AudioStop exec qdbus org.mpris.MediaPlayer2.cantata /org/mpris/MediaPlayer2 Stop
 
 bindsym XF86MonBrightnessDown exec qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl setBrightness $(expr $(qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl brightness) - $(qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl brightnessMax) / 5)
 bindsym XF86MonBrightnessUp exec qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl setBrightness $(expr $(qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl brightness) + $(qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl brightnessMax) / 5)
@@ -147,12 +159,12 @@ bindsym XF86Launch1 exec i3-sensible-browser
 bindsym XF86ScreenSaver exec /usr/lib/kscreenlocker_greet
 bindsym Ctrl+Mod1+l exec /usr/lib/kscreenlocker_greet
 bindsym Ctrl+Escape exec urxvt -e htop
-bindsym Print exec qdbus org.kde.Spectacle / StartAgent
+bindsym Print exec spectacle
 
 # reload the configuration file
 bindsym Mod1+Shift+r reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-#bindsym $mod+q restart
+bindsym $mod+q restart
 # exit i3 (poweroff)
 bindsym $mod+Shift+q exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to shutdown?' -b 'Yes, shutdown' 'systemctl poweroff -i'"
 
@@ -191,16 +203,16 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym $left       resize shrink width 10 px or 10 ppt
+        bindsym $down       resize grow height 10 px or 10 ppt
+        bindsym $up         resize shrink height 10 px or 10 ppt
+        bindsym $right      resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym Left        resize shrink width 10 px or 10 ppt
+        bindsym Down        resize grow height 10 px or 10 ppt
+        bindsym Up          resize shrink height 10 px or 10 ppt
+        bindsym Right       resize grow width 10 px or 10 ppt
 
         # back to normal: Enter or Escape
         bindsym Return mode "default"
@@ -208,8 +220,6 @@ mode "resize" {
 }
 
 bindsym $mod+Shift+r mode "resize"
-
-output "*" background /home/andrea/Pictures/wallpapers/wall_145.jpg fill
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)

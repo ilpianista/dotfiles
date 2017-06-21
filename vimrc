@@ -86,7 +86,7 @@ Plugin 'rust-lang/rust.vim'
 
 " PHP
 " Up-to-date PHP syntax file (5.3 – 7.1 support)
-Plugin 'StanAngeloff/php.vim'
+"Plugin 'StanAngeloff/php.vim'
 
 " PowerShell
 " A Vim plugin for Windows PowerShell support
