@@ -88,8 +88,8 @@ bindsym $mod+minus scratchpad show
 
 set $tag1 "1:*"
 set $tag2 "2:web"
-set $tag3 "3:media"
-set $tag4 "4:chat"
+set $tag3 "3:chat"
+set $tag4 "4:media"
 #set $tag5 "5"
 #set $tag6 "6"
 #set $tag7 "7"
@@ -129,12 +129,11 @@ bindsym $mod+p move workspace to output LVDS1
 
 assign [class="Firefox"] 2:web
 assign [class="kontact"] 2:web
+assign [class="konversation"] 3:chat
+assign [class="pidgin"] 3:chat
 for_window [class="Vlc"] floating enable
-assign [class="Vlc"] 3:media
-assign [class="Cantata"] 3:media
-assign [class="konversation"] 4:chat
-assign [class="ktpcontactlist"] 4:chat
-assign [class="ktp-text-ui"] 4:chat
+assign [class="Vlc"] 4:media
+assign [class="Clementine"] 4:media
 assign [class="Eclipse"] 10:dev
 assign [class="QtCreator"] 10:dev
 assign [class="jetbrains-studio"] 10:dev
@@ -147,10 +146,10 @@ bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -10%
 bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
-bindsym XF86AudioPlay exec qdbus org.mpris.MediaPlayer2.cantata /org/mpris/MediaPlayer2 PlayPause
-bindsym XF86AudioPrev exec qdbus org.mpris.MediaPlayer2.cantata /org/mpris/MediaPlayer2 Previous
-bindsym XF86AudioNext exec qdbus org.mpris.MediaPlayer2.cantata /org/mpris/MediaPlayer2 Next
-bindsym XF86AudioStop exec qdbus org.mpris.MediaPlayer2.cantata /org/mpris/MediaPlayer2 Stop
+bindsym XF86AudioPlay exec qdbus org.mpris.MediaPlayer2.clementine /org/mpris/MediaPlayer2 PlayPause
+bindsym XF86AudioPrev exec qdbus org.mpris.MediaPlayer2.clementine /org/mpris/MediaPlayer2 Previous
+bindsym XF86AudioNext exec qdbus org.mpris.MediaPlayer2.clementine /org/mpris/MediaPlayer2 Next
+bindsym XF86AudioStop exec qdbus org.mpris.MediaPlayer2.clementine /org/mpris/MediaPlayer2 Stop
 
 bindsym XF86MonBrightnessDown exec qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl setBrightness $(expr $(qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl brightness) - $(qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl brightnessMax) / 5)
 bindsym XF86MonBrightnessUp exec qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl setBrightness $(expr $(qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl brightness) + $(qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl brightnessMax) / 5)

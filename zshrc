@@ -23,6 +23,8 @@ zplug load
 bindkey "${terminfo[khome]}" beginning-of-line
 bindkey "${terminfo[kend]}" end-of-line
 bindkey "${terminfo[kdch1]}" delete-char
+bindkey "${terminfo[kpp]}" up-line-or-history
+bindkey "${terminfo[knp]}" down-line-or-history
 
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
