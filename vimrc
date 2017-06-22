@@ -192,9 +192,9 @@ set wildmenu        " command-line completion operates in an enhanced mode
 set completeopt=longest,menuone " completion popup menu work just like in an IDE
 
 " Disable output and VCS files
-set wildignore+=*.o,*.out,*.obj,.git,*.rbc,*.rbo,*.class,.svn,*.gem
+set wildignore+=*.o,*.out,*.obj,.git,*.rbc,*.rbo,*.class,.svn,*.gem,*.so
 " Disable archive files
-set wildignore+=*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz
+set wildignore+=*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz,*.jar,*.war
 " Ignore bundler and sass cache
 set wildignore+=*/vendor/gems/*,*/vendor/cache/*,*/.bundle/*,*/.sass-cache/*
 " Disable temp and backup files
@@ -205,6 +205,11 @@ set backupdir^=~/.vim/_backup/    " where to put backup files.
 set directory^=~/.vim/_temp/      " where to put swap files.
 
 let mapleader=","
+
+" exclude files and directories from CtrlP
+let g:ctrlp_custom_ignore = {
+  \ 'dir': '\v[\/](node_modules|build|vendor|dist)$',
+  \ }
 
 " use patched powerline fonts
 "let g:airline_powerline_fonts = 1
