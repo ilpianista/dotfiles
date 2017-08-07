@@ -37,14 +37,14 @@ setopt SHARE_HISTORY
 [[ -r $HOME/.config/base16-shell/scripts/base16-default-dark.sh ]] && source $HOME/.config/base16-shell/scripts/base16-default-dark.sh
 
 # pacman stuff
-alias upgrade='sudo pacman -Syu; echo "Checking for AUR updates..."; cower -uddf'
+alias upgrade='sudo pacman -Syu; echo "Checking for AUR updates..."; auracle sync -r'
 alias asdeps='sudo pacman -S --asdeps'
 alias remove='sudo pacman -Rscn'
 alias useless='pacman -Qqtd'
 alias makepkg='makepkg -L'
 
 search() { pacman -Ss ${1}; cower -s ${1} }
-aurpkg() { cower -dd ${1} && cd /tmp/${1} && makepkg -s }
+aurpkg() { auracle download -r ${1} && cd /tmp/${1} && makepkg -s }
 
 # Show needed libraries
 scan() {
@@ -71,7 +71,7 @@ alias ls='ls --color=tty -h'
 alias cp='cp -i'
 alias mv='mv -i'
 alias sign='gpg --armor --detach-sign'
-alias cal='cal -3'
+alias cal='cal -m -3'
 
 alias connect='nmcli con up id'
 alias disconnect='nmcli con down id'

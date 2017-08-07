@@ -2,148 +2,144 @@
 set nocompatible   " be iMproved
 filetype off       " required!
 
-set rtp+=~/.vim/bundle/Vundle.vim/
-call vundle#begin()
-
-" let Vundle manage Vundle
-"  " required!
-Plugin 'VundleVim/Vundle.vim'
+" Specify a directory for plugins
+call plug#begin('~/.vim/plugged')
 
 "" General plugins
 " Some utility functions for VIM (needed by snipmate)
-"Plugin 'tomtom/tlib_vim'
+"Plug 'tomtom/tlib_vim'
 " interpret a file by function and cache file automatically (needed by snipmate)
-"Plugin 'MarcWeber/vim-addon-mw-utils'
+"Plug 'MarcWeber/vim-addon-mw-utils'
 " a concise vim script that implements some of TextMate's snippets
-"Plugin 'garbas/vim-snipmate'
+"Plug 'garbas/vim-snipmate'
 " vim-snipmate default snippets
-"Plugin 'honza/vim-snippets'
+"Plug 'honza/vim-snippets'
 " A code-completion engine for Vim
-Plugin 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe'
 " lean & mean status/tabline for vim that's light as air
-Plugin 'bling/vim-airline'
+Plug 'bling/vim-airline'
 " provides insert mode auto-completion for quotes, parens, brackets, etc
-Plugin 'Raimondi/delimitMate'
+Plug 'Raimondi/delimitMate'
 " A tree explorer plugin for vim
-"Plugin 'scrooloose/nerdtree'
+"Plug 'scrooloose/nerdtree'
 " plugin for intensely orgasmic commenting
-Plugin 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdcommenter'
 " Vim plugin to list, select and switch between buffers
-Plugin 'jeetsukumaran/vim-buffergator'
+Plug 'jeetsukumaran/vim-buffergator'
 " Delete buffers and close files in Vim without closing your windows or messing up your layout
-Plugin 'moll/vim-bbye'
+Plug 'moll/vim-bbye'
 " Fuzzy file, buffer, mru, tag, etc finder
-Plugin 'kien/ctrlp.vim'
+Plug 'kien/ctrlp.vim'
 " helpers for UNIX
-Plugin 'tpope/vim-eunuch'
+Plug 'tpope/vim-eunuch'
 " a Git wrapper so awesome, it should be illegal
-Plugin 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 " A Vim plugin which shows a git diff in the gutter (sign column) and stages/reverts hunks.
-Plugin 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter'
 " Vim plugin that displays tags in a window, ordered by class etc.
-Plugin 'majutsushi/tagbar'
+Plug 'majutsushi/tagbar'
 " Syntax checking hacks for vim
-Plugin 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic'
 " Automated tag file generation and syntax highlighting of tags in Vim
-Plugin 'xolox/vim-easytags'
+Plug 'xolox/vim-easytags'
 " Miscellaneous auto-load Vim scripts (needed by vim-session)
-Plugin 'xolox/vim-misc'
+Plug 'xolox/vim-misc'
 " Extended session management for Vim
-Plugin 'xolox/vim-session'
+Plug 'xolox/vim-session'
 " Vim plugin for the Perl module / CLI script 'ack'
-Plugin 'mileszs/ack.vim'
+Plug 'mileszs/ack.vim'
 
 " Vim Markdown runtime files
-Plugin 'tpope/vim-markdown'
+Plug 'tpope/vim-markdown'
 
 "" HTML/CSS
 " emmet for vim
-Plugin 'mattn/emmet-vim'
+Plug 'mattn/emmet-vim'
 " HTML5 omnicomplete and syntax
-Plugin 'othree/html5.vim'
+Plug 'othree/html5.vim'
 " Highlight colors in css files" Highlight colors in css files
-"Plugin 'ap/vim-css-color'
+"Plug 'ap/vim-css-color'
 " vim syntax for LESS (dynamic CSS)
-Plugin 'groenewege/vim-less'
+Plug 'groenewege/vim-less'
 " Vim syntax file for scss (Sassy CSS)
-Plugin 'cakebaker/scss-syntax.vim'
+Plug 'cakebaker/scss-syntax.vim'
 
 "" Rust
 " Vim configuration for Rust
-Plugin 'rust-lang/rust.vim'
+Plug 'rust-lang/rust.vim'
 
 "" Haskell
 " vim2hs :: Vim -> Haskell
-"Plugin 'dag/vim2hs'
+"Plug 'dag/vim2hs'
 " A completion plugin for Haskell, using ghc-mod
-"Plugin 'eagletmt/neco-ghc'
+"Plug 'eagletmt/neco-ghc'
 " Interactive command execution in Vim. (needed by ghcmod-vim)
-"Plugin 'Shougo/vimproc.vim'
+"Plug 'Shougo/vimproc.vim'
 " Happy Haskell programming on Vim, powered by ghc-mod
-"Plugin 'eagletmt/ghcmod-vim'
+"Plug 'eagletmt/ghcmod-vim'
 " Create ctags compatible tags files for Haskell programs
-"Plugin 'bitc/lushtags'
+"Plug 'bitc/lushtags'
 
 " PHP
 " Up-to-date PHP syntax file (5.3 – 7.1 support)
-"Plugin 'StanAngeloff/php.vim'
+"Plug 'StanAngeloff/php.vim'
 
 " PowerShell
 " A Vim plugin for Windows PowerShell support
-Plugin 'PProvost/vim-ps1'
+Plug 'PProvost/vim-ps1'
 
 "" Ruby
 " Vim/Ruby Configuration Files
-Plugin 'vim-ruby/vim-ruby'
+Plug 'vim-ruby/vim-ruby'
 " wisely add 'end' in ruby, endfunction/endif/more in vim script, etc
-Plugin 'tpope/vim-endwise'
+Plug 'tpope/vim-endwise'
 " Vim runtime files for Haml, Sass, and SCSS
-Plugin 'tpope/vim-haml'
+Plug 'tpope/vim-haml'
 " Ruby on Rails power tools
-Plugin 'tpope/vim-rails'
+Plug 'tpope/vim-rails'
 " Run Rspec specs from Vim
-Plugin 'thoughtbot/vim-rspec'
+Plug 'thoughtbot/vim-rspec'
 
 "" JavaScript
 " Vastly improved Javascript indentation and syntax support in Vim
-Plugin 'pangloss/vim-javascript'
+Plug 'pangloss/vim-javascript'
 " Syntax for JavaScript libraries
-Plugin 'othree/javascript-libraries-syntax.vim'
+Plug 'othree/javascript-libraries-syntax.vim'
 " Tern plugin for Vim
-Plugin 'ternjs/tern_for_vim'
+Plug 'ternjs/tern_for_vim'
 " vim plugin which formated javascript files by js-beautify
-Plugin 'maksimr/vim-jsbeautify'
+Plug 'maksimr/vim-jsbeautify'
 " CoffeeScript support for vim
-Plugin 'kchmck/vim-coffee-script'
+Plug 'kchmck/vim-coffee-script'
 " Typescript syntax files for Vim
-Plugin 'leafgarland/typescript-vim'
+Plug 'leafgarland/typescript-vim'
 
 " Vim plugin for the Elm programming language
-"Plugin 'lambdatoast/elm.vim'
+"Plug 'lambdatoast/elm.vim'
 
 "" Qt
 " QML syntax highlighting for VIM
-Plugin 'peterhoeg/vim-qml'
+Plug 'peterhoeg/vim-qml'
 " qmake project highlighting support for the Vim editor
-Plugin 'artoj/qmake-syntax-vim'
+Plug 'artoj/qmake-syntax-vim'
 
 " Vim syntax file & snippets for Docker's Dockerfile
-Plugin 'ekalinin/Dockerfile.vim'
+Plug 'ekalinin/Dockerfile.vim'
 
 " basic vim/vagrant integration
-Plugin 'markcornick/vim-vagrant'
+Plug 'markcornick/vim-vagrant'
 
 " A vim plugin for syntax highlighting Ansible's common filetypes
-Plugin 'pearofducks/ansible-vim'
+Plug 'pearofducks/ansible-vim'
 
 " Vim syntax for i3 window manager config
-Plugin 'PotatoesMaster/i3-vim-syntax'
+Plug 'PotatoesMaster/i3-vim-syntax'
 
 "" color schemes
 " Base16 for Vim
-Plugin 'chriskempson/base16-vim'
+Plug 'chriskempson/base16-vim'
 
-call vundle#end()
+call plug#end()
 
 " Load KDE settings
 source /usr/share/kde-dev-scripts/kde-devel-vim.vim
