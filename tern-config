@@ -1,0 +1,16 @@
+{
+  "dontLoad": [
+    "node_modules/**",
+    "vendor/**"
+  ],
+  "libs": [
+    "browser",
+    "jquery"
+  ],
+  "plugins": {
+    "doc_comment": {
+      "fullDocs": true
+    },
+    "angular": {}
+  }
+}
