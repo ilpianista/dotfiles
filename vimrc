@@ -70,7 +70,7 @@ Plug 'rust-lang/rust.vim'
 
 "" Haskell
 " vim2hs :: Vim -> Haskell
-"Plug 'dag/vim2hs'
+Plug 'dag/vim2hs'
 " A completion plugin for Haskell, using ghc-mod
 "Plug 'eagletmt/neco-ghc'
 " Interactive command execution in Vim. (needed by ghcmod-vim)
@@ -133,7 +133,7 @@ Plug 'markcornick/vim-vagrant'
 Plug 'pearofducks/ansible-vim'
 
 " Vim syntax for i3 window manager config
-Plug 'PotatoesMaster/i3-vim-syntax'
+"Plug 'PotatoesMaster/i3-vim-syntax'
 
 "" color schemes
 " Base16 for Vim

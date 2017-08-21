@@ -21,8 +21,8 @@ if [ -n "$DISPLAY" ]; then
 fi
 
 # ZSH history
-export HISTSIZE=1000
-export SAVEHIST=1000
+export HISTSIZE=10000
+export SAVEHIST=10000
 export HISTFILE="$HOME/.zsh_history"
 
 # Disable Dr Konqui

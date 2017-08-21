@@ -5,7 +5,6 @@ xsetroot -cursor_name left_ptr
 sh ~/.fehbg
 /usr/lib/org_kde_powerdevil &
 #xautolock -time 10 -locker "/usr/lib/kscreenlocker_greet --immediateLock" -noclose &
-#~/bin/battery_low.sh &
+stalonetray &
 dunst &
 kded5 &
-redshift &

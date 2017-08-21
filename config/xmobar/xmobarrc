@@ -49,7 +49,7 @@ Config {
                              ] 10
 
         -- volume monitor
-      , Run Volume "default" "Master" [ "--template" , "<action=`pactl set-sink-mute 0 toggle`><status></action>"
+      , Run Volume "default" "Master" [ "--template" , "<action=`pactl set-sink-mute @DEFAULT_SINK@ toggle`><status></action>"
                                       , "--"
                                       , "-c"         , "#ba8baf"
                                       , "-o"         , ""

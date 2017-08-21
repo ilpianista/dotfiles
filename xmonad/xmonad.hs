@@ -25,7 +25,7 @@ import qualified Data.Map        as M
 -- certain contrib modules.
 --
 myTerminal :: [Char]
-myTerminal = "konsole"
+myTerminal = "urxvt"
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
@@ -53,7 +53,7 @@ myModMask = mod4Mask
 -- workspace name. The number of workspaces is determined by the length
 -- of this list.
 --
-myWorkspaces = ["*","web","media","chat"] ++ map show [5..9] ++ ["dev"]
+myWorkspaces = ["*","web","chat","media"] ++ map show [5..9] ++ ["dev"]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
@@ -172,24 +172,24 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- Audio bindings
     ++
-    [ ((0, 0x1008ff13), spawn "pactl set-sink-volume 0 +5%") -- XF86AudioRaiseVolume
-    , ((0, 0x1008ff11), spawn "pactl set-sink-volume 0 -5%") -- XF86AudioLowerVolume
-    , ((0, 0x1008ff12), spawn "pactl set-sink-mute 0 toggle") -- XF86AudioMute
-    , ((0, 0x1008ffb2), spawn "pactl set-source-mute 1 toggle") -- XF86AudioMicMute
+    [ ((0, 0x1008ff13), spawn "pactl set-sink-volume @DEFAULT_SINK@ +5%") -- XF86AudioRaiseVolume
+    , ((0, 0x1008ff11), spawn "pactl set-sink-volume @DEFAULT_SINK@ -5%") -- XF86AudioLowerVolume
+    , ((0, 0x1008ff12), spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle") -- XF86AudioMute
+    , ((0, 0x1008ffb2), spawn "pactl set-source-mute @DEFAULT_SOURCE@ toggle") -- XF86AudioMicMute
     ]
 
     -- Media bindings
     ++
-    [ ((0, 0x1008ff14), spawn "playerctl play-pause") -- XF86AudioPlay
-    , ((0, 0x1008ff16), spawn "playerctl previous") -- XF86AudioPrev
-    , ((0, 0x1008ff17), spawn "playerctl next") -- XF86AudioNext
-    , ((0, 0x1008ff15), spawn "playerctl stop") -- XF86AudioStop
+    [ ((0, 0x1008ff14), spawn "qdbus org.mpris.MediaPlayer2.clementine /org/mpris/MediaPlayer2 PlayPause") -- XF86AudioPlay
+    , ((0, 0x1008ff16), spawn "qdbus org.mpris.MediaPlayer2.clementine /org/mpris/MediaPlayer2 Previous") -- XF86AudioPrev
+    , ((0, 0x1008ff17), spawn "qdbus org.mpris.MediaPlayer2.clementine /org/mpris/MediaPlayer2 Next") -- XF86AudioNext
+    , ((0, 0x1008ff15), spawn "qdbus org.mpris.MediaPlayer2.clementine /org/mpris/MediaPlayer2 Stop") -- XF86AudioStop
     ]
 
     -- Brightness bindings
     ++
-    [ ((0, 0x1008ff03), spawn "xbacklight -dec 20") -- XF86MonBrightnessDown
-    , ((0, 0x1008ff02), spawn "xbacklight -inc 20") -- XF86MonBrightnessUp
+    [ ((0, 0x1008ff03), spawn "qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl setBrightness $(expr $(qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl brightness) - $(qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl brightnessMax) / 5)") -- XF86MonBrightnessDown
+    , ((0, 0x1008ff02), spawn "qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl setBrightness $(expr $(qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl brightness) + $(qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl brightnessMax) / 5)") -- XF86MonBrightnessUp
     ]
 
     -- Extra bindings
@@ -276,23 +276,21 @@ myLayout = avoidStruts $
 -- workspace.
 --
 myManageHook = composeAll
-    [ className =? "QupZilla"          --> doShift "web"
+    [ className =? "qutebrowser"       --> doShift "web"
     , className =? "Firefox"           --> doShift "web"
     , resource  =? "kontact"           --> doShift "web"
-    , className =? "Vlc"               --> doFloat <+> doShift "media"
-    , className =? "Amarok"            --> doShift "media"
-    , className =? "cantata"           --> doShift "media"
     , className =? "konversation"      --> doShift "chat"
-    , className =? "ktpcontactlist"    --> doShift "chat"
-    , className =? "ktp-text-ui"       --> doShift "chat"
-    , className =? "Skype"             --> doShift "chat"
+    , className =? "pidgin"            --> doShift "chat"
+    , className =? "Vlc"               --> doFloat <+> doShift "media"
+    , className =? "Clementine"        --> doShift "media"
     , className =? "Eclipse"           --> doShift "dev"
     , className =? "QtCreator"         --> doShift "dev"
     , className =? "Designer"          --> doShift "dev"
-    , className =? "Xmessage"          --> doFloat
+    , className =? "jetbrains-studio"  --> doShift "dev"
     , className =? "stalonetray"       --> doIgnore
     , title =? "SailfishOS Emulator [Running] - Oracle VM VirtualBox" --> doFloat
     , isFullscreen                     --> doFullFloat
+    , isDialog                         --> doCenterFloat
     ]
 
 ------------------------------------------------------------------------
@@ -304,7 +302,7 @@ myManageHook = composeAll
 -- return (All True) if the default handler is to be run afterwards. To
 -- combine event hooks use mappend or mconcat from Data.Monoid.
 --
-myEventHook = mempty
+myEventHook = docksEventHook
 
 ------------------------------------------------------------------------
 -- Status bars and logging
