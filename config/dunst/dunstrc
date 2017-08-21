@@ -148,7 +148,7 @@
 
 [frame]
     width = 1
-    color = "#90a959"
+    color = "#a1b56c"
 
 [shortcuts]
 
@@ -174,18 +174,18 @@
 [urgency_low]
     # IMPORTANT: colors have to be defined in quotation marks.
     # Otherwise the "#" and following would be interpreted as a comment.
-    background = "#151515"
-    foreground = "#90a959"
+    background = "#282828"
+    foreground = "#585858"
     timeout = 10
 
 [urgency_normal]
-    background = "#151515"
-    foreground = "#90a959"
+    background = "#383838"
+    foreground = "#d8d8d8"
     timeout = 10
 
 [urgency_critical]
-    background = "#ac4142"
-    foreground = "#303030"
+    background = "#ab4642"
+    foreground = "#e8e8e8"
     timeout = 0
 
 # Every section that isn't one of the above is interpreted as a rules to
