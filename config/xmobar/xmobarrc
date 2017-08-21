@@ -3,12 +3,12 @@ Config {
    -- appearance
      font            = "xft:Source Code Pro:size=9,Ionicons:size=10"
    , additionalFonts = []
-   , bgColor         = "#151515"
-   , fgColor         = "#90a959"
+   , bgColor         = "#181818"
+   , fgColor         = "#a1b56c"
    , alpha           = 255
    , position        = Top
    , border          = NoBorder
-   , borderColor     = "#151515"
+   , borderColor     = "#181818"
    , borderWidth     = 0
    , textOffset      = -1
    , iconOffset      = -1
@@ -45,36 +45,36 @@ Config {
 
       [
         -- wireless network activity monitor
-        Run Wireless "wlp3s0" [ "--template" , "<action=`kde5-nm-connection-editor`><fc=#6a9fb5> <essid></fc></action>"
+        Run Wireless "wlp3s0" [ "--template" , "<action=`kde5-nm-connection-editor`><fc=#7cafc2> <essid></fc></action>"
                              ] 10
 
         -- volume monitor
       , Run Volume "default" "Master" [ "--template" , "<action=`pactl set-sink-mute 0 toggle`><status></action>"
                                       , "--"
-                                      , "-c"         , "#aa759f"
+                                      , "-c"         , "#ba8baf"
                                       , "-o"         , ""
-                                      , "-C"         , "#aa759f"
+                                      , "-C"         , "#ba8baf"
                                       , "-O"         , " <volume>"
                                       ] 10
 
         -- battery monitor
-      , Run Battery [ "--template" , "<action=`konsole --hold -e acpi -V`><acstatus></action>"
+      , Run Battery [ "--template" , "<action=`urxvt --hold -e acpi -V`><acstatus></action>"
                     , "--Low"      , "20"        -- units: %
                     , "--High"     , "80"        -- units: %
-                    , "--low"      , "#ac4142"
-                    , "--high"     , "#d28445"
+                    , "--low"      , "#ab4642"
+                    , "--high"     , "#dc9656"
                     , "--"
-                    , "-o"         , "<fc=#d28445> <left>%</fc>"
-                    , "-O"         , "<fc=#d28445> <left>%</fc>"
-                    , "-i"         , "<fc=#d28445> <left>%</fc>"
+                    , "-o"         , "<fc=#dc9656> <left>%</fc>"
+                    , "-O"         , "<fc=#dc9656> <left>%</fc>"
+                    , "-i"         , "<fc=#dc9656> <left>%</fc>"
                     ] 120
 
         -- system load monitor
-      , Run MultiCpu          [ "--template" , "<action=`konsole -e htop`><fc=#f4bf75> <total>%</fc></action>"
+      , Run MultiCpu          [ "--template" , "<action=`urxvt -e htop`><fc=#f7ca88> <total>%</fc></action>"
                               ] 15
 
         -- time and date indicator
-      , Run Date              "<action=`konsole --noclose -e cal -3`>%A, %R</action>" "date" 60
+      , Run Date              "<action=`urxvt --hold -e cal -m -3`>%A, %R</action>" "date" 60
 
       , Run StdinReader
       ]
