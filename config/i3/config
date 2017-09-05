@@ -130,9 +130,9 @@ bindsym $mod+p move workspace to output LVDS1
 assign [class="Firefox"] 2:web
 assign [class="kontact"] 2:web
 assign [class="konversation"] 3:chat
-assign [class="pidgin"] 3:chat
-for_window [class="Vlc"] floating enable
-assign [class="Vlc"] 4:media
+assign [class="Pidgin"] 3:chat
+for_window [class="mpv"] floating enable
+assign [class="mpv"] 4:media
 assign [class="Clementine"] 4:media
 assign [class="Eclipse"] 10:dev
 assign [class="QtCreator"] 10:dev
@@ -161,7 +161,7 @@ bindsym Ctrl+Escape exec urxvt -e htop
 bindsym Print exec spectacle
 
 # reload the configuration file
-bindsym Mod1+Shift+r reload
+#bindsym Mod1+Shift+r reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+q restart
 # exit i3 (poweroff)

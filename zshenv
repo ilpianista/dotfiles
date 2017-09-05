@@ -59,7 +59,9 @@ export XDG_DATA_DIRS="/usr/share:/usr/local/share"
 export XDG_CURRENT_DESKTOP="KDE"
 
 # MPW
-export MP_FULLNAME="Andrea Scarpino"
+export MPW_FULLNAME="Andrea Scarpino"
+export MPW_FORMAT=n
+export MPW_ASKPASS="/usr/bin/ksshaskpass"
 
 # Wayland
 #export XKB_DEFAULT_LAYOUT=gb

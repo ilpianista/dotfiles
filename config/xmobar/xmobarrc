@@ -17,7 +17,8 @@ Config {
    -- layout
    , sepChar =  "%"   -- delineator between plugin names and straight text
    , alignSep = "}{"  -- separator between left-right alignment
-   , template = "%StdinReader%}{%wlp3s0wi% %default:Master% %battery% %multicpu% %date%"
+--   , template = "%StdinReader%}{%wlp3s0wi% %default:Master% %battery% %multicpu% %date%"
+   , template = "%StdinReader%}{%wlp3s0wi% %battery% %multicpu% %date%"
 
    -- general behavior
    , lowerOnStart =     True    -- send to bottom of window stack on start
@@ -49,13 +50,13 @@ Config {
                              ] 10
 
         -- volume monitor
-      , Run Volume "default" "Master" [ "--template" , "<action=`pactl set-sink-mute @DEFAULT_SINK@ toggle`><status></action>"
-                                      , "--"
-                                      , "-c"         , "#ba8baf"
-                                      , "-o"         , ""
-                                      , "-C"         , "#ba8baf"
-                                      , "-O"         , " <volume>"
-                                      ] 10
+   --   , Run Volume "default" "Master" [ "--template" , "<action=`pactl set-sink-mute @DEFAULT_SINK@ toggle`><status></action>"
+   --                                   , "--"
+   --                                   , "-c"         , "#ba8baf"
+   --                                   , "-o"         , ""
+   --                                   , "-C"         , "#ba8baf"
+   --                                   , "-O"         , " <volume>"
+   --                                   ] 10
 
         -- battery monitor
       , Run Battery [ "--template" , "<action=`urxvt --hold -e acpi -V`><acstatus></action>"
