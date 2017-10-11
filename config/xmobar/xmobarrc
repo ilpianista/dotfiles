@@ -46,7 +46,7 @@ Config {
 
       [
         -- wireless network activity monitor
-        Run Wireless "wlp3s0" [ "--template" , "<action=`kde5-nm-connection-editor`><fc=#7cafc2> <essid></fc></action>"
+        Run Wireless "wlp3s0" [ "--template" , "<action=`kcmshell5 kcm_networkmanagement`><fc=#7cafc2> <essid></fc></action>"
                              ] 10
 
         -- volume monitor

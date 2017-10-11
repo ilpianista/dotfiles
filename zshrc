@@ -43,7 +43,7 @@ alias remove='sudo pacman -Rscn'
 alias useless='pacman -Qqtd'
 alias makepkg='makepkg -L'
 
-search() { pacman -Ss ${1}; cower -s ${1} }
+search() { pacman -Ss ${1}; auracle search ${1} }
 aurpkg() { auracle download -r ${1} && cd /tmp/${1} && makepkg -s }
 
 # Show needed libraries

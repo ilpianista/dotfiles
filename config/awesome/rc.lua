@@ -259,7 +259,7 @@ wifiwidget = lain.widgets.base({
   end
 })
 
-wifiwidget:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn("kde5-nm-connection-editor") end)))
+wifiwidget:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn("kcmshell5 kcm_networkmanagement") end)))
 
 local wifinotification
 wifiwidget:connect_signal("mouse::enter", function()
