@@ -49,6 +49,8 @@ export JAVA_FONTS="/usr/share/fonts/TTF"
 # Bundler install gems per-user
 export GEM_HOME=$(ruby -e 'print Gem.user_dir')
 
+export QT_PLUGIN_PATH="/usr/local/lib64/plugins/:$QT_PLUGIN_PATH"
+
 # KDE stuff from startkde
 export QT_AUTO_SCREEN_SCALE_FACTOR=0
 export XCURSOR_THEME="breeze_cursors"
@@ -64,6 +66,6 @@ export MPW_FORMAT=n
 export MPW_ASKPASS="/usr/bin/ksshaskpass"
 
 # Wayland
-#export XKB_DEFAULT_LAYOUT=gb
+export XKB_DEFAULT_LAYOUT=gb
 #export QT_QPA_PLATFORM=wayland-egl
 #export GDK_BACKEND=wayland
