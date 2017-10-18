@@ -40,7 +40,6 @@ export GCC_COLORS="error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 
 # Speed-up rebuilds
 export PATH="/usr/lib/ccache/bin:$PATH"
-export CCACHE_DIR="/tmp/ccache"
 
 # Java fonts stuff
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=lcd -Dswing.aatext=true"
