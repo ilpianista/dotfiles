@@ -14,7 +14,7 @@ export PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 export PATH="$HOME/node_modules/.bin:$PATH"
 
 export EDITOR=vim
-export TERMINAL=urxvt
+export TERMINAL=termite
 
 if [ -n "$DISPLAY" ]; then
   export BROWSER=firefox

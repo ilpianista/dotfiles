@@ -20,11 +20,11 @@ fi
 # Then, source plugins and add commands to $PATH
 zplug load
 
-bindkey "${terminfo[khome]}" beginning-of-line
-bindkey "${terminfo[kend]}" end-of-line
-bindkey "${terminfo[kdch1]}" delete-char
-bindkey "${terminfo[kpp]}" up-line-or-history
-bindkey "${terminfo[knp]}" down-line-or-history
+bindkey "^[[H" beginning-of-line
+bindkey "^[[F" end-of-line
+bindkey "^[[3~" delete-char
+bindkey "^[[5~" up-line-or-history
+bindkey "^[[6~" down-line-or-history
 
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
