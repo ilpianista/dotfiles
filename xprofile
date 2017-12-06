@@ -1,6 +1,3 @@
 #!/bin/sh
 
 sh ~/.fehbg
-#xautolock -time 10 -locker "/usr/lib/kscreenlocker_greet --immediateLock" -noclose &
-#stalonetray &
-#kded5 &

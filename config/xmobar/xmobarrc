@@ -59,7 +59,7 @@ Config {
    --                                   ] 10
 
         -- battery monitor
-      , Run Battery [ "--template" , "<action=`urxvt --hold -e acpi -V`><acstatus></action>"
+      , Run Battery [ "--template" , "<action=`termite --hold -e acpi -V`><acstatus></action>"
                     , "--Low"      , "20"        -- units: %
                     , "--High"     , "80"        -- units: %
                     , "--low"      , "#ab4642"
@@ -71,11 +71,11 @@ Config {
                     ] 120
 
         -- system load monitor
-      , Run MultiCpu          [ "--template" , "<action=`urxvt -e htop`><fc=#f7ca88> <total>%</fc></action>"
+      , Run MultiCpu          [ "--template" , "<action=`termite -e htop`><fc=#f7ca88> <total>%</fc></action>"
                               ] 15
 
         -- time and date indicator
-      , Run Date              "<action=`urxvt --hold -e cal -m -3`>%A, %R</action>" "date" 60
+      , Run Date              "<action=`termite --hold -e cal -m -3`>%A, %R</action>" "date" 60
 
       , Run StdinReader
       ]
