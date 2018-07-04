@@ -17,7 +17,8 @@ call plug#begin('~/.vim/plugged')
 " A code-completion engine for Vim
 Plug 'Valloric/YouCompleteMe'
 " lean & mean status/tabline for vim that's light as air
-Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 " provides insert mode auto-completion for quotes, parens, brackets, etc
 Plug 'Raimondi/delimitMate'
 " A tree explorer plugin for vim
@@ -112,7 +113,7 @@ Plug 'maksimr/vim-jsbeautify'
 " CoffeeScript support for vim
 Plug 'kchmck/vim-coffee-script'
 " Typescript syntax files for Vim
-Plug 'leafgarland/typescript-vim'
+"Plug 'leafgarland/typescript-vim'
 
 " Vim plugin for the Elm programming language
 "Plug 'lambdatoast/elm.vim'
@@ -271,7 +272,7 @@ match Error /\s\+$/
 autocmd BufWritePre * :%s/\s\+$//e
 
 " Enable automatic running of :RustFmt
-let g:rustfmt_autosave = 1
+"let g:rustfmt_autosave = 1
 
 " check file change every 4 seconds ('CursorHold') and reload the buffer upon detecting change
 set autoread

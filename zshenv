@@ -14,7 +14,7 @@ export PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 export PATH="$HOME/node_modules/.bin:$PATH"
 
 export EDITOR=vim
-export TERMINAL=termite
+export TERMINAL=urxvt
 
 if [ -n "$DISPLAY" ]; then
   export BROWSER=firefox
@@ -62,7 +62,6 @@ export XDG_CURRENT_DESKTOP="KDE"
 # MPW
 export MPW_FULLNAME="Andrea Scarpino"
 export MPW_FORMAT=n
-export MPW_ASKPASS="/usr/bin/ksshaskpass"
 
 # Wayland
 export XKB_DEFAULT_LAYOUT=gb

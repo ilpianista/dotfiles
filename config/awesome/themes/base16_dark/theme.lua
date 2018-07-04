@@ -2,15 +2,19 @@
 -- Base16 Default Dark awesome theme --
 ---------------------------
 local awful = require("awful")
+local theme_assets = require("beautiful.theme_assets")
+local xresources = require("beautiful.xresources")
+local dpi = xresources.apply_dpi
 
-theme = {}
+local theme = {}
+
 
 theme.confdir       = awful.util.getdir("config")
 theme.name          = "base16_dark"
 theme.path          = theme.confdir .. "/themes/" .. theme.name
 
-theme.font          = "Source Code Pro 10"
-theme.iconFont      = "Ionicons 10"
+theme.font          = "Source Code Pro 9"
+theme.iconFont      = "Ionicons 9"
 
 -- Base16 colors
 theme.base16_base00 = "#181818"
@@ -41,32 +45,27 @@ theme.fg_focus      = theme.base16_base05
 theme.fg_urgent     = theme.base16_base01
 theme.fg_minimize   = theme.base16_base07
 
-theme.border_width  = 1
-theme.border_normal = theme.base16_base00
+theme.useless_gap   = dpi(0)
+theme.border_width  = dpi(1)
+theme.border_normal = theme.base16_base02
 theme.border_focus  = theme.base16_base02
 theme.border_marked = theme.base16_base08
 
--- There are other variable sets
--- overriding the default one when
--- defined, the sets are:
--- taglist_[bg|fg]_[focus|urgent|occupied|empty]
--- tasklist_[bg|fg]_[focus|urgent]
--- titlebar_[bg|fg]_[normal|focus]
--- tooltip_[font|opacity|fg_color|bg_color|border_width|border_color]
--- mouse_finder_[color|timeout|animate_timeout|radius|factor]
--- Example:
---theme.taglist_bg_focus = "#ff0000"
-
--- Display the taglist squares
-theme.taglist_squares_sel   = theme.path .. "/icons/taglist/sel.png"
-theme.taglist_squares_unsel = theme.path .. "/icons/taglist/unsel.png"
+-- Generate taglist squares:
+local taglist_square_size = dpi(4)
+theme.taglist_squares_sel = theme_assets.taglist_squares_sel(
+    taglist_square_size, theme.fg_normal
+)
+theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
+    taglist_square_size, theme.fg_normal
+)
 
 -- Variables set for theming the menu:
 -- menu_[bg|fg]_[normal|focus]
 -- menu_[border_color|border_width]
 theme.menu_submenu_icon = theme.path .. "/icons/submenu.png"
-theme.menu_height = 15
-theme.menu_width  = 100
+theme.menu_height = dpi(15)
+theme.menu_width  = dpi(100)
 
 -- {{{ Widgets
 theme.widget_bat_fg     = theme.base16_base09
@@ -85,56 +84,60 @@ theme.widget_chat_fg    = theme.base16_base0D
 theme.titlebar_close_button_normal = theme.path .. "/icons/titlebar/close_normal.png"
 theme.titlebar_close_button_focus  = theme.path .. "/icons/titlebar/close_focus.png"
 
-theme.titlebar_ontop_button_normal_inactive = theme.path .. "/icons/titlebar/ontop_normal_inactive.png"
-theme.titlebar_ontop_button_focus_inactive  = theme.path .. "/icons/titlebar/ontop_focus_inactive.png"
-theme.titlebar_ontop_button_normal_active = theme.path .. "/icons/titlebar/ontop_normal_active.png"
-theme.titlebar_ontop_button_focus_active  = theme.path .. "/icons/titlebar/ontop_focus_active.png"
+theme.titlebar_minimize_button_normal = theme.path.."/icons/titlebar/minimize_normal.png"
+theme.titlebar_minimize_button_focus  = theme.path.."/icons/titlebar/minimize_focus.png"
 
-theme.titlebar_sticky_button_normal_inactive = theme.path .. "/icons/titlebar/sticky_normal_inactive.png"
-theme.titlebar_sticky_button_focus_inactive  = theme.path .. "/icons/titlebar/sticky_focus_inactive.png"
-theme.titlebar_sticky_button_normal_active = theme.path .. "/icons/titlebar/sticky_normal_active.png"
-theme.titlebar_sticky_button_focus_active  = theme.path .. "/icons/titlebar/sticky_focus_active.png"
+theme.titlebar_ontop_button_normal_inactive = theme.path.."/icons/titlebar/ontop_normal_inactive.png"
+theme.titlebar_ontop_button_focus_inactive  = theme.path.."/icons/titlebar/ontop_focus_inactive.png"
+theme.titlebar_ontop_button_normal_active = theme.path.."/icons/titlebar/ontop_normal_active.png"
+theme.titlebar_ontop_button_focus_active  = theme.path.."/icons/titlebar/ontop_focus_active.png"
 
-theme.titlebar_floating_button_normal_inactive = theme.path .. "/icons/titlebar/floating_normal_inactive.png"
-theme.titlebar_floating_button_focus_inactive  = theme.path .. "/icons/titlebar/floating_focus_inactive.png"
-theme.titlebar_floating_button_normal_active = theme.path .. "/icons/titlebar/floating_normal_active.png"
-theme.titlebar_floating_button_focus_active  = theme.path .. "/icons/titlebar/floating_focus_active.png"
+theme.titlebar_sticky_button_normal_inactive = theme.path.."/icons/titlebar/sticky_normal_inactive.png"
+theme.titlebar_sticky_button_focus_inactive  = theme.path.."/icons/titlebar/sticky_focus_inactive.png"
+theme.titlebar_sticky_button_normal_active = theme.path.."/icons/titlebar/sticky_normal_active.png"
+theme.titlebar_sticky_button_focus_active  = theme.path.."/icons/titlebar/sticky_focus_active.png"
 
-theme.titlebar_maximized_button_normal_inactive = theme.path .. "/icons/titlebar/maximized_normal_inactive.png"
-theme.titlebar_maximized_button_focus_inactive  = theme.path .. "/icons/titlebar/maximized_focus_inactive.png"
-theme.titlebar_maximized_button_normal_active = theme.path .. "/icons/titlebar/maximized_normal_active.png"
-theme.titlebar_maximized_button_focus_active  = theme.path .. "/icons/titlebar/maximized_focus_active.png"
+theme.titlebar_floating_button_normal_inactive = theme.path.."/icons/titlebar/floating_normal_inactive.png"
+theme.titlebar_floating_button_focus_inactive  = theme.path.."/icons/titlebar/floating_focus_inactive.png"
+theme.titlebar_floating_button_normal_active = theme.path.."/icons/titlebar/floating_normal_active.png"
+theme.titlebar_floating_button_focus_active  = theme.path.."/icons/titlebar/floating_focus_active.png"
 
--- You can use your own command to set your wallpaper
+theme.titlebar_maximized_button_normal_inactive = theme.path.."/icons/titlebar/maximized_normal_inactive.png"
+theme.titlebar_maximized_button_focus_inactive  = theme.path.."/icons/titlebar/maximized_focus_inactive.png"
+theme.titlebar_maximized_button_normal_active = theme.path.."/icons/titlebar/maximized_normal_active.png"
+theme.titlebar_maximized_button_focus_active  = theme.path.."/icons/titlebar/maximized_focus_active.png"
+
 theme.wallpaper = theme.confdir .. "/themes/wallpaper.jpg"
 
 -- You can use your own layout icons like this:
-theme.layout_fairh = theme.path .. "/icons/layouts/fairh.png"
-theme.layout_fairv = theme.path .. "/icons/layouts/fairv.png"
-theme.layout_floating  = theme.path .. "/icons/layouts/floating.png"
-theme.layout_magnifier = theme.path .. "/icons/layouts/magnifier.png"
-theme.layout_max = theme.path .. "/icons/layouts/max.png"
-theme.layout_fullscreen = theme.path .. "/icons/layouts/fullscreen.png"
-theme.layout_tilebottom = theme.path .. "/icons/layouts/tilebottom.png"
-theme.layout_tileleft   = theme.path .. "/icons/layouts/tileleft.png"
-theme.layout_tile = theme.path .. "/icons/layouts/tile.png"
-theme.layout_tiletop = theme.path .. "/icons/layouts/tiletop.png"
-theme.layout_spiral  = theme.path .. "/icons/layouts/spiral.png"
-theme.layout_dwindle = theme.path .. "/icons/layouts/dwindle.png"
-theme.layout_termfair = theme.path .. "/icons/layouts/termfair.png"
-theme.layout_centerfair = theme.path .. "/icons/layouts/centerfair.png"
-theme.layout_cascade = theme.path .. "/icons/layouts/cascade.png"
-theme.layout_cascadetile = theme.path .. "/icons/layouts/cascade.png"
-theme.layout_centerwork = theme.path .. "/icons/layouts/centerwork.png"
-theme.layout_uselessfair = theme.path .. "/icons/layouts/fairv.png"
-theme.layout_uselessspiral = theme.path .. "/icons/layouts/spiral.png"
-theme.layout_uselesstile = theme.path .. "/icons/layouts/tile.png"
+theme.layout_fairh = theme.path.."/icons/layouts/fairhw.png"
+theme.layout_fairv = theme.path.."/icons/layouts/fairvw.png"
+theme.layout_floating  = theme.path.."/icons/layouts/floatingw.png"
+theme.layout_magnifier = theme.path.."/icons/layouts/magnifierw.png"
+theme.layout_max = theme.path.."/icons/layouts/maxw.png"
+theme.layout_fullscreen = theme.path.."/icons/layouts/fullscreenw.png"
+theme.layout_tilebottom = theme.path.."/icons/layouts/tilebottomw.png"
+theme.layout_tileleft   = theme.path.."/icons/layouts/tileleftw.png"
+theme.layout_tile = theme.path.."/icons/layouts/tilew.png"
+theme.layout_tiletop = theme.path.."/icons/layouts/tiletopw.png"
+theme.layout_spiral  = theme.path.."/icons/layouts/spiralw.png"
+theme.layout_dwindle = theme.path.."/icons/layouts/dwindlew.png"
+theme.layout_cornernw = theme.path.."/icons/layouts/cornernww.png"
+theme.layout_cornerne = theme.path.."/icons/layouts/cornernew.png"
+theme.layout_cornersw = theme.path.."/icons/layouts/cornersww.png"
+theme.layout_cornerse = theme.path.."/icons/layouts/cornersew.png"
 
-theme.awesome_icon = theme.path .. "/icons/arch.png"
+-- Generate Awesome icon:
+theme.awesome_icon = theme_assets.awesome_icon(
+    theme.menu_height, theme.bg_focus, theme.fg_focus
+)
 
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
-theme.icon_theme = elementary
+theme.icon_theme = nil
+
+theme.tasklist_disable_icon = true
 
 return theme
+
 -- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80

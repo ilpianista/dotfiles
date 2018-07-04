@@ -1,6 +1,6 @@
 # i3 config file (v4)
 #
-# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+# Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
 
@@ -21,7 +21,7 @@ floating_modifier $mod
 focus_follows_mouse yes
 
 # start a terminal
-bindsym $mod+Return exec termite
+bindsym $mod+Return exec $TERMINAL
 
 # kill focused window
 bindsym $mod+Shift+c kill
@@ -130,7 +130,6 @@ bindsym $mod+p move workspace to output LVDS1
 assign [class="Firefox"] 2:web
 assign [class="kontact"] 2:web
 assign [class="konversation"] 3:chat
-assign [class="Pidgin"] 3:chat
 for_window [class="mpv"] floating enable
 assign [class="mpv"] 4:media
 assign [class="Clementine"] 4:media
@@ -151,13 +150,13 @@ bindsym XF86AudioPrev exec qdbus org.mpris.MediaPlayer2.clementine /org/mpris/Me
 bindsym XF86AudioNext exec qdbus org.mpris.MediaPlayer2.clementine /org/mpris/MediaPlayer2 Next
 bindsym XF86AudioStop exec qdbus org.mpris.MediaPlayer2.clementine /org/mpris/MediaPlayer2 Stop
 
-bindsym XF86MonBrightnessDown exec xbacklight -dec 10
-bindsym XF86MonBrightnessUp exec xbacklight -inc 10
+bindsym XF86MonBrightnessDown exec qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl setBrightness $(expr $(qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl brightness) - $(qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl brightnessMax) / 5)
+bindsym XF86MonBrightnessUp exec qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl setBrightness $(expr $(qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl brightness) + $(qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl brightnessMax) / 5)
 
-bindsym XF86Launch1 exec termite
-bindsym XF86ScreenSaver exec i3lock -i $HOME/Pictures/wallpapers/wall_130.png
-bindsym Ctrl+Mod1+l exec i3lock -i $HOME/Pictures/wallpapers/wall_130.png
-bindsym Ctrl+Escape exec termite -e htop
+bindsym XF86Launch1 exec $TERMINAL
+bindsym XF86ScreenSaver exec /usr/lib/kscreenlocker_greet
+bindsym Ctrl+Mod1+l exec /usr/lib/kscreenlocker_greet
+bindsym Ctrl+Escape exec $TERMINAL -e htop
 bindsym Print exec spectacle
 
 # reload the configuration file
@@ -216,6 +215,7 @@ mode "resize" {
         # back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
+        bindsym $mod+Shift+r mode "default"
 }
 
 bindsym $mod+Shift+r mode "resize"
@@ -245,7 +245,5 @@ bar {
 exec xrdb -quiet -merge -nocpp "$HOME/.Xresources"
 exec xsetroot -cursor_name left_ptr
 exec dunst
-exec dockd --daemon
-exec i3-battery-popup -N
-exec xautolock -time 10 -locker "i3lock -i $HOME/Pictures/wallpapers/wall_130.png"
-exec xss-lock -- i3lock -n -i $HOME/Pictures/wallpapers/wall_130.png
+#exec dockd --daemon
+exec /usr/lib/org_kde_powerdevil
