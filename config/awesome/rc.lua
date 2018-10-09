@@ -124,7 +124,7 @@ powermenu = awful.menu({ items = {
 })
 
 powerwidget = wibox.widget.textbox()
-powerwidget:set_markup('<span font="' .. beautiful.iconFont .. '" color="' .. beautiful.fg_focus .. '"></span>')
+powerwidget:set_markup('<span font="' .. beautiful.iconFont .. '" color="' .. beautiful.fg_focus .. '"></span>')
 powerwidget:buttons(awful.util.table.join(
   awful.button({ }, 1, function (c) powermenu:toggle() end)
 ))
@@ -134,7 +134,7 @@ powerwidget:buttons(awful.util.table.join(
 cpuwidget = lain.widget.sysload({
   timeout = 5,
   settings = function()
-    widget:set_markup('<span font="' .. beautiful.iconFont .. '" color="' .. beautiful.widget_cpu_fg .. '"></span> <span color="' .. beautiful.widget_cpu_fg .. '">' .. load_1 .. '</span>')
+    widget:set_markup('<span font="' .. beautiful.iconFont .. '" color="' .. beautiful.widget_cpu_fg .. '"></span> <span color="' .. beautiful.widget_cpu_fg .. '">' .. load_1 .. '</span>')
   end
 })
 --cpuwidget = lain.widget.cpu({
@@ -191,13 +191,11 @@ batwidget = lain.widget.bat({
   settings = function()
     remainingtime = bat_now.time
     if bat_now.status == "Charging" or bat_now.status == "Full" then
-      widget:set_markup('<span font="' .. beautiful.iconFont .. '" color="' .. beautiful.widget_bat_fg .. '"></span> <span color="' .. beautiful.widget_bat_fg .. '">' .. bat_now.perc .. '%</span>')
-    elseif tonumber(bat_now.perc) > 60 then
-      widget:set_markup('<span font="' .. beautiful.iconFont .. '" color="' .. beautiful.widget_bat_fg .. '"></span> <span color="' .. beautiful.widget_bat_fg .. '">' .. bat_now.perc .. '%</span>')
-    elseif tonumber(bat_now.perc) > 20 then
-      widget:set_markup('<span font="' .. beautiful.iconFont .. '" color="' .. beautiful.widget_bat_fg .. '"></span> <span color="' .. beautiful.widget_bat_fg .. '">' .. bat_now.perc .. '%</span>')
+      widget:set_markup('<span font="' .. beautiful.iconFont .. '" color="' .. beautiful.widget_bat_fg .. '"></span> <span color="' .. beautiful.widget_bat_fg .. '">' .. bat_now.perc .. '%</span>')
+    elseif tonumber(bat_now.perc) > 50 then
+      widget:set_markup('<span font="' .. beautiful.iconFont .. '" color="' .. beautiful.widget_bat_fg .. '"></span> <span color="' .. beautiful.widget_bat_fg .. '">' .. bat_now.perc .. '%</span>')
     else
-      widget:set_markup('<span font="' .. beautiful.iconFont .. '" color="' .. beautiful.widget_batlow_fg .. '"></span> <span color="' .. beautiful.widget_batlow_fg .. '">' .. bat_now.perc .. '%</span>')
+      widget:set_markup('<span font="' .. beautiful.iconFont .. '" color="' .. beautiful.widget_batlow_fg .. '"></span> <span color="' .. beautiful.widget_batlow_fg .. '">' .. bat_now.perc .. '%</span>')
     end
   end
 })
@@ -220,13 +218,13 @@ end)
 volwidget = lain.widget.pulse({
   settings = function()
     if volume_now.muted == "yes" or volume_now.left == "0%" then
-      widget:set_markup('<span font="' .. beautiful.iconFont .. '" color="' .. beautiful.widget_vol_fg .. '"></span> <span color="' .. beautiful.widget_vol_fg .. '">' .. volume_now.left .. '</span>')
+      widget:set_markup('<span font="' .. beautiful.iconFont .. '" color="' .. beautiful.widget_vol_fg .. '"></span> <span color="' .. beautiful.widget_vol_fg .. '">' .. volume_now.left .. '</span>')
     elseif tonumber(volume_now.left) > 80 then
-      widget:set_markup('<span font="' .. beautiful.iconFont .. '" color="' .. beautiful.widget_vol_fg .. '"></span> <span color="' .. beautiful.widget_vol_fg .. '">' .. volume_now.left .. '</span>')
+      widget:set_markup('<span font="' .. beautiful.iconFont .. '" color="' .. beautiful.widget_vol_fg .. '"></span> <span color="' .. beautiful.widget_vol_fg .. '">' .. volume_now.left .. '</span>')
     elseif tonumber(volume_now.left) > 40 then
-      widget:set_markup('<span font="' .. beautiful.iconFont .. '" color="' .. beautiful.widget_vol_fg .. '"></span> <span color="' .. beautiful.widget_vol_fg .. '">' .. volume_now.left .. '</span>')
+      widget:set_markup('<span font="' .. beautiful.iconFont .. '" color="' .. beautiful.widget_vol_fg .. '"></span> <span color="' .. beautiful.widget_vol_fg .. '">' .. volume_now.left .. '</span>')
     else
-      widget:set_markup('<span font="' .. beautiful.iconFont .. '" color="' .. beautiful.widget_vol_fg .. '"></span> <span color="' .. beautiful.widget_vol_fg .. '">' .. volume_now.left .. '</span>')
+      widget:set_markup('<span font="' .. beautiful.iconFont .. '" color="' .. beautiful.widget_vol_fg .. '"></span> <span color="' .. beautiful.widget_vol_fg .. '">' .. volume_now.left .. '</span>')
     end
   end
 })
@@ -244,7 +242,7 @@ volwidget.widget:buttons(awful.util.table.join(
 -- {{{ Wireless
 wifiwidget = awful.widget.watch("bash -c 'nmcli -g ssid,active dev wifi | grep \":yes\" | sed \"s/:yes//\"'", 10, function(widget, stdout)
   if stdout ~= '' then
-    widget:set_markup('<span font="' .. beautiful.iconFont .. '" color="' .. beautiful.widget_wifi_fg .. '"></span> <span color="' .. beautiful.widget_wifi_fg .. '">' .. stdout .. '</span>')
+    widget:set_markup('<span font="' .. beautiful.iconFont .. '" color="' .. beautiful.widget_wifi_fg .. '"></span> <span color="' .. beautiful.widget_wifi_fg .. '">' .. stdout .. '</span>')
   else
     widget:set_markup('')
   end
@@ -259,16 +257,18 @@ wifiwidget:connect_signal("mouse::enter", function()
   f:close()
 
   f = assert(io.popen("nmcli -g signal,active dev wifi | grep ':yes' | sed 's/:yes//'"))
-  local wifiquality = f:read() .. "%"
+  local wifiquality = f:read()
   f:close()
 
-  wifinotification = naughty.notify({
-    text = "Access Point: " .. wifiaccesspoint .. "\nSignal: " .. wifiquality,
-    position = "top_right"
-  })
+  if wifiaccesspoint ~= nil and wifiquality ~= nil then
+    wifinotification = naughty.notify({
+      text = "Access Point: " .. wifiaccesspoint .. "\nSignal: " .. wifiquality .. "%",
+      position = "top_right"
+    })
+  end
 end)
 wifiwidget:connect_signal("mouse::leave", function()
-  if (wifinotification ~= nil) then
+  if wifinotification ~= nil then
     naughty.destroy(wifinotification)
     wifinotification = nil
   end
@@ -281,11 +281,11 @@ end)
 
 -- {{{ Date and time
 dateicon = wibox.widget.textbox()
---dateicon:set_markup('<span font="' .. beautiful.iconFont .. '"></span> ')
+--dateicon:set_markup('<span font="' .. beautiful.iconFont .. '"></span> ')
 datewidget = awful.widget.textclock("%A, %R")
-lain.widget.calendar({
+lain.widget.cal({
   attach_to = { datewidget },
-  notification_preset = { font = "Source Code Pro 9" }
+  notification_preset = { font = "Source Code Pro 9", bg = beautiful.bg_normal, fg = beautiful.fg_normal }
 })
 -- }}}
 
@@ -359,10 +359,10 @@ awful.screen.connect_for_each_screen(function(s)
     -- We need one layoutbox per screen.
     s.mylayoutbox = awful.widget.layoutbox(s)
     s.mylayoutbox:buttons(gears.table.join(
-                           awful.button({ }, 1, function () awful.layout.inc( 1) end),
-                           awful.button({ }, 3, function () awful.layout.inc(-1) end),
-                           awful.button({ }, 4, function () awful.layout.inc( 1) end),
-                           awful.button({ }, 5, function () awful.layout.inc(-1) end)))
+                           awful.button({ }, 1, function () awful.layout.inc(layouts,  1) end),
+                           awful.button({ }, 3, function () awful.layout.inc(layouts, -1) end),
+                           awful.button({ }, 4, function () awful.layout.inc(layouts,  1) end),
+                           awful.button({ }, 5, function () awful.layout.inc(layouts, -1) end)))
     -- Create a taglist widget
     s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.noempty, taglist_buttons)
 
@@ -539,8 +539,8 @@ globalkeys = gears.table.join(
     awful.key({ }, "XF86AudioMicMute", function () awful.util.spawn("pactl set-source-mute @DEFAULT_SOURCE@ toggle") end),
 
     -- Brightness
-    awful.key({ }, "XF86MonBrightnessDown", function () awful.util.spawn("qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl setBrightness $(expr $(qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl brightness) - $(qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl brightnessMax) / 5)") end),
-    awful.key({ }, "XF86MonBrightnessUp", function () awful.util.spawn("qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl setBrightness $(expr $(qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl brightness) + $(qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl brightnessMax) / 5)") end),
+    awful.key({ }, "XF86MonBrightnessDown", function () awful.util.spawn_with_shell("qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl setBrightness $(expr $(qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl brightness) - $(qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl brightnessMax) / 5)") end),
+    awful.key({ }, "XF86MonBrightnessUp", function () awful.util.spawn_with_shell("qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl setBrightness $(expr $(qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl brightness) + $(qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl brightnessMax) / 5)") end),
 
     -- Lock screen
     awful.key({ "Mod1", "Control" }, "l", function () awful.util.spawn("/usr/lib/kscreenlocker_greet") end),
@@ -678,11 +678,6 @@ awful.rules.rules = {
         properties = { tag = tags.names[2] } },
     { rule_any = { class = { "mpv", "Clementine" } },
         properties = { tag = tags.names[4] } },
-    { rule = { class = "Vlc" },
-        callback = function(c) awful.client.movetotag(tags[mouse.screen][4], c) end,
-        properties = { floating = true } },
-    { rule_any = { class = { "Firefox" } },
-       callback = function(c) awful.client.movetotag(tags[mouse.screen][2], c) end },
     { rule_any = { class = { "konversation" } },
         properties = { tag = tags.names[3] } },
     { rule_any = { class = { "Eclipse", "jetbrains-studio", "QtCreator", "Designer"} },

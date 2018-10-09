@@ -29,6 +29,9 @@ bindkey "${terminfo[knp]}" down-line-or-history
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
+# Enable Vim mode in ZSH
+bindkey -v
+
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_IGNORE_DUPS
 setopt APPEND_HISTORY

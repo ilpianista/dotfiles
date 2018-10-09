@@ -106,8 +106,6 @@ Plug 'thoughtbot/vim-rspec'
 Plug 'pangloss/vim-javascript'
 " Syntax for JavaScript libraries
 Plug 'othree/javascript-libraries-syntax.vim'
-" Tern plugin for Vim
-Plug 'ternjs/tern_for_vim'
 " vim plugin which formated javascript files by js-beautify
 Plug 'maksimr/vim-jsbeautify'
 " CoffeeScript support for vim
