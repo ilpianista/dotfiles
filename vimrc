@@ -69,6 +69,10 @@ Plug 'cakebaker/scss-syntax.vim'
 " Vim configuration for Rust
 Plug 'rust-lang/rust.vim'
 
+"" Go
+" Go development plugin for Vim
+Plug 'fatih/vim-go'
+
 "" Haskell
 " vim2hs :: Vim -> Haskell
 "Plug 'dag/vim2hs'
