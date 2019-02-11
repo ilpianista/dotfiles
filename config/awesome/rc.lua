@@ -1,3 +1,7 @@
+-- If LuaRocks is installed, make sure that packages installed through it are
+-- found (e.g. lgi). If LuaRocks is not installed, do nothing.
+pcall(require, "luarocks.loader")
+
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
@@ -77,21 +81,6 @@ local layouts = {
 --    awful.layout.suit.corner.sw,
 --    awful.layout.suit.corner.se,
 }
--- }}}
-
--- {{{ Helper functions
-local function client_menu_toggle_fn()
-    local instance = nil
-
-    return function ()
-        if instance and instance.wibox.visible then
-            instance:hide()
-            instance = nil
-        else
-            instance = awful.menu.clients({ theme = { width = 250 } })
-        end
-    end
-end
 -- }}}
 
 -- {{{ Tags
@@ -311,19 +300,16 @@ local tasklist_buttons = gears.table.join(
                                               if c == client.focus then
                                                   c.minimized = true
                                               else
-                                                  -- Without this, the following
-                                                  -- :isvisible() makes no sense
-                                                  c.minimized = false
-                                                  if not c:isvisible() and c.first_tag then
-                                                      c.first_tag:view_only()
-                                                  end
-                                                  -- This will also un-minimize
-                                                  -- the client, if needed
-                                                  client.focus = c
-                                                  c:raise()
+                                                  c:emit_signal(
+                                                      "request::activate",
+                                                      "tasklist",
+                                                      {raise = true}
+                                                  )
                                               end
                                           end),
-                     awful.button({ }, 3, client_menu_toggle_fn()),
+                     awful.button({ }, 3, function()
+                                              awful.menu.client_list({ theme = { width = 250 } })
+                                          end),
                      awful.button({ }, 4, function ()
                                               awful.client.focus.byidx(1)
                                           end),
@@ -364,10 +350,18 @@ awful.screen.connect_for_each_screen(function(s)
                            awful.button({ }, 4, function () awful.layout.inc(layouts,  1) end),
                            awful.button({ }, 5, function () awful.layout.inc(layouts, -1) end)))
     -- Create a taglist widget
-    s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.noempty, taglist_buttons)
+    s.mytaglist = awful.widget.taglist {
+        screen  = s,
+        filter  = awful.widget.taglist.filter.noempty,
+        buttons = taglist_buttons
+    }
 
     -- Create a tasklist widget
-    s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, tasklist_buttons)
+    s.mytasklist = awful.widget.tasklist {
+        screen  = s,
+        filter  = awful.widget.tasklist.filter.currenttags,
+        buttons = tasklist_buttons
+    }
 
     -- Create the wibox
     s.mywibox = awful.wibar({ position = "top", screen = s })
@@ -500,8 +494,9 @@ globalkeys = gears.table.join(
                   local c = awful.client.restore()
                   -- Focus restored client
                   if c then
-                      client.focus = c
-                      c:raise()
+                    c:emit_signal(
+                        "request::activate", "key.unminimize", {raise = true}
+                    )
                   end
               end,
               {description = "restore minimized", group = "client"}),
@@ -609,7 +604,7 @@ for i, k in next, keynumber do
                            tag:view_only()
                         end
                   end,
-                  {description = "view tag "..tags.names[i], group = "tag"}),
+                  {description = "view tag #"..tags.names[i], group = "tag"}),
         -- Toggle tag display.
         awful.key({ modkey, "Control" }, "#" .. k + 9,
                   function ()
@@ -619,7 +614,7 @@ for i, k in next, keynumber do
                          awful.tag.viewtoggle(tag)
                       end
                   end,
-                  {description = "toggle tag " .. tags.names[i], group = "tag"}),
+                  {description = "toggle tag #" .. tags.names[i], group = "tag"}),
         -- Move client to tag.
         awful.key({ modkey, "Shift" }, "#" .. k + 9,
                   function ()
@@ -630,7 +625,7 @@ for i, k in next, keynumber do
                           end
                      end
                   end,
-                  {description = "move focused client to tag "..tags.names[i], group = "tag"}),
+                  {description = "move focused client to tag #"..tags.names[i], group = "tag"}),
         -- Toggle tag on focused client.
         awful.key({ modkey, "Control", "Shift" }, "#" .. k + 9,
                   function ()
@@ -641,14 +636,23 @@ for i, k in next, keynumber do
                           end
                       end
                   end,
-                  {description = "toggle focused client on tag " .. tags.names[i], group = "tag"})
+                  {description = "toggle focused client on tag #" .. tags.names[i], group = "tag"})
     )
 end
 
-clientbuttons = awful.util.table.join(
-    awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
-    awful.button({ modkey }, 1, awful.mouse.client.move),
-    awful.button({ modkey }, 3, awful.mouse.client.resize))
+clientbuttons = gears.table.join(
+    awful.button({ }, 1, function (c)
+        c:emit_signal("request::activate", "mouse_click", {raise = true})
+    end),
+    awful.button({ modkey }, 1, function (c)
+        c:emit_signal("request::activate", "mouse_click", {raise = true})
+        awful.mouse.client.move(c)
+    end),
+    awful.button({ modkey }, 3, function (c)
+        c:emit_signal("request::activate", "mouse_click", {raise = true})
+        awful.mouse.client.resize(c)
+    end)
+)
 
 -- Set keys
 root.keys(globalkeys)
@@ -694,8 +698,8 @@ client.connect_signal("manage", function (c)
     -- i.e. put it at the end of others instead of setting it master.
     if not awesome.startup then awful.client.setslave(c) end
 
-    if awesome.startup and
-      not c.size_hints.user_position
+    if awesome.startup
+      and not c.size_hints.user_position
       and not c.size_hints.program_position then
         -- Prevent clients from being unreachable after screen count changes.
         awful.placement.no_offscreen(c)
@@ -707,13 +711,11 @@ client.connect_signal("request::titlebars", function(c)
     -- buttons for the titlebar
     local buttons = gears.table.join(
         awful.button({ }, 1, function()
-            client.focus = c
-            c:raise()
+            c:emit_signal("request::activate", "titlebar", {raise = true})
             awful.mouse.client.move(c)
         end),
         awful.button({ }, 3, function()
-            client.focus = c
-            c:raise()
+            c:emit_signal("request::activate", "titlebar", {raise = true})
             awful.mouse.client.resize(c)
         end)
     )
@@ -746,10 +748,7 @@ end)
 
 -- Enable sloppy focus, so that focus follows mouse.
 client.connect_signal("mouse::enter", function(c)
-    if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
-        and awful.client.focus.filter(c) then
-        client.focus = c
-    end
+    c:emit_signal("request::activate", "mouse_enter", {raise = false})
 end)
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)

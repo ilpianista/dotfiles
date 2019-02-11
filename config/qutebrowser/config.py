@@ -342,3 +342,6 @@ c.colors.tabs.selected.even.bg = '#d8d8d8'
 # setting, it's replaced with the fonts listed here.
 # Type: Font
 c.fonts.monospace = 'Source Code Pro'
+
+# Bindings for normal mode
+config.bind('m', 'spawn mpv {url}')
