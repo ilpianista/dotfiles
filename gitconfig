@@ -47,5 +47,6 @@
 	prompt = false
 [fetch]
 	prune = true
+  pruneTags = true
 [pull]
 	rebase = true

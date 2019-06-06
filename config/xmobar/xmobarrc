@@ -1,7 +1,7 @@
 Config {
 
    -- appearance
-     font            = "xft:Source Code Pro:size=9,Ionicons:size=10"
+     font            = "xft:Source Code Pro:size=9,Ionicons:size=9"
    , additionalFonts = []
    , bgColor         = "#181818"
    , fgColor         = "#a1b56c"
@@ -46,36 +46,36 @@ Config {
 
       [
         -- wireless network activity monitor
-        Run Wireless "wlp3s0" [ "--template" , "<action=`kcmshell5 kcm_networkmanagement`><fc=#7cafc2> <essid></fc></action>"
-                             ] 10
+        Run Wireless "wlp3s0" [ "--template" , "<action=`kcmshell5 kcm_networkmanagement`><fc=#7cafc2> <essid></fc></action>"
+                              ] 10
 
         -- volume monitor
    --   , Run Volume "default" "Master" [ "--template" , "<action=`pactl set-sink-mute @DEFAULT_SINK@ toggle`><status></action>"
    --                                   , "--"
    --                                   , "-c"         , "#ba8baf"
-   --                                   , "-o"         , ""
+   --                                   , "-o"         , ""
    --                                   , "-C"         , "#ba8baf"
-   --                                   , "-O"         , " <volume>"
+   --                                   , "-O"         , " <volume>"
    --                                   ] 10
 
         -- battery monitor
-      , Run Battery [ "--template" , "<action=`termite --hold -e acpi -V`><acstatus></action>"
+      , Run Battery [ "--template" , "<action=`urxvt --hold -e acpi -V`><acstatus></action>"
                     , "--Low"      , "20"        -- units: %
                     , "--High"     , "80"        -- units: %
                     , "--low"      , "#ab4642"
                     , "--high"     , "#dc9656"
                     , "--"
-                    , "-o"         , "<fc=#dc9656> <left>%</fc>"
-                    , "-O"         , "<fc=#dc9656> <left>%</fc>"
-                    , "-i"         , "<fc=#dc9656> <left>%</fc>"
+                    , "-o"         , "<fc=#dc9656> <left>%</fc>"
+                    , "-O"         , "<fc=#dc9656> <left>%</fc>"
+                    , "-i"         , "<fc=#dc9656> <left>%</fc>"
                     ] 120
 
         -- system load monitor
-      , Run MultiCpu          [ "--template" , "<action=`termite -e htop`><fc=#f7ca88> <total>%</fc></action>"
+      , Run MultiCpu          [ "--template" , "<action=`urxvt -e htop`><fc=#f7ca88> <total>%</fc></action>"
                               ] 15
 
         -- time and date indicator
-      , Run Date              "<action=`termite --hold -e cal -m -3`>%A, %R</action>" "date" 60
+      , Run Date              "<action=`urxvt --hold -e cal -m -3`>%A, %R</action>" "date" 60
 
       , Run StdinReader
       ]

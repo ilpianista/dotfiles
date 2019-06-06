@@ -21,7 +21,7 @@ config.set('content.javascript.enabled', True, 'qute://*/*')
 # Page to open if :open -t/-b/-w is used without URL. Use `about:blank`
 # for a blank page.
 # Type: FuzzyUrl
-c.url.default_page = 'https://searx.me'
+c.url.default_page = 'https://search.disroot.org'
 
 # Search engines which can be used via the address bar. Maps a search
 # engine name (such as `DEFAULT`, or `ddg`) to a URL with a `{}`
@@ -32,11 +32,11 @@ c.url.default_page = 'https://searx.me'
 # used by prepending the search engine name to the search term, e.g.
 # `:open google qutebrowser`.
 # Type: Dict
-c.url.searchengines = {'DEFAULT': 'https://searx.me/?q={}'}
+c.url.searchengines = {'DEFAULT': 'https://search.disroot.org/?q={}'}
 
 # Page(s) to open at the start.
 # Type: List of FuzzyUrl, or FuzzyUrl
-c.url.start_pages = 'https://searx.me'
+c.url.start_pages = 'https://search.disroot.org'
 
 # Text color of the completion widget. May be a single color to use for
 # all columns or a list of three colors, one for each column.

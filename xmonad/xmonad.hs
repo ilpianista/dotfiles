@@ -3,7 +3,7 @@
 --
 
 import XMonad
---import XMonad.Actions.GridSelect
+import XMonad.Actions.GridSelect
 import XMonad.Actions.CycleWS
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
@@ -53,21 +53,21 @@ myModMask = mod4Mask
 -- workspace name. The number of workspaces is determined by the length
 -- of this list.
 --
-myWorkspaces = ["*","web","chat","media"] ++ map show [5..9] ++ ["dev"]
+myWorkspaces = ["*","mail","chat","media"] ++ map show [5..9] ++ ["dev"]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
 myNormalBorderColor :: [Char]
 myNormalBorderColor  = "#181818"
 myFocusedBorderColor :: [Char]
-myFocusedBorderColor = "#383838"
+myFocusedBorderColor = "#a1b56c"
 
---powerMenu :: [(String, X ())]
---powerMenu = [ ("lock" , spawn "qdbus org.kde.ksmserver /ScreenSaver Lock")
---            , ("suspend" , spawn "qdbus org.kde.Solid.PowerManagement /org/freedesktop/PowerManagement Suspend")
---            , ("reboot" , spawn "qdbus org.kde.ksmserver /KSMServer logout 0 1 0")
---            , ("shutdown" , spawn "qdbus org.kde.ksmserver /KSMServer logout 0 2 0")
---            ]
+powerMenu :: [(String, X ())]
+powerMenu = [ ("lock" , spawn "/usr/lib/kscreenlocker_greet")
+            , ("suspend" , spawn "qdbus org.kde.Solid.PowerManagement /org/freedesktop/PowerManagement Suspend")
+            , ("reboot" , spawn "systemctl reboot")
+            , ("shutdown" , spawn "systemctl poweroff")
+            ]
 
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
@@ -133,9 +133,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Deincrement the number of windows in the master area
     , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
 
-    --, ((controlMask .|. mod1Mask, xK_l), runSelectedAction defaultGSConfig powerMenu)
-    , ((controlMask .|. mod1Mask, xK_l), spawn "qdbus org.kde.ksmserver /ScreenSaver Lock")
-    --, ((controlMask .|. mod1Mask, xK_l), spawn "slock")
+    , ((controlMask .|. mod1Mask, xK_l), runSelectedAction def powerMenu)
+
+    --, ((controlMask .|. mod1Mask, xK_l), spawn "/usr/lib/kscreenlocker_greet")
 
     -- Toggle the status bar gap
     -- Use this binding with avoidStruts from Hooks.ManageDocks.
@@ -150,7 +150,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
 
     -- Run xmessage with a summary of the default keybindings (useful for beginners)
-    --, ((modMask .|. shiftMask, xK_slash ), spawn ("echo \"" ++ help ++ "\" | xmessage -file -"))
+    --, ((modm .|. shiftMask, xK_slash ), spawn ("echo \"" ++ help ++ "\" | xmessage -file -"))
     ]
     ++
 
@@ -172,8 +172,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- Audio bindings
     ++
-    [ ((0, 0x1008ff13), spawn "pactl set-sink-volume @DEFAULT_SINK@ +5%") -- XF86AudioRaiseVolume
-    , ((0, 0x1008ff11), spawn "pactl set-sink-volume @DEFAULT_SINK@ -5%") -- XF86AudioLowerVolume
+    [ ((0, 0x1008ff13), spawn "pactl set-sink-volume @DEFAULT_SINK@ +10%") -- XF86AudioRaiseVolume
+    , ((0, 0x1008ff11), spawn "pactl set-sink-volume @DEFAULT_SINK@ -10%") -- XF86AudioLowerVolume
     , ((0, 0x1008ff12), spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle") -- XF86AudioMute
     , ((0, 0x1008ffb2), spawn "pactl set-source-mute @DEFAULT_SOURCE@ toggle") -- XF86AudioMicMute
     ]
@@ -194,14 +194,14 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- Extra bindings
     ++
-    [ ((0, 0x1008ff41), spawn "firefox") -- XF86Launch1
-    , ((0, 0x1008ff2d), spawn "qdbus org.kde.ksmserver /ScreenSaver Lock") -- XF86ScreenSaver
+    [ ((0, 0x1008ff41), spawn myTerminal) -- XF86Launch1
+    , ((0, 0x1008ff2d), spawn "/usr/lib/kscreenlocker_greet") -- XF86ScreenSaver
     , ((0, xK_Print  ), spawn "spectacle") -- XF86Print
     --, ((0, 0x1008ff93), spawn "") -- XF86Battery
     ]
 
 myXPConfig :: XPConfig
-myXPConfig = defaultXPConfig
+myXPConfig = def
     { font                = "xft:Source Code Pro:size=9"
     , bgColor             = "#181818"
     , fgColor             = "#a1b56c"
@@ -250,8 +250,10 @@ myLayout = avoidStruts $
     smartBorders $
 
     -- custom layouts per workspaces
-    onWorkspace "web" Full $
-    onWorkspace "media" Full $
+    onWorkspace "mail" Full $
+    onWorkspace "media" simplestFloat $
+    onWorkspace "9" (Mirror tiled) $
+    onWorkspace "dev" Full $
 
     tiled ||| Mirror tiled ||| Full ||| simplestFloat
     where
@@ -276,19 +278,14 @@ myLayout = avoidStruts $
 -- workspace.
 --
 myManageHook = composeAll
-    [ className =? "qutebrowser"       --> doShift "web"
-    , className =? "Firefox"           --> doShift "web"
-    , resource  =? "kontact"           --> doShift "web"
+    [ resource  =? "kontact"           --> doShift "mail"
     , className =? "konversation"      --> doShift "chat"
-    , className =? "pidgin"            --> doShift "chat"
-    , className =? "Vlc"               --> doFloat <+> doShift "media"
+    , className =? "mpv"               --> doFloat <+> doShift "media"
     , className =? "Clementine"        --> doShift "media"
     , className =? "Eclipse"           --> doShift "dev"
     , className =? "QtCreator"         --> doShift "dev"
-    , className =? "Designer"          --> doShift "dev"
     , className =? "jetbrains-studio"  --> doShift "dev"
     , className =? "stalonetray"       --> doIgnore
-    , title =? "SailfishOS Emulator [Running] - Oracle VM VirtualBox" --> doFloat
     , isFullscreen                     --> doFullFloat
     , isDialog                         --> doCenterFloat
     ]
@@ -346,7 +343,7 @@ main = do
 -- fields in the default config. Any you don't override, will
 -- use the defaults defined in xmonad/XMonad/Config.hs
 --
-defaults = defaultConfig
+defaults = def
     { terminal           = myTerminal
     , focusFollowsMouse  = myFocusFollowsMouse
     , clickJustFocuses   = myClickJustFocuses
@@ -362,4 +359,3 @@ defaults = defaultConfig
     , handleEventHook    = myEventHook
     , startupHook        = myStartupHook
     }
-

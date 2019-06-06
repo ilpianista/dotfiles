@@ -7,6 +7,8 @@ zplug "zsh-users/zsh-syntax-highlighting"
 
 zplug "zsh-users/zsh-history-substring-search"
 
+zplug "zsh-users/zsh-autosuggestions"
+
 zplug "themes/robbyrussell", from:oh-my-zsh
 
 # Install plugins if there are plugins that have not been installed

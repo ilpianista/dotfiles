@@ -9,4 +9,4 @@ fi
 
 sh $HOME/.xprofile &
 
-exec i3
+exec xmonad
