@@ -58,7 +58,7 @@ myWorkspaces = ["*","mail","chat","media"] ++ map show [5..9] ++ ["dev"]
 -- Border colors for unfocused and focused windows, respectively.
 --
 myNormalBorderColor :: [Char]
-myNormalBorderColor  = "#181818"
+myNormalBorderColor  = "#383838"
 myFocusedBorderColor :: [Char]
 myFocusedBorderColor = "#a1b56c"
 
