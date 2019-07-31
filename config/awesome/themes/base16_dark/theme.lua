@@ -46,9 +46,9 @@ theme.fg_urgent     = theme.base16_base01
 theme.fg_minimize   = theme.base16_base07
 
 theme.useless_gap   = dpi(0)
-theme.border_width  = dpi(1)
+theme.border_width  = dpi(2)
 theme.border_normal = theme.base16_base02
-theme.border_focus  = theme.base16_base02
+theme.border_focus  = theme.base16_base0B
 theme.border_marked = theme.base16_base08
 
 -- Generate taglist squares:
@@ -76,8 +76,7 @@ theme.widget_wifi_fg    = theme.base16_base0D
 theme.widget_mem_fg     = theme.base16_base0A
 theme.widget_cpu_fg     = theme.base16_base0A
 theme.widget_vol_fg     = theme.base16_base0E
-theme.widget_date_fg    = theme.fg_normal
-theme.widget_chat_fg    = theme.base16_base0D
+theme.widget_date_fg    = theme.base16_base0B
 -- }}}
 
 -- Define the image to load

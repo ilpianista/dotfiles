@@ -1,0 +1,45 @@
+{
+    "layer": "top",
+    "modules-left": ["sway/workspaces"],
+    "modules-center": ["sway/window"],
+    "modules-right": ["network", "pulseaudio", "battery", "cpu", "tray", "clock"],
+    "sway/workspaces": {
+        "format": "{name}"
+    },
+    "tray": {
+        "spacing": 10
+    },
+    "clock": {
+        "format": "{:%A, %R}",
+        "tooltip-format": "{:%Y-%m-%d | %H:%M}"
+    },
+    "cpu": {
+        "format": " {usage}%",
+        "on-click": "alacritty -e htop",
+        "tooltip": false
+    },
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": " {capacity}%",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "",
+        "tooltip": false
+    },
+    "network": {
+        "format-wifi": " {essid}",
+        "format-disconnected": "",
+        "tooltip-format": "{ifname}: {ipaddr}/{cidr}\nSignal: {signalStrength}%",
+        "on-click": "kcmshell5 kcm_networkmanagement"
+    },
+    "pulseaudio": {
+        "scroll-step": 5, // %, can be a float
+        "format": " {volume}%",
+        "format-muted": " ",
+        "tooltip": false,
+        "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+        "on-click-right": "pavucontrol-qt"
+    }
+}

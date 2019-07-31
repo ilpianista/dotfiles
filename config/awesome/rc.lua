@@ -66,11 +66,11 @@ modkey = "Mod4"
 local layouts = {
     awful.layout.suit.floating,
     awful.layout.suit.tile,
---    awful.layout.suit.tile.left,
---    awful.layout.suit.tile.bottom,
-    awful.layout.suit.tile.top,
-    awful.layout.suit.fair,
-    awful.layout.suit.fair.horizontal,
+    awful.layout.suit.tile.left,
+    awful.layout.suit.tile.bottom,
+--    awful.layout.suit.tile.top,
+--    awful.layout.suit.fair,
+--    awful.layout.suit.fair.horizontal,
 --    awful.layout.suit.spiral,
     awful.layout.suit.spiral.dwindle,
     awful.layout.suit.max,
@@ -87,7 +87,7 @@ local layouts = {
 -- Define a tag table which hold all screen tags.
 tags = {
     names = { "*", "mail", "chat", "media", "8", "9", "dev" },
-    layouts = { layouts[4], layouts[7], layouts[7], layouts[1], layouts[4], layouts[6], layouts[4] }
+    layouts = { layouts[7], layouts[6], layouts[6], layouts[1], layouts[7], layouts[3], layouts[2] }
 }
 -- }}}
 
@@ -105,7 +105,7 @@ separator:set_markup("|")
 
 -- {{{ Power menu
 powermenu = awful.menu({ items = {
-    { "lock", "/usr/lib/kscreenlocker_greet" },
+    { "lock", "loginctl lock-session" },
     { "suspend", "qdbus org.kde.Solid.PowerManagement /org/freedesktop/PowerManagement Suspend" },
     { "reboot", "systemctl reboot" },
     { "shutdown", "systemctl poweroff" }
@@ -113,7 +113,7 @@ powermenu = awful.menu({ items = {
 })
 
 powerwidget = wibox.widget.textbox()
-powerwidget:set_markup('<span font="' .. beautiful.iconFont .. '" color="' .. beautiful.fg_focus .. '"></span>')
+powerwidget:set_markup('<span font="' .. beautiful.iconFont .. '" color="' .. beautiful.bg_urgent .. '"></span>')
 powerwidget:buttons(awful.util.table.join(
   awful.button({ }, 1, function (c) powermenu:toggle() end)
 ))
@@ -157,7 +157,7 @@ cpuwidget.widget:connect_signal("mouse::enter", function()
     end
   })
   cpunotification = naughty.notify({
-    text = "CPU: " .. cpuusage .. "%\nRAM: " .. ramusage .. "/" .. ramtotal .. " MB\nSWAP: " .. swapusage .. "/" .. swaptotal .. " MB",
+    text = '<span color="' .. beautiful.widget_cpu_fg .. '">CPU:\t' .. cpuusage .. '%\nRAM:\t' .. ramusage .. '/' .. ramtotal .. ' MB\nSWAP:\t' .. swapusage .. '/' .. swaptotal .. ' MB</span>',
     position = "top_right"
   })
 end)
@@ -179,7 +179,7 @@ batwidget = lain.widget.bat({
   notify = "off",
   settings = function()
     remainingtime = bat_now.time
-    if bat_now.status == "Charging" or bat_now.status == "Full" then
+    if bat_now.status == "Charging" or bat_now.status == "Full" or bat_now.status == "Unknown" then
       widget:set_markup('<span font="' .. beautiful.iconFont .. '" color="' .. beautiful.widget_bat_fg .. '"></span> <span color="' .. beautiful.widget_bat_fg .. '">' .. bat_now.perc .. '%</span>')
     elseif tonumber(bat_now.perc) > 50 then
       widget:set_markup('<span font="' .. beautiful.iconFont .. '" color="' .. beautiful.widget_bat_fg .. '"></span> <span color="' .. beautiful.widget_bat_fg .. '">' .. bat_now.perc .. '%</span>')
@@ -191,7 +191,7 @@ batwidget = lain.widget.bat({
 local batnotification
 batwidget.widget:connect_signal("mouse::enter", function()
   batnotification = naughty.notify({
-    text = "Remaining time: " .. remainingtime,
+    text = '<span color="' .. beautiful.widget_bat_fg .. '">Remaining time: ' .. remainingtime .. '</span>',
     position = "top_right"
   })
 end)
@@ -251,7 +251,7 @@ wifiwidget:connect_signal("mouse::enter", function()
 
   if wifiaccesspoint ~= nil and wifiquality ~= nil then
     wifinotification = naughty.notify({
-      text = "Access Point: " .. wifiaccesspoint .. "\nSignal: " .. wifiquality .. "%",
+      text = '<span color="' .. beautiful.widget_wifi_fg .. '">Access Point:\t' .. wifiaccesspoint .. '\nSignal:\t\t' .. wifiquality .. '%</span>',
       position = "top_right"
     })
   end
@@ -270,11 +270,10 @@ end)
 
 -- {{{ Date and time
 dateicon = wibox.widget.textbox()
---dateicon:set_markup('<span font="' .. beautiful.iconFont .. '"></span> ')
-datewidget = awful.widget.textclock("%A, %R")
+datewidget = awful.widget.textclock('<span color="' .. beautiful.widget_date_fg .. '">%A, %R</span>')
 lain.widget.cal({
   attach_to = { datewidget },
-  notification_preset = { font = "Source Code Pro 9", bg = beautiful.bg_normal, fg = beautiful.fg_normal }
+  notification_preset = { font = beautiful.font, bg = beautiful.bg_normal, fg = beautiful.widget_date_fg }
 })
 -- }}}
 
@@ -340,7 +339,21 @@ awful.screen.connect_for_each_screen(function(s)
     awful.tag(tags.names, s, tags.layouts)
 
     -- Create a promptbox for each screen
-    s.mypromptbox = awful.widget.prompt()
+    s.mypromptbox = awful.widget.prompt {
+      exe_callback = function (cmd)
+                         if string.find(cmd, '^qb%s') then
+                             awful.util.spawn("qutebrowser https://" .. string.gsub(cmd, 'qb%s', ''))
+                         elseif string.find(cmd, '^ddg%s') then
+                             awful.util.spawn("qutebrowser 'https://duckduckgo.com/?q=" .. string.gsub(cmd, 'ddg%s', '') .. "'")
+                         elseif string.find(cmd, '^ff%s') then
+                             awful.util.spawn("firefox https://" .. string.gsub(cmd, 'ff%s', ''))
+                         elseif string.find(cmd, '^ssh%s') then
+                             awful.util.spawn_with_shell(terminal .. " -e ssh " .. string.gsub(cmd, 'ssh%s', ''))
+                         else
+                             awful.util.spawn(cmd)
+                         end
+                     end
+    }
     -- Create an imagebox widget which will contain an icon indicating which layout we're using.
     -- We need one layoutbox per screen.
     s.mylayoutbox = awful.widget.layoutbox(s)
@@ -388,7 +401,6 @@ awful.screen.connect_for_each_screen(function(s)
         right_layout:add(spacer)
         right_layout:add(batwidget.widget)
         right_layout:add(spacer)
---        right_layout:add(chaticon)
         right_layout:add(cpuwidget.widget)
         right_layout:add(spacer)
         right_layout:add(wibox.widget.systray())
@@ -533,13 +545,19 @@ globalkeys = gears.table.join(
     awful.key({ }, "XF86AudioMute", function () awful.util.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle") end),
     awful.key({ }, "XF86AudioMicMute", function () awful.util.spawn("pactl set-source-mute @DEFAULT_SOURCE@ toggle") end),
 
+    -- Media
+    awful.key({ }, "XF86AudioPlay", function () awful.util.spawn("mpc toggle") end),
+    awful.key({ }, "XF86AudioPrev", function () awful.util.spawn("mpc prev") end),
+    awful.key({ }, "XF86AudioNext", function () awful.util.spawn("mpc next") end),
+    awful.key({ }, "XF86AudioStop", function () awful.util.spawn("mpc stop") end),
+
     -- Brightness
     awful.key({ }, "XF86MonBrightnessDown", function () awful.util.spawn_with_shell("qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl setBrightness $(expr $(qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl brightness) - $(qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl brightnessMax) / 5)") end),
     awful.key({ }, "XF86MonBrightnessUp", function () awful.util.spawn_with_shell("qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl setBrightness $(expr $(qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl brightness) + $(qdbus org.freedesktop.PowerManagement /org/kde/Solid/PowerManagement/Actions/BrightnessControl brightnessMax) / 5)") end),
 
     -- Lock screen
-    awful.key({ "Mod1", "Control" }, "l", function () awful.util.spawn("/usr/lib/kscreenlocker_greet") end),
-    awful.key({ }, "XF86ScreenSaver", function () awful.util.spawn("/usr/lib/kscreenlocker_greet") end),
+    awful.key({ "Mod1", "Control" }, "l", function () awful.util.spawn("loginctl lock-session") end),
+    awful.key({ }, "XF86ScreenSaver", function () awful.util.spawn("loginctl lock-session") end),
 
     -- Launcher
     awful.key({}, "XF86Launch1", function () awful.util.spawn(terminal) end)
@@ -680,10 +698,8 @@ awful.rules.rules = {
       properties = { floating = true } },
     { rule = { instance = "kontact" },
         properties = { tag = tags.names[2] } },
-    { rule_any = { class = { "mpv", "Clementine" } },
+    { rule_any = { class = { "mpv", "Cantata" } },
         properties = { tag = tags.names[4] } },
-    { rule_any = { class = { "konversation" } },
-        properties = { tag = tags.names[3] } },
     { rule_any = { class = { "Eclipse", "jetbrains-studio", "QtCreator", "Designer"} },
         except = { type = "dialog" },
         callback = function(c) awful.client.movetotag(tags[mouse.screen][0], c) end,
@@ -753,12 +769,3 @@ end)
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
-
--- {{{ Autostart
--- Autostart apps after login
-awful.util.spawn_with_shell("xrdb -quiet -merge -nocpp $HOME/.Xresources")
-awful.util.spawn("xsetroot -cursor_name left_ptr")
---awful.util.spawn("dockd --daemon")
-awful.util.spawn("start-pulseaudio-x11")
-awful.util.spawn("/usr/lib/org_kde_powerdevil")
--- }}}

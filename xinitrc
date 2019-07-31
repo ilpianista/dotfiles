@@ -9,4 +9,4 @@ fi
 
 sh $HOME/.xprofile &
 
-exec xmonad
+exec awesome

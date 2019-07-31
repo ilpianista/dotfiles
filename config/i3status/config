@@ -19,29 +19,29 @@ order += "load"
 order += "tztime local"
 
 wireless wlp3s0 {
-        format_up = "<span color='#7cafc2'>%essid</span>"
+        format_up = "<span color='#7cafc2'> %essid</span>"
         format_down = ""
 }
 
 volume master {
-        format = "<span color='#ba8baf'>%volume</span>"
-        format_muted = "<span color='#ba8baf'></span>"
+        format = "<span color='#ba8baf'> %volume</span>"
+        format_muted = "<span color='#ba8baf'></span>"
         device = "pulse"
 }
 
 battery 0 {
-        format = "<span color='#dc9656'>%status%percentage</span>"
-        format_down = "<span color='#dc9656'></span>"
-        status_chr = ""
-        status_bat = ""
-        status_full = ""
+        format = "<span color='#dc9656'>%status %percentage</span>"
+        format_down = "<span color='#dc9656'></span>"
+        status_chr = ""
+        status_bat = ""
+        status_full = ""
         low_threshold = 20
         threshold_type = percentage
         #last_full_capacity = true
 }
 
 load {
-        format = "<span color='#f7ca88'>%1min</span>"
+        format = "<span color='#f7ca88'> %1min</span>"
 }
 
 tztime local {

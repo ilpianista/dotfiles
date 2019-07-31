@@ -1,4 +1,4 @@
-#!/bin/python2
+#!/bin/python
 # -*- coding: UTF-8 -*-
 #
 # (C) 2015 Daniel Vrátil <dvratil@kde.org>
@@ -7,7 +7,7 @@
 
 # https://github.com/gitpython-developers/GitPython
 import git
-import ConfigParser
+import configparser
 import os
 import sys
 
@@ -20,7 +20,7 @@ try:
     # The value of user.email is non-empty, stop here
     if config.get_value('user', 'email'):
         sys.exit(0)
-except (ConfigParser.NoSectionError, ConfigParser.NoOptionError):
+except (configparser.NoSectionError, configparser.NoOptionError):
     # Section or option does not exist, continue
     pass
 
@@ -35,6 +35,8 @@ if 'kde.org' in origin.url or origin.url.startswith('kde:'):
     email = 'scarpino@kde.org'
 elif 'archlinux.org' in origin.url:
     email = 'andrea@archlinux.org'
+elif 'spaziodati.eu' in origin.url:
+    email = 'scarpino@spaziodati.eu'
 else:
 #    print('** Failed to detect identity! **')
     sys.exit(0)

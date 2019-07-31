@@ -1,79 +1,127 @@
-# i3 config file (v4)
+# Default config for sway
 #
-# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+# Read `man 5 sway` for a complete reference.
 
+### Variables
+#
+# Logo key. Use Mod1 for Alt.
 set $mod Mod4
+# Home row direction keys, like vim
+set $left h
+set $down j
+set $up k
+set $right l
+# Your preferred terminal emulator
+set $term alacritty
+# Your preferred application launcher
+# Note: pass the final command to swaymsg so that the resulting window can be opened
+# on the original workspace that the command was run on.
+set $menu wofi --show drun
+
+### Output configuration
+#
+# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
+output * bg ~/Pictures/wallpapers/wall_001.jpg fill
+#
+#output LVDS-1 resolution 1366x768 position 0,1080
+#output VGA-1 resolution 1920x1080 position 0,0
+#
+# To get a config file with the same key positions, but for your current
+# layout, use the i3-config-wizard
+#
+
+### Idle configuration
+
+exec swayidle -w \
+         timeout 300 'swaylock -i $HOME/Pictures/wallpapers/wall_001.jpg' \
+         timeout 600 'swaymsg "output * dpms off"' \
+              resume 'swaymsg "output * dpms on"' \
+         before-sleep 'swaylock -i $HOME/Pictures/wallpapers/wall_001.jpg'
+
+# This will lock your screen after 300 seconds of inactivity, then turn off
+# your displays after another 300 seconds, and turn your screens back on when
+# resumed. It will also lock your screen before your computer goes to sleep.
+
+input * xkb_layout "gb"
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 font pango:Source Code Pro 9
 
-# use these keys for focus, movement, and resize directions when reaching for
-# the arrows is not convenient
-set $up l
-set $down k
-set $left j
-set $right semicolon
-
-# Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
-
-focus_follows_mouse yes
+# Use pactl to adjust volume in PulseAudio.
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 # start a terminal
-bindsym $mod+Return exec termite
+bindsym $mod+Return exec $term
 
 # kill focused window
 bindsym $mod+Shift+c kill
 
 # start dmenu (a program launcher)
-bindsym $mod+r exec --no-startup-id rofi -show run -theme base16-default-dark -font Source\ Code\ Pro\ 9
+bindsym $mod+r exec $menu
 
-# change focus
+# Drag floating windows by holding down $mod and left mouse button.
+# Resize them with right mouse button + $mod.
+# Despite the name, also works for non-floating windows.
+# Change normal to inverse to use left mouse button for resizing and right
+# mouse button for dragging.
+floating_modifier $mod normal
+
+# Reload the configuration file
+bindsym Mod1+Shift+r reload
+# Exit sway (logs you out of your Wayland session)
+bindsym $mod+Shift+q exec "swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to shutdown?' -b 'Yes, shutdown' 'systemctl poweroff -i'"
+
+focus_follows_mouse yes
+
+# Move your focus around
 bindsym $mod+$left focus left
 bindsym $mod+$down focus down
 bindsym $mod+$up focus up
 bindsym $mod+$right focus right
 
-# alternatively, you can use the cursor keys:
+# Or use $mod+[up|down|left|right]
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
-# move focused window
+# Move the focused window with the same, but add Shift
 bindsym $mod+Shift+$left move left
 bindsym $mod+Shift+$down move down
 bindsym $mod+Shift+$up move up
 bindsym $mod+Shift+$right move right
-
-# alternatively, you can use the cursor keys:
+# Ditto, with arrow keys
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-# split in horizontal orientation
-bindsym $mod+h split h
+# You can "split" the current object of your focus with
+# $mod+b or $mod+v, for horizontal and vertical splits
+# respectively.
+bindsym $mod+b splith
+bindsym $mod+v splitv
 
-# split in vertical orientation
-bindsym $mod+v split v
-
-# enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
-
-# change container layout (stacked, tabbed, toggle split)
+# Switch the current container between different layout styles
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
-# toggle tiling / floating
+# Make the current focus fullscreen
+bindsym $mod+f fullscreen
+
+# Toggle the current focus between tiling and floating mode
 bindsym $mod+Shift+space floating toggle
 
-# change focus between tiling / floating windows
+# Swap focus between the tiling area and the floating area
 bindsym $mod+space focus mode_toggle
 
-# focus the parent container
+# Move focus to the parent container
 bindsym $mod+a focus parent
 
 # focus the child container
@@ -86,8 +134,10 @@ bindsym $mod+Shift+minus move scratchpad
 # If there are multiple scratchpad windows, this command cycles through them.
 bindsym $mod+minus scratchpad show
 
+# Define names for default workspaces for which we configure key bindings later on.
+# We use variables to avoid repeating the names in multiple places.
 set $tag1 "1:*"
-set $tag2 "2:web"
+set $tag2 "2:mail"
 set $tag3 "3:chat"
 set $tag4 "4:media"
 #set $tag5 "5"
@@ -127,47 +177,33 @@ bindsym $mod+Shift+0 move container to workspace $tag10
 bindsym $mod+o move workspace to output VGA-1
 bindsym $mod+p move workspace to output LVDS-1
 
-assign [class="Firefox"] 2:web
-assign [class="kontact"] 2:web
-assign [class="konversation"] 3:chat
-assign [class="Pidgin"] 3:chat
+assign [class="kontact"] 2:mail
 for_window [class="mpv"] floating enable
 assign [class="mpv"] 4:media
-assign [class="Clementine"] 4:media
+assign [class="Cantata"] 4:media
 assign [class="Eclipse"] 10:dev
-assign [class="QtCreator"] 10:dev
 assign [class="jetbrains-studio"] 10:dev
+assign [class="QtCreator"] 10:dev
 assign [class="Designer"] 10:dev
 for_window [title="SailfishOS Emulator [Running] - Oracle VM VirtualBox"] floating enable
 assign [title="SailfishOS Emulator [Running] - Oracle VM VirtualBox"] 10:dev
 
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +10%
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -10%
-bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
-bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym XF86AudioPlay exec mpc toggle
+bindsym XF86AudioPrev exec mpc prev
+bindsym XF86AudioNext exec mpc next
+bindsym XF86AudioStop exec mpc stop
 
-bindsym XF86AudioPlay exec qdbus org.mpris.MediaPlayer2.clementine /org/mpris/MediaPlayer2 PlayPause
-bindsym XF86AudioPrev exec qdbus org.mpris.MediaPlayer2.clementine /org/mpris/MediaPlayer2 Previous
-bindsym XF86AudioNext exec qdbus org.mpris.MediaPlayer2.clementine /org/mpris/MediaPlayer2 Next
-bindsym XF86AudioStop exec qdbus org.mpris.MediaPlayer2.clementine /org/mpris/MediaPlayer2 Stop
+bindsym XF86MonBrightnessDown exec brightnessctl s 10%-
+bindsym XF86MonBrightnessUp exec brightnessctl s +10%
 
-bindsym XF86MonBrightnessDown exec xbacklight -dec 10
-bindsym XF86MonBrightnessUp exec xbacklight -inc 10
+bindsym XF86Launch1 exec $term
+bindsym XF86ScreenSaver exec swaylock -i $HOME/Pictures/wallpapers/wall_001.jpg
+bindsym Ctrl+Mod1+l exec swaylock -i $HOME/Pictures/wallpapers/wall_001.jpg
+bindsym Ctrl+Escape exec $term -e htop
+bindsym Print exec grim -g \"$(slurp)" \"$(mktemp -t Screenshot-XXXXXX --suffix .png)"
 
-bindsym XF86Launch1 exec termite
-bindsym XF86ScreenSaver exec swaylock -i $HOME/Pictures/wallpapers/wall_130.png
-bindsym Ctrl+Mod1+l exec swaylock -i $HOME/Pictures/wallpapers/wall_130.png
-bindsym Ctrl+Escape exec termite -e htop
-bindsym Print exec spectacle
-
-# reload the configuration file
-bindsym Mod1+Shift+r reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+q restart
-# exit i3 (poweroff)
-bindsym $mod+Shift+q exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to shutdown?' -b 'Yes, shutdown' 'systemctl poweroff -i'"
-
-hide_edge_borders none
+default_border pixel 1
+hide_edge_borders smart
 
 # Base16 Default by Chris Kempson (http://chriskempson.com)
 # template by Matt Parnell, @parnmatt
@@ -213,9 +249,10 @@ mode "resize" {
         bindsym Up          resize shrink height 10 px or 10 ppt
         bindsym Right       resize grow width 10 px or 10 ppt
 
-        # back to normal: Enter or Escape
+        # back to normal: Enter or Escape or $mod+Shift+r
         bindsym Return mode "default"
         bindsym Escape mode "default"
+        bindsym $mod+Shift+r mode "default"
 }
 
 bindsym $mod+Shift+r mode "resize"
@@ -223,30 +260,11 @@ bindsym $mod+Shift+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        position top
-        status_command i3status
-        tray_output primary
-        separator_symbol "·"
-        strip_workspace_numbers yes
-        font pango:Source Code Pro, Ionicons 9
-
-        colors {
-                separator $base03
-                background $base01
-                statusline $base05
-                focused_workspace $base01 $base01 $base05
-                active_workspace $base01 $base01 $base0B
-                inactive_workspace $base01 $base01 $base0B
-                urgent_workspace $base01 $base08 $base01
-        }
+        swaybar_command waybar
 }
 
-# Autostart applications
-exec xrdb -quiet -merge -nocpp "$HOME/.Xresources"
-exec xsetroot -cursor_name left_ptr
-exec dunst
-exec dockd --daemon
-exec i3-battery-popup -N
+# Notification daemon
+exec mako
+exec kanshi
 
-# Set wallpaper
-output "*" background ~/Pictures/wallpapers/wall_132.jpg fill
+include /etc/sway/config.d/*

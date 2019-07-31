@@ -8,16 +8,16 @@ export PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 #export PATH="$HOME/.cabal/bin:$PATH"
 
 # Python
-#export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 
 # NodeJS modules installed with npm
 export PATH="$HOME/node_modules/.bin:$PATH"
 
 export EDITOR=vim
-export TERMINAL=urxvt
+export TERMINAL=alacritty
 
 if [ -n "$DISPLAY" ]; then
-  export BROWSER=firefox
+  export BROWSER=qutebrowser
 fi
 
 # ZSH history
@@ -63,7 +63,16 @@ export XDG_CURRENT_DESKTOP="KDE"
 export MPW_FULLNAME="Andrea Scarpino"
 export MPW_FORMAT=n
 
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+
 # Wayland
 export XKB_DEFAULT_LAYOUT=gb
-#export QT_QPA_PLATFORM=wayland-egl
-#export GDK_BACKEND=wayland
+export QT_WAYLAND_FORCE_DPI=96
+export XDG_SESSION_TYPE=wayland
+export PLASMA_USE_QT_SCALING=1
+export QT_QPA_PLATFORM=wayland-egl
+
+export PLATFORM_SDK_ROOT=~/projects/Jolla
+
+export GOPATH=$HOME/go
+export PATH="$GOPATH/bin:$PATH"

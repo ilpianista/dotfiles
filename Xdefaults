@@ -29,27 +29,27 @@ Xcursor.theme: breeze_cursors
 #define base0E #ba8baf
 #define base0F #a16946
 
-*.foreground:   base05
-*.background:   base00
-*.cursorColor:  base05
+*foreground:   base05
+*background:   base00
+*cursorColor:  base05
 
-*.color0:       base00
-*.color1:       base08
-*.color2:       base0B
-*.color3:       base0A
-*.color4:       base0D
-*.color5:       base0E
-*.color6:       base0C
-*.color7:       base05
+*color0:       base00
+*color1:       base08
+*color2:       base0B
+*color3:       base0A
+*color4:       base0D
+*color5:       base0E
+*color6:       base0C
+*color7:       base05
 
-*.color8:       base03
-*.color9:       base09
-*.color10:      base01
-*.color11:      base02
-*.color12:      base04
-*.color13:      base06
-*.color14:      base0F
-*.color15:      base07
+*color8:       base03
+*color9:       base09
+*color10:      base01
+*color11:      base02
+*color12:      base04
+*color13:      base06
+*color14:      base0F
+*color15:      base07
 
 ! Note: colors beyond 15 might not be loaded (e.g., xterm, urxvt),
 ! use 'shell' template to set these if necessary
@@ -64,21 +64,26 @@ Xcursor.theme: breeze_cursors
 URxvt.termName: rxvt-256color
 URxvt.scrollBar: false
 URxvt.savelines: 5000
-URxvt.perl-ext-common: default,matcher
-URxvt.url-launcher: firefox
-URxvt.matcher.button: 1
+URxvt.perl-ext-common: default,clipboard,url-select
+URxvt.url-select.launcher: /usr/bin/xdg-open
+URxvt.url-select.underline: true
 URxvt.font: xft:Source Code Pro:pixelsize=12
 URxvt.boldfont: xft:Source Code Pro:bold:pixelsize=12
 URxvt.letterSpace: 1
 URxvt*scrollTtyOutput: false
 URxvt*scrollWithBuffer: true
 URxvt*scrollTtyKeypress: true
+URxvt.keysym.M-u: perl:url-select:select_next
+URxvt.keysym.M-c: perl:clipboard:copy
+URxvt.keysym.M-v: perl:clipboard:paste
 URxvt.keysym.Home: \033[7~
 URxvt.keysym.KP_Home: \033[7~
 URxvt.keysym.End: \033[8~
 URxvt.keysym.KP_End: \033[8~
 URxvt.keysym.Delete: \033[3~
 URxvt.keysym.KP_Delete: \033[3~
+URxvt.clipboard.autocopy: true
+URxvt.print-pipe: "cat > /dev/null"
 
 ! URxvt*tintColor:                      color
 ! URxvt*fadeColor:                      color

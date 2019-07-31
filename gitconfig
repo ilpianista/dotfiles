@@ -1,5 +1,5 @@
 [user]
-  email = me@andreascarpino.it
+  email = andrea@scarpino.dev
   name = Andrea Scarpino
   signingkey = 0x918F7DDFFD8D0B6E
 [sendemail]
@@ -17,6 +17,7 @@
   excludesfile = ~/.gitexcludes
   autocrlf = input
   editor = vim
+# hooksPath = /home/andrea/.git/hooks
 [merge]
 	tool = vimdiff
 	ff = false

@@ -7,5 +7,8 @@ if [[ "$SSH_AGENT_PID" == "" ]]; then
 fi
 export SSH_ASKPASS="/usr/bin/ksshaskpass"
 
-# Automatically startx
-#[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx
+# Automatically startx or sway at login
+if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
+  #exec startx
+  exec sway
+fi

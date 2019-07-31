@@ -22,12 +22,9 @@ fi
 # Then, source plugins and add commands to $PATH
 zplug load
 
-bindkey "${terminfo[khome]}" beginning-of-line
-bindkey "${terminfo[kend]}" end-of-line
-bindkey "${terminfo[kdch1]}" delete-char
-bindkey "${terminfo[kpp]}" up-line-or-history
-bindkey "${terminfo[knp]}" down-line-or-history
-
+bindkey '^[[H' beginning-of-line
+bindkey '^[[F' end-of-line
+bindkey '^[[3~' delete-char
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
@@ -39,7 +36,11 @@ setopt HIST_IGNORE_DUPS
 setopt APPEND_HISTORY
 setopt SHARE_HISTORY
 
-[[ -r $HOME/.config/base16-shell/scripts/base16-default-dark.sh ]] && source $HOME/.config/base16-shell/scripts/base16-default-dark.sh
+# Base16 Shell
+BASE16_SHELL="$HOME/.config/base16-shell/"
+[ -n "$PS1" ] && \
+    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+        eval "$("$BASE16_SHELL/profile_helper.sh")"
 
 # pacman stuff
 alias upgrade='sudo pacman -Syu; echo "Checking for AUR updates..."; auracle sync -r'
@@ -88,3 +89,7 @@ alias mount750='sudo cryptsetup luksOpen /dev/sdb1 --key-file $HOME/Documents/75
 
 # LS_COLORS
 [[ -r $HOME/.dir_colors ]] && eval $(dircolors -b $HOME/.dir_colors)
+
+alias sfossdk=$HOME/projects/Jolla/sdks/sfossdk/mer-sdk-chroot
+
+gpgconf --launch gpg-agent
