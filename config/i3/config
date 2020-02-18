@@ -202,7 +202,7 @@ set $base0D #7cafc2
 set $base0E #ba8baf
 set $base0F #a16946
 
-client.focused $base01 $base01 $base05 $base01 $base01
+client.focused $base01 $base01 $base05 $base01 $base0B
 client.focused_inactive $base01 $base01 $base0B $base01 $base01
 client.unfocused $base01 $base01 $base0B $base01 $base01
 client.urgent $base01 $base01 $base08 $base08 $base01

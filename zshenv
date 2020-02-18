@@ -76,3 +76,5 @@ export PLATFORM_SDK_ROOT=~/projects/Jolla
 
 export GOPATH=$HOME/go
 export PATH="$GOPATH/bin:$PATH"
+
+export AWS_VAULT_PROMPT=kdialog

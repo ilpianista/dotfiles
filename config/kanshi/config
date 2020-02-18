@@ -1,6 +1,6 @@
 {
   output LVDS-1 disable
-  output "Samsung Electric Company S24B300 H4MCA01263" mode 1920x1080 position 0,0
+  output "Dell Inc. DELL P2720D JV69F9B20VMS" mode 2560x1440 position 0,0
 }
 
 {
