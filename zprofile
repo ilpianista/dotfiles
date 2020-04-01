@@ -8,7 +8,7 @@ fi
 export SSH_ASKPASS="/usr/bin/ksshaskpass"
 
 # Automatically startx or sway at login
-if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
+#if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
   #exec startx
-  exec sway
-fi
+  #exec sway
+#fi

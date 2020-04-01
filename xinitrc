@@ -9,4 +9,4 @@ fi
 
 sh $HOME/.xprofile &
 
-exec awesome
+exec i3

@@ -125,7 +125,7 @@ c.spellcheck.languages = ['en-GB', 'it-IT']
 # Page to open if :open -t/-b/-w is used without URL. Use `about:blank`
 # for a blank page.
 # Type: FuzzyUrl
-c.url.default_page = 'https://search.fossdaily.xyz'
+c.url.default_page = 'https://search.snopyta.org/'
 
 # Search engines which can be used via the address bar. Maps a search
 # engine name (such as `DEFAULT`, or `ddg`) to a URL with a `{}`
@@ -136,11 +136,11 @@ c.url.default_page = 'https://search.fossdaily.xyz'
 # used by prepending the search engine name to the search term, e.g.
 # `:open google qutebrowser`.
 # Type: Dict
-c.url.searchengines = {'DEFAULT': 'https://search.fossdaily.xyz/?q={}'}
+c.url.searchengines = {'DEFAULT': 'https://search.snopyta.org/?q={}'}
 
 # Page(s) to open at the start.
 # Type: List of FuzzyUrl, or FuzzyUrl
-c.url.start_pages = 'https://search.fossdaily.xyz'
+c.url.start_pages = 'https://search.snopyta.org/'
 
 # Text color of the completion widget. May be a single color to use for
 # all columns or a list of three colors, one for each column.

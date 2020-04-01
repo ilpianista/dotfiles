@@ -10,6 +10,7 @@ general {
         colors = true
         interval = 10
         markup = "pango"
+        separator = ""
 }
 
 order += "wireless wlp3s0"

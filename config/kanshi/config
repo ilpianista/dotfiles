@@ -9,5 +9,5 @@
 
 {
   output LVDS-1 disable
-  output 'Unknown 2770 GGHH8HA047476' mode 1920x1080 position 0,0
+  output "Unknown 2770 GGHH8HA047476" mode 1920x1080 position 0,0
 }

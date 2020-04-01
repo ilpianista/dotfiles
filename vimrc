@@ -11,32 +11,30 @@ Plug 'vim-airline/vim-airline-themes'
 
 " Intellisense engine for vim8 & neovim, full language server protocol support as VSCode
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Check syntax in Vim asynchronously and fix files, with Language Server Protocol (LSP) support
+Plug 'dense-analysis/ale'
+
+" A tree explorer plugin for vim
+Plug 'preservim/nerdtree'
+" fzf loves vim
+Plug 'junegunn/fzf.vim'
+" A solid language pack for Vim
+Plug 'sheerun/vim-polyglot'
+" commentary.vim: comment stuff out
+Plug 'tpope/vim-commentary'
 
 " A Vim plugin which shows a git diff in the gutter (sign column) and stages/reverts hunks.
 Plug 'airblade/vim-gitgutter'
-" Fuzzy file, buffer, mru, tag, etc finder.
-Plug 'ctrlpvim/ctrlp.vim'
 
 " Vim plugin that displays tags in a window, ordered by scope
 Plug 'majutsushi/tagbar'
 
-" Vim Markdown runtime files
-Plug 'tpope/vim-markdown'
-
 " Jsonnet filetype plugin for Vim
 Plug 'google/vim-jsonnet'
 
-"" HTML/CSS
-" emmet for vim
-"Plug 'mattn/emmet-vim'
-" HTML5 omnicomplete and syntax
-Plug 'othree/html5.vim'
-" Highlight colors in css files" Highlight colors in css files
-"Plug 'ap/vim-css-color'
-" vim syntax for LESS (dynamic CSS)
-"Plug 'groenewege/vim-less'
-" Vim syntax file for scss (Sassy CSS)
-"Plug 'cakebaker/scss-syntax.vim'
+"" Python
+" A nicer Python indentation style for vim
+Plug 'Vimjas/vim-python-pep8-indent'
 
 "" Rust
 " Vim configuration for Rust
@@ -45,18 +43,6 @@ Plug 'rust-lang/rust.vim'
 "" Go
 " Go development plugin for Vim
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
-
-"" Haskell
-" vim2hs :: Vim -> Haskell
-"Plug 'dag/vim2hs'
-" A completion plugin for Haskell, using ghc-mod
-"Plug 'eagletmt/neco-ghc'
-" Interactive command execution in Vim. (needed by ghcmod-vim)
-"Plug 'Shougo/vimproc.vim'
-" Happy Haskell programming on Vim, powered by ghc-mod
-"Plug 'eagletmt/ghcmod-vim'
-" Create ctags compatible tags files for Haskell programs
-"Plug 'bitc/lushtags'
 
 "" Ruby
 " Vim/Ruby Configuration Files
@@ -70,38 +56,10 @@ Plug 'vim-ruby/vim-ruby'
 " Run Rspec specs from Vim
 "Plug 'thoughtbot/vim-rspec'
 
-"" JavaScript
-" Vastly improved Javascript indentation and syntax support in Vim
-Plug 'pangloss/vim-javascript'
-" Syntax for JavaScript libraries
-"Plug 'othree/javascript-libraries-syntax.vim'
-" vim plugin which formated javascript files by js-beautify
-"Plug 'maksimr/vim-jsbeautify'
-" CoffeeScript support for vim
-"Plug 'kchmck/vim-coffee-script'
-" Typescript syntax files for Vim
-"Plug 'leafgarland/typescript-vim'
-
-" Vim plugin for the Elm programming language
-"Plug 'lambdatoast/elm.vim'
-
-"" Qt
-" QML syntax highlighting for VIM
-"Plug 'peterhoeg/vim-qml'
-" qmake project highlighting support for the Vim editor
-"Plug 'artoj/qmake-syntax-vim'
-
-" Vim syntax file & snippets for Docker's Dockerfile
-Plug 'ekalinin/Dockerfile.vim'
-
+" basic vim/packer integration
+Plug 'hashivim/vim-packer'
 " basic vim/vagrant integration
 Plug 'markcornick/vim-vagrant'
-
-" A vim plugin for syntax highlighting Ansible's common filetypes
-Plug 'pearofducks/ansible-vim'
-
-" basic vim/terraform integration
-Plug 'hashivim/vim-terraform'
 
 "" color schemes
 " Base16 for Vim
