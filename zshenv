@@ -63,8 +63,6 @@ export XDG_CURRENT_DESKTOP="KDE"
 export MPW_FULLNAME="Andrea Scarpino"
 export MPW_FORMAT=n
 
-export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-
 # Wayland
 export XKB_DEFAULT_LAYOUT=gb
 export QT_WAYLAND_FORCE_DPI=96
@@ -78,3 +76,6 @@ export GOPATH=$HOME/go
 export PATH="$GOPATH/bin:$PATH"
 
 export AWS_VAULT_PROMPT=kdialog
+
+# Android builds
+export ANDROID_JACK_VM_ARGS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx4G"

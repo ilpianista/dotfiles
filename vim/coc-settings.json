@@ -1,0 +1,9 @@
+{
+	"coc.preferences.formatOnSaveFiletypes": ["go", "rust"],
+	"languageserver": {
+		"golang": {
+			"command": "gopls",
+			"filetypes": ["go"]
+		}
+	}
+}

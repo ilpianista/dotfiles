@@ -17,11 +17,14 @@ Plug 'dense-analysis/ale'
 " A tree explorer plugin for vim
 Plug 'preservim/nerdtree'
 " fzf loves vim
+Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 " A solid language pack for Vim
 Plug 'sheerun/vim-polyglot'
 " commentary.vim: comment stuff out
 Plug 'tpope/vim-commentary'
+" quoting/parenthesizing made simple
+Plug 'tpope/vim-surround'
 
 " A Vim plugin which shows a git diff in the gutter (sign column) and stages/reverts hunks.
 Plug 'airblade/vim-gitgutter'
@@ -29,12 +32,9 @@ Plug 'airblade/vim-gitgutter'
 " Vim plugin that displays tags in a window, ordered by scope
 Plug 'majutsushi/tagbar'
 
-" Jsonnet filetype plugin for Vim
-Plug 'google/vim-jsonnet'
-
 "" Python
 " A nicer Python indentation style for vim
-Plug 'Vimjas/vim-python-pep8-indent'
+"Plug 'Vimjas/vim-python-pep8-indent'
 
 "" Rust
 " Vim configuration for Rust
@@ -42,11 +42,11 @@ Plug 'rust-lang/rust.vim'
 
 "" Go
 " Go development plugin for Vim
-Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+Plug 'fatih/vim-go'
 
 "" Ruby
 " Vim/Ruby Configuration Files
-Plug 'vim-ruby/vim-ruby'
+"Plug 'vim-ruby/vim-ruby'
 " wisely add 'end' in ruby, endfunction/endif/more in vim script, etc
 "Plug 'tpope/vim-endwise'
 " Vim runtime files for Haml, Sass, and SCSS
@@ -56,8 +56,6 @@ Plug 'vim-ruby/vim-ruby'
 " Run Rspec specs from Vim
 "Plug 'thoughtbot/vim-rspec'
 
-" basic vim/packer integration
-Plug 'hashivim/vim-packer'
 " basic vim/vagrant integration
 Plug 'markcornick/vim-vagrant'
 
@@ -416,6 +414,9 @@ let g:tagbar_type_rust = {
 let g:go_code_completion_enabled = 0
 let g:go_def_mapping_enabled = 0
 let g:go_doc_keywordprg_enabled = 0
+
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
 
 " Create missing directories on save
 function s:MkNonExDir(file, buf)

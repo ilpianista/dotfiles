@@ -36,6 +36,9 @@ setopt HIST_IGNORE_DUPS
 setopt APPEND_HISTORY
 setopt SHARE_HISTORY
 
+# Android builds
+setopt shwordsplit
+
 # Base16 Shell
 BASE16_SHELL="$HOME/.config/base16-shell/"
 [ -n "$PS1" ] && \
@@ -91,5 +94,3 @@ alias mount750='sudo cryptsetup luksOpen /dev/sdb1 --key-file $HOME/Documents/75
 [[ -r $HOME/.dir_colors ]] && eval $(dircolors -b $HOME/.dir_colors)
 
 alias sfossdk=$HOME/projects/Jolla/sdks/sfossdk/mer-sdk-chroot
-
-gpgconf --launch gpg-agent

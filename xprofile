@@ -7,5 +7,5 @@ xprop -root -f KDE_FULL_SESSION 8t -set KDE_FULL_SESSION true
 xprop -root -f KDE_SESSION_VERSION 32c -set KDE_SESSION_VERSION 5
 start-pulseaudio-x11 &
 xautolock -time 10 -locker "i3lock -i $HOME/Pictures/wallpapers/wall_001.jpg"
-xss-lock -- i3lock -n -i $HOME/Pictures/wallpapers/wall_130.png
+xss-lock -- i3lock -n -i $HOME/Pictures/wallpapers/wall_130.png &
 dunst &

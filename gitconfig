@@ -31,9 +31,9 @@
 [status]
   short = true
 
-[url "git://anongit.kde.org/"]
+[url "https://invent.kde.org/"]
   insteadOf = kde:
-[url "git@git.kde.org:"]
+[url "git@invent.kde.org:"]
   pushInsteadOf = kde:
 [url "https://aur.archlinux.org/"]
   insteadOf = aur:
@@ -48,6 +48,6 @@
 	prompt = false
 [fetch]
 	prune = true
-  pruneTags = true
+#  pruneTags = true
 [pull]
 	rebase = true
