@@ -17,7 +17,7 @@ Plug 'dense-analysis/ale'
 " A tree explorer plugin for vim
 Plug 'preservim/nerdtree'
 " fzf loves vim
-Plug 'junegunn/fzf'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 " A solid language pack for Vim
 Plug 'sheerun/vim-polyglot'
